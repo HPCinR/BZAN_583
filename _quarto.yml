@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "HPC for Data Science in R - BZAN 583"
+  page-navigation: true
+  navbar:
+    background: light
+    foreground: dark
+    left:
+      - href: index.qmd
+        text: Home
+    right:
+      - icon: github
+        href: https://github.com/RBigData/HPCinR_583
+        aria-label: GitHub
+  page-footer:
+    right: "This page is built with [Quarto](https://quarto.org/)."
+    left: "&copy; 2024, George Ostrouchov"
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+

@@ -1,0 +1,11 @@
+---
+title: "Welcome to HPC for Data Science"
+---
+
+Parallel software to make your R code faster. How to parallelize in Unix flavors.
+
+[Full Screen](slides.qmd)
+
+```{=html}
+<iframe class="slide-deck" src="slides.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
+```

@@ -1,0 +1,11 @@
+---
+title: "Faster R Scripts"
+---
+
+This lecture is about strategies to make your R code faster.
+
+[Full Screen](slides.qmd)
+
+```{=html}
+<iframe class="slide-deck" src="slides.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
+```

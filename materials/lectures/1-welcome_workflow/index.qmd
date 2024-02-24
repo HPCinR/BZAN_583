@@ -1,0 +1,55 @@
+---
+title: "Welcome to HPC for Data Science"
+---
+
+Welcome to HPC for Data Science in R. This class ...
+
+[Full Screen](slides.qmd)
+
+```{=html}
+<iframe class="slide-deck" src="slides.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
+```
+
+
+
+<!-- #### Outline -->
+
+<!-- 1. About the Class: Intro -->
+
+<!-- 2. About me -->
+
+<!-- 3. Logistics: Working in groups -- Random # and move arount -->
+
+<!-- 3. About you -->
+
+<!-- 4.  -->
+
+<!-- 5.  -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!-- 6.  -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!--     -->
+
+<!-- #### Exercises -->

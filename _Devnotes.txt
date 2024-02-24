@@ -1,0 +1,7 @@
+DEV NOTES
+
+* start populating slides and adding text to book
+* test presentation notes on slides
+* commit first GitHub version
+* move book to RBigData as well
+

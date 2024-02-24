@@ -1,0 +1,92 @@
+---
+title: "BZAN 583"
+format: revealjs
+---
+
+## Welcome to HPC for Data Science in R!
+#### BZAN 583
+
+
+::: notes
+Speaker notes go here.
+:::
+
+## Class will work in goups of 3-4
+
+Can I have some random numbers? Five numbers from 0 1 2 3 4 5 6 7 8 9
+
+```{r eval=FALSE}
+roster = data.table::fread("~/UTK/roster/roster.csv")
+names = paste(roster$StudentFirstName, roster$StudentLastName)
+names
+seed = readline("seed: ")
+```
+
+## Random Group Assignment
+```{r eval=FALSE}
+#| panel: sidebar
+numericInput('seed', 'Seed', 1234567, min = 1, max = 99999999)
+```
+```{r eval=FALSE}
+#| panel: fill
+numericInput('seed', 'Seed', 1234567, min = 1, max = 99999999)
+```
+
+```{r eval=FALSE}
+#| context: server
+output$nameList <- renderText({ input$seed })
+    seed = as.numeric(output$value)
+    set.seed(seed)
+    n = length(names)
+    ng = n %/% 3
+    permute = sample(n)
+    groups = parallel::splitIndices(n, ng)
+    lapply(lapply(groups, function(x) permute[x]), function(x) names[x])
+```
+
+
+
+
+  server <- function(input, output) {
+
+  }
+  shinyApp(ui, server)
+}
+```
+
+## After Grouping, Pleas share ...
+
+::: poll
+1.  Your name
+2.  Where you're from
+3.  What you work on in 3 words or fewer
+4.  Name one thing you've made that you're proud of
+:::
+
+```{r}
+#| echo: false
+countdown::countdown(2)
+```
+
+## About me
+
+* Czechia: Prague through grade 9  
+* Canada: high school and University of Waterloo B.Math.  
+* USA: Iowa State University, Ph.D. Statistics  
+  * Joined Oak Ridge National Laboratory, 1983  
+  * Retired from ORNL 2023 as Distinguished Scientist  
+  * Continue affiliation with U Tennessee, BAS Dep - BZAN 583   
+
+## About me: Computing  
+  * Languages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, **unix shell**, S, **R**  
+  * Document preparation: nroff, pdf, TeX/LaTeX, .md, .Rmd, now **Quarto .qmd**
+  * Systems: IBM, DEC, Honeywell, VAX, PC, Intel, **Mac**, **HPE (formerly Cray)**, 
+
+
+## Workflow for Computing with R on Remote Unix Platforms
+
+```{r echo=FALSE, out.height=500, fig.retina=1}
+knitr::include_graphics("pics/01-intro/Workflow.jpg")
+```
+   
+

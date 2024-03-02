@@ -1,6 +1,0 @@
----
-title: "Untitled"
-format: revealjs
----
-
-## How to make your R code faster!

@@ -1,7 +1,8 @@
 DEV NOTES
 
 * start populating slides and adding text to book
-* test presentation notes on slides
-* commit first GitHub version
+  * workflow & intro is now one deck. Should be two with more examples
+  * There will be a faster deck and a hardware deck
+
 * move book to RBigData as well
 

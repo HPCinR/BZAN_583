@@ -1,8 +1,6 @@
 ---
-title: "Welcome to HPC for Data Science"
+title: "Hardware and Memory Hierarchies"
 ---
-
-Hardware and Memory Hierarchy
 
 [Full Screen](slides.qmd)
 

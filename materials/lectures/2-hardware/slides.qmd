@@ -1,0 +1,39 @@
+---
+title: "Hardware and Memory Hierarchies"
+format: revealjs
+---
+
+## Rework this into:
+
+* Two memory models: shared and distributed
+  * shared memory: UMA small systems, and NUMA larger systems
+  * shared memory: runs OS, and coprocessor
+  * distributed memory: large systems
+  
+* Memory hierarchies and page faults
+
+## Three Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="1200px" background-position="center"}
+
+## Three Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide1.png" background-size="1200px" background-position="center"}
+
+## {background-image="/pics/ParallelHardware/Slide2.png" background-size="1200px" background-position="center"}
+
+## {background-image="/pics/ParallelHardware/Slide3.png" background-size="1200px" background-position="center"}
+
+## {background-image="/pics/ParallelHardware/Slide4.png" background-size="1200px" background-position="center"}
+
+## {background-image="/pics/ParallelHardware/Slide5.png" background-size="1200px" background-position="center"}
+
+## {background-image="/pics/ParallelHardware/Slide6.png" background-size="1200px" background-position="center"}
+
+## Native Programming Mindset {background-image="/pics/ParallelSoftware/Slide2.png" background-size="1200px" background-position="center"}
+
+## Native Programming Models and Tools {background-image="/pics/ParallelSoftware/Slide3.png" background-size="1200px" background-position="center"}
+
+## 35+ Years of Practical Parallel Computing {background-image="/pics/ParallelSoftware/Slide4.png" background-size="1200px" background-position="center"}
+
+## Last 15+ years of Advances {background-image="/pics/ParallelSoftware/Slide5.png" background-size="1200px" background-position="center"}
+
+## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/Slide6.png" background-size="1200px" background-position="center"}
+
+## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/Slide7.png" background-size="1200px" background-position="center"}

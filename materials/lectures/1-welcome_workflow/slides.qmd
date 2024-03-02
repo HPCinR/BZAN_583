@@ -4,8 +4,8 @@ format: revealjs
 ---
 
 ## Welcome to HPC for Data Science in R!
-#### BZAN 583
 
+#### BZAN 583
 
 ::: notes
 Speaker notes go here.
@@ -23,44 +23,37 @@ seed = readline("seed: ")
 ```
 
 ## Random Group Assignment
-```{r eval=FALSE}
-#| panel: sidebar
-numericInput('seed', 'Seed', 1234567, min = 1, max = 99999999)
-```
-```{r eval=FALSE}
-#| panel: fill
-numericInput('seed', 'Seed', 1234567, min = 1, max = 99999999)
-```
 
-```{r eval=FALSE}
-#| context: server
-output$nameList <- renderText({ input$seed })
-    seed = as.numeric(output$value)
-    set.seed(seed)
-    n = length(names)
-    ng = n %/% 3
-    permute = sample(n)
-    groups = parallel::splitIndices(n, ng)
-    lapply(lapply(groups, function(x) permute[x]), function(x) names[x])
-```
+Shiny app to permute names FIXME
 
+## Please share in your group
 
+-   Your name:
 
+-   One thing you love to do:
 
-  server <- function(input, output) {
+-   One thing you're most proud of:
 
-  }
-  shinyApp(ui, server)
-}
-```
+-   Where will you be in 5 years:
 
-## After Grouping, Pleas share ...
+## Please share in your group
 
-::: poll
-1.  Your name
-2.  Where you're from
-3.  What you work on in 3 words or fewer
-4.  Name one thing you've made that you're proud of
+::: incremental
+-   Your name:
+
+    -   George Ostrouchov
+
+-   One thing you love to do:
+
+    -   Downhill ski - volunteer ski patrol at Sugar mountain
+
+-   One thing you're proud of:
+
+    -   My family (done a few things professionally too ...)
+
+-   Where will you be in 5 years:
+
+    -   Semi-retired
 :::
 
 ```{r}
@@ -68,25 +61,224 @@ output$nameList <- renderText({ input$seed })
 countdown::countdown(2)
 ```
 
-## About me
+::: notes
+-   Czechia: Prague through grade 9\
+-   Canada: high school and University of Waterloo B.Math.\
+-   USA: Iowa State University, Ph.D. Statistics
+    -   Joined Oak Ridge National Laboratory, 1983\
+    -   Retired from ORNL 2023 as Distinguished Scientist\
+    -   Continue affiliation with U Tennessee, BAS Dep - BZAN 583
+:::
 
-* Czechia: Prague through grade 9  
-* Canada: high school and University of Waterloo B.Math.  
-* USA: Iowa State University, Ph.D. Statistics  
-  * Joined Oak Ridge National Laboratory, 1983  
-  * Retired from ORNL 2023 as Distinguished Scientist  
-  * Continue affiliation with U Tennessee, BAS Dep - BZAN 583   
+## Survey
 
-## About me: Computing  
-  * Languages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, **unix shell**, S, **R**  
-  * Document preparation: nroff, pdf, TeX/LaTeX, .md, .Rmd, now **Quarto .qmd**
-  * Systems: IBM, DEC, Honeywell, VAX, PC, Intel, **Mac**, **HPE (formerly Cray)**, 
+#### Programming experience
 
+#### git?
 
-## Workflow for Computing with R on Remote Unix Platforms
+#### R?
 
-```{r echo=FALSE, out.height=500, fig.retina=1}
-knitr::include_graphics("pics/01-intro/Workflow.jpg")
-```
-   
+#### R parallel package?
 
+#### Unix (Linux, MacOS terminal)
+
+#### Cluster
+
+#### Torch
+
+#### Large Language Models
+
+## About me: Computing
+
+-   Languages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, **unix shell**, S, **R**\
+-   Document preparation: nroff, ps, pdf, **LaTeX**, **.md**, .Rmd, **Quarto .qmd**
+-   Systems: IBM, DEC, Honeywell, VAX, PC, Intel, **Mac**, **HPE (formerly Cray)**,
+
+## Workflow for Remote Computing in R
+
+![](/pics/01-intro/Workflow.png)
+
+## Workflow for Remote Computing in R {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="bottom right"}
+
+#### Laptop RStudio
+
+-   Familiar custom editing environment (Windows, Mac, Unix)
+-   Interactive Syntax checking
+
+#### GitHub/GitLab
+
+-   Portability to remote computing
+-   Version control
+-   Collaboration
+
+#### Cluster unix
+
+-   Same environment for all
+-   Batch job submission
+
+::: notes
+-   Portability - in your basement or on another continent
+-   RStudio installs difficult - legacy OS on HPC
+-   Bandwidth
+:::
+
+## Cooperating R Sessions on a Modern Cluster {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="800px" background-position="bottom right"}
+
+8 Nodes (128 cores each)\
+- 32 R sessions\
+- each using 32 cores\
+- 1024 cores total\
+
+::: notes
+-   
+
+-   Laptop - login node - resource script\
+
+-   BIG data on parallel file system - not on laptop!\
+
+-   Can monitor a longer run with logins to compute nodes\
+
+-   Batch
+:::
+
+## Software Needed on Laptop {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="bottom right"}
+
+-   Mac
+    -   R, RStudio
+
+    -   terminal, git (in Xcode)
+-   Windows
+    -   R, RStudio
+
+    -   putty
+
+    -   git
+
+    -   WinSCP
+
+## Software on Cluster {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="top right"}
+
+-   R, FlexiBLAS, OpenBLAS
+-   OpenMPI
+-   Arrow or HDF5 (for parallel I/O)
+-   R (\>= 4.0)
+-   And various packages, including `pbdMPI`
+
+#### R vs conda-R Deployment:
+
+-   Different package management philosophy
+-   Can create conflicts if mixing, a layer of complexity
+
+::: notes
+-   Solves some dependency issues but creates others
+:::
+
+## GitHub + git (laptop to cluster)
+
+::: {layout="[1,3,1]"}
+![](/pics/01-intro/WorkflowGit.jpg)
+
+![](/pics/01-intro/Git_operations.svg) [By Daniel Kinzler - Own work, CC BY 3.0](https://commons.wikimedia.org/w/index.php?curid=25223536)
+
+![](/pics/01-intro/WorkflowCluster.jpg){fig-align="top"} ![](/pics/01-intro/WorkflowLaptop.jpg){fig-align="bottom"}
+:::
+
+# Making **git** easy {background-image="/pics/01-intro/WorkflowPushPull.jpg" background-size="300px" background-position="top right"}
+
+-   Private and Public key pairs for Client and Server
+
+    -   Git repository (GitHub, GigLab) is the **server**
+    -   Your laptop and remote cluster are **clients**
+
+-   Each **client** has own *key-pair*
+
+    -   *Private key* stays on the **client**
+    -   *Public key* is copied to the **server**
+
+-   Works like a single-use password generator and authentication
+
+    -   Client contacts server, server responds with a random string encrypted by client's public key
+    -   Client decrypts with own private key and sends to server
+    -   Server verifies agreement and opens secure connection
+
+## Clusters are Linux systems {background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right"}
+
+-   Linux is one of many descendants of original Unix. MacOS is another.
+
+    -   Everything in Linux is a file
+    -   Linux files are organized as a tree
+
+::: notes
+*Unix* (Bell Labs) was a play on an earlier *Multics* operating system (designed at MIT)
+:::
+
+## Linux Commands {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right"}
+
+In a terminal, you talk to a *shell* program (*bash* is most common)
+
+-   Commands can have *options* and *arguments*
+
+*Standard input* and *standard output* of a command is the terminal but can be redirected
+
+-   **\<**, **\<\<**, **\>**, **\>\>** redirect standard input and output
+-   *command1* **\|** *command2* pipes standard output1 to standard input2
+
+Commands are files in directories listed in your PATH variable (try "echo \$PATH")
+
+-   \$ means substitute variable value
+-   *export* lists (or sets) variables and their values
+
+There are many resources on the web to learn Linux basics
+
+## Job Submission on Cluster {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right"}
+
+-   Command line submission
+-   Shell script submission (preferred)
+
+### SLURM
+
+<mark>sbatch *your-shell-script.sh* </mark>
+
+<mark>squeue -u *uid*</mark>
+
+<mark>scancel *jobnumber*</mark>
+
+### Software Modules
+
+set software environment (PATH)
+
+<mark>*module list*</mark> - list what is loaded\
+<mark>*module avail*</mark> - list what is available\
+<mark>*module load r*</mark>
+
+## Hands-on Session 1 - Fork and clone your HPCinR FIXME {.smaller .tight}
+
+-   Fork R4HPC to your GitHub account
+    -   Login to GitHub and navigate to RBigData/R4HPC repository
+    -   Fork button near top-right and copy forked repo url
+-   Clone to New Project in RStudio
+-   Open Terminal window (ssh or putty)
+-   Login to cluster
+-   clone your R4HPC (git clone ...)
+-   You are ready for the development loop:
+    -   edit -\> commit -\> push -\> pull -\> run -\> examine output -\> back to edit
+
+::: {layout-ncol="2"}
+![](/pics/01-intro/Workflow.png){width="200"} ![](/pics/01-intro/BatchRonClusterLaptop.jpg){width="200"}
+:::
+
+## Hands-on Session 1 - On Login Node
+
+-   Below, replace `MACHINE` with your cluster name
+-   Go to `R4HPC/code_0` directory and run
+    -   `./packages_MACHINE.sh` to install all R packages that will be used
+-   Go to `R$HPC/code_1` directory and run
+    -   `sbatch hello_MACHINE_slurm.sh` to run a script that illustrates a basic two-level parallelism
+    -   We will return to this script throughout the workshop as we learn its components
+-   Examine output in `hello.e` and `hello.o` and notice that:
+    -   4 nodes are involved
+    -   4 R sessions were running on each node for a total of 16
+    -   Each R session ran `mclapply` on several cores
+    -   All `mclapply` process id's are reported
+    -   The code figured out how many cores in total
+    -   Only one R session wrote the output

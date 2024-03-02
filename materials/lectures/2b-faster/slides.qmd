@@ -3,4 +3,6 @@ title: "Untitled"
 format: revealjs
 ---
 
-## Faster R Strategies for All Platforms, Including HPC Clusters
+## Faster R for All Platforms, Including HPC Clusters
+
+

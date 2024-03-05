@@ -1,30 +1,105 @@
 ---
 title: "Hardware and Memory Hierarchies"
-format: revealjs
+format: 
+  revealjs:
+    chalkboard: true
+editor: source
 ---
 
 ## Rework this into:
 
-* Two memory models: shared and distributed
-  * shared memory: UMA small systems, and NUMA larger systems
-  * shared memory: runs OS, and coprocessor
-  * distributed memory: large systems
-  
-* Memory hierarchies and page faults
+-   Two memory models: shared and distributed
+    -   shared memory: UMA small systems, and NUMA larger systems
+    -   shared memory: runs OS, and coprocessor
+    -   distributed memory: large systems
+-   Single (or two) chip: hardware shared memory (otherwise software shared and NUMA)
+-   Memory hierarchies and page faults
+
+## Flynn's Taxonomy of Computer Architecture {.smaller}
+
+-   SISD
+
+    -   CPU
+    -   Optimized for diverse instruction streams
+
+-   MISD
+
+-   SIMD
+
+    -   GPU
+
+-   MIMD
+
+-   GPU are optimized for simple instruction on many data items (e.g. pixels on screen)
+
+-   CPU are optimized for complex instruction streams
+
+Multicore - Manycore - GPU ARM https://www.wevolver.com/article/risc-v-vs-arm-a-comprehensive-comparison-of-processor-architectures
 
 ## Three Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="1200px" background-position="center"}
 
+## Shared Memory Hardware {.smaller}
+
+**Multicore CPU** - one or two chips with multiple cores\
+\* Current high-end is 64 cores (e.g. AMD EPYC "Milan")\
+\* Hosts operating system (OS)
+
+**ARM CPU-GPU**\
+\* A hybrid unified memory architecture\
+\* Low power requirements\
+\* Hosts OS
+
+**GPU**\
+\* Excellent SIMD throughput at the expense of bad serial performance\
+\* Separate memory, so "offloading" co-processor concept\
+\* Low power requirements, lots of slow cores\
+\* Does not host OS
+
+### The takeaway:
+
+CPU fast and versatile but limited parallelism\
+GPU slow and less versatile but extreme parallelism
+
+::: notes
+-   ARM was big in cellphones, now big in HPC
+-   Nvidia is also heading toward ARM
+:::
+
+## Flynn's Taxonomy (1972) {.smaller}
+
+-   *Single Instruction, Single Data (**SISD**):* scalar processor, serial program\
+-   *Single Instruction, Multiple Data (**SIMD**):* vector processor, array processor\
+-   *Multiple Instruction, Multiple Data (**MIMD**):* multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster\
+-   *Multiple Instruction, Single Data (**MISD**):* is not used much
+
+## Parallel Programming Models {.smaller}
+
+### Shared Memory Parallel
+
+-   Unix fork\
+-   Multithreading\
+-   OpenMP
+
+### Distributed Memory Parallel
+
+-   manager-workers: most common in simple cases\
+-   Single program, multiple data (SPMD): most common and most scalable on clusters\
+-   MapReduce: common in customer database processing\
+-   Dataflow: dependency graph directed, still evolving <br><br>
+
+#### Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.
+
 ## Three Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide1.png" background-size="1200px" background-position="center"}
 
-## {background-image="/pics/ParallelHardware/Slide2.png" background-size="1200px" background-position="center"}
+##  {background-image="/pics/ParallelHardware/Slide2.png" background-size="1200px" background-position="center"}
 
-## {background-image="/pics/ParallelHardware/Slide3.png" background-size="1200px" background-position="center"}
+##  {background-image="/pics/ParallelHardware/Slide3.png" background-size="1200px" background-position="center"}
 
-## {background-image="/pics/ParallelHardware/Slide4.png" background-size="1200px" background-position="center"}
+##  {background-image="/pics/ParallelHardware/Slide4.png" background-size="1200px" background-position="center"}
 
-## {background-image="/pics/ParallelHardware/Slide5.png" background-size="1200px" background-position="center"}
+##  {background-image="/pics/ParallelHardware/Slide5.png" background-size="1200px" background-position="center"}
 
-## {background-image="/pics/ParallelHardware/Slide6.png" background-size="1200px" background-position="center"}
+##  {background-image="/pics/ParallelHardware/Slide6.png" background-size="1200px" background-position="center"}
 
 ## Native Programming Mindset {background-image="/pics/ParallelSoftware/Slide2.png" background-size="1200px" background-position="center"}
 

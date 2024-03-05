@@ -1,8 +1,27 @@
 ---
-title: "Untitled"
-format: revealjs
+title: "Faster R for All Platforms, Including HPC Clusters"
+format: 
+  revealjs:
+    chalkboard: true
+editor: source
 ---
 
-## Faster R for All Platforms, Including HPC Clusters
+## Faster Serial Code
 
+-   Almost any R code can be made faster
 
+-   Profile, profile, profile
+
+-   Fast libraries: OpenBLAS or MKL
+
+-   C/C++ access
+
+## Multicore Shared Memory Approaches
+
+-   Fast multithreaded libraries: OpenBLAS or MKL
+
+-   Unix fork via mclapply, et. al
+
+-   OpenMP via C/C++ access
+
+-   Cuda, OenCL on GPU

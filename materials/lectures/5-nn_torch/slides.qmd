@@ -1,6 +1,9 @@
 ---
 title: "Untitled"
-format: revealjs
+format: 
+  revealjs:
+    chalkboard: true
+editor: source
 ---
 
 ## A short excursion

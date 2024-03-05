@@ -1,6 +1,9 @@
 ---
 title: "BZAN 583"
-format: revealjs
+format: 
+  revealjs:
+    chalkboard: true
+editor: source
 ---
 
 ## Welcome to HPC for Data Science in R!

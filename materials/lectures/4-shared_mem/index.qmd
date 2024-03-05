@@ -1,8 +1,7 @@
 ---
-title: "Welcome to HPC for Data Science"
+title: "Shared memory parallel computing"
 ---
 
-## Shared memory parallel computing
 
 [Full Screen](slides.qmd)
 

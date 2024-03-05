@@ -9,8 +9,4 @@ This lecture is about strategies to make your R code faster.
 ```{=html}
 <iframe class="slide-deck" src="slides.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
 ```
-\<!--
-* Reference and use the Rfast package
-* Companion doc: Taking R to its limits: 70+ tips (bad grammar but useful tips)
-* Mangalore tutorial, JSM tutorial, other?
---\>
+\<!-- \* Reference and use the Rfast package \* Companion doc: Taking R to its limits: 70+ tips (bad grammar but useful tips) \* Mangalore tutorial, JSM tutorial, other? --\>

@@ -1,6 +1,9 @@
 ---
 title: "HPC Software"
-format: revealjs
+format: 
+  revealjs:
+    chalkboard: true
+editor: source
 ---
 
 ## Parallel Software

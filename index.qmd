@@ -26,7 +26,7 @@ downloading packages practice
 
 Week 2, March 25 & 27
 
-Lectures: [Hardware and Memory hierarchy](materials/lectures/2-workflow)\
+Lectures: [Hardware and Memory hierarchy](materials/lectures/2-hardware)\
 [Faster R](materials/lectures/2b-faster)\
 Project: [Faster Data](materials/projects/2-faster) 
 <!-- double down on faster with memory hierarchy examples -->

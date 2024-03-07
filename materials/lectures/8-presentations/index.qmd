@@ -1,5 +1,6 @@
 ---
 title: "Presentations"
+editor: source
 ---
 
 Lightning talks about projects

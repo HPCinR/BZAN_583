@@ -1,10 +1,9 @@
 ---
 title: "Untitled"
 format: revealjs
+editor: source
 ---
 
 ## Lightning Talk 1
 
-
 ## Lightning Talk 2
-

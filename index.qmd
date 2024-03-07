@@ -1,67 +1,60 @@
 ---
 title: "HPC for Data Science in R - BZAN 583"
+editor: source
 ---
 
 This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system.
 
-**Prerequisites:** BZAN 583 builds on the R content of BZAN 542. Students should have a basic understanding of R, at least at the level of Part 1 in [Prof. Matloff's fastR]
+It is the first time this course has been offered so there will be some rough edges and some material provided "just in time." Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material. 
 
-**History of this class:** It is the first time this has been offered so there will be some rough edges and some material provided "just in time." Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material. 
+**Material below is under construction!**
 
-```{=html}
-<!-- FIX and uncomment, also rename index.mask_qmd back to index.qmd
-Week 0, Before March 18
-
-Prerequisites: [Before we Start: Prerequisites](materials/lectures/0-prerequisite)
--->
-```
 ::: {layout="[1,2]"}
 Week 1, March 18 & 20
 
 Lectures: [Welcome and Workflow Intro](materials/lectures/1-welcome_workflow)\
-Project: [Installs and Workflow](materials/projects/1-workflow) 
+Assignment: [Installs and Workflow](materials/assignment/1-workflow) 
 <!--
 workflow practice starts with faster examples and timing.
-compare lapply sum, coulumnSums(), and tidyverse sum of taxi data subset
-downloading packages practice
+e.g. compare lapply sum, coulumnSums(), and tidyverse sum of taxi data subset
+downloading packages practice, git and GitHub setup
 -->
 
 Week 2, March 25 & 27
 
-Lectures: [Hardware and Memory hierarchy](materials/lectures/2-hardware)\
-[Faster R](materials/lectures/2b-faster)\
-Project: [Faster Data](materials/projects/2-faster) 
+Lectures: [Hardware and Memory Hierarchy Concepts](materials/lectures/2-hardware)\
+[Coding for Faster R](materials/lectures/2b-faster)\
+Assignment: [Faster Data](materials/assignment/2-faster) 
 <!-- double down on faster with memory hierarchy examples -->
 
 Week 3, April 1 & 3
 
-Lectures: [HPC Software](materials/lectures/3-software)\
-Project: [Faster R](materials/projects/3-library) 
+Lectures: [HPC Software and BLAS Libraries](materials/lectures/3-software)\
+Assignment: [Faster R](materials/assignment/3-library) 
 <!-- start library parallel FlexiBLAS & OpenBLAS -->
 
 Week 4, April 8 & 10
 
 Lectures: [Shared Memory Parallel](materials/lectures/4-shared_mem)\
-Project: [Multicore](materials/projects/4-mclapply) 
+Assignment: [Multicore](materials/assignment/4-mclapply) 
 <!-- mclapply examples -->
 
 Week 5, April 15 & 17
 
-Lectures: [Torch for R](materials/lectures/5-nn_torch)\
-Project: [A classification task](materials/projects/5-nn_torch) 
+Lectures: [LLM or Torch for R](materials/lectures/5-nn)\
+Assignment: [A classification task](materials/assignment/5-nn) 
 <!-- NN torch week? -->
 
 Week 6, April 22 & 24
 
 Lectures: [Distributed Computing](materials/lectures/6-distributed)\
-Project: [pbdMPI application](materials/projects/6-mpi) 
+Assignment: [pbdMPI application](materials/assignment/6-mpi) 
 <!-- simple distributed (mapreduce & spmd MPI) and projects -->
 
 Week 7, April 29 & May 1
 
-Lectures: [Your choice](materials/lectures/7-projects)\
-Project: [Projects](materials/projects/7-projects) 
-<!-- concentrate projects -->
+Lectures: [TBD Your choice](materials/lectures/7-projects)\
+<!-- concentrate on troubleshooting projects -->
 
 Week 8, May 6
 
@@ -69,4 +62,3 @@ Project: [Presentations](materials/lectures/8-presentations)
 :::
 
 
-Code development will be presented with RStudio, so comfort with using RStudio helps, but other development environments (such as Jupyter) can be used. However, if you are not using RStudio, I may be of limited help in troubleshooting your IDE issues. Remote computing will be on the Delta cluster at the National Center for Supercomputing Applications (NCSA), which we will access with `ssh` and transfer codes via GitHub. You should have a GitHub personal account (free) and I will provide you with an account on Delta.

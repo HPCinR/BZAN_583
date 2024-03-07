@@ -1,9 +1,9 @@
 ---
 title: "Syllabus"
+editor: source
 ---
 
 ::: {layout="[2,1.2]"}
-
 Department of Business Analytics and Statistics\
 Haslam College of Business\
 The University of Tennessee
@@ -16,7 +16,7 @@ $\qquad$
 
 **High Performance Computing for Data Science with R**
 
-**Instructor:** Dr. George Ostrouchov [pronounced: ost-ruh-kov]
+**Instructor:** Dr. George Ostrouchov \[pronounced: ost-ruh-kov\]
 
 **Time:** 4:05 - 5:20 Mondays and Wednesdays
 
@@ -24,6 +24,7 @@ $\qquad$
 
 **Room:** HBB 132
 
+**Office Hours:** Mondays and Wednesdays 11-12. Other times possible by arrangement.
 :::
 
 ## BACKGROUND {.unnumbered}
@@ -44,6 +45,7 @@ This course will build on the R content of BZAN 542. Students should have a basi
 
 This is the first iteration of the class and materials are under development. Expect to see recent developments in the field at the cost of rough edges and materials being available JIT (right before class). The course is constructed in part from recent technical tutorials and presentations at HPC and Data Science conferences given by the instructor and from open content by others.
 
+```{=html}
 <!-- Instructor notes
 \### Proposed Lecture Topics (to be reduced, reordered, and coordinated) {.unnumbered}
 
@@ -62,11 +64,12 @@ This is the first iteration of the class and materials are under development. Ex
 
 The class will have two tracks that support each other: (1) a description of HPC concepts, some history to support the "why of HPC", and a practical track that uses a few tools to experiment with the HPC concepts on real HPC systems.
 -->
-
+```
 ## Software: {.unnumbered}
 
-On your laptop, make sure you have a current version of (or install): [R](https://www.r-project.org), [RStudio](https://www.rstudio.com), and
-[git](https://git-scm.com/). Also, create a free account on [GitHub](https://github.com/) if you don't have one already.
+On your laptop, make sure you have a current version of (or install): [R](https://www.r-project.org), [RStudio](https://www.rstudio.com), and [git](https://git-scm.com/). Also, create a free account on [GitHub](https://github.com/) if you don't have one already.
+
+Code development will be presented with RStudio, so comfort with using RStudio helps, but other development environments (such as Jupyter) can be used. However, if you are not using RStudio, I may be of limited help in troubleshooting your IDE issues. Remote computing will be on the Delta cluster at the National Center for Supercomputing Applications (NCSA), which we will access with `ssh` and transfer codes via GitHub. You should have a GitHub personal account (free) and I will provide you with an account on Delta. Computing on the Delta cluster will be via submission of batch scripts to the Slurm workload manager.
 
 ## Data {.unnumbered}
 
@@ -74,33 +77,35 @@ Several cities have started publishing data about their operation and about vari
 
 ## Optional Reading: {.unnumbered}
 
-[The Art of R Programming](https://utk.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma9925646348902311&context=L&vid=01UTN_KNOXVILLE:01UTK&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any%2Ccontains%2CThe%20Art%20of%20R%20Programming%3A%20A%20Tour%20of%20Statistical%20Software%20Design)  by Norman Matloff  
-[Advanced R](https://adv-r.hadley.nz/) by Hadley Wickham.  
-[Large Language Models]()  
+[The Art of R Programming](https://utk.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma9925646348902311&context=L&vid=01UTN_KNOXVILLE:01UTK&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any%2Ccontains%2CThe%20Art%20of%20R%20Programming%3A%20A%20Tour%20of%20Statistical%20Software%20Design) by Norman Matloff\
+[Advanced R](https://adv-r.hadley.nz/) by Hadley Wickham.\
+[Large Language Models]()\
 [R torch](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
 
 ## Grading and assignments policy: {.unnumbered}
 
-#### Groups:  
+#### Groups:
+
 The class will be divided into groups of mostly 3, possibly 4, that are encouraged to work together. It is highly recommended for all group members to actively begin coding independently, possibly discussing things but not just copying work of one group member. Your ability to work with HPC concepts after the class will depend directly on the amount of trial-and-error experience that you put into the assignments and project.
 
-#### Assignments:  
+#### Assignments:
+
 This course will have 6 assignments (one each of the first 6 weeks) that are **assigned on Monday** and are **due by 23:59 on the following Sunday**. They may depend on material presented on Monday and Wednesday of the same week. If code is part of the assignment, it must reproduce your results when run by the instructor.
 
-#### Project:  
-In addition, there will be a group project culminating in a **5-minute lightning presentation in the last class on Monday, May 6**. 
+#### Project:
 
-**Each group's project plan must be defined and approved by the end of the second week (Friday, March 29).** The project will consist of a **specific large data set** of your choosing and a **hypothesis that will be examined** with statistical and machine learning methods. 
+In addition, there will be a group project culminating in a **5-minute lightning presentation in the last class on Monday, May 6**.
 
-#### Grading:  
-The weekly assignments are worth 12% each and the project with presentation is 28%. While each group is assigned a grade that all members receive, at the end of the course all members will evaluate their own and others' relative contributions. I may consider these evaluations in adjusting the grades.
+**Each group's project plan must be defined and approved by the end of the second week (Friday, March 29).** The project will consist of a **specific large data set** of your choosing and a **hypothesis that will be examined** with statistical and machine learning methods.
 
-#### Late submission policy:  
+#### Grading:
+
+The weekly assignments are worth 12% each and the project with presentation is 28%. While each group is assigned a grade that all members receive, at the end of the course all members will evaluate and specify the kind of their own and others' relative contributions. I may consider these evaluations in adjusting the grades.
+
+#### Late submission policy:
+
 50% of the grade if submitted the following week. Zero after that.
-
 
 ## Interesting links: {.unnumbered}
 
-There is a number of great websites and podcasts that provide additional interesting information. See for instance [R-bloggers](https://www.r-bloggers.com), 
-[R Graph Gallery](https://www.r-graph-gallery.com/portfolio/ggplot2-package/), [Towards Data Science](https://towardsdatascience.com), [R Weekly](https://rweekly.org).
-
+There is a number of great websites and podcasts that provide additional interesting information. See for instance [R-bloggers](https://www.r-bloggers.com), [R Graph Gallery](https://www.r-graph-gallery.com/portfolio/ggplot2-package/), [Towards Data Science](https://towardsdatascience.com), [R Weekly](https://rweekly.org).

@@ -1,5 +1,6 @@
 ---
 title: "Welcome to HPC for Data Science"
+editor: source
 ---
 
 Welcome to HPC for Data Science in R. This class ...

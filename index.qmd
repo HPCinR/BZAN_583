@@ -43,7 +43,7 @@ Week 5, April 15 & 17
 
 Lectures: [LLM or Torch for R](materials/lectures/5-nn)\
 Assignment: [A classification task](materials/assignment/5-nn) 
-<!-- NN torch week? -->
+<!-- LLM coding or torch week? -->
 
 Week 6, April 22 & 24
 

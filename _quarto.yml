@@ -8,8 +8,8 @@ website:
     background: light
     foreground: dark
     left:
-      - href: index.qmd
-        text: Home
+      - href: syllabus.qmd
+        text: Syllabus
     right:
       - icon: github
         href: https://github.com/RBigData/HPCinR_583
@@ -23,4 +23,5 @@ format:
     css: styles.css
     toc: true
     html-math-method: katex
+    code-link: TRUE
 editor: source

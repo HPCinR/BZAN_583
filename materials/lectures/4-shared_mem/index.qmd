@@ -2,7 +2,6 @@
 title: "Shared memory parallel computing"
 ---
 
-
 [Full Screen](slides.qmd)
 
 ```{=html}

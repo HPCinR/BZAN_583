@@ -1,0 +1,106 @@
+---
+title: "Syllabus"
+---
+
+::: {layout="[2,1.2]"}
+
+Department of Business Analytics and Statistics\
+Haslam College of Business\
+The University of Tennessee
+
+$\qquad$
+
+**BZAN 583 Special Topics**
+
+2024 Spring Semester - 2^nd^ Session
+
+**High Performance Computing for Data Science with R**
+
+**Instructor:** Dr. George Ostrouchov [pronounced: ost-ruh-kov]
+
+**Time:** 4:05 - 5:20 Mondays and Wednesdays
+
+**E-mail:** go\@tennessee.edu
+
+**Room:** HBB 132
+
+:::
+
+## BACKGROUND {.unnumbered}
+
+### Course description: {.unnumbered}
+
+This course presents a high performance computing (HPC) view of some statistical and machine learning algorithms. It includes a high-level view of today's HPC architectures and parallel computing concepts for data science, along with practical exercises on a modern HPC cluster system.
+
+### Course Objective: {.unnumbered}
+
+Upon successful completion of this course, students should have (1) an ability to use modern HPC systems for data science, (2) have some understanding of issues that arise with large data sets in machine learning and potential solutions, (3) have practiced some of these skills to analyze large data in business applications.
+
+### Prerequisites: {.unnumbered}
+
+This course will build on the R content of BZAN 542. Students should have a basic understanding of R, at least at the level of Part I in [Prof. Matloff's fastR](https://github.com/matloff/fasteR).
+
+### History of this class: {.unnumbered}
+
+This is the first iteration of the class and materials are under development. Expect to see recent developments in the field at the cost of rough edges and materials being available JIT (right before class). The course is constructed in part from recent technical tutorials and presentations at HPC and Data Science conferences given by the instructor and from open content by others.
+
+<!-- Instructor notes
+\### Proposed Lecture Topics (to be reduced, reordered, and coordinated) {.unnumbered}
+
+-   Introductions, overview, form groups, R review, workflow assignment\
+-   Workflow introduction: RStudio to GitHub to HPC platform.\
+-   Bare basics of working with Unix (look/create/delete/copy files)\
+-   We plan to work with the [TLC](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) large taxi ride data set to get some experience with large data I/O.\
+-   What is parallel computing? Introduction to HPC architectures, resource managers, and cloud computing.\
+-   Shared memory parallel computing with R (package **parallel** and multithreaded math libraries **FlexiBLAS**, **OpenBLAS**).\
+-   Distributed memory parallel computing with R (package **pbdMPI**)\
+-   Methodology choices:
+    -   Random forest, serial, shared memory, and distributed memory versions\
+    -   Regularized polynomial regression via **polyreg** package\
+    -   Classification via projection onto trained basis functions\
+    -   Deep Learning through the use of **torch** (the R interface to the PyTorch C++ library) or Large Language Models introduction (Hugging Face models), but not both.
+
+The class will have two tracks that support each other: (1) a description of HPC concepts, some history to support the "why of HPC", and a practical track that uses a few tools to experiment with the HPC concepts on real HPC systems.
+-->
+
+## Software: {.unnumbered}
+
+On your laptop, make sure you have a current version of (or install): [R](https://www.r-project.org), [RStudio](https://www.rstudio.com), and
+[git](https://git-scm.com/). Also, create a free account on [GitHub](https://github.com/) if you don't have one already.
+
+## Data {.unnumbered}
+
+Several cities have started publishing data about their operation and about various available services. Perhaps the best known is the [New York City data](https://opendata.cityofnewyork.us/), where [TLC](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) is a well-known very large taxi ride data set. Knoxville has also joined this trend [Knoxville Open Data](https://www.knoxvilletn.gov/government/opendata). Another interesting collection of data is at the University of Washington. A broader list of available data for projects is at [careerfoundry](https://careerfoundry.com/en/blog/data-analytics/where-to-find-free-datasets/) and a somewhat overlapping [Database Star](https://www.databasestar.com/free-data-sets/). For your project, find a data set that is at least 1 GB in size.
+
+## Optional Reading: {.unnumbered}
+
+[The Art of R Programming](https://utk.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma9925646348902311&context=L&vid=01UTN_KNOXVILLE:01UTK&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any%2Ccontains%2CThe%20Art%20of%20R%20Programming%3A%20A%20Tour%20of%20Statistical%20Software%20Design)  by Norman Matloff  
+[Advanced R](https://adv-r.hadley.nz/) by Hadley Wickham.  
+[Large Language Models]()  
+[R torch](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
+
+## Grading and assignments policy: {.unnumbered}
+
+#### Groups:  
+The class will be divided into groups of mostly 3, possibly 4, that are encouraged to work together. It is highly recommended for all group members to actively begin coding independently, possibly discussing things but not just copying work of one group member. Your ability to work with HPC concepts after the class will depend directly on the amount of trial-and-error experience that you put into the assignments and project.
+
+#### Assignments:  
+This course will have 6 assignments (one each of the first 6 weeks) that are **assigned on Monday** and are **due by 23:59 on the following Sunday**. They may depend on material presented on Monday and Wednesday of the same week. If code is part of the assignment, it must reproduce your results when run by the instructor.
+
+#### Project:  
+In addition, there will be a group project culminating in a **5-minute lightning presentation in the last class on Monday, May 6**. 
+
+**Each group's project plan must be defined and approved by the end of the second week (Friday, March 29).** The project will consist of a **specific large data set** of your choosing and a **hypothesis that will be examined** with statistical and machine learning methods. 
+
+#### Grading:  
+The weekly assignments are worth 12% each and the project with presentation is 28%. While each group is assigned a grade that all members receive, at the end of the course all members will evaluate their own and others' relative contributions. I may consider these evaluations in adjusting the grades.
+
+#### Late submission policy:  
+50% of the grade if submitted the following week. Zero after that.
+
+
+## Interesting links: {.unnumbered}
+
+There is a number of great websites and podcasts that provide additional interesting information. See for instance [R-bloggers](https://www.r-bloggers.com), 
+[R Graph Gallery](https://www.r-graph-gallery.com/portfolio/ggplot2-package/), [Towards Data Science](https://towardsdatascience.com), [R Weekly](https://rweekly.org).
+

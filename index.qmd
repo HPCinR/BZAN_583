@@ -2,9 +2,11 @@
 title: "HPC for Data Science in R - BZAN 583"
 ---
 
-This course will provide an ability to use modern HPC systems for data science, provide some understanding of issues that arise with large data sets in machine learning and potential solutions, some practice of these skills to analyze large data in business applications.
+This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system.
 
-It is the first time this has been offered so there will be some rough edges. This means that I will work with you when some things break and I also hope that you will work with me to improve the course for future iterations.
+**Prerequisites:** BZAN 583 builds on the R content of BZAN 542. Students should have a basic understanding of R, at least at the level of Part 1 in [Prof. Matloff's fastR]
+
+**History of this class:** It is the first time this has been offered so there will be some rough edges and some material provided "just in time." Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material. 
 
 ```{=html}
 <!-- FIX and uncomment, also rename index.mask_qmd back to index.qmd
@@ -65,3 +67,6 @@ Week 8, May 6
 
 Project: [Presentations](materials/lectures/8-presentations)
 :::
+
+
+Code development will be presented with RStudio, so comfort with using RStudio helps, but other development environments (such as Jupyter) can be used. However, if you are not using RStudio, I may be of limited help in troubleshooting your IDE issues. Remote computing will be on the Delta cluster at the National Center for Supercomputing Applications (NCSA), which we will access with `ssh` and transfer codes via GitHub. You should have a GitHub personal account (free) and I will provide you with an account on Delta.

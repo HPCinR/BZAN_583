@@ -27,17 +27,9 @@ seed = readline("seed: ")
 
 ## Random Group Assignment
 
-Shiny app to permute names FIXME
-
-## Please share in your group
-
--   Your name:
-
--   One thing you love to do:
-
--   One thing you're most proud of:
-
--   Where will you be in 5 years:
+Shiny app to permute names. FIXME  
+Please change seats so groups sit together.  
+Swapping is allowed if all concerned groups agree.  
 
 ## Please share in your group
 
@@ -54,7 +46,7 @@ Shiny app to permute names FIXME
 
     -   My family (done a few things professionally too ...)
 
--   Where will you be in 5 years:
+-   Where do you want to be doing in 5 years:
 
     -   Semi-retired
 :::
@@ -75,7 +67,9 @@ countdown::countdown(2)
 
 ## Survey
 
-#### Programming experience
+#### Programming experience?
+
+#### Your laptop (Unix, Mac, Windows)?
 
 #### git?
 
@@ -85,17 +79,16 @@ countdown::countdown(2)
 
 #### Unix (Linux, MacOS terminal)
 
-#### Cluster
+#### HPC Cluster?
 
-#### Torch
+#### Torch or LLM experience?
 
-#### Large Language Models
 
-## About me: Computing
+## About me: Computing Tools
 
--   Languages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, **unix shell**, S, **R**\
--   Document preparation: nroff, ps, pdf, **LaTeX**, **.md**, .Rmd, **Quarto .qmd**
--   Systems: IBM, DEC, Honeywell, VAX, PC, Intel, **Mac**, **HPE (formerly Cray)**,
+-   Languages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, [**unix shell**]{style="color:green;"}, S, [**R**]{style="color:green;"}\
+-   Document preparation: nroff, ps, pdf, [**LaTeX**]{style="color:green;"}, [**Markdown**]{style="color:green;"}, .Rmd, [**Quarto .qmd**]{style="color:green;"}
+-   Systems: IBM, DEC, Honeywell, VAX, PC, Intel, [**Mac**]{style="color:green;"}, [**HPE** (formerly Cray)]{style="color:green;"},
 
 ## Workflow for Remote Computing in R
 

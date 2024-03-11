@@ -1,5 +1,6 @@
 ---
 title: "Welcome to HPC for Data Science"
+editor: source
 ---
 
 Parallel software to make your R code faster. How to parallelize in Unix flavors.

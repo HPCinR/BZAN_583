@@ -1,5 +1,6 @@
 ---
 title: "Distributed Computing"
+editor: source
 ---
 
 Distributed computing for multinode computation
@@ -14,3 +15,4 @@ Distributed computing for multinode computation
 * distributed memory from R4HPC
 
 -->
+

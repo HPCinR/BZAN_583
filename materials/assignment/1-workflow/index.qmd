@@ -1,4 +1,44 @@
 ---
-title: "Welcome to HPC for Data Science"
+title: "Week 1 Assignment: Setup and Installations"
 editor: source
 ---
+
+## Install on your Laptop
+
+* Current version of R from [CRAN](https://cran.r-project.org/)  
+* Current version of RStudio Desktop from [posit](https://posit.co/downloads/)  
+* Current `git` version as described in [happywithgit.com](https://happygitwithr.com/install-git.html)  
+
+## Create a personal account on [github.com](github.com)  
+
+* If you already have one, you can continue to use it for this class
+* Go to [github.com](github.com) and Sign up for a GitHub free personal account
+
+
+## Setup your NCSA Delta Account
+
+<!--
+Instructor notes for adding Delta users to allocated project:  
+See "Adding account holders to a group or project" on [Delta Webpage](https://wiki.ncsa.illinois.edu/display/USSPPRT/NCSA+Allocation+and+Account+Management) for general directions.
+
+Specifically, see "Inviting new people to your project" for information on inviting persons who do not have an NCSA account.
+-->
+
+Expect to receive an email from the instructor with the subject: "NCSA Delta Account for BZAN 583" it will contain a link to account registration and login. Let the instructor know if you did not receive one by the first class meeting.
+
+Following the link will open a login webpage:
+
+  ![](/pics/login/ncsa.png)
+
+Use the green "Register New User and Join" link to set up your NCSA Delta account. If you don't see the "Register ..." link, clearing your browser cookies should bring it back.
+
+Follow the registration and login instructions. Your login setup can use UTK's 2-factor authentication via DUO. 
+
+After setting up your account, your instructor will add you to join the class computing allocation. 
+
+Turn in the result of the following shell commands that you run on a Delta login node after logging in.
+
+```{r}
+date()
+```
+

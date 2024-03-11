@@ -1,5 +1,6 @@
 ---
 title: "Welcome to HPC for Data Science"
+editor: source
 ---
 
 A short excursion into neural net classification

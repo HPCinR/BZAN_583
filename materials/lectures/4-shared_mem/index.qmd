@@ -1,5 +1,6 @@
 ---
 title: "Shared memory parallel computing"
+editor: source
 ---
 
 [Full Screen](slides.qmd)

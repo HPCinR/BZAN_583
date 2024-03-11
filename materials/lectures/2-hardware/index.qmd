@@ -1,5 +1,6 @@
 ---
 title: "Hardware and Memory Hierarchies"
+editor: source
 ---
 
 [Full Screen](slides.qmd)

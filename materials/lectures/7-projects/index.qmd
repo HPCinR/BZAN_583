@@ -1,5 +1,6 @@
 ---
 title: "Selected Topics for Project Completion"
+editor: source
 ---
 
 Various topics to discuss for requested topics and projects.

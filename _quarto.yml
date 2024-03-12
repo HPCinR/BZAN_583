@@ -1,6 +1,6 @@
 project:
   type: website
-
+  output-dir: docs
 website:
   title: "HPC for Data Science in R - BZAN 583"
   page-navigation: true

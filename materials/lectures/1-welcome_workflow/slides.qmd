@@ -1,28 +1,22 @@
 ---
-title: "BZAN 583"
+title: "Welcome to HPC for Data Science in R! <br><br> BZAN 583"
 format: 
   revealjs:
     chalkboard: true
 editor: source
 ---
 
-## Welcome to HPC for Data Science in R!
-
-#### BZAN 583
-
-::: notes
-Speaker notes go here.
-:::
-
 ## Random Group Assignment {.smaller}
 
 #### Class divided into groups of 3 to 4  
 - Assigned randomly via Canvas  
-- Swapping is allowed (after class today) if members of concerned groups agree
+- Swapping is allowed (after class today) if all members of concerned groups agree
 
 #### Handout
 - Group assignments on the front  
 - Survey on the back  
+  - Fill out now  
+  - Will collect at end of class today  
 
 ## Programming experience? {.smaller}
 
@@ -31,6 +25,7 @@ Speaker notes go here.
 -  Your laptop: [Unix, Mac, Windows]{style="color:blue;"}  
 - R experience:  [used in a class, used in two classes, x years, wrote an R package, live and breathe R]{style="color:blue;"}  
 - Use RStudio?  [usually, all the time, reluctantly, prefer Jupyter]{style="color:blue;"}
+- Other programming languages: [Python, C, C++, Go, ...]{style="color:blue;"}  
 - Use git?  [what's that?, heard of it, tried it once, use it often, I live on it]{style="color:blue;"}
 - R parallel package?  [what's that?, heard of it, tried it once, didn't help me, got great results, keeps all the cores busy on my laptop]{style="color:blue;"}
 - Unix experince (Linux, MacOS terminal): [never used it, tried it once, know a few commands, I write shell scripts]{style="color:blue;"}
@@ -38,10 +33,11 @@ Speaker notes go here.
 - Cloud computing? [is it real?, heard about it, MS Azure, AWS, UTK cluster VM, Other]{style="color:blue;"}
 - MPI?  [what's that?, heard of it, used a code that used it, wrote some code]{style="color:blue;"}
 - Torch or LLM experience? [a few words]{style="color:blue;"}
+- Your expectations for this class: [play with HPC, Build an HPC Analytics Startup Co]{style="color:blue;"}
 
 :::
 
-#### Expectations for this class:
+
 
 ::: notes
 

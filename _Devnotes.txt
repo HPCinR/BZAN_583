@@ -1,8 +1,14 @@
 DEV NOTES
 
-* start populating slides and adding text to book
-  * workflow & intro is now one deck. Should be two with more examples
-  * There will be a faster deck and a hardware deck
+* Create a new github organization for the class
+* Make the class repo a github website in that organization
+* Get the website URL into Canvas
+
+* Make the repo a tamplate repository so that forks do not include history
+  * commits to a fork do not count but to cloned templates they do count
+
+* Looks like GitHub classroom connection to Canvas is an Admin job
+  * Is it possible that no UTK class has yet been connected?
 
 * move book to RBigData as well
 

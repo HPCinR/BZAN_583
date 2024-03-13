@@ -1,8 +1,9 @@
 DEV NOTES
 
 Sources:
-* go-ski/ASwR
+* go-ski/ASwR - Charles - book parts and class slides
 * go-ski/pics - is a pictures repository shared by BZAN_583 and by HPCinR_book. GO repo clone has more
+* RBigData/R4HPC - slides for OLCF class
 
 TODO:
 

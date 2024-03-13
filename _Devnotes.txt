@@ -1,5 +1,11 @@
 DEV NOTES
 
+Sources:
+* go-ski/ASwR
+* go-ski/pics - is a pictures repository shared by BZAN_583 and by HPCinR_book. GO repo clone has more
+
+TODO:
+
 * Create a new github organization for the class
 * Make the class repo a github website in that organization
 * Get the website URL into Canvas

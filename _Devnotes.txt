@@ -22,3 +22,8 @@ TODO:
 
 * move book to RBigData as well
 
+UPDATE
+* https://stat.ethz.ch/pipermail/r-sig-hpc/2022-August/002144.html directions
+  * `export CMAKE_PREFIX_PATH=$HOMEBREW_CELLAR/openblas:$CMAKE_PREFIX_PATH`
+  * flexiblas on macOS has issues with @rpath and LC_RPATH
+  

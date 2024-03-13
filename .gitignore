@@ -7,3 +7,4 @@ _site
 .quarto
 
 /.quarto/
+/_site/

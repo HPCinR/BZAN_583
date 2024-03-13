@@ -1,9 +1,12 @@
 DEV NOTES
 
 Sources:
-* go-ski/ASwR - Charles - book parts and class slides
+* go-ski/ASwR - Charles - book parts, class slides, and exercises
 * go-ski/pics - is a pictures repository shared by BZAN_583 and by HPCinR_book. GO repo clone has more
 * RBigData/R4HPC - slides for OLCF class
+* RBigData/ROBUST2022 - a shortened version of Charles class slides
+* RBigData/KPMS-IT4I-EX - exercises for Charles class
+* RBigData/KPMS-IT4I - pdf version of Charles class
 
 TODO:
 

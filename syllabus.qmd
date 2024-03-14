@@ -73,7 +73,7 @@ The class will be divided into groups of mostly 3, possibly 4, that are encourag
 
 #### Assignments:
 
-This course will have 6 assignments (one each of the first 6 weeks) that are **assigned on Monday** and are **due by 23:59 on the following Sunday**. They may depend on material presented on Monday and Wednesday of the same week. If code is part of the assignment, it must reproduce your results when run by the instructor.
+This course will have 6 assignments (one each of the first 6 weeks) that are **assigned on Monday** and are **due by 23:59 on the following Sunday**. They may depend on material presented on Monday and Wednesday of the same week. If R code development is part of the assignment, it must reproduce your results when run by the instructor.
 
 #### Project:
 
@@ -83,7 +83,7 @@ In addition, there will be a group project culminating in a **5-minute lightning
 
 #### Grading:
 
-The weekly assignments are worth 12% each and the project with presentation is 28%. While each group is assigned a grade that all members receive, at the end of the course all members will evaluate and specify the kind of their own and others' relative contributions. These evaluations will be considered in adjusting the grades.
+The weekly assignments are worth 12% each and the project with presentation is 25%. While each group is assigned a grade that all members receive, at the end of the course all members will evaluate and specify the kind of their own and others' relative contributions. The remaining 3% will be based on these evaluations and on class attendance, which will be taken at each lecture.
 
 #### Late submission policy:
 

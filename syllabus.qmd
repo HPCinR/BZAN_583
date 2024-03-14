@@ -97,7 +97,7 @@ Several cities have started publishing data about their operation and about vari
 [Happy Git and GitHub for the useR](https://happygitwithr.com/)  
 [The Art of R Programming](https://utk.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma9925646348902311&context=L&vid=01UTN_KNOXVILLE:01UTK&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&tab=Everything&query=any%2Ccontains%2CThe%20Art%20of%20R%20Programming%3A%20A%20Tour%20of%20Statistical%20Software%20Design) by Norman Matloff\
 [Advanced R](https://adv-r.hadley.nz/) by Hadley Wickham.\
-[Large Language Models]()\
+[Large Language Models](https://blogs.rstudio.com/ai/posts/2023-06-20-llm-intro/) and their use in [coding](https://michelnivard.github.io/gptstudio/ \
 [R torch](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
 
 ## Interesting links: 

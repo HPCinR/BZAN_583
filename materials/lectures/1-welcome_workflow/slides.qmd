@@ -29,7 +29,11 @@ editor: source
 - Use git?  [what's that?, heard of it, tried it once, use it often, I live on it]{style="color:blue;"}
 - R parallel package?  [what's that?, heard of it, tried it once, didn't help me, got great results, keeps all the cores busy on my laptop]{style="color:blue;"}
 
+:::
+
 ## Programming experience? ... continued {.smaller}
+
+::: {.incremental}
 
 - Unix experince (Linux, MacOS terminal): [never used it, tried it once, know a few commands, I write shell scripts]{style="color:blue;"}
 - HPC Cluster? [I know they exist, saw one, logged in once, used one for a project]{style="color:blue;"}

@@ -1,5 +1,5 @@
 ---
-title: "Week 1 Assignment: Setup and Installations"
+title: "Week 1 Assignment: Setup, Installations, and first Unix Steps"
 editor: source
 knitr: true
 ---
@@ -37,7 +37,7 @@ Follow the registration and login instructions. Your login setup can use UTK's 2
 
 After setting up your account, your instructor will add you to join the class computing allocation. 
 
-Turn in the result of the following shell commands that you run on a Delta login node after logging in.
+**Result 1:** Turn in the result of the following shell commands that you run on a Delta login node after logging in.
 
 ```{bash}
 #| echo: true
@@ -51,4 +51,4 @@ module load r
 module list
 Rscript -e "sessionInfo()"
 ```
-
+**Result 2:** Use the `man` Unix command to get a description of what each command does. Turn in a one sentence description for each command.

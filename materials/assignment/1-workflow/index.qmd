@@ -38,7 +38,13 @@ After setting up your account, your instructor will add you to join the class co
 
 Turn in the result of the following shell commands that you run on a Delta login node after logging in.
 
-```{r}
-date()
+```{sh eval=FALSE}
+hostname
+date
+w
+whoami
+module load r
+module list
+Rscript -e "sessionInfo()"
 ```
 

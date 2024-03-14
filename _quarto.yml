@@ -24,3 +24,4 @@ format:
     html-math-method: katex
     code-link: TRUE
 editor: source
+knitr: true

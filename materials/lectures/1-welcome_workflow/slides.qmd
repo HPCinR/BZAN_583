@@ -60,7 +60,7 @@ About me: Computing Tools
 
 ![](/pics/01-intro/Workflow.png)
 
-## Workflow for Remote Computing in R {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="bottom right"}
+## Workflow for Remote Computing in R {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="bottom right" .smaller}
 
 #### Laptop RStudio
 
@@ -84,7 +84,7 @@ About me: Computing Tools
 -   Bandwidth
 :::
 
-## Cooperating R Sessions on a Modern Cluster {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="800px" background-position="bottom right"}
+## Cooperating R Sessions on a Modern Cluster {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="1000px" background-position="bottom right"}
 
 8 Nodes (128 cores each)\
 - 32 R sessions\
@@ -118,7 +118,7 @@ About me: Computing Tools
 
     -   WinSCP
 
-## Software on Cluster {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="top right"}
+## Software on Cluster {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="top right" .smaller}
 
 -   R, FlexiBLAS, OpenBLAS
 -   OpenMPI
@@ -159,7 +159,7 @@ $$\qquad$$
 
 -   Private and Public key pairs for Client and Server
 
-    -   Git repository (GitHub, GigLab) is the **server**
+    -   Git repository (GitHub, GitLab) is the **server**
     -   Your laptop and remote cluster are **clients**
 
 -   Each **client** has own *key-pair*
@@ -173,12 +173,17 @@ $$\qquad$$
     -   Client decrypts with own private key and sends to server
     -   Server verifies agreement and opens secure connection
 
-## Clusters are Linux systems {background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right"}
+## Clusters are Linux systems {background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right" .smaller}
 
 -   Linux is one of many descendants of original Unix. MacOS is another.
 
-    -   Everything in Linux is a file
+    -   Everything in Linux is a file (some files are directory files)
     -   Linux files are organized as a tree
+    -   Every file has permissions: d r w x | r w x | r w x
+        -  delete, read, write, execute
+        -  owner, group, all
+    -   Every file has *owner* and *group*
+    -   Available commands are executable files in PATH directories
 
 ::: notes
 *Unix* (Bell Labs) was a play on an earlier *Multics* operating system (designed at MIT)

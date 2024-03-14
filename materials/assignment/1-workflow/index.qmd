@@ -38,7 +38,10 @@ After setting up your account, your instructor will add you to join the class co
 
 Turn in the result of the following shell commands that you run on a Delta login node after logging in.
 
-```{sh eval=FALSE}
+```{sh}
+#| echo: true
+#| eval: false
+
 hostname
 date
 w

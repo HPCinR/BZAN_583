@@ -29,7 +29,7 @@ $\qquad$
 
 ## BACKGROUND
 
-This course presents a high performance computing (HPC) view of some statistical and machine learning algorithms. It includes a high-level view of today's HPC architectures and parallel computing concepts for data science, along with practical exercises on a modern HPC cluster system.
+This course presents a high performance computing (HPC) view of some statistical and machine learning algorithms. It centers on a high-level view of today's HPC architectures and parallel computing concepts for data science, along with practical exercises on a modern HPC cluster system.
 
 ### Prerequisites:
 

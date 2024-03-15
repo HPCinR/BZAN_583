@@ -6,13 +6,13 @@ format:
 editor: source
 ---
 
+## Today:
+
 ::: notes
 * Welcome!!
 * thx for signing up for the class!
 
 :::
-
-## Today:
 
 #### Welcome!!  
 #### Assign groups of 3-4  

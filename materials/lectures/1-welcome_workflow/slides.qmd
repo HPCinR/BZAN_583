@@ -10,16 +10,15 @@ editor: source
 * Welcome!!
 * thx for signing up for the class!
 
-
 :::
 
 ## Today:
 
 #### Welcome!!  
-#### Assign groups (see handout)  
-#### Survey and expectations (other side of handout)
-#### Start setting up accounts (GitHub, Delta cluster)  -Assignment
-#### Introduction to workflow: RStudio to remote cluster via GitHub  
+#### Assign groups of 3-4  
+#### Survey and expectations  
+#### Start setting up accounts (GitHub, Delta cluster)  -Assignment  
+#### Introduction to workflow: RStudio to remote cluster via GitHub   
 
 ## Random Group Assignment {.smaller}
 

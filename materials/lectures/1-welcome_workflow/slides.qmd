@@ -32,7 +32,7 @@ editor: source
   - Fill out now  
   - Will collect at end of class today  
 
-## Programming experience? {.smaller}
+## Survey {.smaller}
 
 ::: {.incremental}
 
@@ -98,7 +98,7 @@ About me: Computing Tools
 -   Bandwidth
 :::
 
-## Cooperating R Sessions on a Modern Cluster {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="1000px" background-position="bottom right"}
+## Cooperating R Sessions on a Modern Cluster {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="1100px" background-position="bottom right"}
 
 8 Nodes (128 cores each)\
 - 32 R sessions\
@@ -106,7 +106,6 @@ About me: Computing Tools
 - 1024 cores total\
 
 ::: notes
--   
 
 -   Laptop - login node - resource script\
 
@@ -134,7 +133,7 @@ About me: Computing Tools
 
 ## Software on Cluster {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="top right" .smaller}
 
--   R, FlexiBLAS, OpenBLAS
+-   FlexiBLAS, OpenBLAS
 -   OpenMPI
 -   Arrow or HDF5 (for parallel I/O)
 -   R (\>= 4.0)

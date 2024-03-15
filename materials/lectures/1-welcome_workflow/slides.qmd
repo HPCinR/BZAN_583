@@ -45,12 +45,12 @@ editor: source
 
 :::
 
-## Programming experience? ... continued {.smaller}
+## Survey ... continued {.smaller}
 
 ::: {.incremental}
 
 - Unix experince (Linux, MacOS terminal): [never used it, tried it once, know a few commands, I write shell scripts]{style="color:blue;"}
-- HPC Cluster? [I know they exist, saw one, logged in once, used one for a project]{style="color:blue;"}
+- HPC Cluster? [I know they exist, saw one, logged in once, used one for a project, keep one in my basement]{style="color:blue;"}
 - Cloud computing? [is it real?, heard about it, MS Azure, AWS, UTK cluster VM, Other]{style="color:blue;"}
 - MPI?  [what's that?, heard of it, used a code that used it, wrote some code]{style="color:blue;"}
 - Torch or LLM experience? [a few words]{style="color:blue;"}
@@ -69,6 +69,10 @@ About me: Computing Tools
 -   Systems: IBM, DEC, Honeywell, VAX, PC, Intel, [**Mac**]{style="color:green;"}, [**HPE** (formerly Cray)]{style="color:green;"},
 
 :::
+
+## Setting up Accounts on GitHub, on Delta
+
+[Assignment 1](https://hpcinr.github.io/BZAN_583/materials/assignment/1-workflow/)
 
 ## Workflow for Remote Computing in R  
 

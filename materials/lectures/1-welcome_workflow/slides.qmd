@@ -6,6 +6,21 @@ format:
 editor: source
 ---
 
+::: notes
+* Welcome!!
+* thx for signing up for the class!
+
+
+:::
+
+## Today:
+
+#### Welcome!!  
+#### Assign groups (see handout)  
+#### Survey and expectations (other side of handout)
+#### Start setting up accounts (GitHub, Delta cluster)  -Assignment
+#### Introduction to workflow: RStudio to remote cluster via GitHub  
+
 ## Random Group Assignment {.smaller}
 
 #### Class divided into groups of 3 to 4  
@@ -177,13 +192,13 @@ $$\qquad$$
 
 -   Linux is one of many descendants of original Unix. MacOS is another.
 
-    -   Everything in Linux is a file (some files are directory files)
+    -   Everything in Linux is a file (some are directory files)
     -   Linux files are organized as a tree
     -   Every file has permissions: d r w x | r w x | r w x
         -  delete, read, write, execute
         -  owner, group, all
-    -   Every file has *owner* and *group*
-    -   Available commands are executable files in PATH directories
+    -   Every file has *owner*, *group*, and a few other attributes
+    -   Available commands are executable files in your PATH directories
 
 ::: notes
 *Unix* (Bell Labs) was a play on an earlier *Multics* operating system (designed at MIT)
@@ -193,7 +208,7 @@ $$\qquad$$
 
 In a terminal, you talk to a *shell* program (*bash* is most common)
 
--   Commands can have *options* and *arguments*
+-   Commands (executable files) can have *options* and *arguments*
 
 *Standard input* and *standard output* of a command is the terminal but can be redirected
 

@@ -47,8 +47,19 @@ hostname
 date
 w
 whoami
+ls
+ls -FG
+ls -lt
+mkdir R
+cd R
+pwd
+cd
 module load r
 module list
 Rscript -e "sessionInfo()"
 ```
-**Result 2:** Use the `man` Unix command to get a description of what each command does. Turn in a one sentence description for each command.
+**Result 2:** Use the `man` Unix command to get a description of what each command does. Turn in a short one-sentence description for each command.
+
+**Result 3:** On GitHub ... navigate to your Profile 
+
+After preparing all the required results, please experiment further with Linux commands. 

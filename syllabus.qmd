@@ -69,7 +69,7 @@ Code development will be presented with RStudio, so comfort with using RStudio h
 
 #### Groups:
 
-The class will be divided into groups of mostly 3, possibly 4, that are encouraged to work together. It is highly recommended for all group members to actively begin coding independently, possibly discussing things but not just copying work of one group member. Your ability to work with HPC concepts after the class will depend directly on the amount of trial-and-error experience that you put into the assignments and project.
+The class will be divided into groups of mostly 4, some 3, that are encouraged to work together. It is highly recommended for all group members to actively begin coding independently, discussing things but not just copying work of one group member. Your ability to work with HPC concepts after the class will depend directly on the amount of trial-and-error experience that you put into the assignments and project.
 
 #### Assignments:
 
@@ -79,7 +79,7 @@ This course will have 6 assignments (one each of the first 6 weeks) that are **a
 
 In addition, there will be a group project culminating in a **5-minute lightning presentation in the last class on Monday, May 6**.
 
-**Each group's project plan must be defined and approved by the end of the second week (Friday, March 29).** The project will consist of a **specific large data set** of your choosing and a **hypothesis that will be examined** with statistical and machine learning methods. The main objective is to successfully exercise several HPC methods (e.g. faster analysis or larger data enabled by methods learned in class). A great discovery from the data is not required, although that would be the icing on the cake. 
+**Each group's project plan must be defined and approved by the end of the second week (Friday, March 29).** Each group should make an appointment with the instructor to discuss their project proposal. The project will consist of a **specific large data set** of your choosing and a **hypothesis to be examined** with statistical and machine learning methods. The main objective is to successfully exercise several HPC methods (e.g. faster, parallel, analysis or larger data enabled by methods learned in class). A great discovery from the data is not required, although that would be the icing on the cake.  
 
 #### Grading:
 

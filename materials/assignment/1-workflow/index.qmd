@@ -37,7 +37,7 @@ Follow the registration and login instructions. Your login setup can use UTK's 2
 
 After setting up your account, your instructor will add you to join the class computing allocation. 
 
-**Result 1:** Turn in the result of the following shell commands that you run on a Delta login node after logging in.
+**Result 1:** Turn in a copy of your session running the following shell commands in the sequence given on a Delta login node.  The intent here is to verify that you can successfully connect to a Delta login node and run a few basic Unix commands.
 
 ```{bash}
 #| echo: true
@@ -48,18 +48,21 @@ date
 w
 whoami
 ls
-ls -FG
-ls -lt
+pwd
 mkdir R
+ls
+ls -a
+ls -la
+ls -laF --color
 cd R
 pwd
 cd
+pwd
 module load r
 module list
 Rscript -e "sessionInfo()"
 ```
-**Result 2:** Use the `man` Unix command to get a description of what each command does. Turn in a short one-sentence description for each command.
+**Result 2:** Use the `man` command to get a description of what each command does. Use `man man` to get an explanation of the `man` command. Turn in a short one-sentence description for each unique command. 
 
-**Result 3:** On GitHub ... navigate to your Profile 
-
-After preparing all the required results, please experiment further with Linux commands. 
+**Result 3:** From GitHub ... your GitHub user id. So I can invite you to the 
+BZAN-583 team in HPCinR organization.

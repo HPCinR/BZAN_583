@@ -19,60 +19,71 @@ editor: source
 
 ## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="1200px" background-position="center"}
 
-## Flynn's Taxonomy (1972) {.smaller}
+## Flynn's Taxonomy (1972) 
 
--   *Single Instruction, Single Data (**SISD**):* scalar processor, serial program\
--   *Single Instruction, Multiple Data (**SIMD**):* vector processor, array processor\
--   *Multiple Instruction, Multiple Data (**MIMD**):* multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster\
+-   *Single Instruction, Single Data (**SISD**):* scalar processor, serial program (old-style CPU)
+-   *Single Instruction, Multiple Data (**SIMD**):* vector processor, array processor (old-style GPU)
+-   *Multiple Instruction, Multiple Data (**MIMD**):* multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today's CPU and GPU but leaning to legacy)
 -   *Multiple Instruction, Single Data (**MISD**):* is not used much
 
 ## Shared Memory Hardware {.smaller}
 
 **Multicore CPU**  
-* one or two chips with multiple cores  
-* Current high-end is 64 cores (e.g. AMD EPYC "Milan")  
-* Hosts operating system (OS)  
+- one or two chips with multiple cores  
+- Current high-end is 64 cores (e.g. AMD EPYC "Milan")  
+- Hosts operating system (OS)  
 
 **ARM CPU-GPU**  
-* A hybrid unified memory architecture  
-* Low power requirements  
-* Hosts OS
+- A hybrid unified memory architecture  
+- Low power requirements  
+- Hosts OS
 
 **GPU**  
-* Excellent SIMD throughput at the expense of bad serial performance  
-* Separate memory, so "offloading" co-processor concept  
-* Low power requirements, lots of slow cores  
-* Does not host OS  
+- Excellent SIMD throughput at the expense of bad serial performance  
+- Separate memory, so "offloading" co-processor concept  
+- Low power requirements, lots of slow cores  
+- Does not host OS  
 
-### The takeaway:
+#### The takeaway:
 
 CPU fast and versatile but limited parallelism  
-GPU slow and less versatile but extreme parallelism (4x+ cores)  
+GPU slower and less versatile but extreme parallelism (4x+ cores)  
 
-::: notes
--   ARM was big in cellphones, now big in HPC
--   Nvidia is also heading toward ARM
+::: notes  
+-   ARM was big in cellphones, now big in HPC  
+-   Nvidia is also heading toward ARM  
+-   My bet would be with ARM. 
 :::
 
 
 ## Parallel Programming Models {.smaller}
 
-### Shared Memory Parallel
-
--   Unix fork\
--   Multithreading\
+### Shared Memory Parallel  
+-   Unix fork  
+-   Multithreading  
 -   OpenMP
 
-### Distributed Memory Parallel
-
--   manager-workers: most common in simple cases\
--   Single program, multiple data (SPMD): most common and most scalable on clusters\
--   MapReduce: common in customer database processing\
+### Distributed Memory Parallel  
+-   manager-workers: most common in simple cases  
+-   Single program, multiple data (SPMD): most common and most scalable on clusters  
+-   MapReduce: common in customer database processing, continuous services  
 -   Dataflow: dependency graph directed, still evolving <br><br>
 
 #### Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.
+#### Unix fork more common in scripting languages like R and Python
 
-## Three Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide1.png" background-size="1000px" background-position="center"}
+## UMA and NUMA
+
+#### Uniform memory access
+
+- A typical multicore CPU chip
+
+#### Non-Uniform memory access
+
+- A larger collection of multicore chips with hardware/software enabled global memory access
+- Some memory is closer than other memory
+
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide1.png" background-size="1000px" background-position="center"}
 
 ##  {background-image="/pics/ParallelHardware/Slide2.png" background-size="1000px" background-position="center"}
 

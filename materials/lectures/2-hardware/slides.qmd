@@ -15,55 +15,9 @@ editor: source
 -   Single (or two) chip: hardware shared memory (otherwise software shared and NUMA)
 -   Memory hierarchies and page faults
 
-## Flynn's Taxonomy of Computer Architecture {.smaller}
-
--   SISD
-
-    -   CPU
-    -   Optimized for diverse instruction streams
-
--   MISD
-
--   SIMD
-
-    -   GPU
-
--   MIMD
-
--   GPU are optimized for simple instruction on many data items (e.g. pixels on screen)
-
--   CPU are optimized for complex instruction streams
-
-Multicore - Manycore - GPU ARM https://www.wevolver.com/article/risc-v-vs-arm-a-comprehensive-comparison-of-processor-architectures
+ 
 
 ## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="1200px" background-position="center"}
-
-## Shared Memory Hardware {.smaller}
-
-**Multicore CPU** - one or two chips with multiple cores\
-\* Current high-end is 64 cores (e.g. AMD EPYC "Milan")\
-\* Hosts operating system (OS)
-
-**ARM CPU-GPU**\
-\* A hybrid unified memory architecture\
-\* Low power requirements\
-\* Hosts OS
-
-**GPU**\
-\* Excellent SIMD throughput at the expense of bad serial performance\
-\* Separate memory, so "offloading" co-processor concept\
-\* Low power requirements, lots of slow cores\
-\* Does not host OS
-
-### The takeaway:
-
-CPU fast and versatile but limited parallelism\
-GPU slow and less versatile but extreme parallelism
-
-::: notes
--   ARM was big in cellphones, now big in HPC
--   Nvidia is also heading toward ARM
-:::
 
 ## Flynn's Taxonomy (1972) {.smaller}
 
@@ -71,6 +25,35 @@ GPU slow and less versatile but extreme parallelism
 -   *Single Instruction, Multiple Data (**SIMD**):* vector processor, array processor\
 -   *Multiple Instruction, Multiple Data (**MIMD**):* multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster\
 -   *Multiple Instruction, Single Data (**MISD**):* is not used much
+
+## Shared Memory Hardware {.smaller}
+
+**Multicore CPU**  
+* one or two chips with multiple cores  
+* Current high-end is 64 cores (e.g. AMD EPYC "Milan")  
+* Hosts operating system (OS)  
+
+**ARM CPU-GPU**  
+* A hybrid unified memory architecture  
+* Low power requirements  
+* Hosts OS
+
+**GPU**  
+* Excellent SIMD throughput at the expense of bad serial performance  
+* Separate memory, so "offloading" co-processor concept  
+* Low power requirements, lots of slow cores  
+* Does not host OS  
+
+### The takeaway:
+
+CPU fast and versatile but limited parallelism  
+GPU slow and less versatile but extreme parallelism (4x+ cores)  
+
+::: notes
+-   ARM was big in cellphones, now big in HPC
+-   Nvidia is also heading toward ARM
+:::
+
 
 ## Parallel Programming Models {.smaller}
 

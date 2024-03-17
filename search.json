@@ -196,13 +196,6 @@
     "text": "Rework this into:\n\nTwo memory models: shared and distributed\n\nshared memory: UMA small systems, and NUMA larger systems\nshared memory: runs OS, and coprocessor\ndistributed memory: large systems\n\nSingle (or two) chip: hardware shared memory (otherwise software shared and NUMA)\nMemory hierarchies and page faults"
   },
   {
-    "objectID": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-of-computer-architecture",
-    "href": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-of-computer-architecture",
-    "title": "Hardware and Memory Hierarchies",
-    "section": "Flynn’s Taxonomy of Computer Architecture",
-    "text": "Flynn’s Taxonomy of Computer Architecture\n\nSISD\n\nCPU\nOptimized for diverse instruction streams\n\nMISD\nSIMD\n\nGPU\n\nMIMD\nGPU are optimized for simple instruction on many data items (e.g. pixels on screen)\nCPU are optimized for complex instruction streams\n\nMulticore - Manycore - GPU ARM https://www.wevolver.com/article/risc-v-vs-arm-a-comprehensive-comparison-of-processor-architectures"
-  },
-  {
     "objectID": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware",
     "href": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware",
     "title": "Hardware and Memory Hierarchies",
@@ -210,32 +203,39 @@
     "text": "Two (Three) Basic Concepts in Hardware"
   },
   {
-    "objectID": "materials/lectures/2-hardware/slides.html#shared-memory-hardware",
-    "href": "materials/lectures/2-hardware/slides.html#shared-memory-hardware",
-    "title": "Hardware and Memory Hierarchies",
-    "section": "Shared Memory Hardware",
-    "text": "Shared Memory Hardware\nMulticore CPU - one or two chips with multiple cores\n* Current high-end is 64 cores (e.g. AMD EPYC “Milan”)\n* Hosts operating system (OS)\nARM CPU-GPU\n* A hybrid unified memory architecture\n* Low power requirements\n* Hosts OS\nGPU\n* Excellent SIMD throughput at the expense of bad serial performance\n* Separate memory, so “offloading” co-processor concept\n* Low power requirements, lots of slow cores\n* Does not host OS\nThe takeaway:\nCPU fast and versatile but limited parallelism\nGPU slow and less versatile but extreme parallelism\n\n\nARM was big in cellphones, now big in HPC\nNvidia is also heading toward ARM"
-  },
-  {
     "objectID": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-1972",
     "href": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-1972",
     "title": "Hardware and Memory Hierarchies",
     "section": "Flynn’s Taxonomy (1972)",
-    "text": "Flynn’s Taxonomy (1972)\n\nSingle Instruction, Single Data (SISD): scalar processor, serial program\n\nSingle Instruction, Multiple Data (SIMD): vector processor, array processor\n\nMultiple Instruction, Multiple Data (MIMD): multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster\n\nMultiple Instruction, Single Data (MISD): is not used much"
+    "text": "Flynn’s Taxonomy (1972)\n\nSingle Instruction, Single Data (SISD): scalar processor, serial program (old-style CPU)\nSingle Instruction, Multiple Data (SIMD): vector processor, array processor (old-style GPU)\nMultiple Instruction, Multiple Data (MIMD): multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today’s CPU and GPU but leaning to legacy)\nMultiple Instruction, Single Data (MISD): is not used much"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#shared-memory-hardware",
+    "href": "materials/lectures/2-hardware/slides.html#shared-memory-hardware",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Shared Memory Hardware",
+    "text": "Shared Memory Hardware\nMulticore CPU\n- one or two chips with multiple cores\n- Current high-end is 64 cores (e.g. AMD EPYC “Milan”)\n- Hosts operating system (OS)\nARM CPU-GPU\n- A hybrid unified memory architecture\n- Low power requirements\n- Hosts OS\nGPU\n- Excellent SIMD throughput at the expense of bad serial performance\n- Separate memory, so “offloading” co-processor concept\n- Low power requirements, lots of slow cores\n- Does not host OS\nThe takeaway:\nCPU fast and versatile but limited parallelism\nGPU slower and less versatile but extreme parallelism (4x+ cores)\n\n\nARM was big in cellphones, now big in HPC\n\nNvidia is also heading toward ARM\n\nMy bet would be with ARM."
   },
   {
     "objectID": "materials/lectures/2-hardware/slides.html#parallel-programming-models",
     "href": "materials/lectures/2-hardware/slides.html#parallel-programming-models",
     "title": "Hardware and Memory Hierarchies",
     "section": "Parallel Programming Models",
-    "text": "Parallel Programming Models\nShared Memory Parallel\n\nUnix fork\n\nMultithreading\n\nOpenMP\n\nDistributed Memory Parallel\n\nmanager-workers: most common in simple cases\n\nSingle program, multiple data (SPMD): most common and most scalable on clusters\n\nMapReduce: common in customer database processing\n\nDataflow: dependency graph directed, still evolving \n\nLargest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP."
+    "text": "Parallel Programming Models\nShared Memory Parallel\n\nUnix fork\n\nMultithreading\n\nOpenMP\n\nDistributed Memory Parallel\n\nmanager-workers: most common in simple cases\n\nSingle program, multiple data (SPMD): most common and most scalable on clusters\n\nMapReduce: common in customer database processing, continuous services\n\nDataflow: dependency graph directed, still evolving \n\nLargest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.\nUnix fork more common in scripting languages like R and Python"
   },
   {
-    "objectID": "materials/lectures/2-hardware/slides.html#three-basic-concepts-in-hardware",
-    "href": "materials/lectures/2-hardware/slides.html#three-basic-concepts-in-hardware",
+    "objectID": "materials/lectures/2-hardware/slides.html#uma-and-numa",
+    "href": "materials/lectures/2-hardware/slides.html#uma-and-numa",
     "title": "Hardware and Memory Hierarchies",
-    "section": "Three Basic Concepts in Hardware",
-    "text": "Three Basic Concepts in Hardware"
+    "section": "UMA and NUMA",
+    "text": "UMA and NUMA\nUniform memory access\n\nA typical multicore CPU chip\n\nNon-Uniform memory access\n\nA larger collection of multicore chips with hardware/software enabled global memory access\nSome memory is closer than other memory"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware-1",
+    "href": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware-1",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Two (Three) Basic Concepts in Hardware",
+    "text": "Two (Three) Basic Concepts in Hardware"
   },
   {
     "objectID": "materials/lectures/2-hardware/slides.html#native-programming-mindset",

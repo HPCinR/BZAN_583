@@ -346,49 +346,43 @@
 <li>Memory hierarchies and page faults</li>
 </ul>
 </section>
-<section id="flynns-taxonomy-of-computer-architecture" class="slide level2 smaller">
-<h2>Flynn’s Taxonomy of Computer Architecture</h2>
-<ul>
-<li><p>SISD</p>
-<ul>
-<li>CPU</li>
-<li>Optimized for diverse instruction streams</li>
-</ul></li>
-<li><p>MISD</p></li>
-<li><p>SIMD</p>
-<ul>
-<li>GPU</li>
-</ul></li>
-<li><p>MIMD</p></li>
-<li><p>GPU are optimized for simple instruction on many data items (e.g.&nbsp;pixels on screen)</p></li>
-<li><p>CPU are optimized for complex instruction streams</p></li>
-</ul>
-<p>Multicore - Manycore - GPU ARM https://www.wevolver.com/article/risc-v-vs-arm-a-comprehensive-comparison-of-processor-architectures</p>
-</section>
 <section id="two-three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide7.png" data-background-size="1200px" data-background-position="center">
 <h2>Two (Three) Basic Concepts in Hardware</h2>
 </section>
+<section id="flynns-taxonomy-1972" class="slide level2">
+<h2>Flynn’s Taxonomy (1972)</h2>
+<ul>
+<li><em>Single Instruction, Single Data (<strong>SISD</strong>):</em> scalar processor, serial program (old-style CPU)</li>
+<li><em>Single Instruction, Multiple Data (<strong>SIMD</strong>):</em> vector processor, array processor (old-style GPU)</li>
+<li><em>Multiple Instruction, Multiple Data (<strong>MIMD</strong>):</em> multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today’s CPU and GPU but leaning to legacy)</li>
+<li><em>Multiple Instruction, Single Data (<strong>MISD</strong>):</em> is not used much</li>
+</ul>
+</section>
 <section id="shared-memory-hardware" class="slide level2 smaller">
 <h2>Shared Memory Hardware</h2>
-<p><strong>Multicore CPU</strong> - one or two chips with multiple cores<br>
-* Current high-end is 64 cores (e.g.&nbsp;AMD EPYC “Milan”)<br>
-* Hosts operating system (OS)</p>
+<p><strong>Multicore CPU</strong><br>
+- one or two chips with multiple cores<br>
+- Current high-end is 64 cores (e.g.&nbsp;AMD EPYC “Milan”)<br>
+- Hosts operating system (OS)</p>
 <p><strong>ARM CPU-GPU</strong><br>
-* A hybrid unified memory architecture<br>
-* Low power requirements<br>
-* Hosts OS</p>
+- A hybrid unified memory architecture<br>
+- Low power requirements<br>
+- Hosts OS</p>
 <p><strong>GPU</strong><br>
-* Excellent SIMD throughput at the expense of bad serial performance<br>
-* Separate memory, so “offloading” co-processor concept<br>
-* Low power requirements, lots of slow cores<br>
-* Does not host OS</p>
-<h3 id="the-takeaway">The takeaway:</h3>
+- Excellent SIMD throughput at the expense of bad serial performance<br>
+- Separate memory, so “offloading” co-processor concept<br>
+- Low power requirements, lots of slow cores<br>
+- Does not host OS</p>
+<h4 id="the-takeaway">The takeaway:</h4>
 <p>CPU fast and versatile but limited parallelism<br>
-GPU slow and less versatile but extreme parallelism</p>
+GPU slower and less versatile but extreme parallelism (4x+ cores)</p>
 <aside class="notes">
 <ul>
-<li>ARM was big in cellphones, now big in HPC</li>
-<li>Nvidia is also heading toward ARM</li>
+<li>ARM was big in cellphones, now big in HPC<br>
+</li>
+<li>Nvidia is also heading toward ARM<br>
+</li>
+<li>My bet would be with ARM.</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -401,18 +395,6 @@ GPU slow and less versatile but extreme parallelism</p>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="flynns-taxonomy-1972" class="slide level2 smaller">
-<h2>Flynn’s Taxonomy (1972)</h2>
-<ul>
-<li><em>Single Instruction, Single Data (<strong>SISD</strong>):</em> scalar processor, serial program<br>
-</li>
-<li><em>Single Instruction, Multiple Data (<strong>SIMD</strong>):</em> vector processor, array processor<br>
-</li>
-<li><em>Multiple Instruction, Multiple Data (<strong>MIMD</strong>):</em> multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster<br>
-</li>
-<li><em>Multiple Instruction, Single Data (<strong>MISD</strong>):</em> is not used much</li>
-</ul>
 </section>
 <section id="parallel-programming-models" class="slide level2 smaller">
 <h2>Parallel Programming Models</h2>
@@ -430,14 +412,27 @@ GPU slow and less versatile but extreme parallelism</p>
 </li>
 <li>Single program, multiple data (SPMD): most common and most scalable on clusters<br>
 </li>
-<li>MapReduce: common in customer database processing<br>
+<li>MapReduce: common in customer database processing, continuous services<br>
 </li>
 <li>Dataflow: dependency graph directed, still evolving <br><br></li>
 </ul>
 <h4 id="largest-codes-use-combination-of-spmd-dataflow-and-multithreading-or-openmp.">Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.</h4>
+<h4 id="unix-fork-more-common-in-scripting-languages-like-r-and-python">Unix fork more common in scripting languages like R and Python</h4>
 </section>
-<section id="three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide1.png" data-background-size="1000px" data-background-position="center">
-<h2>Three Basic Concepts in Hardware</h2>
+<section id="uma-and-numa" class="slide level2">
+<h2>UMA and NUMA</h2>
+<h4 id="uniform-memory-access">Uniform memory access</h4>
+<ul>
+<li>A typical multicore CPU chip</li>
+</ul>
+<h4 id="non-uniform-memory-access">Non-Uniform memory access</h4>
+<ul>
+<li>A larger collection of multicore chips with hardware/software enabled global memory access</li>
+<li>Some memory is closer than other memory</li>
+</ul>
+</section>
+<section id="two-three-basic-concepts-in-hardware-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide1.png" data-background-size="1000px" data-background-position="center">
+<h2>Two (Three) Basic Concepts in Hardware</h2>
 </section>
 <section id="section" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide2.png" data-background-size="1000px" data-background-position="center">
 <h2></h2>

@@ -32,7 +32,7 @@
     "href": "syllabus.html#optional-reading",
     "title": "Syllabus",
     "section": "Optional Reading:",
-    "text": "Optional Reading:\nHappy Git and GitHub for the useR\nThe Art of R Programming by Norman Matloff\nAdvanced R by Hadley Wickham.\nLarge Language Models and their use in [coding](https://michelnivard.github.io/gptstudio/\nR torch"
+    "text": "Optional Reading:\nHappy Git and GitHub for the useR\nThe Art of R Programming by Norman Matloff\nAdvanced R by Hadley Wickham.\nLarge Language Models and their use in [coding](https://michelnivard.github.io/gptstudio/\nR torch\nFor a deeper dive into HPC, consider The Science of Computing by Viktor Eijkhout with Edmond Chow and Robert van de Geijn."
   },
   {
     "objectID": "syllabus.html#interesting-links",
@@ -165,7 +165,7 @@
     "href": "materials/lectures/1-welcome/slides.html#survey",
     "title": "Welcome to HPC for Data Science in R!  BZAN 583",
     "section": "Survey",
-    "text": "Survey\n\n\nYour laptop: Unix, Mac, Windows\n\nR experience: used in a class, used in two classes, x years, wrote an R package, live and breathe R\n\nUse RStudio? usually, all the time, reluctantly, prefer Jupyter\nOther programming languages: Python, C, C++, Go, …\n\nUse git? what’s that?, heard of it, tried it once, use it often, I live on it\nR parallel package? what’s that?, heard of it, tried it once, didn’t help me, got great results, keeps all the cores busy on my laptop"
+    "text": "Survey\n\n\nYour laptop: Unix, Mac, Windows\n\nR experience: used in a class, used in two classes, x years, wrote an R package, live and breathe R\n\nUse RStudio? usually, all the time, reluctantly, prefer Jupyter, prefer Visual Studio\nOther programming languages: Python, C, C++, Go, …\n\nUse git? what’s that?, heard of it, tried it once, use it often, I live on it\nR parallel package? what’s that?, heard of it, tried it once, didn’t help me, got great results, keeps all the cores busy on my laptop"
   },
   {
     "objectID": "materials/lectures/1-welcome/slides.html#survey-continued",

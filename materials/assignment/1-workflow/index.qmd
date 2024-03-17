@@ -10,10 +10,10 @@ knitr: true
 * Current version of RStudio Desktop from [posit](https://posit.co/downloads/)  
 * Current `git` version as described in [happywithgit.com](https://happygitwithr.com/install-git.html)  
 
-## Create a personal account on [github.com](github.com)  
+## Create a personal account on [github.com](https://github.com)  
 
-* If you already have one, you can continue to use it for this class
-* Go to [github.com](github.com) and Sign up for a GitHub free personal account
+* Go to [github.com](https://github.com) and Sign up for a GitHub free personal account  
+* If you already have one, you can continue to use it for this class  
 
 
 ## Setup your NCSA Delta Account
@@ -65,4 +65,4 @@ Rscript -e "sessionInfo()"
 **Result 2:** Use the `man` command to get a description of what each command does. Use `man man` to get an explanation of the `man` command. Turn in a short one-sentence description for each unique command. 
 
 **Result 3:** From GitHub ... your GitHub user id. So I can invite you to the 
-BZAN-583 team in HPCinR organization.
+BZAN-583 team in the HPCinR organization.

@@ -1,0 +1,842 @@
+[
+  {
+    "objectID": "syllabus.html#background",
+    "href": "syllabus.html#background",
+    "title": "Syllabus",
+    "section": "BACKGROUND",
+    "text": "BACKGROUND\nThis course presents a high performance computing (HPC) view of some statistical and machine learning algorithms. It centers on a high-level view of today’s HPC architectures and parallel computing concepts for data science, along with practical exercises on a modern HPC cluster system.\n\nPrerequisites:\nThis course will build on the R content of BZAN 542. Students should have a basic understanding of R, at least at the level of Part I in Prof. Matloff’s fastR.\n\n\nHistory of this Course:\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material."
+  },
+  {
+    "objectID": "syllabus.html#software",
+    "href": "syllabus.html#software",
+    "title": "Syllabus",
+    "section": "Software:",
+    "text": "Software:\nOn your laptop, make sure you have a current version of (or install): R, RStudio, and git. Also, create a free account on GitHub if you don’t have one already.\nCode development will be presented with RStudio, so comfort with using RStudio helps, but other development environments (such as Jupyter) can be used. However, if you are not using RStudio, I may be of limited help in troubleshooting your IDE issues. Remote computing will be on the Delta cluster at the National Center for Supercomputing Applications (NCSA), which we will access with ssh and transfer codes via GitHub. You should have a GitHub personal account (free) and I will provide you with an account on Delta. Computing on the Delta cluster will be via submission of batch scripts to its Slurm workload manager."
+  },
+  {
+    "objectID": "syllabus.html#grading-groups-assignments-and-project",
+    "href": "syllabus.html#grading-groups-assignments-and-project",
+    "title": "Syllabus",
+    "section": "Grading, Groups, Assignments, and Project:",
+    "text": "Grading, Groups, Assignments, and Project:\n\nGroups:\nThe class will be divided into groups of mostly 4, some 3, that are encouraged to work together. It is highly recommended for all group members to actively begin coding independently, discussing things but not just copying work of one group member. Your ability to work with HPC concepts after the class will depend directly on the amount of trial-and-error experience that you put into the assignments and project.\n\n\nAssignments:\nThis course will have 6 assignments (one each of the first 6 weeks) that are assigned on Monday and are due by 23:59 on the following Sunday. They may depend on material presented on Monday and Wednesday of the same week. If R code development is part of the assignment, it must reproduce your results when run by the instructor.\n\n\nProject:\nIn addition, there will be a group project culminating in a 5-minute lightning presentation in the last class on Monday, May 6.\nEach group’s project plan must be defined and approved by the end of the second week (Friday, March 29). Each group should make an appointment with the instructor to discuss their project proposal. The project will consist of a specific large data set of your choosing and a hypothesis to be examined with statistical and machine learning methods. The main objective is to successfully exercise several HPC methods (e.g. faster, parallel, analysis or larger data enabled by methods learned in class). A great discovery from the data is not required, although that would be the icing on the cake.\n\n\nGrading:\nThe weekly assignments are worth 12% each and the project with presentation is 25%. Assignments will vary individual submissions and group submissions. In group submissions, all members receive the same grade. At the end of the course all members will evaluate and specify the kind of their own and others’ relative contributions. The remaining 3% will be based on these evaluations and on class attendance, which will be taken at each lecture.\n\n\nLate submission policy:\n50% of the grade if submitted the following week. Zero after that."
+  },
+  {
+    "objectID": "syllabus.html#data",
+    "href": "syllabus.html#data",
+    "title": "Syllabus",
+    "section": "Data",
+    "text": "Data\nSeveral cities have started publishing data about their operation and about various available services. Perhaps the best known is the New York City data, where TLC is a well-known very large taxi ride data set. Knoxville has also joined this trend Knoxville Open Data. Another interesting collection of data is at the University of Washington. A broader list of available data for projects is at careerfoundry and a somewhat overlapping Database Star. For your project, find a data set that is at least 1 GB in size."
+  },
+  {
+    "objectID": "syllabus.html#optional-reading",
+    "href": "syllabus.html#optional-reading",
+    "title": "Syllabus",
+    "section": "Optional Reading:",
+    "text": "Optional Reading:\nHappy Git and GitHub for the useR\nThe Art of R Programming by Norman Matloff\nAdvanced R by Hadley Wickham.\nLarge Language Models and their use in [coding](https://michelnivard.github.io/gptstudio/\nR torch"
+  },
+  {
+    "objectID": "syllabus.html#interesting-links",
+    "href": "syllabus.html#interesting-links",
+    "title": "Syllabus",
+    "section": "Interesting links:",
+    "text": "Interesting links:\nThere is a number of great websites and podcasts that provide additional interesting information. See for instance R-bloggers, R Graph Gallery, Towards Data Science, R Weekly."
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/index.html",
+    "href": "materials/lectures/6-distributed/index.html",
+    "title": "Distributed Computing",
+    "section": "",
+    "text": "Distributed computing for multinode computation\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/5-nn/index.html",
+    "href": "materials/lectures/5-nn/index.html",
+    "title": "Welcome to HPC for Data Science",
+    "section": "",
+    "text": "A short excursion into neural net classification\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/index.html",
+    "href": "materials/lectures/4-shared_mem/index.html",
+    "title": "Shared memory parallel computing",
+    "section": "",
+    "text": "Full Screen"
+  },
+  {
+    "objectID": "materials/lectures/7-projects/index.html",
+    "href": "materials/lectures/7-projects/index.html",
+    "title": "Selected Topics for Project Completion",
+    "section": "",
+    "text": "Various topics to discuss for requested topics and projects.\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/index.html",
+    "href": "materials/lectures/1a-workflow/index.html",
+    "title": "Workflow for Remote Computing with R",
+    "section": "",
+    "text": "Full Screen"
+  },
+  {
+    "objectID": "materials/lectures/3-software/index.html",
+    "href": "materials/lectures/3-software/index.html",
+    "title": "Welcome to HPC for Data Science",
+    "section": "",
+    "text": "Parallel software to make your R code faster. How to parallelize in Unix flavors.\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/8-presentations/index.html",
+    "href": "materials/lectures/8-presentations/index.html",
+    "title": "Presentations",
+    "section": "",
+    "text": "Lightning talks about projects\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/index.html",
+    "href": "materials/lectures/2b-faster/index.html",
+    "title": "Faster R Scripts",
+    "section": "",
+    "text": "This lecture is about strategies to make your R code faster.\nFull Screen\n\n&lt;!–\n* Reference and use the Rfast package\n* Companion doc: Taking R to its limits: 70+ tips (bad grammar but useful tips) * Mangalore tutorial, JSM tutorial, other? –&gt;"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/index.html",
+    "href": "materials/lectures/2-hardware/index.html",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "",
+    "text": "Full Screen"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/index.html",
+    "href": "materials/lectures/1-welcome/index.html",
+    "title": "Welcome to HPC for Data Science",
+    "section": "",
+    "text": "Welcome to HPC for Data Science in R. This class …\nFull Screen"
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "HPC for Data Science in R - BZAN 583",
+    "section": "",
+    "text": "These “HPCinR Course Materials” by George Ostrouchov are licensed under CC-BY-4.0"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html",
+    "href": "materials/assignment/1-workflow/index.html",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "",
+    "text": "Current version of R from CRAN\n\nCurrent version of RStudio Desktop from posit\n\nCurrent git version as described in happywithgit.com"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html#install-on-your-laptop",
+    "href": "materials/assignment/1-workflow/index.html#install-on-your-laptop",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "",
+    "text": "Current version of R from CRAN\n\nCurrent version of RStudio Desktop from posit\n\nCurrent git version as described in happywithgit.com"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html#create-a-personal-account-on-github.com",
+    "href": "materials/assignment/1-workflow/index.html#create-a-personal-account-on-github.com",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "Create a personal account on github.com\n",
+    "text": "Create a personal account on github.com\n\n\nGo to github.com and Sign up for a GitHub free personal account\n\nIf you already have one, you can continue to use it for this class"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html#setup-your-ncsa-delta-account",
+    "href": "materials/assignment/1-workflow/index.html#setup-your-ncsa-delta-account",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "Setup your NCSA Delta Account",
+    "text": "Setup your NCSA Delta Account\n\nExpect to receive an email from the instructor with the subject: “NCSA Delta Account for BZAN 583” it will contain a link to account registration and login. Let the instructor know if you did not receive one by the first class meeting.\nFollowing the link will open a login webpage:\n\nUse the green “Register New User and Join” link to set up your NCSA Delta account. If you don’t see the “Register …” link, clearing your browser cookies should bring it back.\nFollow the registration and login instructions. Your login setup can use UTK’s 2-factor authentication via DUO.\nAfter setting up your account, your instructor will add you to join the class computing allocation.\nResult 1: Turn in a copy of your session running the following shell commands in the sequence given on a Delta login node. The intent here is to verify that you can successfully connect to a Delta login node and run a few basic Unix commands.\n\nhostname\ndate\nw\nwhoami\nls\npwd\nmkdir R\nls\nls -a\nls -la\nls -laF --color\ncd R\npwd\ncd\npwd\nmodule load r\nmodule list\nRscript -e \"sessionInfo()\"\n\nResult 2: Use the man command to get a description of what each command does. Use man man to get an explanation of the man command. Turn in a short one-sentence description for each unique command.\nResult 3: From GitHub … your GitHub user id. So I can invite you to the BZAN-583 team in the HPCinR organization."
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#today",
+    "href": "materials/lectures/1-welcome/slides.html#today",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Today:",
+    "text": "Today:\n\n\nWelcome!!\nthx for signing up for the class!\n\n\n\nWelcome!! Overview & Syllabus\nAssign groups of 3-4\n\nSurvey and expectations\n\nStart setting up accounts (GitHub, Delta cluster) -Assignment\n\nIntroduction to workflow: RStudio to remote cluster via GitHub"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#random-group-assignment",
+    "href": "materials/lectures/1-welcome/slides.html#random-group-assignment",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Random Group Assignment",
+    "text": "Random Group Assignment\nClass divided into groups of 3 to 4\n\nAssigned randomly via Canvas\n\nSwapping is allowed (after class today) if all members of concerned groups agree\n\nHandout\n\nGroup assignments on the front\n\nSurvey on the back\n\nFill out now\n\nWill collect at end of class today"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#survey",
+    "href": "materials/lectures/1-welcome/slides.html#survey",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Survey",
+    "text": "Survey\n\n\nYour laptop: Unix, Mac, Windows\n\nR experience: used in a class, used in two classes, x years, wrote an R package, live and breathe R\n\nUse RStudio? usually, all the time, reluctantly, prefer Jupyter\nOther programming languages: Python, C, C++, Go, …\n\nUse git? what’s that?, heard of it, tried it once, use it often, I live on it\nR parallel package? what’s that?, heard of it, tried it once, didn’t help me, got great results, keeps all the cores busy on my laptop"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#survey-continued",
+    "href": "materials/lectures/1-welcome/slides.html#survey-continued",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Survey … continued",
+    "text": "Survey … continued\n\n\nUnix experince (Linux, MacOS terminal): never used it, tried it once, know a few commands, I write shell scripts\nHPC Cluster? I know they exist, saw one, logged in once, used one for a project, keep one in my basement\nCloud computing? is it real?, heard about it, MS Azure, AWS, UTK cluster VM, Other\nMPI? what’s that?, heard of it, used a code that used it, wrote some code\nTorch or LLM experience? a few words\nYour expectations for this class: play with HPC, Build an HPC Analytics Startup Co\n\n\n\n\nWorkload: How many classes are you taking at the moment?\n\nShow of hands: zero, one, two, three, …\n\nLanguages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, unix shell, S, R\n\nDocument preparation: nroff, ps, pdf, LaTeX, Markdown, .Rmd, Quarto .qmd\nSystems: IBM, DEC, Honeywell, VAX, PC, Intel, Mac, HPE (formerly Cray),"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#setting-up-accounts-on-github-on-delta",
+    "href": "materials/lectures/1-welcome/slides.html#setting-up-accounts-on-github-on-delta",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Setting up Accounts on GitHub, on Delta",
+    "text": "Setting up Accounts on GitHub, on Delta\nAssignment 1"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#workflow-for-remote-computing-in-r",
+    "href": "materials/lectures/1-welcome/slides.html#workflow-for-remote-computing-in-r",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Workflow for Remote Computing in R",
+    "text": "Workflow for Remote Computing in R"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#rework-this-into",
+    "href": "materials/lectures/2-hardware/slides.html#rework-this-into",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Rework this into:",
+    "text": "Rework this into:\n\nTwo memory models: shared and distributed\n\nshared memory: UMA small systems, and NUMA larger systems\nshared memory: runs OS, and coprocessor\ndistributed memory: large systems\n\nSingle (or two) chip: hardware shared memory (otherwise software shared and NUMA)\nMemory hierarchies and page faults"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-of-computer-architecture",
+    "href": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-of-computer-architecture",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Flynn’s Taxonomy of Computer Architecture",
+    "text": "Flynn’s Taxonomy of Computer Architecture\n\nSISD\n\nCPU\nOptimized for diverse instruction streams\n\nMISD\nSIMD\n\nGPU\n\nMIMD\nGPU are optimized for simple instruction on many data items (e.g. pixels on screen)\nCPU are optimized for complex instruction streams\n\nMulticore - Manycore - GPU ARM https://www.wevolver.com/article/risc-v-vs-arm-a-comprehensive-comparison-of-processor-architectures"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware",
+    "href": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Two (Three) Basic Concepts in Hardware",
+    "text": "Two (Three) Basic Concepts in Hardware"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#shared-memory-hardware",
+    "href": "materials/lectures/2-hardware/slides.html#shared-memory-hardware",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Shared Memory Hardware",
+    "text": "Shared Memory Hardware\nMulticore CPU - one or two chips with multiple cores\n* Current high-end is 64 cores (e.g. AMD EPYC “Milan”)\n* Hosts operating system (OS)\nARM CPU-GPU\n* A hybrid unified memory architecture\n* Low power requirements\n* Hosts OS\nGPU\n* Excellent SIMD throughput at the expense of bad serial performance\n* Separate memory, so “offloading” co-processor concept\n* Low power requirements, lots of slow cores\n* Does not host OS\nThe takeaway:\nCPU fast and versatile but limited parallelism\nGPU slow and less versatile but extreme parallelism\n\n\nARM was big in cellphones, now big in HPC\nNvidia is also heading toward ARM"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-1972",
+    "href": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-1972",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Flynn’s Taxonomy (1972)",
+    "text": "Flynn’s Taxonomy (1972)\n\nSingle Instruction, Single Data (SISD): scalar processor, serial program\n\nSingle Instruction, Multiple Data (SIMD): vector processor, array processor\n\nMultiple Instruction, Multiple Data (MIMD): multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster\n\nMultiple Instruction, Single Data (MISD): is not used much"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#parallel-programming-models",
+    "href": "materials/lectures/2-hardware/slides.html#parallel-programming-models",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Parallel Programming Models",
+    "text": "Parallel Programming Models\nShared Memory Parallel\n\nUnix fork\n\nMultithreading\n\nOpenMP\n\nDistributed Memory Parallel\n\nmanager-workers: most common in simple cases\n\nSingle program, multiple data (SPMD): most common and most scalable on clusters\n\nMapReduce: common in customer database processing\n\nDataflow: dependency graph directed, still evolving \n\nLargest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP."
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#three-basic-concepts-in-hardware",
+    "href": "materials/lectures/2-hardware/slides.html#three-basic-concepts-in-hardware",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Three Basic Concepts in Hardware",
+    "text": "Three Basic Concepts in Hardware"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#native-programming-mindset",
+    "href": "materials/lectures/2-hardware/slides.html#native-programming-mindset",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Native Programming Mindset",
+    "text": "Native Programming Mindset"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#native-programming-models-and-tools",
+    "href": "materials/lectures/2-hardware/slides.html#native-programming-models-and-tools",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Native Programming Models and Tools",
+    "text": "Native Programming Models and Tools"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#years-of-practical-parallel-computing",
+    "href": "materials/lectures/2-hardware/slides.html#years-of-practical-parallel-computing",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "40 Years of Practical Parallel Computing",
+    "text": "40 Years of Practical Parallel Computing"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#last-20-years-of-advances",
+    "href": "materials/lectures/2-hardware/slides.html#last-20-years-of-advances",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Last 20 years of Advances",
+    "text": "Last 20 years of Advances"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#distributed-programming-works-in-shared-memory",
+    "href": "materials/lectures/2-hardware/slides.html#distributed-programming-works-in-shared-memory",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "Distributed Programming Works in Shared Memory",
+    "text": "Distributed Programming Works in Shared Memory"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/2-hardware/slides.html#r-interfaces-to-low-level-native-tools",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "R Interfaces to Low-Level Native Tools",
+    "text": "R Interfaces to Low-Level Native Tools"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#faster-serial-code",
+    "href": "materials/lectures/2b-faster/slides.html#faster-serial-code",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Faster Serial Code",
+    "text": "Faster Serial Code\n\nAlmost any R code can be made faster\nProfile, profile, profile\nFast libraries: OpenBLAS or MKL\nC/C++ access"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#multicore-shared-memory-approaches",
+    "href": "materials/lectures/2b-faster/slides.html#multicore-shared-memory-approaches",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Multicore Shared Memory Approaches",
+    "text": "Multicore Shared Memory Approaches\n\nFast multithreaded libraries: OpenBLAS or MKL\nUnix fork via mclapply, et. al\nOpenMP via C/C++ access\nCuda, OenCL on GPU"
+  },
+  {
+    "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
+    "href": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
+    "title": "Untitled",
+    "section": "Lightning Talk 1",
+    "text": "Lightning Talk 1"
+  },
+  {
+    "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-2",
+    "href": "materials/lectures/8-presentations/slides.html#lightning-talk-2",
+    "title": "Untitled",
+    "section": "Lightning Talk 2",
+    "text": "Lightning Talk 2"
+  },
+  {
+    "objectID": "materials/lectures/3-software/slides.html#parallel-software",
+    "href": "materials/lectures/3-software/slides.html#parallel-software",
+    "title": "HPC Software",
+    "section": "Parallel Software",
+    "text": "Parallel Software"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
+    "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Workflow for Remote Computing in R",
+    "text": "Workflow for Remote Computing in R"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r-1",
+    "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r-1",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Workflow for Remote Computing in R",
+    "text": "Workflow for Remote Computing in R\nLaptop RStudio\n\nFamiliar custom editing environment (Windows, Mac, Unix)\nInteractive Syntax checking\n\ngit, GitHub (or GitLab and Bitbucket)\n\nPortability to remote computing\nVersion control\nCollaboration\n\nCluster unix\n\nSame environment for all\nBatch job submission\n\n\n\nPortability - in your basement or on another continent\nRStudio installs difficult - legacy OS on HPC\nBandwidth"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Cooperating R Sessions on a Modern Cluster",
+    "text": "Cooperating R Sessions on a Modern Cluster\n8 Nodes (124 + 4 cores each)\n- 32 R sessions\n- each using 31 cores\n- 992 cores total\n\n\n\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
+    "href": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Software Needed on Laptop",
+    "text": "Software Needed on Laptop\n\nMac\n\nR, RStudio\nterminal, git (in Xcode)\n\nWindows\n\nR, RStudio\nputty\ngit\nWinSCP"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Software on Cluster",
+    "text": "Software on Cluster\n\nFlexiBLAS, OpenBLAS\nOpenMPI\nArrow or HDF5 (for parallel I/O)\nR (&gt;= 4.0)\n\nAbove managed by center, below by you\n\nAnd various packages, including pbdMPI\n\nR vs conda-R Deployment:\n\nDifferent package management philosophy\nCan create conflicts if mixing, a layer of complexity\n\n\n\nSolves some dependency issues but creates others"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "GitHub + git (laptop to cluster)",
+    "text": "GitHub + git (laptop to cluster)\n\n\n\n\n\n\n By Daniel Kinzler - Own work, CC BY 3.0\n\n\n \\[\\qquad\\] \n\n\n\n\n\nRStudio demo and checkbox add\nnames for head, remote,"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#making-git-easy",
+    "href": "materials/lectures/1a-workflow/slides.html#making-git-easy",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Making git easy",
+    "text": "Making git easy\n\nPrivate and Public key pairs for Client and Server\n\nGit repository (GitHub, GitLab) is the server\nYour laptop and remote cluster are clients\n\nEach client has own key-pair\n\nPrivate key stays on the client\nPublic key is copied to the server\n\nWorks like a single-use password generator and authentication\n\nClient contacts server, server responds with a random string encrypted by client’s public key\nClient decrypts with own private key and sends to server\nServer verifies agreement and opens secure connection"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
+    "href": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Clusters are Linux systems",
+    "text": "Clusters are Linux systems\n\nLinux is one of many descendants of original Unix. MacOS is another.\n\nEverything in Linux is a file (some are directory files)\nLinux files are organized as a tree\nEvery file has permissions: d r w x | r w x | r w x\n\ndelete, read, write, execute\nowner, group, all\n\nEvery file has owner, group, and a few other attributes\nAvailable commands are executable files in your PATH directories\n\n\n\nUnix (Bell Labs) was a play on an earlier Multics operating system (designed at MIT)"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#linux-commands",
+    "href": "materials/lectures/1a-workflow/slides.html#linux-commands",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Linux Commands",
+    "text": "Linux Commands\nIn a terminal, you talk to a shell program (bash is most common)\n\nCommands (executable files) can have options and arguments\n\nStandard input and standard output of a command is the terminal but can be redirected\n\n&lt;, &lt;&lt;, &gt;, &gt;&gt; redirect standard input and output\ncommand1 | command2 pipes standard output1 to standard input2\n\nCommands are files in directories listed in your PATH variable (try “echo $PATH”)\n\n$ means substitute variable value\nexport lists (or sets) variables and their values\n\nThere are many resources on the web to learn Linux basics"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#job-submission-on-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#job-submission-on-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Job Submission on Cluster",
+    "text": "Job Submission on Cluster\n\nCommand line submission\nShell script submission (preferred)\n\nSLURM\nsbatch your-shell-script.sh \nsqueue -u uid\nscancel jobnumber\nSoftware Modules\nset software environment (PATH)\nmodule list - list what is loaded\nmodule avail - list what is available\nmodule load r"
+  },
+  {
+    "objectID": "materials/lectures/7-projects/slides.html#selected-topics",
+    "href": "materials/lectures/7-projects/slides.html#selected-topics",
+    "title": "Untitled",
+    "section": "Selected Topics",
+    "text": "Selected Topics"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas",
+    "href": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas",
+    "title": "Shared Memory Parallel Computing",
+    "section": "R-LAPACK-BLAS",
+    "text": "R-LAPACK-BLAS\n\nBLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n\nvector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\nLAPACK: dense and banded matrix decompositions and more\n\n\\(\\quad LU\\) \\(\\quad LL^T\\) \\(\\quad QR\\) \\(\\quad UDV^T\\) \\(\\quad VD^2V^T\\) \\(\\quad\\|\\cdot\\|_p\\)\n\nImplementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#measurement-and-terminology-of-parallel-speedup",
+    "href": "materials/lectures/4-shared_mem/slides.html#measurement-and-terminology-of-parallel-speedup",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Measurement and terminology of parallel speedup",
+    "text": "Measurement and terminology of parallel speedup"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#embarrassingly-pleasingly-parallel",
+    "href": "materials/lectures/4-shared_mem/slides.html#embarrassingly-pleasingly-parallel",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Embarrassingly (Pleasingly) Parallel",
+    "text": "Embarrassingly (Pleasingly) Parallel\n\n\\[t_p = \\frac{t}{n} = t_n\\]\n\\[\\mbox{Speedup:}\\quad\\frac{t}{t_p} = n\\] \\(t\\) - Serial time\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - Single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#serial-section-amdahls-law",
+    "href": "materials/lectures/4-shared_mem/slides.html#serial-section-amdahls-law",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Serial Section (Amdahl’s Law)",
+    "text": "Serial Section (Amdahl’s Law)\n\\[\\qquad\\]\n\\[t_p = t_s + t_n &gt; t_s\\]\n\\[\\mbox{Max Speedup:}\\quad\\lim_{n \\to \\infty}\\frac{t}{t_p} = \\frac{t}{t_s}\\]\n\\(t\\) - Serial time (fixed)\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\nStrong Scaling: fixed work, increasing resources"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#serial-section-gustafsons-law",
+    "href": "materials/lectures/4-shared_mem/slides.html#serial-section-gustafsons-law",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Serial Section (Gustafson’s Law)",
+    "text": "Serial Section (Gustafson’s Law)\n\\[\\qquad\\]\n\\[t_p = t_s + t_n\\]\n\\[\\mbox{Speedup:}\\quad\\frac{t}{t_p} = \\frac{t_s + nt_n}{t_s + t_n} = O(n)\\]\n\\(t\\) - Serial time (growing: \\(t_{2n} = 2t_n\\) )\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\nWeak Scaling: increasing work, increasing resources\n\nWeak: misnomer: the speedup is actually great"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#parallel-overhead",
+    "href": "materials/lectures/4-shared_mem/slides.html#parallel-overhead",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Parallel Overhead",
+    "text": "Parallel Overhead\n\\[\\qquad\\] \\[\\qquad\\]\n\\[t_p = t_s + t_n + t_o(n)\\]\n\\(t\\) - Serial time\n\\(n\\) - Number of processes\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\n\\(t_o(n)\\) - Parallel overhead time"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#replication-of-serial-section",
+    "href": "materials/lectures/4-shared_mem/slides.html#replication-of-serial-section",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Replication of Serial Section",
+    "text": "Replication of Serial Section\n\\[\\qquad\\] \\[\\qquad\\] \\[\\qquad\\] \\[\\qquad\\]\nSuppose the serial section is computed on one rank and sent to all ranks. Then overhead is a function of \\(n\\)!\n\\(t\\) - Serial time\n\\(n\\) - Number of processes\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\n\\(t_o(n)\\) - Parallel overhead time\nReplication can reduce communication overhead due to communication"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/4-shared_mem/slides.html#r-interfaces-to-low-level-native-tools",
+    "title": "Shared Memory Parallel Computing",
+    "section": "R Interfaces to Low-Level Native Tools",
+    "text": "R Interfaces to Low-Level Native Tools\n\n\nwe begin with paralel’s multicore parts\ncontinue with Foreign language via libraries (OpenBLAS, nvBLAS)\ngo to SPMD MPI with collectives\nreverse of history - because we are used to a laptop\nDistributed - some things are recomputed rather than communicated"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#unix-fork",
+    "href": "materials/lectures/4-shared_mem/slides.html#unix-fork",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Unix fork",
+    "text": "Unix fork\n\nCopy-on-write\n\nA memory efficient parallelism on shared memory devices\n\nparallel package mclapply and friends\n\nUse for numerical sections only\n\nAvoid GUI, I/O, and graphics sections\n\n\nConvenient for data (not modified)\n\nConvenient for functional languages like R\n\nAvoid or manage nested parallelism\n\nOpenBLAS takes all cores by default\n\ndata.table automatically switches to single threaded mode upon fork\n\n\n.footnote[A deeper discussion of fork memory (if you have interest) on YouTube by Chris Kanich (UIC)]"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#copy-on-write",
+    "href": "materials/lectures/4-shared_mem/slides.html#copy-on-write",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Copy-on-write",
+    "text": "Copy-on-write\n\n\nAll done with pointers\nMemory is in pages\nProcesses not aware of each other or other’s memory use\nOS is aware of memory use\n16 forks write = 16 copies of memory"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#mapping-threads-to-cores",
+    "href": "materials/lectures/4-shared_mem/slides.html#mapping-threads-to-cores",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Mapping Threads to Cores",
+    "text": "Mapping Threads to Cores\nTheory and Reality\n\nOperating system manages core affinity\nOperating system tasks can compete\nCore switching occurs frequently\nBut it works rather well!"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#drop-in-replacements-almost-for-lapply-mapply-and-map",
+    "href": "materials/lectures/4-shared_mem/slides.html#drop-in-replacements-almost-for-lapply-mapply-and-map",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Drop-in replacements (almost) for lapply, mapply, and Map",
+    "text": "Drop-in replacements (almost) for lapply, mapply, and Map\nmclapply(X, FUN, ...,\nmc.preschedule = TRUE, mc.set.seed = TRUE,\nmc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\nmc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)\nmcmapply(FUN, ...,\nMoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,\nmc.preschedule = TRUE, mc.set.seed = TRUE,\nmc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\nmc.cleanup = TRUE, affinity.list = NULL)\nmcMap(f, ...)"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#bootstrap-bagging-boosting-and-crossvalidation",
+    "href": "materials/lectures/4-shared_mem/slides.html#bootstrap-bagging-boosting-and-crossvalidation",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Bootstrap, Bagging, Boosting, and Crossvalidation",
+    "text": "Bootstrap, Bagging, Boosting, and Crossvalidation\n\nBootstrap: a tool for uncertainty quantification\n\nBagging: a tool for reducing variance\nBoosting: a greedy method of growing a model\n\nCrossvalidation: model performance assessment\n\nEstimates expected prediction error\n\nUses all data (no test set)\n\n\n.footnote[ \\(^*\\)Hastie, Tibshirani, and Friedman (2009) The Elements of Statistical Learning, Second Edition, (2009). link]"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#bootstrap---uncertainty-quantification",
+    "href": "materials/lectures/4-shared_mem/slides.html#bootstrap---uncertainty-quantification",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Bootstrap - uncertainty quantification",
+    "text": "Bootstrap - uncertainty quantification\nResampling data with replacement and repeating estimation\nResults in a sample of estimates/predictions - can estimate its distribution\n\nData: \\({\\mathbf Z} = (z_1,z_2,\\ldots,z_N)\\), where \\(z_i = (y_i,x_i)\\)\nModel: Let \\(S({\\mathbf Z})\\) be an estimated quantity from the data\nSample with replacement \\(B\\) sets of size \\(N\\) from data\nFit model to each of the reseampled \\(B\\) sets \\(\\{S({\\mathbf Z^{*1}}), S({\\mathbf Z^{*2}}),\\ldots, S({\\mathbf Z^{*B}})\\}\\)\nUse as sample from the sampling distribution of the estimator\n\nFor example, \\(\\widehat{\\mbox{Var}[S({\\mathbf Z})]} = \\frac{1}{B−1} \\sum_{b=1}^B[S({\\mathbf Z^{*b}} )− \\bar{S^*}]^2\\)\n\n\nParallelize over the \\(B\\) sets\nMore parallelism may exist within \\(S(\\cdot)\\)"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#bagging---variance-reduction",
+    "href": "materials/lectures/4-shared_mem/slides.html#bagging---variance-reduction",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Bagging - variance reduction",
+    "text": "Bagging - variance reduction\nStands for bootstrap aggregation\nSimple models (low bias and high variance models) on resampled data\nGeneralized by random forest to sampling subsets of predictors\n\nLet \\(\\widehat{S({\\mathbf Z})} = \\frac{1}{B}\\sum_{b=1}^B S({\\mathbf Z^{*b}})\\) (bootstrap sample mean)\nMajority vote if discrete\nReduces variance of the estimate\n\nParallelize over \\(B\\)\nMore parallelism may exist within \\(S(\\cdot)\\)"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#random-forest",
+    "href": "materials/lectures/4-shared_mem/slides.html#random-forest",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Random Forest",
+    "text": "Random Forest\nfor Regression or Classification 1.\n\nFor b = 1 to B:\n\nDraw a bootstrap sample \\({\\mathbf Z^∗}\\) of size \\(N\\) from the training data\n\nGrow a random-forest tree \\(T_b\\) on \\(\\mathbf Z^*\\) until \\(n_{min}\\) nodes achieved:\n\nSelect \\(m &lt; p\\) variables at random\n\nPick the best variable/split-point among the \\(m\\)\n\nSplit the node into two daughter nodes\n\n\n\nOutput the ensemble of trees \\(\\{T_b\\}^B_1\\)\n\nTo make a prediction at \\(x\\):\nRegression: \\(\\widehat{f^B_{\\rm rf}}(x) = \\frac{1}{B}\\sum_{b=1}^B T_b(x)\\)\nClassification: Let \\(\\widehat{C}_b(x)\\) be the class prediction of the \\(b\\)th random-forest\ntree. Then \\(\\hat{C^B_{\\rm rf}}(x)\\) = majority vote \\(\\{\\widehat{C}_b(x)\\}^B_1\\)\nAlgorithm 15.1 in Hastie, Tibshirani, and Friedman (2009). The Elements of Statistical Learning, Second Edition. Link"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#shared-memory-considerations",
+    "href": "materials/lectures/4-shared_mem/slides.html#shared-memory-considerations",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Shared memory considerations",
+    "text": "Shared memory considerations\n\\[\\qquad\\]\n\\[\\qquad\\]\nCores produce separate forests:\nCombine forests for prediction or combine predictions?"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#boosting",
+    "href": "materials/lectures/4-shared_mem/slides.html#boosting",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Boosting",
+    "text": "Boosting\nIncreasing weights on misclassified observations (fits\\(^*\\) additive model framework)\nSequential, so parallelization within a model\nDiscrete AdaBoost \\(^*\\)\n\nInitialize weights \\(w_i = \\frac{1}{N}\\), \\(i = 1,2,...,N\\).\nFor \\(m=1\\) to \\(M\\):\n\nFit a classifier \\(G_m(x)\\) to the training data using weights \\(w_i\\).\nCompute \\[err_m = \\frac{\\sum_{i=1}^N w_i I(y_i \\neq G_m(x_i))}{\\sum_{i=1}{N} w_i}\\]\nCompute \\(\\alpha_m = \\log((1 − err_m)/err_m)\\).\nSet \\(w_i \\leftarrow w_i · \\exp[\\alpha_m \\cdot I( y_i \\neq G_m(x_i))]\\), \\(i = 1, 2, \\ldots, N\\).\n\nOutput \\(G(x) = sign \\left[\\sum^M_{m=1} \\alpha_mG_m(x)\\right]\\).\n\nSequential over M, parallelize within \\(G_m(\\cdot)\\)\n.footnote[ \\(^*\\) Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)]"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#k-fold-crossvalidation",
+    "href": "materials/lectures/4-shared_mem/slides.html#k-fold-crossvalidation",
+    "title": "Shared Memory Parallel Computing",
+    "section": "K-fold Crossvalidation",
+    "text": "K-fold Crossvalidation\n\nLet \\(y = f(x, \\beta, \\alpha)\\) be a model and \\(\\widehat{y} = f(x, \\widehat{\\beta}, \\alpha)\\) be a prediction of \\(y\\)\n\ndata are \\((y, x)\\), parameters \\(\\beta\\), and hyperparameters \\(\\alpha\\)\nGiven \\(\\alpha\\), \\(\\widehat{\\beta}\\) is determined by minimizing a loss function \\(L(y, \\widehat{y} )\\)\n\nRandomly divide \\(N\\) training data points into \\(k\\) roughly equal folds (shuffle and split)\nLet \\(\\widehat{f^{-k}}\\) be the estimator when fold \\(k\\) data is removed\nLet \\(f(x,\\alpha)\\) be an estimator with a tuning parameter \\(\\alpha\\)\nThen average loss for a choice of \\(\\alpha\\) is \\(\\mbox{CV}(f,α) = \\frac{1}{N}\\sum_{i=1}^{N} L(y_i, \\widehat{f^{-k_i}}(x_i,\\alpha))\\)\nPicking \\(\\alpha\\) with minimum average loss, mitigates overfitting"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_serial.r",
+    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_serial.r",
+    "title": "Shared Memory Parallel Computing",
+    "section": "KPMS-IT4I-EX/code/rf_serial.r",
+    "text": "KPMS-IT4I-EX/code/rf_serial.r\n{.r include = \"code/rf_serial.r\"}"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_serial.r",
+    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_serial.r",
+    "title": "Shared Memory Parallel Computing",
+    "section": "KPMS-IT4I-EX/code/rf_cv_serial.r",
+    "text": "KPMS-IT4I-EX/code/rf_cv_serial.r\n{.r include = \"code/rf_cv_serial.r\" lines=c(3,4,11:32)}"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_mc.r",
+    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_mc.r",
+    "title": "Shared Memory Parallel Computing",
+    "section": "KPMS-IT4I-EX/code/rf_cv_mc.r",
+    "text": "KPMS-IT4I-EX/code/rf_cv_mc.r\n{.r include = \"code/rf_cv_mc.r\" lines=c(3,4,11:32)}"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#demo",
+    "href": "materials/lectures/4-shared_mem/slides.html#demo",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Demo …",
+    "text": "Demo …"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#matrix-libraries",
+    "href": "materials/lectures/4-shared_mem/slides.html#matrix-libraries",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Matrix Libraries …",
+    "text": "Matrix Libraries …"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas-1",
+    "href": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas-1",
+    "title": "Shared Memory Parallel Computing",
+    "section": "R-LAPACK-BLAS",
+    "text": "R-LAPACK-BLAS\n * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\nLAPACK: dense and banded matrix decompositions and more\n\n\\(\\quad LU\\) \\(\\quad LL^T\\) \\(\\quad QR\\) \\(\\quad UDV^T\\) \\(\\quad VD^2V^T\\) \\(\\quad\\|\\cdot\\|_p\\)\n\nImplementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries\nFlexiBLAS: A BLAS and LAPACK wrapper library with runtime exchangable backends"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#flexiblas",
+    "href": "materials/lectures/4-shared_mem/slides.html#flexiblas",
+    "title": "Shared Memory Parallel Computing",
+    "section": "FlexiBLAS",
+    "text": "FlexiBLAS\n.footnote[ https://github.com/Enchufa2/r-flexiblas\nhttps://cran.r-project.org/package=flexiblas]"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#example-random-forest-code",
+    "href": "materials/lectures/4-shared_mem/slides.html#example-random-forest-code",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Example Random forest Code",
+    "text": "Example Random forest Code\nLetter recognition data ( \\(20\\,000 \\times 17\\) )\n.footnote[*Parallel Statistical Computing with R: An Illustration on Two Architectures arXiv:1709.01195]"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#random-forest-classification",
+    "href": "materials/lectures/4-shared_mem/slides.html#random-forest-classification",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Random Forest Classification",
+    "text": "Random Forest Classification\nBuild many decision trees from random subsets of variables\nUse their majority votes to classify"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#example-random-forest-classification-code",
+    "href": "materials/lectures/4-shared_mem/slides.html#example-random-forest-classification-code",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Example Random Forest Classification Code",
+    "text": "Example Random Forest Classification Code\nLetter recognition data ( \\(20\\,000 \\times 17\\) )"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_serial.r-1",
+    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_serial.r-1",
+    "title": "Shared Memory Parallel Computing",
+    "section": "KPMS-IT4I-EX/code/rf_serial.r",
+    "text": "KPMS-IT4I-EX/code/rf_serial.r\n{.r include = \"code/rf_serial.r\"}"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_mc.r",
+    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_mc.r",
+    "title": "Shared Memory Parallel Computing",
+    "section": "KPMS-IT4I-EX/code/rf_mc.r",
+    "text": "KPMS-IT4I-EX/code/rf_mc.r\n{.r include = \"code/rf_mc.r\"}"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#pseudo-random-number-generators-rng",
+    "href": "materials/lectures/4-shared_mem/slides.html#pseudo-random-number-generators-rng",
+    "title": "Shared Memory Parallel Computing",
+    "section": "Pseudo Random Number Generators (RNG)",
+    "text": "Pseudo Random Number Generators (RNG)\n.pull-left[ * Guaranteed reproducibility * Possibly overlapping streams] .pull-right[ * Reproducibility for same number of streams * Guaranteed independent streams ]"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_mc.r-1",
+    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_mc.r-1",
+    "title": "Shared Memory Parallel Computing",
+    "section": "KPMS-IT4I-EX/code/rf_mc.r",
+    "text": "KPMS-IT4I-EX/code/rf_mc.r\n{.r include = \"code/rf_mc.r\"}"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_karolina_pbs.sh",
+    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_karolina_pbs.sh",
+    "title": "Shared Memory Parallel Computing",
+    "section": "KPMS-IT4I-EX/code/rf_karolina_pbs.sh",
+    "text": "KPMS-IT4I-EX/code/rf_karolina_pbs.sh\n{.sh include = \"code/rf_karolina_pbs.sh\"}"
+  },
+  {
+    "objectID": "materials/lectures/5-nn/slides.html#a-short-excursion",
+    "href": "materials/lectures/5-nn/slides.html#a-short-excursion",
+    "title": "Untitled",
+    "section": "A short excursion",
+    "text": "A short excursion"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#distributed-memory-computing",
+    "href": "materials/lectures/6-distributed/slides.html#distributed-memory-computing",
+    "title": "Distributed Computing",
+    "section": "Distributed Memory Computing",
+    "text": "Distributed Memory Computing"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#running-mpi-on-a-laptop",
+    "href": "materials/lectures/6-distributed/slides.html#running-mpi-on-a-laptop",
+    "title": "Distributed Computing",
+    "section": "Running MPI on a Laptop",
+    "text": "Running MPI on a Laptop\nmacOS in a Terminal window:\n\nbrew install openmpi\nIn an R session: install.packages(\"pbdMPI\")\nmpirun -np 4 Rscript your_spmd_code.R\n\nWindows\n\nWeb Page: https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi\nDownload: https://www.microsoft.com/en-us/download/details.aspx?id=100593\npbdMPI has a Windows binary on CRAN"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#revisit-hello_balance.r",
+    "href": "materials/lectures/6-distributed/slides.html#revisit-hello_balance.r",
+    "title": "Distributed Computing",
+    "section": "Revisit hello_balance.R",
+    "text": "Revisit hello_balance.R\n## This script describes two levels of parallelism:\n## Top level: Distributed MPI runs several copies of this entire script.\n##            Instances differ by their comm.rank() designation.\n## Inner level: The unix fork (copy-on-write) shared memory parallel execution\n##            of the mc.function() managed by parallel::mclapply()\n## Further levels are possible: multithreading in compiled code and communicator\n## splitting at the distributed MPI level.\n\nsuppressMessages(library(pbdMPI))\ncomm.print(sessionInfo())\n\n## get node name\nhost = system(\"hostname\", intern = TRUE)\n\nmc.function = function(x) {\n    Sys.sleep(1) # replace with your function for mclapply cores here\n    Sys.getpid() # returns process id\n}\n\n## Compute how many cores per R session are on this node\nlocal_ranks_query = \"echo $OMPI_COMM_WORLD_LOCAL_SIZE\"\nranks_on_my_node = as.numeric(system(local_ranks_query, intern = TRUE))\ncores_on_my_node = parallel::detectCores()\ncores_per_R = floor(cores_on_my_node/ranks_on_my_node)\ncores_total = allreduce(cores_per_R)  # adds up over ranks\n\n## Run mclapply on allocated cores to demonstrate fork pids\nmy_pids = parallel::mclapply(1:cores_per_R, mc.function, mc.cores = cores_per_R)\nmy_pids = do.call(paste, my_pids) # combines results from mclapply\n##\n## Same cores are shared with OpenBLAS (see flexiblas package)\n##            or for other OpenMP enabled codes outside mclapply.\n## If BLAS functions are called inside mclapply, they compete for the\n##            same cores: avoid or manage appropriately!!!\n\n## Now report what happened and where\nmsg = paste0(\"Hello World from rank \", comm.rank(), \" on host \", host,\n             \" with \", cores_per_R, \" cores allocated\\n\",\n             \"            (\", ranks_on_my_node, \" R sessions sharing \",\n             cores_on_my_node, \" cores on this host node).\\n\",\n             \"      pid: \", my_pids, \"\\n\")\ncomm.cat(msg, quiet = TRUE, all.rank = TRUE)\n\n\ncomm.cat(\"Total R sessions:\", comm.size(), \"Total cores:\", cores_total, \"\\n\",\n         quiet = TRUE)\ncomm.cat(\"\\nNotes: cores on node obtained by: detectCores {parallel}\\n\",\n         \"       ranks (R sessions) per node: OMPI_COMM_WORLD_LOCAL_SIZE\\n\",\n         \"       pid to core map changes frequently during mclapply\\n\",\n         quiet = TRUE)\n\nfinalize()"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#working-with-a-remote-cluster-using-r",
+    "href": "materials/lectures/6-distributed/slides.html#working-with-a-remote-cluster-using-r",
+    "title": "Distributed Computing",
+    "section": "Working with a remote cluster using R",
+    "text": "Working with a remote cluster using R"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#running-distributed-on-a-cluster",
+    "href": "materials/lectures/6-distributed/slides.html#running-distributed-on-a-cluster",
+    "title": "Distributed Computing",
+    "section": "Running Distributed on a Cluster",
+    "text": "Running Distributed on a Cluster"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#distributed-memory-tools",
+    "href": "materials/lectures/6-distributed/slides.html#distributed-memory-tools",
+    "title": "Distributed Computing",
+    "section": "Distributed Memory Tools",
+    "text": "Distributed Memory Tools"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#message-passing-interface-mpi",
+    "href": "materials/lectures/6-distributed/slides.html#message-passing-interface-mpi",
+    "title": "Distributed Computing",
+    "section": "Message Passing Interface (MPI)",
+    "text": "Message Passing Interface (MPI)"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#single-program-multiple-data-spmd",
+    "href": "materials/lectures/6-distributed/slides.html#single-program-multiple-data-spmd",
+    "title": "Distributed Computing",
+    "section": "Single Program Multiple Data (SPMD)",
+    "text": "Single Program Multiple Data (SPMD)\n\nN instances of the same code cooperate\n\nEach of the N instances has rank, {0, . . ., N-1}\nThe rank determines any differences in work\nInstances run asynchronously\n\nSPMD parallelization is a generalization of the serial code\n\nMany rank-aware operations are automated\nCollective operations are high level and easy to learn\nExplicit point-to-point communications are an advanced topic\nMultilevel parallelism is possible\n\nTypically no manager, it is all cooperation"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#pbdr-project",
+    "href": "materials/lectures/6-distributed/slides.html#pbdr-project",
+    "title": "Distributed Computing",
+    "section": "pbdR Project",
+    "text": "pbdR Project\n\n\nBridge HPC with high-productivity of R: Expressive for data and modern statistics\nKeep syntax identical to R, when possible\nSoftware reuse philosophy:\n\nDon’t reinvent the wheel when possible\nIntroduce HPC standards with R flavor\nUse scalable HPC libraries with R convenience\n\nSimplify and use R intelligence where possible\n\n\nUsing HPC concepts and libraries * Benefits the R user by knowing standard components of HPC"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#package-pbdmpi",
+    "href": "materials/lectures/6-distributed/slides.html#package-pbdmpi",
+    "title": "Distributed Computing",
+    "section": "Package pbdMPI",
+    "text": "Package pbdMPI\n\nSpecializes in SPMD programming for HPC clusters\n\nManages printing from ranks\nProvides chunking options\nProvides communicator splits for multilevel parallelism\nIn situ capability to process data from other MPI codes without copy\n\nA derivation and rethinking of the Rmpi package aimed at HPC clusters\n\nSimplified interface with fewer parameters (using R’s S4 methods)\nFaster for matrix and array data - no serialization\n\n\n\n\nPrefer pbdMPI over Rmpi due to simplification and speed\n\nNo serialization for arrays and vectors\n\nDrops spawning a cluster\n\nBecause a client-server relationship is more appropriate"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#pbdmpi-high-level-collective-communications",
+    "href": "materials/lectures/6-distributed/slides.html#pbdmpi-high-level-collective-communications",
+    "title": "Distributed Computing",
+    "section": "pbdMPI: High-level Collective Communications",
+    "text": "pbdMPI: High-level Collective Communications\nEach of these operations is performed across a communicator of ranks. Simplest one is all ranks but rank arrays can be used for multilevel collectives.\n\nreduce() Reduces a set of same-size distributed vectors or arrays with an operation (+ is default). Fast because both communication and reduction are parallel and no serialization is needed.\nallreduce() Same as reduce() except all ranks in a comm get the result\ngather() Gathers a set of distributed objects\nallgather() Same as gather() except all ranks in a comm get the result\nbcast() Broadcasts an object from one rank to all in its comm\nscatter() Broadcasts different pieces of an object from one rank to all in its comm\nbarrier() Waits on all ranks in a comm before proceeding"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#pbdmpi-high-level-collective-operations",
+    "href": "materials/lectures/6-distributed/slides.html#pbdmpi-high-level-collective-operations",
+    "title": "Distributed Computing",
+    "section": "pbdMPI: High-level Collective Operations",
+    "text": "pbdMPI: High-level Collective Operations\n\\(\\small \\bf A = \\sum_{i=1}^nX_i\\) \\(\\quad\\) \\(\\qquad\\) \\(\\qquad\\) A = reduce(X) \\(\\qquad\\) \\(\\qquad\\) A = allreduce(X)\n\\(\\small \\bf A = \\left[ X_1 | X_2 | \\cdots | X_n \\right]\\) \\(\\qquad\\) A = gather(X) \\(\\qquad\\) \\(\\qquad\\) A = allgather(X)\n\n\n\nPowerful: communication and reduction is highly parallel\n\nthat’s why it beats Spark/MapReduce"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#pbdmpi-functions-to-facilitate-spmd-programming",
+    "href": "materials/lectures/6-distributed/slides.html#pbdmpi-functions-to-facilitate-spmd-programming",
+    "title": "Distributed Computing",
+    "section": "pbdMPI: Functions to Facilitate SPMD Programming",
+    "text": "pbdMPI: Functions to Facilitate SPMD Programming\n\ncomm.chunk() splits a number into chunks in various ways and various formats. Tailored for SPMD programming, returning rank-specific results.\ncomm.set.seed() sets the seed of a parallel RNG. If diff = FALSE, then all ranks generate the same stream. Otherwise, ranks generate different streams.\ncomm.print() and comm.cat() print by default from rank 0 only, with options to print from any or all ranks."
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#distributed-programming-works-in-shared-memory",
+    "href": "materials/lectures/6-distributed/slides.html#distributed-programming-works-in-shared-memory",
+    "title": "Distributed Computing",
+    "section": "Distributed Programming Works in Shared Memory",
+    "text": "Distributed Programming Works in Shared Memory"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-5-hello-mpi-ranks-picsparallelsoftwareslide7mpi.jpg-background-size200px-background-positionbottom-right",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-5-hello-mpi-ranks-picsparallelsoftwareslide7mpi.jpg-background-size200px-background-positionbottom-right",
+    "title": "Distributed Computing",
+    "section": "Hands on Session 5: Hello MPI Ranks {/pics/ParallelSoftware/Slide7mpi.jpg background-size=“200px” background-position=“bottom right”}",
+    "text": "Hands on Session 5: Hello MPI Ranks {/pics/ParallelSoftware/Slide7mpi.jpg background-size=“200px” background-position=“bottom right”}\ncode_5/hello_world.R {.r include = \"code/hello_world.R\"}\nRank distinguishes the parallel copies of the same code"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-5-random-forest-with-mpi",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-5-random-forest-with-mpi",
+    "title": "Distributed Computing",
+    "section": "Hands on Session 5: Random Forest with MPI",
+    "text": "Hands on Session 5: Random Forest with MPI\ncode_5/rf_mpi.R\nsuppressPackageStartupMessages(library(randomForest))\ndata(LetterRecognition, package = \"mlbench\")\nlibrary(pbdMPI, quiet = TRUE)                #&lt;&lt;\ncomm.set.seed(seed = 7654321, diff = FALSE)      #&lt;&lt;\n\nn = nrow(LetterRecognition)\nn_test = floor(0.2 * n)\ni_test = sample.int(n, n_test)\ntrain = LetterRecognition[-i_test, ]\ntest = LetterRecognition[i_test, ][comm.chunk(n_test, form = \"vector\"), ]    #&lt;&lt;\n\ncomm.set.seed(seed  = 1234, diff = TRUE)          #&lt;&lt;\nmy.rf = randomForest(lettr ~ ., train, ntree = comm.chunk(500), norm.votes = FALSE) #&lt;&lt;\nrf.all = allgather(my.rf)                  #&lt;&lt;\nrf.all = do.call(combine, rf.all)          #&lt;&lt;\npred = as.vector(predict(rf.all, test))\n\ncorrect = allreduce(sum(pred == test$lettr))  #&lt;&lt;\ncomm.cat(\"Proportion Correct:\", correct/(n_test), \"\\n\")\n\nfinalize()          #&lt;&lt;"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-5-comm.chunk",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-5-comm.chunk",
+    "title": "Distributed Computing",
+    "section": "Hands on Session 5: comm.chunk()",
+    "text": "Hands on Session 5: comm.chunk()\nmpi_shorts/chunk.r\nlibrary( pbdMPI, quiet = TRUE )\n\nmy.rank = comm.rank( )\n\nk = comm.chunk( 10 )\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\", type = \"equal\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nfinalize( )"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-5-other-short-mpi-codes",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-5-other-short-mpi-codes",
+    "title": "Distributed Computing",
+    "section": "Hands on Session 5: other short MPI codes",
+    "text": "Hands on Session 5: other short MPI codes\nbcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hello-p.r hello.r map-reduce.r mcsim.r ols.r qr-cop.r rank.r reduce-mat.r timer.r\n\nThese short codes only use pbdMPI and can run on a laptop in a terminal window if you installed OpenMPI\nOn the clusters these can run on a login node with a small \\(^*\\) number of ranks\nWile in the mpi_shorts directory, run the following\n\nsource ../code_4/modules_MACHINE.sh\nmpirun -np 4 Rscript your_script.r\n\n\n.footnote[ \\(^*\\) Note that running long or large jobs on login nodes is strongly discouraged]"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#shared-memory---mpi-or-fork",
+    "href": "materials/lectures/6-distributed/slides.html#shared-memory---mpi-or-fork",
+    "title": "Distributed Computing",
+    "section": "Shared Memory - MPI or fork?",
+    "text": "Shared Memory - MPI or fork?\n\n\n\n\nfork via mclapply() + do.call()\n\n\nMPI replicated data + allreduce()\n\n\nMPI chunked data + allreduce()\n\n\n\n\ndo.call() is serial\nallreduce() is parallel"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#package-pbddmat",
+    "href": "materials/lectures/6-distributed/slides.html#package-pbddmat",
+    "title": "Distributed Computing",
+    "section": "Package pbdDMAT",
+    "text": "Package pbdDMAT\n\nScaLAPACK: Distributed version of LAPACK (uses PBLAS/BLAS but not LAPACK)\n\n2d Block-Cyclic data layout - mostly automated in pbdDMAT package\nBLACS: Communication collectives for distributed matrix computation\nPBLAS: Distributed BLAS (uses standard BLAS within blocks)\n\nR code is identical for most matrix operations by overloading operators and ddmatrix class\n\n {size=300 position=“left”}"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#package-pbdml",
+    "href": "materials/lectures/6-distributed/slides.html#package-pbdml",
+    "title": "Distributed Computing",
+    "section": "Package pbdML",
+    "text": "Package pbdML\n\nA demonstration of pbdDMAT package capabilities\nIncludes\n\nRandomized SVD\nRandomized principal components analysis\nRobust Principal Component Analysis?” from https://arxiv.org/pdf/0912.3599.pdf"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-quad-rsvd",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-quad-rsvd",
+    "title": "Distributed Computing",
+    "section": "Hands on Session \\(\\quad\\) rsvd:",
+    "text": "Hands on Session \\(\\quad\\) rsvd:\nSingular value decomposition via randomized sketching\n Randomized sketching produces fast new alternatives to classical numerical linear algebra computations.\n Guarantees are given with probability statements instead of classical error analysis.\n Martinsson, P., & Tropp, J. (2020). Randomized numerical linear algebra: Foundations and algorithms. Acta Numerica, 29, 403-572. https://doi.org/10.48550/arXiv.2002.01387"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-quad-rsvd-1",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-quad-rsvd-1",
+    "title": "Distributed Computing",
+    "section": "Hands on Session \\(\\quad\\) rsvd:",
+    "text": "Hands on Session \\(\\quad\\) rsvd:\nRandomized SVD via subspace embedding\nGiven an \\(n\\times p\\) matrix \\(X\\) and \\(k = r + 10\\), where \\(r\\) is the effective rank of \\(X\\):\n1. Construct a \\(p\\times k\\) random matrix \\(\\Omega\\)\n2. Form \\(Y = X \\Omega\\)\n3. Decompose \\(Y = QR\\)\n\\(Q\\) is an orthogonal basis for the columnspace of \\(Y\\), which with high probability is the columnspace of \\(X\\). To get the SVD of \\(X\\):\n1. Compute \\(C= Q^TX\\)\n2. Decompose \\(C = \\hat{U}\\Sigma V^T\\)\n3. Compute \\(U = Q\\hat{U}\\)\n4. Truncate factorization to \\(r\\) columns"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#mnist-data",
+    "href": "materials/lectures/6-distributed/slides.html#mnist-data",
+    "title": "Distributed Computing",
+    "section": "MNIST Data",
+    "text": "MNIST Data"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#mnist_rsvd.r",
+    "href": "materials/lectures/6-distributed/slides.html#mnist_rsvd.r",
+    "title": "Distributed Computing",
+    "section": "mnist_rsvd.R",
+    "text": "mnist_rsvd.R\nsource(\"mnist_read_mpi.R\") # reads blocks of rows\nsuppressMessages(library(pbdDMAT))\nsuppressMessages(library(pbdML))\ninit.grid()\n\n## construct block-cyclic ddmatrix\nbldim = c(allreduce(nrow(my_train), op = \"max\"), ncol(my_train))\ngdim = c(allreduce(nrow(my_train), op = \"sum\"), ncol(my_train))\ndmat_train = new(\"ddmatrix\", Data = my_train, dim = gdim, \n                 ldim = dim(my_train), bldim = bldim, ICTXT = 2)\ncyclic_train = as.blockcyclic(dmat_train)\n\ncomm.print(comm.size())\nt1 = as.numeric(Sys.time())\nrsvd_train = rsvd(cyclic_train, k = 10, q = 3, retu = FALSE, retvt = TRUE)\nt2 = as.numeric(Sys.time())\nt1 = allreduce(t1, op = \"min\")\nt2 = allreduce(t2, op = \"max\")\ncomm.cat(\"Time:\", t2 - t1, \"seconds\\n\")\ncomm.cat(\"dim(V):\", dim(rsvd_train$vt), \"\\n\")\n\ncomm.cat(\"rsvd top 10 singular values:\", rsvd_train$d, \"\\n\")\n\nfinalize()"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-rsvd",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-rsvd",
+    "title": "Distributed Computing",
+    "section": "Hands-on Session rsvd",
+    "text": "Hands-on Session rsvd\nrsvd &lt;- function(x, k=1, q=3, retu=TRUE, retvt=TRUE) {\n  \n  n &lt;- ncol(x)\n  \n  if (class(x) == \"matrix\")\n    Omega &lt;- matrix(runif(n*2L*k), nrow=n, ncol=2L*k)\n  else if (class(x) == \"ddmatrix\")  #&lt;&lt;\n    Omega &lt;- ddmatrix(\"runif\", nrow=n, ncol=2L*k, bldim=x@bldim, ICTXT=x@ICTXT) #&lt;&lt;\n  \n  Y &lt;- x %*% Omega\n  Q &lt;- qr.Q(qr(Y))\n  \n  for (i in 1:q) {\n    Y &lt;- crossprod(x, Q)\n    Q &lt;- qr.Q(qr(Y))\n    Y &lt;- x %*% Q\n    Q &lt;- qr.Q(qr(Y))\n  }\n  \n  B &lt;- crossprod(Q, x)\n  \n  if (!retu) nu &lt;- 0\n  else nu &lt;- min(nrow(B), ncol(B))\n  \n  if (!retvt) nv &lt;- 0\n  else nv &lt;- min(nrow(B), ncol(B))\n  \n  svd.B &lt;- La.svd(x=B, nu=nu, nv=nv)\n  \n  d &lt;- svd.B$d\n  d &lt;- d[1L:k]\n  \n  # Produce u/vt as desired\n  if (retu) {\n    u &lt;- svd.B$u\n    u &lt;- Q %*% u\n    u &lt;- u[, 1L:k, drop=FALSE]\n  }\n  \n  if (retvt) vt &lt;- svd.B$vt[1L:k, , drop=FALSE]\n  \n  # wrangle return\n  if (retu) {\n    if (retvt) svd &lt;- list(d=d, u=u, vt=vt)\n    else svd &lt;- list(d=d, u=u)\n  } else {\n    if (retvt) svd &lt;- list(d=d, vt=vt)\n    else svd &lt;- list(d=d)\n  }\n  \n  return( svd )\n}"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#package-kazaam",
+    "href": "materials/lectures/6-distributed/slides.html#package-kazaam",
+    "title": "Distributed Computing",
+    "section": "Package kazaam",
+    "text": "Package kazaam\n {size=300 position=“left”}\n\nDistributed methods for tall matrices (and some for wide matrices) that exploit the short dimension for speed and long dimension for parallelism\nTall matrices, shaq class, are chunked by blocks of rows\nWide matrices, tshaq class, are chunked by blocks of columns\nMuch like pbdDMAT, most matrix operations in R code are identical to serial through overloading operators and shaq S4 class\n\n.footnote[ Naming is a “tongue-in-cheek” play on ‘Shaquille’ ‘ONeal’ (‘Shaq’) and the film ‘Kazaam’]"
+  },
+  {
+    "objectID": "materials/lectures/6-distributed/slides.html#hands-on-session-kazaam",
+    "href": "materials/lectures/6-distributed/slides.html#hands-on-session-kazaam",
+    "title": "Distributed Computing",
+    "section": "Hands on Session kazaam",
+    "text": "Hands on Session kazaam"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "HPC for Data Science in R - BZAN 583",
+    "section": "",
+    "text": "This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.\nMaterial below is under construction!\n\n\n\n\n\n\nWeek 1, March 18 & 20\n\n\nLectures: Welcome and Setup Workflow Introduction\nAssignment: Installs and Workflow \n\n\n\n\nWeek 2, March 25 & 27\nProject Proposals Due by March 29.\n\n\nLectures: Hardware and Memory Hierarchy Concepts\nCoding for Faster R\nAssignment: Faster Data \n\n\n\n\nWeek 3, April 1 & 3\n\n\nLectures: HPC Software and BLAS Libraries\nAssignment: Faster R \n\n\n\n\nWeek 4, April 8 & 10\n\n\nLectures: Shared Memory Parallel\nAssignment: Multicore \n\n\n\n\nWeek 5, April 15 & 17\n\n\nLectures: LLM or Torch for R\nAssignment: A classification task \n\n\n\n\nWeek 6, April 22 & 24\n\n\nLectures: Distributed Computing\nAssignment: pbdMPI application \n\n\n\n\nWeek 7, April 29 & May 1\n\n\nLectures: TBD Your choice\n\n\n\n\n\nWeek 8, May 6\n\n\nProject: Presentations"
+  }
+]

@@ -189,18 +189,18 @@
     "text": "Workflow for Remote Computing in R"
   },
   {
-    "objectID": "materials/lectures/2-hardware/slides.html#rework-this-into",
-    "href": "materials/lectures/2-hardware/slides.html#rework-this-into",
-    "title": "Hardware and Memory Hierarchies",
-    "section": "Rework this into:",
-    "text": "Rework this into:\n\nTwo memory models: shared and distributed\n\nshared memory: UMA small systems, and NUMA larger systems\nshared memory: runs OS, and coprocessor\ndistributed memory: large systems\n\nSingle (or two) chip: hardware shared memory (otherwise software shared and NUMA)\nMemory hierarchies and page faults"
-  },
-  {
     "objectID": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware",
     "href": "materials/lectures/2-hardware/slides.html#two-three-basic-concepts-in-hardware",
     "title": "Hardware and Memory Hierarchies",
     "section": "Two (Three) Basic Concepts in Hardware",
     "text": "Two (Three) Basic Concepts in Hardware"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/slides.html#same-in-mermaid",
+    "href": "materials/lectures/2-hardware/slides.html#same-in-mermaid",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "same in mermaid",
+    "text": "same in mermaid\n\n\n\n\n\nflowchart LR\n  subgraph Processor\n    direction TB\n    subgraph Cores\n        direction RL\n        core0 ~~~ core1 ~~~ core2 ~~~ core3\n        style core0 fill:lightblue,stroke:lightblue,stroke-width:20px\n        style core1 fill:lightblue,stroke:lightblue,stroke-width:20px\n        style core2 fill:lightblue,stroke:lightblue,stroke-width:20px\n        style core3 fill:lightblue,stroke:lightblue,stroke-width:20px\n    end\n    subgraph Network\n    end\n    subgraph Memory\n    end\n  end\n  Cores ~~~ Network"
   },
   {
     "objectID": "materials/lectures/2-hardware/slides.html#flynns-taxonomy-1972",
@@ -252,11 +252,11 @@
     "text": "Native Programming Models and Tools"
   },
   {
-    "objectID": "materials/lectures/2-hardware/slides.html#years-of-practical-parallel-computing",
-    "href": "materials/lectures/2-hardware/slides.html#years-of-practical-parallel-computing",
+    "objectID": "materials/lectures/2-hardware/slides.html#years-of-parallel-computing",
+    "href": "materials/lectures/2-hardware/slides.html#years-of-parallel-computing",
     "title": "Hardware and Memory Hierarchies",
-    "section": "40 Years of Practical Parallel Computing",
-    "text": "40 Years of Practical Parallel Computing"
+    "section": "40 Years of Parallel Computing",
+    "text": "40 Years of Parallel Computing"
   },
   {
     "objectID": "materials/lectures/2-hardware/slides.html#last-20-years-of-advances",
@@ -278,6 +278,62 @@
     "title": "Hardware and Memory Hierarchies",
     "section": "R Interfaces to Low-Level Native Tools",
     "text": "R Interfaces to Low-Level Native Tools"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#speeding-up-your-r-code",
+    "href": "materials/lectures/2b-faster/slides.html#speeding-up-your-r-code",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Speeding up your R code",
+    "text": "Speeding up your R code\nSerial solutions before parallel solutions\n\nUser R code often inefficient (high-level code = deep complexity)\n\nProfile and improve code first\n\nVectorize loops if possible\n\nCompute once if not changing\n\nKnow when copies are made\n\n\nImprove matrix algebra speed with a fast multithreaded library such as OpenBLAS\n\nMove kernels into compiled language, such as C/C++\n\nConsider parallel computation (multicore and distriuted) only after the above"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#profiling-why-profile",
+    "href": "materials/lectures/2b-faster/slides.html#profiling-why-profile",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Profiling: Why Profile?",
+    "text": "Profiling: Why Profile?\n\nBecause performance matters\n\nBad practices scale up!\n\nYour bottlenecks may surprise you\n\nOne line of R code can touch a lot of data\n\nUnlike compilers, R will not fix it for you"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-system.time",
+    "href": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-system.time",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Performance Profiling Tools: system.time()",
+    "text": "Performance Profiling Tools: system.time()\n\nsystem.time() is a basic R utility for timing expressions\n\n\n## consider import fastR/system.time.R\nx &lt;- matrix(rnorm(20000*750), nrow=20000, ncol=750)\n\nsystem.time(t(x) %*% x)\n#    user  system elapsed\n#   2.187   0.032   2.324\n\nsystem.time(crossprod(x))\n#    user  system elapsed\n#   1.009   0.003   1.019\n\nsystem.time(cov(x))\n#    user  system elapsed\n#   6.264   0.026   6.338"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rprof",
+    "href": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rprof",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Performance Profiling Tools: Rprof()",
+    "text": "Performance Profiling Tools: Rprof()\nSamples call stack at interval (default 0.02 second)\n\n## consider import title=fastR/profile.R\nx &lt;- matrix(rnorm(10000*250), nrow=10000, ncol=250)\nRprof()\ninvisible(prcomp(x))\nRprof(NULL)\nsummaryRprof()\n\n# $by.self\n#                 self.time self.pct total.time total.pct\n# \"La.svd\"             0.64    78.05       0.70     85.37\n# \"%*%\"                0.06     7.32       0.06      7.32\n# \"aperm.default\"      0.04     4.88       0.04      4.88\n# \"is.finite\"          0.04     4.88       0.04      4.88\n# \"matrix\"             0.04     4.88       0.04      4.88\n\n# $by.total\n#                  total.time total.pct self.time self.pct\n# \"prcomp.default\"       0.82    100.00      0.00     0.00\n# \"prcomp\"               0.82    100.00      0.00     0.00\n# \"svd\"                  0.72     87.80      0.00     0.00\n# \"La.svd\"               0.70     85.37      0.64    78.05\n# \"%*%\"                  0.06      7.32      0.06     7.32\n# ### output truncated by presenter\n\n# $sample.interval\n# [1] 0.02\n\n# $sampling.time\n# [1] 0.98"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rprof-1",
+    "href": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rprof-1",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Performance Profiling Tools: Rprof()",
+    "text": "Performance Profiling Tools: Rprof()\n\n## consider import fastR/profile.R\nRprof(interval=.99)\ninvisible(prcomp(x))\nRprof(NULL)\nsummaryRprof()\n\n# $by.self\n# [1] self.time  self.pct   total.time total.pct\n# &lt;0 rows&gt; (or 0-length row.names)\n\n# $by.total\n# [1] total.time total.pct  self.time  self.pct\n# &lt;0 rows&gt; (or 0-length row.names)\n\n# $sample.interval\n# [1] 0.99\n\n# $sampling.time\n# [1] 0"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rbenchmark",
+    "href": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rbenchmark",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Performance Profiling Tools: rbenchmark",
+    "text": "Performance Profiling Tools: rbenchmark\na package that easily benchmarks different functions\n\nx &lt;- matrix(rnorm(10000*500), nrow=10000, ncol=500)\n\nf &lt;- function(x) t(x) %*% x\ng &lt;- function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   2.561    3.067     2.360    0.198          0         0\n2 g(x)          100   0.835    1.000     0.807    0.025          0         0"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#profiling-summary",
+    "href": "materials/lectures/2b-faster/slides.html#profiling-summary",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Profiling Summary",
+    "text": "Profiling Summary\n\nProfile, profile, profile\n\nUse system.time() to get a general sense of a method\n\nUse rbenchmark’s benchmark() function to compare 2 methods\nUse Rprof() for more detailed profiling\nOther tools exist for more advanced applications (pbdPAPI and pbdPROF on GitHub/RBigData)"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#vectorizing",
+    "href": "materials/lectures/2b-faster/slides.html#vectorizing",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Vectorizing",
+    "text": "Vectorizing\n\nn &lt;- 1e5\nx &lt;- seq(0, 1, length.out=n)\nf &lt;- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 &lt;- numeric(n)\n\nset.seed(12345)\nsystem.time(\n  for(i in 1:n)\n    y1[i] &lt;- f(x[i]) + rnorm(1)\n)\n\n   user  system elapsed \n  0.102   0.011   0.114 \n\nset.seed(12345)\nsystem.time(\n  y2 &lt;- f(x) + rnorm(n)\n)\n\n   user  system elapsed \n  0.003   0.000   0.003 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#faster-serial-code",

@@ -321,6 +321,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -333,21 +336,39 @@
 </div>
 
 </section>
-<section id="rework-this-into" class="slide level2">
-<h2>Rework this into:</h2>
-<ul>
-<li>Two memory models: shared and distributed
-<ul>
-<li>shared memory: UMA small systems, and NUMA larger systems</li>
-<li>shared memory: runs OS, and coprocessor</li>
-<li>distributed memory: large systems</li>
-</ul></li>
-<li>Single (or two) chip: hardware shared memory (otherwise software shared and NUMA)</li>
-<li>Memory hierarchies and page faults</li>
-</ul>
-</section>
-<section id="two-three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide7.png" data-background-size="1200px" data-background-position="center">
+<section id="two-three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide7.png" data-background-size="90%" data-background-position="center">
 <h2>Two (Three) Basic Concepts in Hardware</h2>
+</section>
+<section id="same-in-mermaid" class="slide level2">
+<h2>same in mermaid</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  subgraph Processor
+    direction TB
+    subgraph Cores
+        direction RL
+        core0 ~~~ core1 ~~~ core2 ~~~ core3
+        style core0 fill:lightblue,stroke:lightblue,stroke-width:20px
+        style core1 fill:lightblue,stroke:lightblue,stroke-width:20px
+        style core2 fill:lightblue,stroke:lightblue,stroke-width:20px
+        style core3 fill:lightblue,stroke:lightblue,stroke-width:20px
+    end
+    subgraph Network
+    end
+    subgraph Memory
+    end
+  end
+  Cores ~~~ Network
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="flynns-taxonomy-1972" class="slide level2">
 <h2>Flynn’s Taxonomy (1972)</h2>
@@ -455,8 +476,8 @@ GPU slower and less versatile but extreme parallelism (4x+ cores)</p>
 <section id="native-programming-models-and-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide3.png" data-background-size="90%" data-background-position="center">
 <h2>Native Programming Models and Tools</h2>
 </section>
-<section id="years-of-practical-parallel-computing" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide4.png" data-background-size="90%" data-background-position="center">
-<h2>40 Years of Practical Parallel Computing</h2>
+<section id="years-of-parallel-computing" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide4.png" data-background-size="90%" data-background-position="center">
+<h2>40 Years of Parallel Computing</h2>
 </section>
 <section id="last-20-years-of-advances" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide5.png" data-background-size="90%" data-background-position="center">
 <h2>Last 20 years of Advances</h2>

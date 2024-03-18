@@ -6,6 +6,165 @@ format:
 editor: source
 ---
 
+## Speeding up your R code  
+### Serial solutions before parallel solutions  
+- User R code often inefficient (high-level code = deep complexity)  
+  - Profile and improve code first  
+  - Vectorize loops if possible  
+  - Compute once if not changing  
+  - Know when copies are made  
+- Improve matrix algebra speed with a fast multithreaded library such as OpenBLAS  
+- Move kernels into compiled language, such as C/C++  
+- Consider parallel computation (multicore and distriuted) only after the above  
+
+## Profiling: Why Profile?  
+- Because performance matters  
+- Bad practices scale up!  
+- Your bottlenecks may surprise you  
+- One line of R code can touch a lot of data  
+- Unlike compilers, R will not fix it for you  
+
+## Performance Profiling Tools: `system.time()`
+- `system.time()` is a basic R utility for timing expressions
+
+```{r}
+#| echo: true 
+#| eval: false
+
+## consider import fastR/system.time.R
+x <- matrix(rnorm(20000*750), nrow=20000, ncol=750)
+
+system.time(t(x) %*% x)
+#    user  system elapsed
+#   2.187   0.032   2.324
+
+system.time(crossprod(x))
+#    user  system elapsed
+#   1.009   0.003   1.019
+
+system.time(cov(x))
+#    user  system elapsed
+#   6.264   0.026   6.338
+```
+
+## Performance Profiling Tools: `Rprof()`
+
+Samples call stack at interval (default 0.02 second)
+
+```{r}
+#| echo: true
+#| eval: false
+
+## consider import title=fastR/profile.R
+x <- matrix(rnorm(10000*250), nrow=10000, ncol=250)
+Rprof()
+invisible(prcomp(x))
+Rprof(NULL)
+summaryRprof()
+
+# $by.self
+#                 self.time self.pct total.time total.pct
+# "La.svd"             0.64    78.05       0.70     85.37
+# "%*%"                0.06     7.32       0.06      7.32
+# "aperm.default"      0.04     4.88       0.04      4.88
+# "is.finite"          0.04     4.88       0.04      4.88
+# "matrix"             0.04     4.88       0.04      4.88
+
+# $by.total
+#                  total.time total.pct self.time self.pct
+# "prcomp.default"       0.82    100.00      0.00     0.00
+# "prcomp"               0.82    100.00      0.00     0.00
+# "svd"                  0.72     87.80      0.00     0.00
+# "La.svd"               0.70     85.37      0.64    78.05
+# "%*%"                  0.06      7.32      0.06     7.32
+# ### output truncated by presenter
+
+# $sample.interval
+# [1] 0.02
+
+# $sampling.time
+# [1] 0.98
+```
+
+## Performance Profiling Tools: `Rprof()`
+
+```{r}
+#| eval: false
+#| echo: true
+
+## consider import fastR/profile.R
+Rprof(interval=.99)
+invisible(prcomp(x))
+Rprof(NULL)
+summaryRprof()
+
+# $by.self
+# [1] self.time  self.pct   total.time total.pct
+# <0 rows> (or 0-length row.names)
+
+# $by.total
+# [1] total.time total.pct  self.time  self.pct
+# <0 rows> (or 0-length row.names)
+
+# $sample.interval
+# [1] 0.99
+
+# $sampling.time
+# [1] 0
+```
+
+## Performance Profiling Tools: **rbenchmark**
+### a package that easily benchmarks different functions
+
+```{r}
+#| echo: true
+
+x <- matrix(rnorm(10000*500), nrow=10000, ncol=500)
+
+f <- function(x) t(x) %*% x
+g <- function(x) crossprod(x)
+
+library(rbenchmark)
+benchmark(f(x), g(x))
+```
+
+::: notes
+#   test replications elapsed relative
+# 1 f(x)          100  64.153    2.063
+# 2 g(x)          100  31.098    1.000
+:::
+
+## Profiling Summary
+- Profile, profile, profile  
+- Use `system.time()` to get a general sense of a method  
+- Use **rbenchmark**'s `benchmark()` function to compare 2 methods
+- Use `Rprof()` for more detailed profiling
+- Other tools exist for more advanced applications (**pbdPAPI** and **pbdPROF** on GitHub/RBigData)
+
+## Vectorizing
+
+```{r}
+#| echo: true
+
+n <- 1e5
+x <- seq(0, 1, length.out=n)
+f <- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)
+y1 <- numeric(n)
+
+set.seed(12345)
+system.time(
+  for(i in 1:n)
+    y1[i] <- f(x[i]) + rnorm(1)
+)
+
+set.seed(12345)
+system.time(
+  y2 <- f(x) + rnorm(n)
+)
+
+all.equal(y1, y2)
+```
+
 ## Faster Serial Code
 
 -   Almost any R code can be made faster

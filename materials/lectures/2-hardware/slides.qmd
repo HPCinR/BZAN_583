@@ -6,18 +6,28 @@ format:
 editor: source
 ---
 
-## Rework this into:
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="90%" background-position="center"}
 
--   Two memory models: shared and distributed
-    -   shared memory: UMA small systems, and NUMA larger systems
-    -   shared memory: runs OS, and coprocessor
-    -   distributed memory: large systems
--   Single (or two) chip: hardware shared memory (otherwise software shared and NUMA)
--   Memory hierarchies and page faults
-
- 
-
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="1200px" background-position="center"}
+## same in mermaid
+```{mermaid}
+flowchart LR
+  subgraph Processor
+    direction TB
+    subgraph Cores
+        direction RL
+        core0 ~~~ core1 ~~~ core2 ~~~ core3
+        style core0 fill:lightblue,stroke:lightblue,stroke-width:20px
+        style core1 fill:lightblue,stroke:lightblue,stroke-width:20px
+        style core2 fill:lightblue,stroke:lightblue,stroke-width:20px
+        style core3 fill:lightblue,stroke:lightblue,stroke-width:20px
+    end
+    subgraph Network
+    end
+    subgraph Memory
+    end
+  end
+  Cores ~~~ Network
+```
 
 ## Flynn's Taxonomy (1972) 
 
@@ -99,7 +109,7 @@ GPU slower and less versatile but extreme parallelism (4x+ cores)
 
 ## Native Programming Models and Tools {background-image="/pics/ParallelSoftware/Slide3.png" background-size="90%" background-position="center"}
 
-## 40 Years of Practical Parallel Computing {background-image="/pics/ParallelSoftware/Slide4.png" background-size="90%" background-position="center"}
+## 40 Years of Parallel Computing {background-image="/pics/ParallelSoftware/Slide4.png" background-size="90%" background-position="center"}
 
 ## Last 20 years of Advances {background-image="/pics/ParallelSoftware/Slide5.png" background-size="90%" background-position="center"}
 

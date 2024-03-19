@@ -1,7 +1,6 @@
 ---
 title: "Week 1 Assignment: Setup, Installations, and first Unix Steps"
 editor: source
-knitr: true
 ---
 
 ## Install on your Laptop
@@ -37,8 +36,9 @@ Follow the registration and login instructions. Your login setup can use UTK's 2
 
 After setting up your account, your instructor will add you to join the class computing allocation. 
 
-When you have access, login via ssh to  `<your-delta-username>@login.delta.ncsa.illinois.edu`. This will request your password and ask whether to do a DUO push to your mobile phone. Below is an example with your instructor's username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt).
-```{bash}
+When you have access, login via ssh to  `<your-delta-username>@login.delta.ncsa.illinois.edu`. This will request your password and ask whether to do a DUO-push to your mobile phone. Below is an example with your instructor's username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt).
+<!-- using bash triggers Jupyter engine? r works but not ideal -->
+```{r}
 #| echo: true
 #| eval: false
 

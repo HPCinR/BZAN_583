@@ -37,6 +37,50 @@ Follow the registration and login instructions. Your login setup can use UTK's 2
 
 After setting up your account, your instructor will add you to join the class computing allocation. 
 
+When you have access, login via ssh to  `<your-delta-username>@login.delta.ncsa.illinois.edu`. This will request your password and ask whether to do a DUO push to your mobile phone. Below is an example with your instructor's username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt).
+```{bash}
+#| echo: true
+#| eval: false
+
+ost@GO ~ % ssh gostrouc@login.delta.ncsa.illinois.edu
+
+NCSA Delta System
+
+Login with NCSA Kerberos + NCSA Duo multi-factor.
+
+DUO Documentation:  https://go.ncsa.illinois.edu/2fa
+
+gostrouc@login.delta.ncsa.illinois.edu's password: 
+(gostrouc@login.delta.ncsa.illinois.edu) Duo two-factor login for gostrouc
+
+Enter a passcode or select one of the following options:
+
+ 1. Duo Push to XXX-XXX-1037
+
+Passcode or option (1-1): 1
+Success. Logging you in...
+dt-login02.delta.ncsa.illinois.edu (141.142.140.195)
+  OS: RedHat 8.8   HW: HPE   CPU: 128x    RAM: 252 GB
+
+      ΔΔΔΔΔ    ΔΔΔΔΔΔ   ΔΔ     ΔΔΔΔΔΔ   ΔΔ
+      ΔΔ  ΔΔ   ΔΔ       ΔΔ       ΔΔ    ΔΔΔΔ
+      ΔΔ  ΔΔ   ΔΔΔΔ     ΔΔ       ΔΔ   ΔΔ  ΔΔ
+      ΔΔ  ΔΔ   ΔΔ       ΔΔ       ΔΔ   ΔΔΔΔΔΔ
+      ΔΔΔΔΔ    ΔΔΔΔΔΔ   ΔΔΔΔΔΔ   ΔΔ   ΔΔ  ΔΔ
+
+  User Guide:  https://go.ncsa.illinois.edu/deltauserdoc
+
+
+Last failed login: Mon Mar 18 18:54:12 CDT 2024 from 73.121.22.186 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+[gostrouc@dt-login02 ~]$ 
+```
+Delta user assistance tells me to ignore the "1 failed login" message.
+
+Troubleshooting your login-node login can be done via the  [Identity](https://identity.ncsa.illinois.edu/login) web page, with the same login credentials.
+
+If you still need login help, email `help@ncsa.illinois.edu`.
+
 **Result 1:** Turn in a copy of your session running the following shell commands in the sequence given on a Delta login node.  The intent here is to verify that you can successfully connect to a Delta login node and run a few basic Unix commands.
 
 ```{bash}
@@ -64,5 +108,4 @@ Rscript -e "sessionInfo()"
 ```
 **Result 2:** Use the `man` command to get a description of what each command does. Use `man man` to get an explanation of the `man` command. Turn in a short one-sentence description for each unique command. 
 
-**Result 3:** From GitHub ... your GitHub user id. So I can invite you to the 
-BZAN-583 team in the HPCinR organization.
+**Result 3:** From GitHub ... your GitHub user id. So I can invite you to the BZAN-583 team in the HPCinR organization.

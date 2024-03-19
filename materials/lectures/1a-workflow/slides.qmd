@@ -4,13 +4,14 @@ format:
   revealjs:
     chalkboard: true
 editor: source
+knitr: true
 ---
 
 ## Workflow for Remote Computing in R  
 
 ![](/pics/01-intro/Workflow.png)
 
-## Workflow for Remote Computing in R {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="bottom right" .smaller}
+## Workflow for Remote Computing in R {background-image="/pics/01-intro//Workflow.png" background-size="30%" background-position="bottom right" .smaller}
 
 #### Laptop RStudio
 
@@ -34,7 +35,7 @@ editor: source
 -   Bandwidth
 :::
 
-## Cooperating R Sessions on a Modern Cluster {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="1100px" background-position="bottom right"}
+## Cooperating R Sessions on a Modern Cluster {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="70%" background-position="bottom right"}
 
 8 Nodes (124 + 4 cores each)\
 - 32 R sessions\
@@ -43,16 +44,15 @@ editor: source
 
 ::: notes
 
--   Laptop - login node - resource script\
-
--   BIG data on parallel file system - not on laptop!\
-
--   Can monitor a longer run with logins to compute nodes\
-
--   Batch
+-   Blue squares are nodes, circles are storage/disk
+-   Interconnect is communication between nodes
+-   Laptop - login node - resource script  
+-   BIG data on parallel file system - not on laptop!  
+-   Can monitor a longer run with logins to compute nodes  
+-   Batch  
 :::
 
-## Software Needed on Laptop {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="bottom right"}
+## Software Needed on Laptop {background-image="/pics/01-intro//Workflow.png" background-size="30%" background-position="bottom right"}
 
 -   Mac
     -   R, RStudio
@@ -67,7 +67,7 @@ editor: source
 
     -   WinSCP
 
-## Software on Cluster {background-image="/pics/01-intro//Workflow.png" background-size="300px" background-position="top right" .smaller}
+## Software on Cluster {background-image="/pics/01-intro//Workflow.png" background-size="30%" background-position="top right" .smaller}
 
 -   FlexiBLAS, OpenBLAS
 -   OpenMPI
@@ -104,7 +104,7 @@ $$\qquad$$
 * names for head, remote, 
 :::
 
-## Making **git** easy {background-image="/pics/01-intro/WorkflowPushPull.jpg" background-size="300px" background-position="top right" .smaller}
+## Making **git** easy {background-image="/pics/01-intro/WorkflowPushPull.jpg" background-size="30%" background-position="top right" .smaller}
 
 -   Private and Public key pairs for Client and Server
 
@@ -122,7 +122,7 @@ $$\qquad$$
     -   Client decrypts with own private key and sends to server
     -   Server verifies agreement and opens secure connection
 
-## Clusters are Linux systems {background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right" .smaller}
+## Clusters are Linux systems {background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="30%" background-position="top right" .smaller}
 
 -   Linux is one of many descendants of original Unix. MacOS is another.
 
@@ -138,7 +138,7 @@ $$\qquad$$
 *Unix* (Bell Labs) was a play on an earlier *Multics* operating system (designed at MIT)
 :::
 
-## Linux Commands {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right"}
+## Linux Commands {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="30%" background-position="top right"}
 
 In a terminal, you talk to a *shell* program (*bash* is most common)
 
@@ -156,24 +156,29 @@ Commands are files in directories listed in your PATH variable (try "echo \$PATH
 
 There are many resources on the web to learn Linux basics
 
-## Job Submission on Cluster {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="300px" background-position="top right"}
+## Job Submission on Cluster {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="30%" background-position="top right"}
 
--   Command line submission
--   Shell script submission (preferred)
+-   Command line submission  
+-   Shell script submission (preferred)  
 
-### SLURM
+### SLURM workload manager
 
-<mark>sbatch *your-shell-script.sh* </mark>
+Submit a shell script, check the job queue, cancel a job. 
 
-<mark>squeue -u *uid*</mark>
+```{bash}
+#| eval: false
+#| echo: true
 
-<mark>scancel *jobnumber*</mark>
+sbatch your-shell-script.sh
+squeue -u *uid*  
+scancel *jobnumber*  
+```
 
-### Software Modules
+### Software Modules  
 
-set software environment (PATH)
+Modules set software environment (PATH)  
 
-<mark>*module list*</mark> - list what is loaded\
-<mark>*module avail*</mark> - list what is available\
-<mark>*module load r*</mark>
+*module list* - list what is loaded  
+*module avail* - list what is available  
+*module load r*  
 

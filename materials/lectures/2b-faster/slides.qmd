@@ -6,7 +6,7 @@ format:
 editor: source
 ---
 
-## Speeding up your R code  
+## Speeding up your R code  {.smaller}
 ### Serial solutions before parallel solutions  
 - User R code often inefficient (high-level code = deep complexity)  
   - Profile and improve code first  
@@ -24,28 +24,43 @@ editor: source
 - One line of R code can touch a lot of data  
 - Unlike compilers, R will not fix it for you  
 
-## Performance Profiling Tools: `system.time()`
-- `system.time()` is a basic R utility for timing expressions
+::: notes
+
+What is a compiler?
+
+:::
+
+## Performance Profiling Tools  
+`system.time()` is a basic R utility for timing expressions
 
 ```{r}
 #| echo: true 
-#| eval: false
+#| cache: true
 
-## consider import fastR/system.time.R
 x <- matrix(rnorm(20000*750), nrow=20000, ncol=750)
 
-system.time(t(x) %*% x)
-#    user  system elapsed
-#   2.187   0.032   2.324
-
-system.time(crossprod(x))
-#    user  system elapsed
-#   1.009   0.003   1.019
-
-system.time(cov(x))
-#    user  system elapsed
-#   6.264   0.026   6.338
+system.time({xtx1 = t(x) %*% x})
+system.time({xtx2 = crossprod(x)})
+all.equal(xtx1, xtx2)
+identical(xtx1, xtx2)
 ```
+<br>
+
+$X^TX$ is a symmetric matrix
+
+## Performance Profiling Tools  
+`system.time()` is a basic R utility for timing expressions
+
+```{r}
+#| echo: true 
+#| cache: true
+
+system.time({cx1 = cov(x)})
+system.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})
+all.equal(cx1, cx2)
+```
+
+ $Cov(X) = \frac{(X - {\bf 1}\bar{x})^T(X - {\bf 1}\bar{x})}{n - 1},$ where $\bar{x}$ is a row vector of column means of $X$ and $\bf 1$ is a column of 1s
 
 ## Performance Profiling Tools: `Rprof()`
 

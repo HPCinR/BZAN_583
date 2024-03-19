@@ -23,20 +23,17 @@ See "Adding account holders to a group or project" on [Delta Webpage](https://wi
 
 Specifically, see "Inviting new people to your project" for information on inviting persons who do not have an NCSA account.
 -->
+<!--
+It appears the above is incorrect for ACCESS managed allocations. The above is for NCSA local allocations outside ACCESS!
 
-Expect to receive an email from the instructor with the subject: "NCSA Delta Account for BZAN 583" it will contain a link to account registration and login. Let the instructor know if you did not receive one by the first class meeting.
+To add students to an ACCESS allocation, the student first needs to register an ACCESS login. Then email the login name to the Instructor (allocation PI) who will add the student to the specific allocation.
 
-Following the link will open a login webpage:
+Still not clear what username will be used for Delta, but most likely the ACCESS login.
+-->
 
-  ![](/pics/login/ncsa.png)
+To set up an account on Delta, first register at the [ACCESS link](https://registry.access-ci.org/registry/co_petitions/start/coef:8). Then email the instructor your user id from the registration. The instructor can add you the the Delta resource allocation at this point.
 
-Use the green "Register New User and Join" link to set up your NCSA Delta account. If you don't see the "Register ..." link, clearing your browser cookies should bring it back.
-
-Follow the registration and login instructions. Your login setup can use UTK's 2-factor authentication via DUO. 
-
-After setting up your account, your instructor will add you to join the class computing allocation. 
-
-When you have access, login via ssh to  `<your-delta-username>@login.delta.ncsa.illinois.edu`. This will request your password and ask whether to do a DUO-push to your mobile phone. Below is an example with your instructor's username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt).
+It takes a day or two to receive access to `login.delta.ncsa.illinois.edu`. Until then, you may see the message "too many authentication failures." When you have access, login via ssh to  `<your-delta-username>@login.delta.ncsa.illinois.edu`. This will request your password and ask whether to do a DUO-push to your mobile phone. Below is an example with your instructor's username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt).
 <!-- using bash triggers Jupyter engine? r works but not ideal -->
 ```{r}
 #| echo: true

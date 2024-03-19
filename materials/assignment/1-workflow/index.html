@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-<head>
-
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.4.549" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-
-
-<title>HPC for Data Science in R - BZAN 583 – Week 1 Assignment: Setup, Installations, and first Unix Steps</title>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>HPC for Data Science in R - BZAN 583 - Week 1 Assignment: Setup, Installations, and first Unix Steps</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,8 +53,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
-<script id="quarto-search-options" type="application/json">{
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -85,65 +94,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-
-<link rel="stylesheet" href="../../../styles.css" />
+}</script><link rel="stylesheet" href="../../../styles.css">
 </head>
-
-<body>
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="/index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">HPC for Data Science in R - BZAN 583</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
-  onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="/syllabus.html"> 
+<li class="nav-item">
+    <a class="nav-link" href="../../../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/RBigData/HPCinR_583"> <i 
-  class="bi bi-github" 
-  role="img" 
-  aria-label="GitHub" 
->
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/RBigData/HPCinR_583"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <div id="quarto-toc-target"></div>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#install-on-your-laptop" id="toc-install-on-your-laptop" class="nav-link active" data-scroll-target="#install-on-your-laptop">Install on your Laptop</a></li>
+  <li><a href="#create-a-personal-account-on-github.com" id="toc-create-a-personal-account-on-github.com" class="nav-link" data-scroll-target="#create-a-personal-account-on-github.com">Create a personal account on github.com</a></li>
+  <li><a href="#setup-your-ncsa-delta-account" id="toc-setup-your-ncsa-delta-account" class="nav-link" data-scroll-target="#setup-your-ncsa-delta-account">Setup your NCSA Delta Account</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Week 1 Assignment: Setup, Installations, and first Unix Steps</h1>
 </div>
 
@@ -158,37 +155,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#install-on-your-laptop" id="toc-install-on-your-laptop">Install on your Laptop</a></li>
-  <li><a href="#create-a-personal-account-on-github.com" id="toc-create-a-personal-account-on-github.com">Create a personal account on github.com</a></li>
-  <li><a href="#setup-your-ncsa-delta-account" id="toc-setup-your-ncsa-delta-account">Setup your NCSA Delta Account</a></li>
-  </ul>
-</nav>
-<section id="install-on-your-laptop" class="level2">
-<h2>Install on your Laptop</h2>
+</header><section id="install-on-your-laptop" class="level2"><h2 class="anchored" data-anchor-id="install-on-your-laptop">Install on your Laptop</h2>
 <ul>
-<li>Current version of R from <a href="https://cran.r-project.org/">CRAN</a><br />
+<li>Current version of R from <a href="https://cran.r-project.org/">CRAN</a><br>
 </li>
-<li>Current version of RStudio Desktop from <a href="https://posit.co/downloads/">posit</a><br />
+<li>Current version of RStudio Desktop from <a href="https://posit.co/downloads/">posit</a><br>
 </li>
-<li>Current <code>git</code> version as described in <a href="https://happygitwithr.com/install-git.html">happywithgit.com</a></li>
-</ul>
-</section>
-<section id="create-a-personal-account-on-github.com" class="level2">
-<h2>Create a personal account on <a href="https://github.com">github.com</a></h2>
+<li>Current <code>git</code> version as described in <a href="https://happygitwithr.com/install-git.html">happywithgit.com</a>
+</li>
+</ul></section><section id="create-a-personal-account-on-github.com" class="level2"><h2 class="anchored" data-anchor-id="create-a-personal-account-on-github.com">Create a personal account on <a href="https://github.com">github.com</a>
+</h2>
 <ul>
-<li>Go to <a href="https://github.com">github.com</a> and Sign up for a GitHub free personal account<br />
+<li>Go to <a href="https://github.com">github.com</a> and Sign up for a GitHub free personal account<br>
 </li>
 <li>If you already have one, you can continue to use it for this class</li>
-</ul>
-</section>
-<section id="setup-your-ncsa-delta-account" class="level2">
-<h2>Setup your NCSA Delta Account</h2>
+</ul></section><section id="setup-your-ncsa-delta-account" class="level2"><h2 class="anchored" data-anchor-id="setup-your-ncsa-delta-account">Setup your NCSA Delta Account</h2>
 <!--
 Instructor notes for adding Delta users to allocated project:  
 See "Adding account holders to a group or project" on [Delta Webpage](https://wiki.ncsa.illinois.edu/display/USSPPRT/NCSA+Allocation+and+Account+Management) for general directions.
@@ -197,21 +178,21 @@ Specifically, see "Inviting new people to your project" for information on invit
 -->
 <p>Expect to receive an email from the instructor with the subject: “NCSA Delta Account for BZAN 583” it will contain a link to account registration and login. Let the instructor know if you did not receive one by the first class meeting.</p>
 <p>Following the link will open a login webpage:</p>
-<p><img src="../../../pics/login/ncsa.png" class="img-fluid" /></p>
+<p><img src="../../../pics/login/ncsa.png" class="img-fluid"></p>
 <p>Use the green “Register New User and Join” link to set up your NCSA Delta account. If you don’t see the “Register …” link, clearing your browser cookies should bring it back.</p>
 <p>Follow the registration and login instructions. Your login setup can use UTK’s 2-factor authentication via DUO.</p>
 <p>After setting up your account, your instructor will add you to join the class computing allocation.</p>
-<p>When you have access, login via ssh to <code>&lt;your-delta-username&gt;@login.delta.ncsa.illinois.edu</code>. This will request your password and ask whether to do a DUO push to your mobile phone. Below is an example with your instructor’s username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt).</p>
+<p>When you have access, login via ssh to <code>&lt;your-delta-username&gt;@login.delta.ncsa.illinois.edu</code>. This will request your password and ask whether to do a DUO-push to your mobile phone. Below is an example with your instructor’s username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt). <!-- using bash triggers Jupyter engine? r works but not ideal --></p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash cell-code"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ost@GO</span> ~ % ssh gostrouc@login.delta.ncsa.illinois.edu</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ost<span class="sc">@</span>GO <span class="sc">~</span> % ssh gostrouc<span class="sc">@</span>login.delta.ncsa.illinois.edu</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">NCSA</span> Delta System</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>NCSA Delta System</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Login</span> with NCSA Kerberos + NCSA Duo multi-factor.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Login with NCSA Kerberos <span class="sc">+</span> NCSA Duo multi<span class="sc">-</span>factor.</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">DUO</span> Documentation:  https://go.ncsa.illinois.edu/2fa</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>DUO Documentation<span class="sc">:</span>  https<span class="sc">:</span><span class="er">//</span>go.ncsa.illinois.edu<span class="sc">/</span><span class="dv">2</span>fa</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">gostrouc@login.delta.ncsa.illinois.edu</span><span class="st">&#39;s password: </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>gostrouc<span class="sc">@</span>login.delta.ncsa.illinois.edu<span class="st">'s password: </span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">(gostrouc@login.delta.ncsa.illinois.edu) Duo two-factor login for gostrouc</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">Enter a passcode or select one of the following options:</span></span>
@@ -234,14 +215,14 @@ Specifically, see "Inviting new people to your project" for information on invit
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="st">Last failed login: Mon Mar 18 18:54:12 CDT 2024 from 73.121.22.186 on ssh:notty</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="st">There was 1 failed login attempt since the last successful login.</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="st">[gostrouc@dt-login02 ~]$ </span></span></code></pre></div>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="st">[gostrouc@dt-login02 ~]$ </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Delta user assistance tells me to ignore the “1 failed login” message.</p>
 <p>Troubleshooting your login-node login can be done via the <a href="https://identity.ncsa.illinois.edu/login">Identity</a> web page, with the same login credentials.</p>
 <p>If you still need login help, email <code>help@ncsa.illinois.edu</code>.</p>
 <p><strong>Result 1:</strong> Turn in a copy of your session running the following shell commands in the sequence given on a Delta login node. The intent here is to verify that you can successfully connect to a Delta login node and run a few basic Unix commands.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash cell-code"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">w</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span></span>
@@ -258,26 +239,13 @@ Specifically, see "Inviting new people to your project" for information on invit
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load r</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> list</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&quot;sessionInfo()&quot;</span></span></code></pre></div>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"sessionInfo()"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Result 2:</strong> Use the <code>man</code> command to get a description of what each command does. Use <code>man man</code> to get an explanation of the <code>man</code> command. Turn in a short one-sentence description for each unique command.</p>
 <p><strong>Result 3:</strong> From GitHub … your GitHub user id. So I can invite you to the BZAN-583 team in the HPCinR organization.</p>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden" data-render-id="quarto-int-sidebar-title">HPC for Data Science in R - BZAN 583</span> <span class="hidden" data-render-id="quarto-int-navbar-title">HPC for Data Science in R - BZAN 583</span> <span class="hidden" data-render-id="quarto-int-navbar:Syllabus">Syllabus</span> <span class="hidden" data-render-id="quarto-int-navbar:/syllabus.html">/syllabus.html</span> <span class="hidden" data-render-id="quarto-int-navbar:https://github.com/RBigData/HPCinR_583">https://github.com/RBigData/HPCinR_583</span></p>
-<div class="hidden" data-render-id="footer-left">
-<p>© 2024, George Ostrouchov</p>
-</div>
-<div class="hidden" data-render-id="footer-right">
-<p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
-</div>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden" data-render-id="quarto-metatitle">HPC for Data Science in R - BZAN 583 - Week 1 Assignment: Setup, Installations, and first Unix Steps</span> <span class="hidden" data-render-id="quarto-twittercardtitle">HPC for Data Science in R - BZAN 583 - Week 1 Assignment: Setup, Installations, and first Unix Steps</span> <span class="hidden" data-render-id="quarto-ogcardtitle">HPC for Data Science in R - BZAN 583 - Week 1 Assignment: Setup, Installations, and first Unix Steps</span> <span class="hidden" data-render-id="quarto-metasitename">HPC for Data Science in R - BZAN 583</span> <span class="hidden" data-render-id="quarto-twittercarddesc"></span> <span class="hidden" data-render-id="quarto-ogcardddesc"></span></p>
-</div>
-</section>
 
-</main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -665,20 +633,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-      <div class='footer-contents'>&copy; 2024, George Ostrouchov</div>  
-    </div>   
+<p>© 2024, George Ostrouchov</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
-      <div class='footer-contents'>This page is built with [Quarto](https://quarto.org/).</div>  
-    </div>
+<p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
   </div>
 </footer>
 
-</body>
 
-</html>
+</body></html>

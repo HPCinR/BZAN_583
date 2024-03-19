@@ -528,8 +528,8 @@
 <span id="cb4-7"><a></a><span class="fu">benchmark</span>(<span class="fu">f</span>(x), <span class="fu">g</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  test replications elapsed relative user.self sys.self user.child sys.child
-1 f(x)          100   2.642    3.083     2.431    0.206          0         0
-2 g(x)          100   0.857    1.000     0.829    0.026          0         0</code></pre>
+1 f(x)          100   2.531    3.094     2.340    0.187          0         0
+2 g(x)          100   0.818    1.000     0.794    0.024          0         0</code></pre>
 </div>
 </div>
 </section>
@@ -587,7 +587,7 @@
 <span id="cb6-10"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.102   0.014   0.115 </code></pre>
+  0.097   0.011   0.108 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
 <span id="cb8-2"><a></a><span class="fu">system.time</span>(</span>
@@ -595,7 +595,7 @@
 <span id="cb8-4"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.004   0.000   0.003 </code></pre>
+  0.003   0.000   0.003 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">all.equal</span>(y1, y2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

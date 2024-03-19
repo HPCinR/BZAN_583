@@ -319,7 +319,7 @@
     "href": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark",
-    "text": "Performance Profiling Tools: rbenchmark\na package that easily benchmarks different functions\n\nx &lt;- matrix(rnorm(10000*500), nrow=10000, ncol=500)\n\nf &lt;- function(x) t(x) %*% x\ng &lt;- function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   2.571    3.158     2.373    0.192          0         0\n2 g(x)          100   0.814    1.000     0.795    0.018          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\na package that easily benchmarks different functions\n\nx &lt;- matrix(rnorm(10000*500), nrow=10000, ncol=500)\n\nf &lt;- function(x) t(x) %*% x\ng &lt;- function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   2.642    3.083     2.431    0.206          0         0\n2 g(x)          100   0.857    1.000     0.829    0.026          0         0"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#profiling-summary",
@@ -333,7 +333,7 @@
     "href": "materials/lectures/2b-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn &lt;- 1e5\nx &lt;- seq(0, 1, length.out=n)\nf &lt;- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 &lt;- numeric(n)\n\nset.seed(12345)\nsystem.time(\n  for(i in 1:n)\n    y1[i] &lt;- f(x[i]) + rnorm(1)\n)\n\n   user  system elapsed \n  0.097   0.010   0.107 \n\nset.seed(12345)\nsystem.time(\n  y2 &lt;- f(x) + rnorm(n)\n)\n\n   user  system elapsed \n  0.003   0.000   0.003 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn &lt;- 1e5\nx &lt;- seq(0, 1, length.out=n)\nf &lt;- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 &lt;- numeric(n)\n\nset.seed(12345)\nsystem.time(\n  for(i in 1:n)\n    y1[i] &lt;- f(x[i]) + rnorm(1)\n)\n\n   user  system elapsed \n  0.102   0.014   0.115 \n\nset.seed(12345)\nsystem.time(\n  y2 &lt;- f(x) + rnorm(n)\n)\n\n   user  system elapsed \n  0.004   0.000   0.003 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#faster-serial-code",
@@ -389,7 +389,7 @@
     "href": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
     "title": "Workflow for Remote Computing with R",
     "section": "Cooperating R Sessions on a Modern Cluster",
-    "text": "Cooperating R Sessions on a Modern Cluster\n8 Nodes (124 + 4 cores each)\n- 32 R sessions\n- each using 31 cores\n- 992 cores total\n\n\n\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
+    "text": "Cooperating R Sessions on a Modern Cluster\n8 Nodes (124 + 4 cores each)\n- 32 R sessions\n- each using 31 cores\n- 992 cores total\n\n\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
@@ -438,7 +438,7 @@
     "href": "materials/lectures/1a-workflow/slides.html#job-submission-on-cluster",
     "title": "Workflow for Remote Computing with R",
     "section": "Job Submission on Cluster",
-    "text": "Job Submission on Cluster\n\nCommand line submission\nShell script submission (preferred)\n\nSLURM\nsbatch your-shell-script.sh \nsqueue -u uid\nscancel jobnumber\nSoftware Modules\nset software environment (PATH)\nmodule list - list what is loaded\nmodule avail - list what is available\nmodule load r"
+    "text": "Job Submission on Cluster\n\nCommand line submission\n\nShell script submission (preferred)\n\nSLURM workload manager\nSubmit a shell script, check the job queue, cancel a job.\n\nsbatch your-shell-script.sh\nsqueue -u *uid*  \nscancel *jobnumber*  \n\nSoftware Modules\nModules set software environment (PATH)\nmodule list - list what is loaded\nmodule avail - list what is available\nmodule load r"
   },
   {
     "objectID": "materials/lectures/7-projects/slides.html#selected-topics",

@@ -1,7 +1,10 @@
 ---
-title: "Today"
-format: revealjs
+title: "Setup Continued and Demo"
+format: 
+  revealjs:
+    chalkboard: true
 editor: source
+knitr: true
 ---
 
 ## Today
@@ -9,7 +12,7 @@ editor: source
 - Delta logins  
 - Office hours  
 - Summary of survey  
-- HPCinR org and Quarto course materials  
+- HPCinR organization and Quarto course materials  
 - Code repository copy and workflow demo  
 
 ## Delta logins  

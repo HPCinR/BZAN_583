@@ -14,7 +14,7 @@ It is the first time this course has been offered so there will be some rough ed
 
 Lectures: [Welcome and Setup](materials/lectures/1-welcome)
 [Workflow Introduction](materials/lectures/1a-workflow)
-[Setup and Demo](Wednesday.qmd)  
+[Setup and Demo](materials/lectures/1b-setupdemo)  
 Assignment: [Installs and Workflow](materials/assignment/1-workflow) 
 <!--
 workflow practice starts with faster examples and timing.

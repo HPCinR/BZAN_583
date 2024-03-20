@@ -13,7 +13,8 @@ It is the first time this course has been offered so there will be some rough ed
 *Week 1, March 18 & 20*
 
 Lectures: [Welcome and Setup](materials/lectures/1-welcome)
-[Workflow Introduction](materials/lectures/1a-workflow)\
+[Workflow Introduction](materials/lectures/1a-workflow)
+[Setup and Demo](Wednesday.qmd)
 Assignment: [Installs and Workflow](materials/assignment/1-workflow) 
 <!--
 workflow practice starts with faster examples and timing.

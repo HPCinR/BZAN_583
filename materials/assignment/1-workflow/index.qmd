@@ -1,6 +1,7 @@
 ---
 title: "Week 1 Assignment: Setup, Installations, and first Unix Steps"
 editor: source
+engine: knitr
 ---
 
 ## Install on your Laptop
@@ -35,7 +36,7 @@ To set up an account on Delta, first register at the [ACCESS link](https://regis
 
 It takes a day or two to receive access to `login.delta.ncsa.illinois.edu`. Until then, you may see the message "too many authentication failures." When you have access, login via ssh to  `<your-delta-username>@login.delta.ncsa.illinois.edu`. This will request your password and ask whether to do a DUO-push to your mobile phone. Below is an example with your instructor's username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt).
 <!-- using bash triggers Jupyter engine? r works but not ideal -->
-```{r}
+```{bash}
 #| echo: true
 #| eval: false
 
@@ -72,11 +73,9 @@ Last failed login: Mon Mar 18 18:54:12 CDT 2024 from 73.121.22.186 on ssh:notty
 There was 1 failed login attempt since the last successful login.
 [gostrouc@dt-login02 ~]$ 
 ```
-Delta user assistance tells me to ignore the "1 failed login" message.
+Delta user assistance tells me to ignore the "1 failed login" message. If you still need login help, email `help@ncsa.illinois.edu`.
 
-Troubleshooting your login-node login can be done via the  [Identity](https://identity.ncsa.illinois.edu/login) web page, with the same login credentials.
-
-If you still need login help, email `help@ncsa.illinois.edu`.
+To log out, `exit` at the `$` prompt.
 
 **Result 1:** Turn in a copy of your session running the following shell commands in the sequence given on a Delta login node.  The intent here is to verify that you can successfully connect to a Delta login node and run a few basic Unix commands.
 

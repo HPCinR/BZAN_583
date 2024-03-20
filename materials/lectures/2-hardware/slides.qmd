@@ -1,13 +1,29 @@
 ---
-title: "Hardware and Memory Hierarchies"
+title: "Hardware, and Memory Hierarchies"
 format: 
   revealjs:
     chalkboard: true
 editor: source
 ---
+## Titan: (2012-19){background-image="/pics/ParallelHardware/Titan.png" background-size="70%" background-position="bottom"}
+### 27 PF
+
+## Delta: (2022){background-image="/pics/ParallelHardware/delta_front_1.png" background-size="90%" background-position="center"}
+### 8 PF
+
+## Delta: (2022){background-image="/pics/ParallelHardware/ncsa-delta-back.jpg" background-size="80%" background-position="center"}
+### 8 PF
+
+## Delta: (2022){background-image="/pics/ParallelHardware/delta-row.jpg" background-size="70%" background-position="center"}
+### 8 PF
+
+## A High-Level Scripting Language View of Hardware
+
+### An 
 
 ## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="90%" background-position="center"}
 
+<!--
 ## same in mermaid
 ```{mermaid}
 flowchart LR
@@ -28,6 +44,7 @@ flowchart LR
   end
   Cores ~~~ Network
 ```
+-->
 
 ## Flynn's Taxonomy (1972) 
 

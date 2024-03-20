@@ -1,0 +1,83 @@
+---
+title: "Today"
+format: revealjs
+editor: source
+---
+
+## Today
+
+- Delta logins  
+- Office hours  
+- Summary of survey  
+- HPCinR org and Quarto course materials  
+- Code repository copy and workflow demo  
+
+## Delta logins  
+
+ACCESS is a project, funded by the National Science Foundation, that helps researchers and educators utilize NSF-funded HPC centers.
+
+::: notes
+The forgot the students
+:::
+
+- NCSA is one of these HPC centers at University of Illinois
+  - Delta is NCSA's (and NSF's) largest cluster
+  - Delta allocates mostly via ACCESS but also locally
+  - Both ACCESS and NCSA/Delta have an "add user" function
+
+## Office hours  
+
+### Your class schedule
+
+- M
+- T
+- W
+- R
+
+## Survey  
+
+- Summary  
+- Do you use a text editor?  
+  - Which one? vim, emacs, nano, ...  
+  - Rstudio is a text editor with extras
+
+## Workflow review
+
+- Three git repositories
+  - On laptop - GitHub is set as remote
+  - On GitHub
+  - On login.delta.ncsa.illinois.edu - GitHub is set as remote
+
+## Quarto Course Materials
+
+- Course materials are on GitHub/HPCinR/BZAN_583
+  - Quarto website with embedded presentations
+  - A template repository
+
+::: notes
+Used .Rmd and xaringan combination before
+Quarto combines them and embraces other lanuages
+:::
+
+## Code Repository Template
+
+HPCinR/BZAN_583_code  
+- On GitHub: Copy template to your account   
+- Clone to your laptop  
+- Make edits  
+- Add, commit, and push edits to GitHub  
+- Get clone link from GitHub
+- Login to Delta  
+- Clone to your Delta files  
+- Run script (is it executable? `chmod +x`)  
+
+## Ready for Workflow Demo  
+**Need:**  
+- Laptop RStudio open on repo project  
+- `ssh` terminal in repo directory on Delta  
+**Workflow:**  
+- Edit code in RStudio on laptop   
+- Add, commit, and push edits to GitHub   
+- Pull code on Delta  
+- Run code and repeat workflow 
+

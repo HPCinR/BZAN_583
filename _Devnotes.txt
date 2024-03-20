@@ -9,18 +9,9 @@ Sources:
 * RBigData/KPMS-IT4I - pdf version of Charles class
 
 TODO:
-
-* Create a new github organization for the class
-* Make the class repo a github website in that organization
-* Get the website URL into Canvas
-
-* Make the repo a tamplate repository so that forks do not include history
-  * commits to a fork do not count but to cloned templates they do count
-
+* make a table of r packages (abstractions) and the underlying approaches they can use
 * Looks like GitHub classroom connection to Canvas is an Admin job
   * Is it possible that no UTK class has yet been connected?
-
-* move book to RBigData as well
 
 UPDATE  
 * https://stat.ethz.ch/pipermail/r-sig-hpc/2022-August/002144.html directions  

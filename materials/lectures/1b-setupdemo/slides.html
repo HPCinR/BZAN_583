@@ -10,7 +10,7 @@
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.549">
 
-  <title>HPC for Data Science in R - BZAN 583 - Hardware, and Memory Hierarchies</title>
+  <title>HPC for Data Science in R - BZAN 583 - Setup Continued and Demo</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -321,118 +321,102 @@
       margin-right: 0; 
     }
   </style>
-  <script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Hardware, and Memory Hierarchies</h1>
+  <h1 class="title">Setup Continued and Demo</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="titan-2012-19" class="slide level2" data-background-image="../../../pics/ParallelHardware/Titan.png" data-background-size="70%" data-background-position="bottom">
-<h2>Titan: (2012-19)</h2>
-<h3 id="pf">27 PF</h3>
-</section>
-<section id="delta-2022" class="slide level2" data-background-image="../../../pics/ParallelHardware/delta_front_1.png" data-background-size="90%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-1">8 PF</h3>
-</section>
-<section id="delta-2022-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/ncsa-delta-back.jpg" data-background-size="80%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-2">8 PF</h3>
-</section>
-<section id="delta-2022-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/delta-row.jpg" data-background-size="70%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-3">8 PF</h3>
-</section>
-<section id="a-high-level-scripting-language-view-of-hardware" class="slide level2">
-<h2>A High-Level Scripting Language View of Hardware</h2>
-<h3 id="an">An</h3>
-</section>
-<section id="two-three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide7.png" data-background-size="90%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-<!--
-## same in mermaid
-
-
-:::{.cell reveal=true layout-align="default"}
-
-:::{.cell-output-display}
-
-:::{}
-`<figure class=''>`{=html}
-
-:::{}
-
-<pre class="mermaid mermaid-js">flowchart LR
-  subgraph Processor
-    direction TB
-    subgraph Cores
-        direction RL
-        core0 ~~~ core1 ~~~ core2 ~~~ core3
-        style core0 fill:lightblue,stroke:lightblue,stroke-width:20px
-        style core1 fill:lightblue,stroke:lightblue,stroke-width:20px
-        style core2 fill:lightblue,stroke:lightblue,stroke-width:20px
-        style core3 fill:lightblue,stroke:lightblue,stroke-width:20px
-    end
-    subgraph Network
-    end
-    subgraph Memory
-    end
-  end
-  Cores ~~~ Network
-</pre>
-:::
-`</figure>`{=html}
-:::
-:::
-:::
-
-
--->
-</section>
-<section id="flynns-taxonomy-1972" class="slide level2">
-<h2>Flynn’s Taxonomy (1972)</h2>
+<section id="today" class="slide level2">
+<h2>Today</h2>
 <ul>
-<li><em>Single Instruction, Single Data (<strong>SISD</strong>):</em> scalar processor, serial program (old-style CPU)</li>
-<li><em>Single Instruction, Multiple Data (<strong>SIMD</strong>):</em> vector processor, array processor (old-style GPU)</li>
-<li><em>Multiple Instruction, Multiple Data (<strong>MIMD</strong>):</em> multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today’s CPU and GPU but leaning to legacy)</li>
-<li><em>Multiple Instruction, Single Data (<strong>MISD</strong>):</em> is not used much</li>
+<li>Delta logins<br>
+</li>
+<li>Office hours<br>
+</li>
+<li>Summary of survey<br>
+</li>
+<li>HPCinR organization and Quarto course materials<br>
+</li>
+<li>Code repository copy and workflow demo</li>
 </ul>
 </section>
-<section id="shared-memory-hardware" class="slide level2 smaller">
-<h2>Shared Memory Hardware</h2>
-<p><strong>Multicore CPU</strong><br>
-- one or two chips with multiple cores<br>
-- Current high-end is 64 cores (e.g.&nbsp;AMD EPYC “Milan”)<br>
-- Hosts operating system (OS)</p>
-<p><strong>ARM CPU-GPU</strong><br>
-- A hybrid unified memory architecture<br>
-- Low power requirements<br>
-- Hosts OS</p>
-<p><strong>GPU</strong><br>
-- Excellent SIMD throughput at the expense of bad serial performance<br>
-- Separate memory, so “offloading” co-processor concept<br>
-- Low power requirements, lots of slow cores<br>
-- Does not host OS</p>
-<h4 id="the-takeaway">The takeaway:</h4>
-<p>CPU fast and versatile but limited parallelism<br>
-GPU slower and less versatile but extreme parallelism (4x+ cores)</p>
+<section id="delta-logins" class="slide level2">
+<h2>Delta logins</h2>
+<p>ACCESS is a project, funded by the National Science Foundation, that helps researchers and educators utilize NSF-funded HPC centers.</p>
 <aside class="notes">
+<p>The forgot the students</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <ul>
-<li>ARM was big in cellphones, now big in HPC<br>
-</li>
-<li>Nvidia is also heading toward ARM<br>
-</li>
-<li>My bet would be with ARM.</li>
+<li>NCSA is one of these HPC centers at University of Illinois
+<ul>
+<li>Delta is NCSA’s (and NSF’s) largest cluster</li>
+<li>Delta allocates mostly via ACCESS but also locally</li>
+<li>Both ACCESS and NCSA/Delta have an “add user” function</li>
+</ul></li>
 </ul>
+</section>
+<section id="office-hours" class="slide level2">
+<h2>Office hours</h2>
+<h3 id="your-class-schedule">Your class schedule</h3>
+<ul>
+<li>M</li>
+<li>T</li>
+<li>W</li>
+<li>R</li>
+</ul>
+</section>
+<section id="survey" class="slide level2">
+<h2>Survey</h2>
+<ul>
+<li>Summary<br>
+</li>
+<li>Do you use a text editor?
+<ul>
+<li>Which one? vim, emacs, nano, …<br>
+</li>
+<li>Rstudio is a text editor with extras</li>
+</ul></li>
+</ul>
+</section>
+<section id="workflow-review" class="slide level2">
+<h2>Workflow review</h2>
+<ul>
+<li>Three git repositories
+<ul>
+<li>On laptop - GitHub is set as remote</li>
+<li>On GitHub</li>
+<li>On login.delta.ncsa.illinois.edu - GitHub is set as remote</li>
+</ul></li>
+</ul>
+</section>
+<section id="quarto-course-materials" class="slide level2">
+<h2>Quarto Course Materials</h2>
+<ul>
+<li>Course materials are on GitHub/HPCinR/BZAN_583
+<ul>
+<li>Quarto website with embedded presentations</li>
+<li>A template repository</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Used .Rmd and xaringan combination before Quarto combines them and embraces other lanuages</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -445,76 +429,27 @@ GPU slower and less versatile but extreme parallelism (4x+ cores)</p>
           display:block!important;
       }</style></aside>
 </section>
-<section id="parallel-programming-models" class="slide level2 smaller">
-<h2>Parallel Programming Models</h2>
-<h3 id="shared-memory-parallel">Shared Memory Parallel</h3>
-<ul>
-<li>Unix fork<br>
-</li>
-<li>Multithreading<br>
-</li>
-<li>OpenMP</li>
-</ul>
-<h3 id="distributed-memory-parallel">Distributed Memory Parallel</h3>
-<ul>
-<li>manager-workers: most common in simple cases<br>
-</li>
-<li>Single program, multiple data (SPMD): most common and most scalable on clusters<br>
-</li>
-<li>MapReduce: common in customer database processing, continuous services<br>
-</li>
-<li>Dataflow: dependency graph directed, still evolving <br><br></li>
-</ul>
-<h4 id="largest-codes-use-combination-of-spmd-dataflow-and-multithreading-or-openmp.">Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.</h4>
-<h4 id="unix-fork-more-common-in-scripting-languages-like-r-and-python">Unix fork more common in scripting languages like R and Python</h4>
+<section id="code-repository-template" class="slide level2">
+<h2>Code Repository Template</h2>
+<p>HPCinR/BZAN_583_code<br>
+- On GitHub: Copy template to your account<br>
+- Clone to your laptop<br>
+- Make edits<br>
+- Add, commit, and push edits to GitHub<br>
+- Get clone link from GitHub - Login to Delta<br>
+- Clone to your Delta files<br>
+- Run script (is it executable? <code>chmod +x</code>)</p>
 </section>
-<section id="uma-and-numa" class="slide level2">
-<h2>UMA and NUMA</h2>
-<h4 id="uniform-memory-access">Uniform memory access</h4>
-<ul>
-<li>A typical multicore CPU chip</li>
-</ul>
-<h4 id="non-uniform-memory-access">Non-Uniform memory access</h4>
-<ul>
-<li>A larger collection of multicore chips with hardware/software enabled global memory access</li>
-<li>Some memory is closer than other memory</li>
-</ul>
-</section>
-<section id="two-three-basic-concepts-in-hardware-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide1.png" data-background-size="90%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="section" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide2.png" data-background-size="90%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide3.png" data-background-size="90%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide4.png" data-background-size="90%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-3" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide5.png" data-background-size="90%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-4" class="slide level2" data-background-image="../../../pics/ParallelHardware/Slide6.png" data-background-size="90%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="native-programming-mindset" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide2.png" data-background-size="90%" data-background-position="center">
-<h2>Native Programming Mindset</h2>
-</section>
-<section id="native-programming-models-and-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide3.png" data-background-size="90%" data-background-position="center">
-<h2>Native Programming Models and Tools</h2>
-</section>
-<section id="years-of-parallel-computing" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide4.png" data-background-size="90%" data-background-position="center">
-<h2>40 Years of Parallel Computing</h2>
-</section>
-<section id="last-20-years-of-advances" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide5.png" data-background-size="90%" data-background-position="center">
-<h2>Last 20 years of Advances</h2>
-</section>
-<section id="distributed-programming-works-in-shared-memory" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide6.png" data-background-size="90%" data-background-position="center">
-<h2>Distributed Programming Works in Shared Memory</h2>
-</section>
-<section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7.png" data-background-size="90%" data-background-position="center">
-<h2>R Interfaces to Low-Level Native Tools</h2>
+<section id="ready-for-workflow-demo" class="slide level2">
+<h2>Ready for Workflow Demo</h2>
+<p><strong>Need:</strong><br>
+- Laptop RStudio open on repo project<br>
+- <code>ssh</code> terminal in repo directory on Delta<br>
+<strong>Workflow:</strong><br>
+- Edit code in RStudio on laptop<br>
+- Add, commit, and push edits to GitHub<br>
+- Pull code on Delta<br>
+- Run code and repeat workflow</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -734,6 +669,44 @@ GPU slower and less versatile but extreme parallelism (4x+ cores)</p>
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

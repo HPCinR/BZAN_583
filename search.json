@@ -361,7 +361,7 @@
     "href": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark",
-    "text": "Performance Profiling Tools: rbenchmark\na package that easily benchmarks different functions\n\nx &lt;- matrix(rnorm(10000*500), nrow=10000, ncol=500)\n\nf &lt;- function(x) t(x) %*% x\ng &lt;- function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   2.550    3.102     2.349    0.198          0         0\n2 g(x)          100   0.822    1.000     0.796    0.024          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\na package that easily benchmarks different functions\n\nx &lt;- matrix(rnorm(10000*500), nrow=10000, ncol=500)\n\nf &lt;- function(x) t(x) %*% x\ng &lt;- function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   2.473    3.023     2.299    0.171          0         0\n2 g(x)          100   0.818    1.000     0.793    0.023          0         0"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#profiling-summary",
@@ -375,7 +375,7 @@
     "href": "materials/lectures/2b-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn &lt;- 1e5\nx &lt;- seq(0, 1, length.out=n)\nf &lt;- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 &lt;- numeric(n)\n\nset.seed(12345)\nsystem.time(\n  for(i in 1:n)\n    y1[i] &lt;- f(x[i]) + rnorm(1)\n)\n\n   user  system elapsed \n  0.098   0.010   0.108 \n\nset.seed(12345)\nsystem.time(\n  y2 &lt;- f(x) + rnorm(n)\n)\n\n   user  system elapsed \n  0.003   0.000   0.003 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn &lt;- 1e5\nx &lt;- seq(0, 1, length.out=n)\nf &lt;- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 &lt;- numeric(n)\n\nset.seed(12345)\nsystem.time(\n  for(i in 1:n)\n    y1[i] &lt;- f(x[i]) + rnorm(1)\n)\n\n   user  system elapsed \n  0.097   0.010   0.108 \n\nset.seed(12345)\nsystem.time(\n  y2 &lt;- f(x) + rnorm(n)\n)\n\n   user  system elapsed \n  0.003   0.000   0.003 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#faster-serial-code",

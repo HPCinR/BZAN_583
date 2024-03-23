@@ -402,8 +402,10 @@
 <h2>Speeding up your R code</h2>
 <h3 id="serial-solutions-before-parallel-solutions">Serial solutions before parallel solutions</h3>
 <ul>
-<li>User R code often inefficient (high-level code = deep complexity)
+<li>Almost any R code can be made faster
 <ul>
+<li>High-level code == deep complexity<br>
+</li>
 <li>Profile and improve code first<br>
 </li>
 <li>Vectorize loops if possible<br>
@@ -411,6 +413,8 @@
 <li>Compute once if not changing<br>
 </li>
 <li>Know when copies are made<br>
+</li>
+<li>Reduce generality to speed up<br>
 </li>
 </ul></li>
 <li>Improve matrix algebra speed with a fast multithreaded library such as OpenBLAS<br>
@@ -424,8 +428,6 @@
 <h2>Profiling: Why Profile?</h2>
 <ul>
 <li>Because performance matters<br>
-</li>
-<li>Bad practices scale up!<br>
 </li>
 <li>Your bottlenecks may surprise you<br>
 </li>
@@ -568,8 +570,8 @@
 <span id="cb17-7"><a></a><span class="fu">benchmark</span>(<span class="fu">f</span>(x), <span class="fu">g</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  test replications elapsed relative user.self sys.self user.child sys.child
-1 f(x)          100   2.473    3.023     2.299    0.171          0         0
-2 g(x)          100   0.818    1.000     0.793    0.023          0         0</code></pre>
+1 f(x)          100   2.536    3.108     2.345    0.187          0         0
+2 g(x)          100   0.816    1.000     0.793    0.023          0         0</code></pre>
 </div>
 </div>
 </section>
@@ -627,7 +629,7 @@
 <span id="cb19-10"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.097   0.010   0.108 </code></pre>
+  0.098   0.012   0.112 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
 <span id="cb21-2"><a></a><span class="fu">system.time</span>(</span>
@@ -643,23 +645,101 @@
 </div>
 </div>
 </section>
-<section id="faster-serial-code" class="slide level2">
-<h2>Faster Serial Code</h2>
+<section id="compute-once-if-not-changing" class="slide level2">
+<h2>Compute Once if not Changing</h2>
+<p>A is a very large matrix</p>
+<div class="sourceCode" id="cb25" data-code-line-numbers="2,7,9,10,12,17,19-21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb25-2"><a></a>  Y <span class="ot">&lt;-</span> <span class="fu">t</span>(A) <span class="sc">%*%</span> Q</span>
+<span id="cb25-3"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb25-4"><a></a>  Y <span class="ot">&lt;-</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb25-5"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb25-6"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Move the transpose outside the loop:</p>
+<div class="sourceCode" id="cb26" data-code-line-numbers="1,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>tA <span class="ot">&lt;-</span> <span class="fu">t</span>(A)</span>
+<span id="cb26-2"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb26-3"><a></a>  Y <span class="ot">&lt;-</span> tA <span class="sc">%*%</span> Q</span>
+<span id="cb26-4"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb26-5"><a></a>  Y <span class="ot">&lt;-</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb26-6"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb26-7"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="check-that-code-is-still-correct" class="slide level2">
+<h2>Check that Code is Still Correct</h2>
+<div class="sourceCode" id="cb27" data-code-line-numbers="7,16-19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb27-2"><a></a>  Y <span class="ot">&lt;-</span> <span class="fu">t</span>(A) <span class="sc">%*%</span> Q</span>
+<span id="cb27-3"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb27-4"><a></a>  Y <span class="ot">&lt;-</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb27-5"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb27-6"><a></a>}</span>
+<span id="cb27-7"><a></a>Q1 <span class="ot">=</span> Q</span>
+<span id="cb27-8"><a></a></span>
+<span id="cb27-9"><a></a>tA <span class="ot">&lt;-</span> <span class="fu">t</span>(A)</span>
+<span id="cb27-10"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb27-11"><a></a>  Y <span class="ot">&lt;-</span> tA <span class="sc">%*%</span> Q</span>
+<span id="cb27-12"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb27-13"><a></a>  Y <span class="ot">&lt;-</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb27-14"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb27-15"><a></a>}</span>
+<span id="cb27-16"><a></a>Q2 <span class="ot">=</span> Q</span>
+<span id="cb27-17"><a></a><span class="fu">all.equal</span>(Q1, Q2)</span>
+<span id="cb27-18"><a></a><span class="fu">identical</span>(Q1, Q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-from-a-real-r-package-on-cran" class="slide level2">
+<h2>Example from a Real R Package on CRAN</h2>
+<div class="sourceCode" id="cb28" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co"># ...</span></span>
+<span id="cb28-2"><a></a><span class="cf">while</span>(i<span class="sc">&lt;=</span>N){</span>
+<span id="cb28-3"><a></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>i){</span>
+<span id="cb28-4"><a></a>    d.k <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)[l<span class="sc">==</span>j,l<span class="sc">==</span>j]}</span>
+<span id="cb28-5"><a></a><span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Convert to matrix outside the loop:</p>
+<div class="sourceCode" id="cb29" data-code-line-numbers="2,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># ...</span></span>
+<span id="cb29-2"><a></a>x.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)</span>
+<span id="cb29-3"><a></a><span class="cf">while</span>(i<span class="sc">&lt;=</span>N){</span>
+<span id="cb29-4"><a></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>i){</span>
+<span id="cb29-5"><a></a>    d.k <span class="ot">&lt;-</span> x.mat[l<span class="sc">==</span>j,l<span class="sc">==</span>j]</span>
+<span id="cb29-6"><a></a><span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By changing just 1 line of code, performance of the main method improved <strong>over 3.5x</strong> !</p>
+</section>
+<section id="multithreaded-basic-linar-algebra-subroutines" class="slide level2">
+<h2>multithreaded Basic Linar Algebra Subroutines</h2>
 <ul>
-<li><p>Almost any R code can be made faster</p></li>
-<li><p>Profile, profile, profile</p></li>
-<li><p>Fast libraries: OpenBLAS or MKL</p></li>
-<li><p>C/C++ access</p></li>
+<li>Install: http://www.openblas.net/</li>
+<li>Batch thread control: OPENBLAS_NUM_THREADS=n
+<ul>
+<li>Dynamic thread control: ``wrathematics/openblasctl’’ micropackage on GitHub</li>
+</ul>
+{openblas.R} \
+\end{frame}</li>
 </ul>
 </section>
-<section id="multicore-shared-memory-approaches" class="slide level2">
-<h2>Multicore Shared Memory Approaches</h2>
+<section id="incorporating-c-code-into-r-rcpp" class="slide level2">
+<h2>Incorporating C++ Code into R (Rcpp)}</h2>
 <ul>
-<li><p>Fast multithreaded libraries: OpenBLAS or MKL</p></li>
-<li><p>Unix fork via mclapply, et. al</p></li>
-<li><p>OpenMP via C/C++ access</p></li>
-<li><p>Cuda, OenCL on GPU</p></li>
+<li>Authors: Dirk Eddelbuettel and Romain Francois</li>
+<li>Simplifies integrating C++ code with R</li>
+<li>Maps R objects (vectors, matrices, functions, environments, . . . ) to dedicated C++ classes</li>
+<li>Broad support for C++ Standard Template Library idioms.</li>
+<li>C++ code can be compiled, linked and loaded on the fly, or added via packages.</li>
+<li>Error and exception code handling</li>
 </ul>
+</section>
+<section id="rcpp-example-a-simple-row-max-calculation" class="slide level2">
+<h2>Rcpp Example: A simple row max calculation}</h2>
+<p>###include &lt;Rcpp.h&gt; using namespace Rcpp;</p>
+<p>//[[Rcpp::export]]</p>
+<p>NumericVector row_max( NumericMatrix m ) { int nrows = m.nrow( ); NumericVector maxPerRow( nrows );</p>
+<p>for ( int i = 0; i &lt; nrows; i++ ) { maxPerRow[ i ] = Rcpp::max( m( i, _ ) ); }</p>
+<p>return ( maxPerRow ); }</p>
+<h4 id="one-can-get-configuration-values-by">One can get configuration values by</h4>
+<p>setenv PKG_CXXFLAGS <code>Rscript -e "Rcpp:::CxxFlags( )"</code> setenv PKG_LIBS <code>Rscript -e "Rcpp:::LdFlags( )"</code></p>
+</section>
+<section id="rcpp-example-cond" class="slide level2">
+<h2>Rcpp Example (con’d)</h2>
+{A simple row max calculation}
+<p>\end{frame}</p>
+%—————————————————————-
+%—————————————————————-
+<p>\end{document}</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

@@ -158,7 +158,7 @@
     "href": "materials/assignment/2-faster/index.html",
     "title": "Week 2 Assignment: Faster",
     "section": "",
-    "text": "Find some R code that YOU put together for a prior assignment or project in another class over the last year or two, profile it, and make changes that make it at least 2x faster. This can be a single function from a larger code but it should not be just trivial. Roughly 10 to 20 lines of your R code that originally takes more than, say, 30 seconds to run.\nThis is your video game! When you get things 2x faster, you just beat the game!\nResult 1: Two or three sentences that describe where the code was used originally and its purpose. The intent is documentation that this is YOUR original R code and to give me some understanding of the code.\nResult 2: The code, its summary profile with 5 top components, and the system.time() of the code “before”.\nResult 3: The code, its summary profile with 5 top components, and the system.time() of the code “after”.\nResult 4: A two or three sentences that explain your changes and why things got faster.\nSubmit the results as 4 text files to Canvas."
+    "text": "Still under development …\nFind some R code that YOU put together for a prior assignment or project in another class over the last year or two, profile it, and make changes that make it at least 2x faster. This can be a single function from a larger code but it should not be just trivial. Roughly 10 to 20 lines of your R code that originally takes more than, say, 30 seconds to run.\nThis is your video game! When you get things 2x faster, you just beat the game and you move up a level!\nResult 1: Two or three sentences that describe where the code was used originally and its purpose. The intent is documentation that this is YOUR R code and to give me some understanding of the code.\nResult 2: The code, its summary profile with 10 top components, and the system.time() of the code “before”.\nResult 3: The code, its summary profile with 10 top components, and the system.time() of the code “after”.\nResult 4: Two or three sentences that explain your changes and why things got faster.\nSubmit the results as 4 text files to Canvas."
   },
   {
     "objectID": "materials/lectures/1-welcome/slides.html#today",
@@ -326,7 +326,7 @@
     "href": "materials/lectures/2b-faster/slides.html#speeding-up-your-r-code",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Speeding up your R code",
-    "text": "Speeding up your R code\nSerial solutions before parallel solutions\n\nAlmost any R code can be made faster\n\nHigh-level code == deep complexity\n\nProfile and improve code first\n\nVectorize loops if possible\n\nCompute once if not changing\n\nKnow when copies are made\n\nReduce generality to speed up\n\n\nImprove matrix algebra speed with a fast multithreaded library such as OpenBLAS\n\nMove kernels into compiled language, such as C/C++\n\nConsider parallel computation (multicore and distriuted) only after the above"
+    "text": "Speeding up your R code\nSerial solutions before parallel solutions\n\nAny R code can be made faster\n\nHigh-level code == deep complexity\n\nProfile and improve code first\n\nVectorize loops if possible\n\nCompute once if not changing\n\nKnow when copies are made\n\nReduce generality to speed up\n\n\nMove kernels into compiled language, such as C/C++\n\nConsider parallel computation (multicore and distriuted) only after the above"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#profiling-why-profile",
@@ -368,7 +368,7 @@
     "href": "materials/lectures/2b-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark",
-    "text": "Performance Profiling Tools: rbenchmark\na package that easily benchmarks different functions\n\nx &lt;- matrix(rnorm(10000*500), nrow=10000, ncol=500)\n\nf &lt;- function(x) t(x) %*% x\ng &lt;- function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   2.536    3.108     2.345    0.187          0         0\n2 g(x)          100   0.816    1.000     0.793    0.023          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\na package that easily benchmarks different functions\n\nx &lt;- matrix(rnorm(10000*500), nrow=10000, ncol=500)\n\nf &lt;- function(x) t(x) %*% x\ng &lt;- function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   2.537    3.098     2.347    0.188          0         0\n2 g(x)          100   0.819    1.000     0.794    0.024          0         0"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#profiling-summary",
@@ -382,7 +382,7 @@
     "href": "materials/lectures/2b-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn &lt;- 1e5\nx &lt;- seq(0, 1, length.out=n)\nf &lt;- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 &lt;- numeric(n)\n\nset.seed(12345)\nsystem.time(\n  for(i in 1:n)\n    y1[i] &lt;- f(x[i]) + rnorm(1)\n)\n\n   user  system elapsed \n  0.098   0.012   0.112 \n\nset.seed(12345)\nsystem.time(\n  y2 &lt;- f(x) + rnorm(n)\n)\n\n   user  system elapsed \n  0.003   0.000   0.003 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn &lt;- 1e5\nx &lt;- seq(0, 1, length.out=n)\nf &lt;- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 &lt;- numeric(n)\n\nset.seed(12345)\nsystem.time(\n  for(i in 1:n)\n    y1[i] &lt;- f(x[i]) + rnorm(1)\n)\n\n   user  system elapsed \n  0.099   0.012   0.111 \n\nset.seed(12345)\nsystem.time(\n  y2 &lt;- f(x) + rnorm(n)\n)\n\n   user  system elapsed \n  0.003   0.000   0.003 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#compute-once-if-not-changing",
@@ -403,35 +403,35 @@
     "href": "materials/lectures/2b-faster/slides.html#example-from-a-real-r-package-on-cran",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Example from a Real R Package on CRAN",
-    "text": "Example from a Real R Package on CRAN\n# ...\nwhile(i&lt;=N){\n  for(j in 1:i){\n    d.k &lt;- as.matrix(x)[l==j,l==j]}\n# ...\nConvert to matrix outside the loop:\n# ...\nx.mat &lt;- as.matrix(x)\nwhile(i&lt;=N){\n  for(j in 1:i){\n    d.k &lt;- x.mat[l==j,l==j]\n# ...\nBy changing just 1 line of code, performance of the main method improved over 3.5x !"
+    "text": "Example from a Real R Package on CRAN\n# ...\nwhile(i&lt;=N){\n  for(j in 1:i){\n    d.k &lt;- as.matrix(x)[l==j,l==j]}\n# ...\nConvert to matrix outside the loop:\n# ...\nx.mat &lt;- as.matrix(x)\nwhile(i&lt;=N){\n  for(j in 1:i){\n    d.k &lt;- x.mat[l==j,l==j]\n# ...\nBy changing just 1 line of code, performance of the main method of the package improved over 3.5x !"
   },
   {
-    "objectID": "materials/lectures/2b-faster/slides.html#multithreaded-basic-linar-algebra-subroutines",
-    "href": "materials/lectures/2b-faster/slides.html#multithreaded-basic-linar-algebra-subroutines",
+    "objectID": "materials/lectures/2b-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
+    "href": "materials/lectures/2b-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
-    "section": "multithreaded Basic Linar Algebra Subroutines",
-    "text": "multithreaded Basic Linar Algebra Subroutines\n\nInstall: http://www.openblas.net/\nBatch thread control: OPENBLAS_NUM_THREADS=n\n\nDynamic thread control: ``wrathematics/openblasctl’’ micropackage on GitHub\n\n{openblas.R} \\\n\\end{frame}"
+    "section": "Preallocate lists and vectors Instead of Growing Them",
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\n\n          x          y         z a\n1 0.7235345 0.12634693 0.4379414 A\n2 0.7792195 0.04498675 0.9927376 C\n3 0.6559264 0.46928099 0.8938012 A\n4 0.2216286 0.45376337 0.1461042 C\n5 0.6826149 0.20852728 0.7828591 C\n6 0.6498295 0.44383626 0.6982019 C"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#programming-languages-hierarchy",
+    "href": "materials/lectures/2b-faster/slides.html#programming-languages-hierarchy",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Programming Languages Hierarchy",
+    "text": "Programming Languages Hierarchy\n\nHigh-level, Scripting Languages: R, Python, Lua, Ruby, …\n\nInterpreted at runtime to run pre-compiled executables\n\nMid-level, Compiled Languages: C, C++, Fortran, …\n\nNeed compiling and linking to machine libraries before they run\n\nCompiler converts to low-level building blocks and provides code optimizations\nA linker links them to libraries of machine code\n\nLow-level, Machine code\n\nArchitecture and operating system specific"
+  },
+  {
+    "objectID": "materials/lectures/2b-faster/slides.html#programming-languages-hierarchy-1",
+    "href": "materials/lectures/2b-faster/slides.html#programming-languages-hierarchy-1",
+    "title": "Faster R for All Platforms, Including HPC Clusters",
+    "section": "Programming Languages Hierarchy",
+    "text": "Programming Languages Hierarchy\n\nHigh-level, Scripting Languages: R, Python, …\n\nLarge building blocks, often vectors, matrices, and arrays\n\nMid-level, Compiled Languages: C, C++, Fortran, …\n\nMid-size building blocks\n\nFast enough for loops through elements of long vectors\nStill machine and operating system independent\n\nLow-level, Machine code\n\nHardware and operating system specific\nManipulating data between registers and memory hierarchies"
   },
   {
     "objectID": "materials/lectures/2b-faster/slides.html#incorporating-c-code-into-r-rcpp",
     "href": "materials/lectures/2b-faster/slides.html#incorporating-c-code-into-r-rcpp",
     "title": "Faster R for All Platforms, Including HPC Clusters",
-    "section": "Incorporating C++ Code into R (Rcpp)}",
-    "text": "Incorporating C++ Code into R (Rcpp)}\n\nAuthors: Dirk Eddelbuettel and Romain Francois\nSimplifies integrating C++ code with R\nMaps R objects (vectors, matrices, functions, environments, . . . ) to dedicated C++ classes\nBroad support for C++ Standard Template Library idioms.\nC++ code can be compiled, linked and loaded on the fly, or added via packages.\nError and exception code handling"
-  },
-  {
-    "objectID": "materials/lectures/2b-faster/slides.html#rcpp-example-a-simple-row-max-calculation",
-    "href": "materials/lectures/2b-faster/slides.html#rcpp-example-a-simple-row-max-calculation",
-    "title": "Faster R for All Platforms, Including HPC Clusters",
-    "section": "Rcpp Example: A simple row max calculation}",
-    "text": "Rcpp Example: A simple row max calculation}\n###include &lt;Rcpp.h&gt; using namespace Rcpp;\n//[[Rcpp::export]]\nNumericVector row_max( NumericMatrix m ) { int nrows = m.nrow( ); NumericVector maxPerRow( nrows );\nfor ( int i = 0; i &lt; nrows; i++ ) { maxPerRow[ i ] = Rcpp::max( m( i, _ ) ); }\nreturn ( maxPerRow ); }\nOne can get configuration values by\nsetenv PKG_CXXFLAGS Rscript -e \"Rcpp:::CxxFlags( )\" setenv PKG_LIBS Rscript -e \"Rcpp:::LdFlags( )\""
-  },
-  {
-    "objectID": "materials/lectures/2b-faster/slides.html#rcpp-example-cond",
-    "href": "materials/lectures/2b-faster/slides.html#rcpp-example-cond",
-    "title": "Faster R for All Platforms, Including HPC Clusters",
-    "section": "Rcpp Example (con’d)",
-    "text": "Rcpp Example (con’d)\n{A simple row max calculation}\n\\end{frame}\n%—————————————————————-\n%—————————————————————-\n\\end{document}"
+    "section": "Incorporating C++ Code into R (Rcpp)",
+    "text": "Incorporating C++ Code into R (Rcpp)\n\nSimplifies integrating C++ code with R\nMaps R objects (vectors, matrices, functions, environments, etc.) to C++ classes\nCode is compiled, linked, and loaded on the fly, or added via packages\nAppropriate when custom element-wise operations cannot be vectorized with R\n\nRead Advanced R: High performance functions with Rcpp by Hadley Wickham"
   },
   {
     "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
@@ -1033,6 +1033,6 @@
     "href": "index.html",
     "title": "HPC for Data Science in R - BZAN 583",
     "section": "",
-    "text": "This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.\nMaterial below is under construction!\n\n\n\n\n\n\nWeek 1, March 18 & 20\n\n\nLectures: Welcome and Setup Workflow Introduction Setup and Demo\nAssignment: Installs and Workflow \n\n\n\n\nWeek 2, March 25 & 27\nProject Proposals Due by March 29.\n\n\nLectures: Hardware and Memory Hierarchy Concepts\nCoding for Faster R\nAssignment: Faster Data \n\n\n\n\nWeek 3, April 1 & 3\n\n\nLectures: HPC Software and BLAS Libraries\nAssignment: Faster R \n\n\n\n\nWeek 4, April 8 & 10\n\n\nLectures: Shared Memory Parallel\nAssignment: Multicore \n\n\n\n\nWeek 5, April 15 & 17\n\n\nLectures: LLM or Torch for R\nAssignment: A classification task \n\n\n\n\nWeek 6, April 22 & 24\n\n\nLectures: Distributed Computing\nAssignment: pbdMPI application \n\n\n\n\nWeek 7, April 29 & May 1\n\n\nLectures: TBD Your choice\n\n\n\n\n\nWeek 8, May 6\n\n\nProject: Presentations"
+    "text": "This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.\nMaterial below is under construction!\n\n\n\n\n\n\nWeek 1, March 18 & 20\n\n\nLectures: Welcome and Setup Workflow Introduction Setup and Demo\nAssignment: Installs and Workflow \n\n\n\n\nWeek 2, March 25 & 27\nProject Proposals Due by March 29.\n\n\nLectures: Coding for Faster R\nHardware and Memory Hierarchy Concepts\nAssignment: Faster Code \n\n\n\n\nWeek 3, April 1 & 3\n\n\nLectures: HPC Software and BLAS Libraries\nAssignment: Faster R \n\n\n\n\nWeek 4, April 8 & 10\n\n\nLectures: Shared Memory Parallel\nAssignment: Multicore \n\n\n\n\nWeek 5, April 15 & 17\n\n\nLectures: LLM or Torch for R\nAssignment: A classification task \n\n\n\n\nWeek 6, April 22 & 24\n\n\nLectures: Distributed Computing\nAssignment: pbdMPI application \n\n\n\n\nWeek 7, April 29 & May 1\n\n\nLectures: TBD Your choice\n\n\n\n\n\nWeek 8, May 6\n\n\nProject: Presentations"
   }
 ]

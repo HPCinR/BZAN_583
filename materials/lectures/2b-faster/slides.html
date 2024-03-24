@@ -402,7 +402,7 @@
 <h2>Speeding up your R code</h2>
 <h3 id="serial-solutions-before-parallel-solutions">Serial solutions before parallel solutions</h3>
 <ul>
-<li>Almost any R code can be made faster
+<li>Any R code can be made faster
 <ul>
 <li>High-level code == deep complexity<br>
 </li>
@@ -417,8 +417,6 @@
 <li>Reduce generality to speed up<br>
 </li>
 </ul></li>
-<li>Improve matrix algebra speed with a fast multithreaded library such as OpenBLAS<br>
-</li>
 <li>Move kernels into compiled language, such as C/C++<br>
 </li>
 <li>Consider parallel computation (multicore and distriuted) only after the above</li>
@@ -570,8 +568,8 @@
 <span id="cb17-7"><a></a><span class="fu">benchmark</span>(<span class="fu">f</span>(x), <span class="fu">g</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  test replications elapsed relative user.self sys.self user.child sys.child
-1 f(x)          100   2.536    3.108     2.345    0.187          0         0
-2 g(x)          100   0.816    1.000     0.793    0.023          0         0</code></pre>
+1 f(x)          100   2.537    3.098     2.347    0.188          0         0
+2 g(x)          100   0.819    1.000     0.794    0.024          0         0</code></pre>
 </div>
 </div>
 </section>
@@ -629,7 +627,7 @@
 <span id="cb19-10"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.098   0.012   0.112 </code></pre>
+  0.099   0.012   0.111 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
 <span id="cb21-2"><a></a><span class="fu">system.time</span>(</span>
@@ -698,48 +696,72 @@
 <span id="cb29-4"><a></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>i){</span>
 <span id="cb29-5"><a></a>    d.k <span class="ot">&lt;-</span> x.mat[l<span class="sc">==</span>j,l<span class="sc">==</span>j]</span>
 <span id="cb29-6"><a></a><span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>By changing just 1 line of code, performance of the main method improved <strong>over 3.5x</strong> !</p>
+<p>By changing just 1 line of code, performance of the main method of the package improved <strong>over 3.5x</strong> !</p>
 </section>
-<section id="multithreaded-basic-linar-algebra-subroutines" class="slide level2">
-<h2>multithreaded Basic Linar Algebra Subroutines</h2>
+<section id="preallocate-lists-and-vectors-instead-of-growing-them" class="slide level2">
+<h2>Preallocate lists and vectors Instead of Growing Them</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>          x          y         z a
+1 0.7235345 0.12634693 0.4379414 A
+2 0.7792195 0.04498675 0.9927376 C
+3 0.6559264 0.46928099 0.8938012 A
+4 0.2216286 0.45376337 0.1461042 C
+5 0.6826149 0.20852728 0.7828591 C
+6 0.6498295 0.44383626 0.6982019 C</code></pre>
+</div>
+</div>
+</section>
+<section id="programming-languages-hierarchy" class="slide level2 smaller">
+<h2>Programming Languages Hierarchy</h2>
 <ul>
-<li>Install: http://www.openblas.net/</li>
-<li>Batch thread control: OPENBLAS_NUM_THREADS=n
+<li><strong>High-level, Scripting Languages:</strong> R, Python, Lua, Ruby, …
 <ul>
-<li>Dynamic thread control: ``wrathematics/openblasctl’’ micropackage on GitHub</li>
+<li>Interpreted at runtime to run pre-compiled executables</li>
+</ul></li>
+<li><strong>Mid-level, Compiled Languages:</strong> C, C++, Fortran, …
+<ul>
+<li>Need compiling and linking to machine libraries before they run<br>
+</li>
+<li>Compiler converts to low-level building blocks and provides code optimizations</li>
+<li>A linker links them to libraries of machine code</li>
+</ul></li>
+<li><strong>Low-level, Machine code</strong>
+<ul>
+<li>Architecture and operating system specific</li>
+</ul></li>
 </ul>
-{openblas.R} \
-\end{frame}</li>
+</section>
+<section id="programming-languages-hierarchy-1" class="slide level2 smaller">
+<h2>Programming Languages Hierarchy</h2>
+<ul>
+<li><strong>High-level, Scripting Languages:</strong> R, Python, …
+<ul>
+<li>Large building blocks, often vectors, matrices, and arrays</li>
+</ul></li>
+<li><strong>Mid-level, Compiled Languages:</strong> C, C++, Fortran, …
+<ul>
+<li>Mid-size building blocks<br>
+</li>
+<li>Fast enough for loops through elements of long vectors</li>
+<li>Still machine and operating system independent</li>
+</ul></li>
+<li><strong>Low-level, Machine code</strong>
+<ul>
+<li>Hardware and operating system specific</li>
+<li>Manipulating data between registers and memory hierarchies</li>
+</ul></li>
 </ul>
 </section>
 <section id="incorporating-c-code-into-r-rcpp" class="slide level2">
-<h2>Incorporating C++ Code into R (Rcpp)}</h2>
+<h2>Incorporating C++ Code into R (Rcpp)</h2>
 <ul>
-<li>Authors: Dirk Eddelbuettel and Romain Francois</li>
 <li>Simplifies integrating C++ code with R</li>
-<li>Maps R objects (vectors, matrices, functions, environments, . . . ) to dedicated C++ classes</li>
-<li>Broad support for C++ Standard Template Library idioms.</li>
-<li>C++ code can be compiled, linked and loaded on the fly, or added via packages.</li>
-<li>Error and exception code handling</li>
+<li>Maps R objects (vectors, matrices, functions, environments, etc.) to C++ classes</li>
+<li>Code is compiled, linked, and loaded on the fly, or added via packages</li>
+<li>Appropriate when custom element-wise operations cannot be vectorized with R</li>
 </ul>
-</section>
-<section id="rcpp-example-a-simple-row-max-calculation" class="slide level2">
-<h2>Rcpp Example: A simple row max calculation}</h2>
-<p>###include &lt;Rcpp.h&gt; using namespace Rcpp;</p>
-<p>//[[Rcpp::export]]</p>
-<p>NumericVector row_max( NumericMatrix m ) { int nrows = m.nrow( ); NumericVector maxPerRow( nrows );</p>
-<p>for ( int i = 0; i &lt; nrows; i++ ) { maxPerRow[ i ] = Rcpp::max( m( i, _ ) ); }</p>
-<p>return ( maxPerRow ); }</p>
-<h4 id="one-can-get-configuration-values-by">One can get configuration values by</h4>
-<p>setenv PKG_CXXFLAGS <code>Rscript -e "Rcpp:::CxxFlags( )"</code> setenv PKG_LIBS <code>Rscript -e "Rcpp:::LdFlags( )"</code></p>
-</section>
-<section id="rcpp-example-cond" class="slide level2">
-<h2>Rcpp Example (con’d)</h2>
-{A simple row max calculation}
-<p>\end{frame}</p>
-%—————————————————————-
-%—————————————————————-
-<p>\end{document}</p>
+<h4 id="read-advanced-r-high-performance-functions-with-rcpp-by-hadley-wickham">Read Advanced R: <a href="http://adv-r.had.co.nz/Rcpp.html">High performance functions with Rcpp</a> by Hadley Wickham</h4>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

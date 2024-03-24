@@ -25,9 +25,9 @@ downloading packages practice, git and GitHub setup
 *Week 2, March 25 & 27* \
 Project Proposals Due by March 29.
 
-Lectures: [Hardware and Memory Hierarchy Concepts](materials/lectures/2-hardware)\
-[Coding for Faster R](materials/lectures/2b-faster)\
-Assignment: [Faster Data](materials/assignment/2-faster) 
+Lectures: [Coding for Faster R](materials/lectures/2b-faster)\
+[Hardware and Memory Hierarchy Concepts](materials/lectures/2-hardware)\
+Assignment: [Faster Code](materials/assignment/2-faster) 
 <!-- double down on faster with memory hierarchy examples -->
 
 *Week 3, April 1 & 3*

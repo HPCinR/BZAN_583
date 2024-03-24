@@ -1,4 +1,19 @@
 ---
-title: "Welcome to HPC for Data Science"
+title: "Week 2 Assignment: Faster"
 editor: source
 ---
+**Still under development ...**
+
+Find some R code that YOU put together for a prior assignment or project in another class over the last year or two, profile it, and make changes that make it at least 2x faster. This can be a single function from a larger code but it should not be just trivial. Roughly 10 to 20 lines of your R code that originally takes more than, say, 30 seconds to run.
+
+This is your video game! When you get things 2x faster, you just beat the game and you move up a level!
+
+**Result 1:** Two or three sentences that describe where the code was used originally and its purpose. The intent is documentation that this is YOUR R code and to give me some understanding of the code.  
+
+**Result 2:** The code, its summary profile with 10 top components, and the `system.time()` of the code "before".  
+
+**Result 3:** The code, its summary profile with 10 top components, and the `system.time()` of the code "after".   
+
+**Result 4:** Two or three sentences that explain your changes and why things got faster.  
+
+Submit the results as 4 text files to Canvas.

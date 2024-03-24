@@ -4,22 +4,23 @@ format:
   revealjs:
     chalkboard: true
 editor: source
+knitr: true
 ---
 
 ## Speeding up your R code  {.smaller}
 ### Serial solutions before parallel solutions  
-- User R code often inefficient (high-level code = deep complexity)  
+- Any R code can be made faster  
+  - High-level code == deep complexity   
   - Profile and improve code first  
   - Vectorize loops if possible  
   - Compute once if not changing  
   - Know when copies are made  
-- Improve matrix algebra speed with a fast multithreaded library such as OpenBLAS  
+  - Reduce generality to speed up  
 - Move kernels into compiled language, such as C/C++  
-- Consider parallel computation (multicore and distriuted) only after the above  
+- Consider parallel computation (multicore and distriuted) only after the above   
 
 ## Profiling: Why Profile?  
 - Because performance matters  
-- Bad practices scale up!  
 - Your bottlenecks may surprise you  
 - One line of R code can touch a lot of data  
 - Unlike compilers, R will not fix it for you  
@@ -180,22 +181,121 @@ system.time(
 all.equal(y1, y2)
 ```
 
-## Faster Serial Code
+## Compute Once if not Changing
 
--   Almost any R code can be made faster
+A is a very large matrix
+```{.r code-line-numbers="2,7,9,10,12,17,19-21"}
+for (i in 1:n){
+  Y <- t(A) %*% Q
+  Q <- qr.Q(qr(Y))
+  Y <- A %*% Q
+  Q <- qr.Q(qr(Y))
+}
+```
+Move the transpose outside the loop:
+```{.r code-line-numbers="1,3"}
+tA <- t(A)
+for (i in 1:n){
+  Y <- tA %*% Q
+  Q <- qr.Q(qr(Y))
+  Y <- A %*% Q
+  Q <- qr.Q(qr(Y))
+}
+```
 
--   Profile, profile, profile
+## Check that Code is Still Correct
 
--   Fast libraries: OpenBLAS or MKL
+```{.r code-line-numbers="7,16-19"}
+for (i in 1:n){
+  Y <- t(A) %*% Q
+  Q <- qr.Q(qr(Y))
+  Y <- A %*% Q
+  Q <- qr.Q(qr(Y))
+}
+Q1 = Q
 
--   C/C++ access
+tA <- t(A)
+for (i in 1:n){
+  Y <- tA %*% Q
+  Q <- qr.Q(qr(Y))
+  Y <- A %*% Q
+  Q <- qr.Q(qr(Y))
+}
+Q2 = Q
+all.equal(Q1, Q2)
+identical(Q1, Q2)
+```
 
-## Multicore Shared Memory Approaches
+## Example from a Real R Package on CRAN
 
--   Fast multithreaded libraries: OpenBLAS or MKL
+```{.r code-line-numbers="4"}
+# ...
+while(i<=N){
+  for(j in 1:i){
+    d.k <- as.matrix(x)[l==j,l==j]}
+# ...
+```
+Convert to matrix outside the loop:
+```{.r code-line-numbers="2,5"}
+# ...
+x.mat <- as.matrix(x)
+while(i<=N){
+  for(j in 1:i){
+    d.k <- x.mat[l==j,l==j]
+# ...
+```
+By changing just 1 line of code, performance of the main
+method of the package improved **over 3.5x** !
 
--   Unix fork via mclapply, et. al
+## Preallocate lists and vectors Instead of Growing Them
 
--   OpenMP via C/C++ access
+```{r}
+n = 1e4
+df = data.frame(x = runif(n), y = runif(n), z = runif(n),
+                a = sample(c("A", "B", "C"), size = n, replace = TRUE))
+head(df)
+for(i in 1:n) {
+    
+}
+```
 
--   Cuda, OenCL on GPU
+```{r}
+```
+
+## Programming Languages Hierarchy {.smaller}
+
+- **High-level, Scripting Languages:** R, Python, Lua, Ruby, ... 
+  - Interpreted at runtime to run pre-compiled executables  
+
+- **Mid-level, Compiled Languages:** C, C++, Fortran, ...
+  - Need compiling and linking to machine libraries before they run  
+  - Compiler converts to low-level building blocks and provides code optimizations
+  - A linker links them to libraries of machine code
+  
+- **Low-level, Machine code**
+  - Architecture and operating system specific
+
+## Programming Languages Hierarchy {.smaller}
+
+- **High-level, Scripting Languages:** R, Python, ... 
+  - Large building blocks, often vectors, matrices, and arrays
+
+- **Mid-level, Compiled Languages:** C, C++, Fortran, ...
+  - Mid-size building blocks  
+  - Fast enough for loops through elements of long vectors
+  - Still machine and operating system independent
+  
+- **Low-level, Machine code**
+  - Hardware and operating system specific
+  - Manipulating data between registers and memory hierarchies
+
+
+## Incorporating C++ Code into R (Rcpp)
+
+- Simplifies integrating C++ code with R
+- Maps R objects (vectors, matrices, functions, environments, etc.) to C++ classes
+- Code is compiled, linked, and loaded on the fly, or added via packages
+- Appropriate when custom element-wise operations cannot be vectorized with R
+
+#### Read Advanced R: [High performance functions with Rcpp](http://adv-r.had.co.nz/Rcpp.html) by Hadley Wickham
+

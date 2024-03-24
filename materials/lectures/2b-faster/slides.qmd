@@ -16,20 +16,8 @@ knitr: true
   - Compute once if not changing  
   - Know when copies are made  
   - Reduce generality to speed up  
-- Move kernels into compiled language, such as C/C++  
-- Consider parallel computation (multicore and distriuted) only after the above   
-
-## Profiling: Why Profile?  
-- Because performance matters  
-- Your bottlenecks may surprise you  
-- One line of R code can touch a lot of data  
-- Unlike compilers, R will not fix it for you  
-
-::: notes
-
-What is a compiler?
-
-:::
+  - Access data contiguous order when possible  
+  - Move kernels into compiled language, such as C/C++  
 
 ## Performance Profiling Tools  
 `system.time()` is a basic R utility for timing expressions

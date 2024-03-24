@@ -3,7 +3,7 @@ title: "Faster R Scripts"
 editor: source
 ---
 
-This lecture is about strategies to make your R code faster.
+This lecture is about strategies to make your R code faster without explicit parallelization.
 
 [Full Screen](slides.qmd)
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HPC for Data Science in R - BZAN 583 - Faster R Scripts</title>
+<title>HPC for Data Science in R - BZAN 583 - Style</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +20,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -78,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">HPC for Data Science in R - BZAN 583</span>
     </a>
   </div>
@@ -89,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../syllabus.html"> 
+    <a class="nav-link" href="./syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
 </ul>
@@ -111,14 +145,23 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#programming-style" id="toc-programming-style" class="nav-link active" data-scroll-target="#programming-style">Programming Style</a>
+  <ul class="collapse">
+  <li><a href="#use-of---or-for-assignment-in-r" id="toc-use-of---or-for-assignment-in-r" class="nav-link" data-scroll-target="#use-of---or-for-assignment-in-r">Use of <code>&lt;-</code> or <code>=</code> for assignment in R</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Faster R Scripts</h1>
+<h1 class="title">Style</h1>
 </div>
 
 
@@ -135,14 +178,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This lecture is about strategies to make your R code faster without explicit parallelization.</p>
-<p><a href="../../../materials/lectures/2b-faster/slides.html">Full Screen</a></p>
-<iframe class="slide-deck" src="slides.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
-<p>&lt;!–<br>
-* Reference and use the Rfast package<br>
-* Companion doc: Taking R to its limits: 70+ tips (bad grammar but useful tips) * Mangalore tutorial, JSM tutorial, other? –&gt;</p>
+<section id="programming-style" class="level2">
+<h2 class="anchored" data-anchor-id="programming-style">Programming Style</h2>
+<p><a href="https://google.github.io/styleguide/Rguide.html">Google’s R Style Guide</a><br>
+<a href="https://style.tidyverse.org/">Tidyverse Style Guide</a></p>
+<section id="use-of---or-for-assignment-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="use-of---or-for-assignment-in-r">Use of <code>&lt;-</code> or <code>=</code> for assignment in R</h3>
+<p><a href="https://stat.ethz.ch/R-manual/R-patched/library/base/html/assignOps.html">What the documentation says.</a></p>
+<p><a href="https://www.r-bloggers.com/2018/09/why-do-we-use-arrow-as-an-assignment-operator/">History</a>. Anyone use the APL language?<br>
+<a href="https://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html">Discussion</a><br>
+<a href="https://csgillespie.wordpress.com/2010/11/16/assignment-operators-in-r-vs/">More Discussion</a></p>
+<p>There are pros and cons to each one. My personal choice is to use <code>=</code> because it is easier and it aligns with most other programming languages. Also, in places where it matters which one is used, performing an assignment is considered bad programming practice.</p>
+<p>While assigning a variable inside a function parameter list is considered bad practice, it is sometimes used temporarily while measuring execution time with <code>system.time()</code>. If <code>&lt;-</code> is used in an expression, adding <code>system.time()</code> works as expected.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(x <span class="ot">&lt;-</span> <span class="fu">my_function</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But if using <code>=</code> for assignment, we need to add braces, <code>{</code> and <code>}</code>, or additional parentheses. Otherwise <code>=</code> is interpreted to set a value of a function parameter in <code>system.time()</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({x <span class="ot">=</span> <span class="fu">my_function</span>()})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Usually, omitting the braces triggers an unknown parameter error, but if the assigned variable is a parameter in <code>system.time()</code> it can fail silently!</p>
+<p>Feel free to use either in this class but be aware of the difference and be consistent in using one or the other. This class will not consider programming style in evaluations.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -22,6 +22,6 @@ format:
     css: styles.css
     toc: true
     html-math-method: katex
-    code-link: TRUE
+    code-link: true
 editor: source
 knitr: true

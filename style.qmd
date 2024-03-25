@@ -27,4 +27,4 @@ system.time({x = my_function()})
 ```
 Usually, omitting the braces triggers an unknown parameter error, but if the assigned variable is a parameter in `system.time()` it can fail silently!
 
-Feel free to use either in this class but be aware of the difference and be consistent in using one or the other. This class will not consider programming style in evaluations.
+Either is fine in this class but be aware of the difference and be consistent in using one or the other. This class will not consider programming style in evaluations.

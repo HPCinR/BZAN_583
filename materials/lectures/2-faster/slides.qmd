@@ -3,6 +3,7 @@ title: "Faster R for All Platforms, Including HPC Clusters"
 format: 
   revealjs:
     chalkboard: true
+    code-link: true
 editor: source
 knitr: true
 ---
@@ -19,12 +20,12 @@ knitr: true
   - Access data contiguous order when possible  
   - Move kernels into compiled language, such as C/C++  
 
-## Performance Profiling Tools  
-`system.time()` is a basic R utility for timing expressions
+## Performance Profiling Tools  `system.time()`
 
 ```{r}
 #| echo: true 
 #| cache: true
+#| code-line-numbers: false
 
 x = matrix(runif(20000*750), nrow=20000, ncol=750)
 
@@ -35,79 +36,79 @@ identical(xtx1, xtx2)
 ```
 <br>
 
-$X^TX$ is a symmetric matrix
+`crossprod()` knows $X^TX$ is a symmetric matrix
 
 ## Performance Profiling Tools: `Rprof()`
 
-Samples call stack at interval (default 0.02 second)
+Samples the call stack at interval (default 0.02 second)
 
 ```{r}
 #| echo: true
-#| eval: false
+#| code-line-numbers: false
 
-## consider import title=fastR/profile.R
-x = matrix(unif(10000*250), nrow=10000, ncol=250)
-Rprof()
-invisible(prcomp(x))
+x = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)
+
+Rprof(interval = 0.005)
+x_pr = prcomp(x, retx = FALSE)
 Rprof(NULL)
-summaryRprof()
-
-# $by.self
-#                 self.time self.pct total.time total.pct
-# "La.svd"             0.64    78.05       0.70     85.37
-# "%*%"                0.06     7.32       0.06      7.32
-# "aperm.default"      0.04     4.88       0.04      4.88
-# "is.finite"          0.04     4.88       0.04      4.88
-# "matrix"             0.04     4.88       0.04      4.88
-
-# $by.total
-#                  total.time total.pct self.time self.pct
-# "prcomp.default"       0.82    100.00      0.00     0.00
-# "prcomp"               0.82    100.00      0.00     0.00
-# "svd"                  0.72     87.80      0.00     0.00
-# "La.svd"               0.70     85.37      0.64    78.05
-# "%*%"                  0.06      7.32      0.06     7.32
-# ### output truncated by presenter
-
-# $sample.interval
-# [1] 0.02
-
-# $sampling.time
-# [1] 0.98
+summaryRprof()$by.self
 ```
 
 ## Performance Profiling Tools: `Rprof()`
 
 ```{r}
+#| echo: true
+#| code-line-numbers: false
+
+Rprof(interval=.005)
+x_pr = prcomp(x, retx = FALSE)
+Rprof(NULL)
+summaryRprof()$by.self[1:5, ]     
+```
+```{r}
+#| echo: false
+
+Rprof(interval=.005)
+x_pr = prcomp(x, retx = FALSE)
+Rprof(NULL)
+summaryRprof()$by.self[1:5, ]
+```
+```{r}
+#| echo: false
+
+Rprof(interval=.005)
+x_pr = prcomp(x, retx = FALSE)
+Rprof(NULL)
+summaryRprof()$by.self[1:5, ]
+```
+
+## Lazy Evaluation {.smaller}
+
+- Function parameters are not evaluated until needed!
+```{r}
 #| eval: false
 #| echo: true
-
-## consider import fastR/profile.R
-Rprof(interval=.99)
-invisible(prcomp(x))
-Rprof(NULL)
-summaryRprof()
-
-# $by.self
-# [1] self.time  self.pct   total.time total.pct
-# <0 rows> (or 0-length row.names)
-
-# $by.total
-# [1] total.time total.pct  self.time  self.pct
-# <0 rows> (or 0-length row.names)
-
-# $sample.interval
-# [1] 0.99
-
-# $sampling.time
-# [1] 0
+square = function(x) { # "pass-by-value" but no x copy made
+  x = x*x              # x is just used, not copied 
+  x
+}
 ```
+- Common in functional languages
+- Speeds up computation by
+  - Better memory access patterns
+  - Prevents extra copies of data
+  - Not wasting computation on things never used
+
+Time or profile more than once to remove possible lazy evaluation effects
+  
+Read more: [About lazy evaluation (R-bloggers)](https://www.r-bloggers.com/2018/07/about-lazy-evaluation/), [How environments work in R and what is lazy evaluation (R-bloggers)](https://www.r-bloggers.com/2018/01/how-environments-work-in-r-and-what-is-lazy-evaluation/)  
 
 ## Performance Profiling Tools: **rbenchmark**
 ### a package that easily benchmarks different functions
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 
 x = matrix(rnorm(1000*500), nrow=1000, ncol=500)
 
@@ -129,14 +130,15 @@ benchmark(f(x), g(x))
 - Use `system.time()` to get a general sense of a method  
 - Use **rbenchmark**'s `benchmark()` function to compare 2 methods
 - Use `Rprof()` for more detailed profiling
-- Other tools exist for more advanced applications (**pbdPAPI** and **pbdPROF** on GitHub/RBigData)
+- Other tools exist for more advanced and graphical output: `profvis()` 
 
 ## Vectorizing
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 
-n = 1e5
+n = 1e6
 x = seq(0, 1, length.out=n)
 f = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)
 y1 = numeric(n)
@@ -177,7 +179,7 @@ for (i in seq_len(n)){
 }
 ```
 
-## Check that Code is Still Correct
+## Check that Faster Code is Still Correct
 
 ```{.r code-line-numbers="7,16-19"}
 for (i in seq_len(n)){
@@ -224,6 +226,9 @@ method of the package improved **over 3.5x** !
 ## Preallocate lists and vectors Instead of Growing Them
 
 ```{r}
+#| code-line-numbers: false
+#| echo: true
+
 m = 1e3
 n = 1e5
 mat = matrix(runif(m*n), nrow = m)
@@ -251,6 +256,8 @@ all.equal(result1, result2)
 ```{r}
 #| echo: true 
 #| cache: true
+#| code-line-numbers: false
+
 x = matrix(runif(20000*750), nrow=20000, ncol=750)
 
 system.time({cx1 = cov(x)})
@@ -260,24 +267,27 @@ all.equal(cx1, cx2)
 
  $Cov(X) = \frac{(X - {\bf 1}\bar{x})^T(X - {\bf 1}\bar{x})}{n - 1},$ where $\bar{x}$ is a row vector of column means of $X$ and $\bf 1$ is a column of 1s.
  
-
-## Memory Hierarchy Considerations with Matrices and data.frames
+## Memory Hierarchy Considerations with Matrices and data.frames {.smaller}
 
 * R matrices are stored by columns
 * R data.frames (lists) are stored by variables 
 
 ```{r}
+#| code-line-numbers: false
+#| echo: true
 memuse::memuse(mat)
 ```
-- Columns contain contiguous data
-- Rows are scattered across columns
+- Columns contain contiguous data  
+- Rows are scattered across columns  
 
-### R, Julia, Matlab, and Fortran are column-major
-### Python and C are row-major
+R, Julia, Matlab, and Fortran are **column-major**  
+Python and C are **row-major**  
 
 ## Favor contigous access to arrays and lists
 
 ```{r}
+#| code-line-numbers: false
+#| echo: true
 system.time({
 result1 = vector("double", m)
 for(i in seq_len(m)) {
@@ -302,7 +312,7 @@ all.equal(result1, result2)
   - Interpreted at runtime to run pre-compiled executables  
 
 - **Mid-level, Compiled Languages:** C, C++, Fortran, ...
-    - Fast enough for loops through elements of long vectors
+  - Fast enough for loops through single elements of long vectors
 
   - Need compiling and linking to machine libraries before they run  
   - Still machine and operating system independent
@@ -324,6 +334,7 @@ all.equal(result1, result2)
 ## **Rfast and RFast2** Packages: A collection of **Rcpp**-Implemented Functions
 
 ```{r}
+#| code-line-numbers: false
 #| echo: true
 system.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})
 system.time({cx3 = Rfast::cova(x)})

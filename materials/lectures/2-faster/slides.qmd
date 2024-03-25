@@ -26,30 +26,16 @@ knitr: true
 #| echo: true 
 #| cache: true
 
-x = matrix(rnorm(20000*750), nrow=20000, ncol=750)
+x = matrix(runif(20000*750), nrow=20000, ncol=750)
 
 system.time({xtx1 = t(x) %*% x})
 system.time({xtx2 = crossprod(x)})
 all.equal(xtx1, xtx2)
 identical(xtx1, xtx2)
-sessionInfo()
 ```
 <br>
 
 $X^TX$ is a symmetric matrix
-
-## Performance Profiling Tools  
-`system.time()` is a basic R utility for timing expressions
-
-```{r}
-#| echo: true 
-#| cache: true
-system.time({cx1 = cov(x)})
-system.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})
-all.equal(cx1, cx2)
-```
-
- $Cov(X) = \frac{(X - {\bf 1}\bar{x})^T(X - {\bf 1}\bar{x})}{n - 1},$ where $\bar{x}$ is a row vector of column means of $X$ and $\bf 1$ is a column of 1s
 
 ## Performance Profiling Tools: `Rprof()`
 
@@ -60,7 +46,7 @@ Samples call stack at interval (default 0.02 second)
 #| eval: false
 
 ## consider import title=fastR/profile.R
-x = matrix(rnorm(10000*250), nrow=10000, ncol=250)
+x = matrix(unif(10000*250), nrow=10000, ncol=250)
 Rprof()
 invisible(prcomp(x))
 Rprof(NULL)
@@ -260,6 +246,21 @@ for(i in seq_len(n)) {
 all.equal(result1, result2)
 ```
 
+## Specialize More General Functions
+
+```{r}
+#| echo: true 
+#| cache: true
+x = matrix(runif(20000*750), nrow=20000, ncol=750)
+
+system.time({cx1 = cov(x)})
+system.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})
+all.equal(cx1, cx2)
+```
+
+ $Cov(X) = \frac{(X - {\bf 1}\bar{x})^T(X - {\bf 1}\bar{x})}{n - 1},$ where $\bar{x}$ is a row vector of column means of $X$ and $\bf 1$ is a column of 1s.
+ 
+
 ## Memory Hierarchy Considerations with Matrices and data.frames
 
 * R matrices are stored by columns
@@ -311,7 +312,7 @@ all.equal(result1, result2)
   - Manipulating data between registers and memory hierarchies
 
 
-## Incorporating C++ Code into R (Rcpp)
+## **Rcpp:** Incorporating C++ Code into R
 
 - Simplifies integrating C++ code with R
 - Maps R objects (vectors, matrices, functions, environments, etc.) to C++ classes
@@ -320,3 +321,20 @@ all.equal(result1, result2)
 
 #### Read Advanced R: [High performance functions with Rcpp](https://adv-r.hadley.nz/rcpp.html) by Hadley Wickham
 
+## **Rfast and RFast2** Packages: A collection of **Rcpp**-Implemented Functions
+
+```{r}
+#| echo: true
+system.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})
+system.time({cx3 = Rfast::cova(x)})
+all.equal(cx2, cx3)
+```
+
+[Taking R to its limits: 70+ tips](https://peerj.com/preprints/26605) by Michail Tsagris and Manos Papadakis is a "not peer-reviewed" PeerJPreprints publication.
+
+::: notes
+Lots of good advice
+Some good and some bad programming practice 
+Some spelling and grammar issues
+Definitely worth reading!
+:::

@@ -26,12 +26,13 @@ knitr: true
 #| echo: true 
 #| cache: true
 
-x <- matrix(rnorm(20000*750), nrow=20000, ncol=750)
+x = matrix(rnorm(20000*750), nrow=20000, ncol=750)
 
 system.time({xtx1 = t(x) %*% x})
 system.time({xtx2 = crossprod(x)})
 all.equal(xtx1, xtx2)
 identical(xtx1, xtx2)
+sessionInfo()
 ```
 <br>
 
@@ -43,7 +44,6 @@ $X^TX$ is a symmetric matrix
 ```{r}
 #| echo: true 
 #| cache: true
-
 system.time({cx1 = cov(x)})
 system.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})
 all.equal(cx1, cx2)
@@ -60,7 +60,7 @@ Samples call stack at interval (default 0.02 second)
 #| eval: false
 
 ## consider import title=fastR/profile.R
-x <- matrix(rnorm(10000*250), nrow=10000, ncol=250)
+x = matrix(rnorm(10000*250), nrow=10000, ncol=250)
 Rprof()
 invisible(prcomp(x))
 Rprof(NULL)
@@ -123,10 +123,10 @@ summaryRprof()
 ```{r}
 #| echo: true
 
-x <- matrix(rnorm(10000*500), nrow=10000, ncol=500)
+x = matrix(rnorm(1000*500), nrow=1000, ncol=500)
 
-f <- function(x) t(x) %*% x
-g <- function(x) crossprod(x)
+f = function(x) t(x) %*% x
+g = function(x) crossprod(x)
 
 library(rbenchmark)
 benchmark(f(x), g(x))
@@ -150,21 +150,21 @@ benchmark(f(x), g(x))
 ```{r}
 #| echo: true
 
-n <- 1e5
-x <- seq(0, 1, length.out=n)
-f <- function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)
-y1 <- numeric(n)
+n = 1e5
+x = seq(0, 1, length.out=n)
+f = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)
+y1 = numeric(n)
 
 set.seed(12345)
-system.time(
-  for(i in 1:n)
-    y1[i] <- f(x[i]) + rnorm(1)
-)
+system.time({
+  for(i in seq_len(n))
+    y1[i] = f(x[i]) + rnorm(1)
+})
 
 set.seed(12345)
-system.time(
-  y2 <- f(x) + rnorm(n)
-)
+system.time({
+  y2 = f(x) + rnorm(n)
+})
 
 all.equal(y1, y2)
 ```
@@ -173,41 +173,41 @@ all.equal(y1, y2)
 
 A is a very large matrix
 ```{.r code-line-numbers="2,7,9,10,12,17,19-21"}
-for (i in 1:n){
-  Y <- t(A) %*% Q
-  Q <- qr.Q(qr(Y))
-  Y <- A %*% Q
-  Q <- qr.Q(qr(Y))
+for (i in seq_len(n)){
+  Y = t(A) %*% Q
+  Q = qr.Q(qr(Y))
+  Y = A %*% Q
+  Q = qr.Q(qr(Y))
 }
 ```
 Move the transpose outside the loop:
 ```{.r code-line-numbers="1,3"}
-tA <- t(A)
-for (i in 1:n){
-  Y <- tA %*% Q
-  Q <- qr.Q(qr(Y))
-  Y <- A %*% Q
-  Q <- qr.Q(qr(Y))
+tA = t(A)
+for (i in seq_len(n)){
+  Y = tA %*% Q
+  Q = qr.Q(qr(Y))
+  Y = A %*% Q
+  Q = qr.Q(qr(Y))
 }
 ```
 
 ## Check that Code is Still Correct
 
 ```{.r code-line-numbers="7,16-19"}
-for (i in 1:n){
-  Y <- t(A) %*% Q
-  Q <- qr.Q(qr(Y))
-  Y <- A %*% Q
-  Q <- qr.Q(qr(Y))
+for (i in seq_len(n)){
+  Y = t(A) %*% Q
+  Q = qr.Q(qr(Y))
+  Y = A %*% Q
+  Q = qr.Q(qr(Y))
 }
 Q1 = Q
 
-tA <- t(A)
-for (i in 1:n){
-  Y <- tA %*% Q
-  Q <- qr.Q(qr(Y))
-  Y <- A %*% Q
-  Q <- qr.Q(qr(Y))
+tA = t(A)
+for (i in seq_len(n)){
+  Y = tA %*% Q
+  Q = qr.Q(qr(Y))
+  Y = A %*% Q
+  Q = qr.Q(qr(Y))
 }
 Q2 = Q
 all.equal(Q1, Q2)
@@ -220,16 +220,16 @@ identical(Q1, Q2)
 # ...
 while(i<=N){
   for(j in 1:i){
-    d.k <- as.matrix(x)[l==j,l==j]}
+    d.k = as.matrix(x)[l==j,l==j]}
 # ...
 ```
 Convert to matrix outside the loop:
 ```{.r code-line-numbers="2,5"}
 # ...
-x.mat <- as.matrix(x)
+x.mat = as.matrix(x)
 while(i<=N){
   for(j in 1:i){
-    d.k <- x.mat[l==j,l==j]
+    d.k = x.mat[l==j,l==j]
 # ...
 ```
 By changing just 1 line of code, performance of the main
@@ -238,39 +238,72 @@ method of the package improved **over 3.5x** !
 ## Preallocate lists and vectors Instead of Growing Them
 
 ```{r}
-n = 1e4
-df = data.frame(x = runif(n), y = runif(n), z = runif(n),
-                a = sample(c("A", "B", "C"), size = n, replace = TRUE))
-head(df)
-for(i in 1:n) {
-    
+m = 1e3
+n = 1e5
+mat = matrix(runif(m*n), nrow = m)
+
+system.time({
+result1 = NULL
+for(i in seq_len(n)) {
+    newres = mean(mat[, i])
+    result1 = c(result1, newres)
 }
+})
+
+system.time({
+result2 = vector("double", n)
+for(i in seq_len(n)) {
+    newres = mean(mat[, i])
+    result2[i] = newres
+}
+})
+all.equal(result1, result2)
 ```
+
+## Memory Hierarchy Considerations with Matrices and data.frames
+
+* R matrices are stored by columns
+* R data.frames (lists) are stored by variables 
 
 ```{r}
+memuse::memuse(mat)
 ```
+- Columns contain contiguous data
+- Rows are scattered across columns
 
-## Programming Languages Hierarchy {.smaller}
+### R, Julia, Matlab, and Fortran are column-major
+### Python and C are row-major
 
-- **High-level, Scripting Languages:** R, Python, Lua, Ruby, ... 
-  - Interpreted at runtime to run pre-compiled executables  
+## Favor contigous access to arrays and lists
 
-- **Mid-level, Compiled Languages:** C, C++, Fortran, ...
-  - Need compiling and linking to machine libraries before they run  
-  - Compiler converts to low-level building blocks and provides code optimizations
-  - A linker links them to libraries of machine code
-  
-- **Low-level, Machine code**
-  - Architecture and operating system specific
+```{r}
+system.time({
+result1 = vector("double", m)
+for(i in seq_len(m)) {
+    result1[i] = mean(mat[i, ])
+}
+})
+
+system.time({tmat = t(mat)})
+system.time({
+result2 = vector("double", m)
+for(i in seq_len(m)) {
+    result2[i] = mean(tmat[, i])
+}
+})
+all.equal(result1, result2)
+```
 
 ## Programming Languages Hierarchy {.smaller}
 
 - **High-level, Scripting Languages:** R, Python, ... 
-  - Large building blocks, often vectors, matrices, and arrays
+  - Efficient for vectors, matrices, and arrays
+  - Interpreted at runtime to run pre-compiled executables  
 
 - **Mid-level, Compiled Languages:** C, C++, Fortran, ...
-  - Mid-size building blocks  
-  - Fast enough for loops through elements of long vectors
+    - Fast enough for loops through elements of long vectors
+
+  - Need compiling and linking to machine libraries before they run  
   - Still machine and operating system independent
   
 - **Low-level, Machine code**
@@ -285,5 +318,5 @@ for(i in 1:n) {
 - Code is compiled, linked, and loaded on the fly, or added via packages
 - Appropriate when custom element-wise operations cannot be vectorized with R
 
-#### Read Advanced R: [High performance functions with Rcpp](http://adv-r.had.co.nz/Rcpp.html) by Hadley Wickham
+#### Read Advanced R: [High performance functions with Rcpp](https://adv-r.hadley.nz/rcpp.html) by Hadley Wickham
 

@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>But if using <code>=</code> for assignment, we need to add braces, <code>{</code> and <code>}</code>, or additional parentheses. Otherwise <code>=</code> is interpreted to set a value of a function parameter in <code>system.time()</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({x <span class="ot">=</span> <span class="fu">my_function</span>()})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Usually, omitting the braces triggers an unknown parameter error, but if the assigned variable is a parameter in <code>system.time()</code> it can fail silently!</p>
-<p>Feel free to use either in this class but be aware of the difference and be consistent in using one or the other. This class will not consider programming style in evaluations.</p>
+<p>Either is fine in this class but be aware of the difference and be consistent in using one or the other. This class will not consider programming style in evaluations.</p>
 
 
 </section>

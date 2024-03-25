@@ -7,16 +7,16 @@
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
-
-  <title>HPC for Data Science in R - BZAN 583 - Faster R for All Platforms, Including HPC Clusters</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
-  <style>
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<title>HPC for Data Science in R - BZAN 583 - Faster R for All Platforms, Including HPC Clusters</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+<style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -94,14 +94,14 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+<link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
 
   .callout {
     margin-top: 1em;
@@ -299,7 +299,7 @@
   }
 
   </style>
-  <style type="text/css">
+<style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -391,15 +391,12 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Faster R for All Platforms, Including HPC Clusters</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Faster R for All Platforms, Including HPC Clusters</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section id="speeding-up-your-r-code" class="slide level2 smaller">
-<h2>Speeding up your R code</h2>
+</section><section id="speeding-up-your-r-code" class="slide level2 smaller"><h2>Speeding up your R code</h2>
 <h3 id="serial-solutions-before-parallel-solutions">Serial solutions before parallel solutions</h3>
 <ul>
 <li>Any R code can be made faster
@@ -419,131 +416,139 @@
 <li>Access data contiguous order when possible<br>
 </li>
 <li>Move kernels into compiled language, such as C/C++</li>
-</ul></li>
 </ul>
-</section>
-<section id="performance-profiling-tools" class="slide level2">
-<h2>Performance Profiling Tools</h2>
-<p><code>system.time()</code> is a basic R utility for timing expressions</p>
+</li>
+</ul></section><section id="performance-profiling-tools-system.time" class="slide level2"><h2>Performance Profiling Tools <code>system.time()</code>
+</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>x <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">20000</span><span class="sc">*</span><span class="dv">750</span>), <span class="at">nrow=</span><span class="dv">20000</span>, <span class="at">ncol=</span><span class="dv">750</span>)</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a><span class="fu">system.time</span>({xtx1 <span class="ot">=</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> x})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">20000</span><span class="op">*</span><span class="fl">750</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">20000</span>, ncol<span class="op">=</span><span class="fl">750</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">xtx1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">x</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.087   0.005   0.092 </code></pre>
+  0.088   0.005   0.093 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">system.time</span>({xtx2 <span class="ot">=</span> <span class="fu">crossprod</span>(x)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">xtx2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/crossprod.html">crossprod</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
   0.033   0.001   0.034 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">all.equal</span>(xtx1, xtx2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">xtx1</span>, <span class="va">xtx2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">identical</span>(xtx1, xtx2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">xtx1</span>, <span class="va">xtx2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p><br></p>
-<p><span class="math inline">\(X^TX\)</span> is a symmetric matrix</p>
-</section>
-<section id="performance-profiling-tools-rprof" class="slide level2">
-<h2>Performance Profiling Tools: <code>Rprof()</code></h2>
-<p>Samples call stack at interval (default 0.02 second)</p>
+<p><code><a href="https://rdrr.io/r/base/crossprod.html">crossprod()</a></code> knows <span class="math inline">\(X^TX\)</span> is a symmetric matrix</p>
+</section><section id="performance-profiling-tools-rprof" class="slide level2"><h2>Performance Profiling Tools: <code>Rprof()</code>
+</h2>
+<p>Samples the call stack at interval (default 0.02 second)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="do">## consider import title=fastR/profile.R</span></span>
-<span id="cb9-2"><a></a>x <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">unif</span>(<span class="dv">10000</span><span class="sc">*</span><span class="dv">250</span>), <span class="at">nrow=</span><span class="dv">10000</span>, <span class="at">ncol=</span><span class="dv">250</span>)</span>
-<span id="cb9-3"><a></a><span class="fu">Rprof</span>()</span>
-<span id="cb9-4"><a></a><span class="fu">invisible</span>(<span class="fu">prcomp</span>(x))</span>
-<span id="cb9-5"><a></a><span class="fu">Rprof</span>(<span class="cn">NULL</span>)</span>
-<span id="cb9-6"><a></a><span class="fu">summaryRprof</span>()</span>
-<span id="cb9-7"><a></a></span>
-<span id="cb9-8"><a></a><span class="co"># $by.self</span></span>
-<span id="cb9-9"><a></a><span class="co">#                 self.time self.pct total.time total.pct</span></span>
-<span id="cb9-10"><a></a><span class="co"># "La.svd"             0.64    78.05       0.70     85.37</span></span>
-<span id="cb9-11"><a></a><span class="co"># "%*%"                0.06     7.32       0.06      7.32</span></span>
-<span id="cb9-12"><a></a><span class="co"># "aperm.default"      0.04     4.88       0.04      4.88</span></span>
-<span id="cb9-13"><a></a><span class="co"># "is.finite"          0.04     4.88       0.04      4.88</span></span>
-<span id="cb9-14"><a></a><span class="co"># "matrix"             0.04     4.88       0.04      4.88</span></span>
-<span id="cb9-15"><a></a></span>
-<span id="cb9-16"><a></a><span class="co"># $by.total</span></span>
-<span id="cb9-17"><a></a><span class="co">#                  total.time total.pct self.time self.pct</span></span>
-<span id="cb9-18"><a></a><span class="co"># "prcomp.default"       0.82    100.00      0.00     0.00</span></span>
-<span id="cb9-19"><a></a><span class="co"># "prcomp"               0.82    100.00      0.00     0.00</span></span>
-<span id="cb9-20"><a></a><span class="co"># "svd"                  0.72     87.80      0.00     0.00</span></span>
-<span id="cb9-21"><a></a><span class="co"># "La.svd"               0.70     85.37      0.64    78.05</span></span>
-<span id="cb9-22"><a></a><span class="co"># "%*%"                  0.06      7.32      0.06     7.32</span></span>
-<span id="cb9-23"><a></a><span class="co"># </span><span class="al">###</span><span class="co"> output truncated by presenter</span></span>
-<span id="cb9-24"><a></a></span>
-<span id="cb9-25"><a></a><span class="co"># $sample.interval</span></span>
-<span id="cb9-26"><a></a><span class="co"># [1] 0.02</span></span>
-<span id="cb9-27"><a></a></span>
-<span id="cb9-28"><a></a><span class="co"># $sampling.time</span></span>
-<span id="cb9-29"><a></a><span class="co"># [1] 0.98</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1e5</span><span class="op">*</span><span class="fl">250</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1e5</span>, ncol<span class="op">=</span><span class="fl">250</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span></span>
+<span><span class="va">x_pr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">x</span>, retx <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/summaryRprof.html">summaryRprof</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">by.self</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                self.time self.pct total.time total.pct
+"La.svd"            1.485    82.04      1.525     84.25
+"aperm.default"     0.180     9.94      0.180      9.94
+"array"             0.040     2.21      0.040      2.21
+"is.finite"         0.035     1.93      0.035      1.93
+"colMeans"          0.025     1.38      0.025      1.38
+"matrix"            0.020     1.10      0.020      1.10
+"any"               0.015     0.83      0.015      0.83
+"svd"               0.005     0.28      1.560     86.19
+"sweep"             0.005     0.28      0.225     12.43</code></pre>
 </div>
-</section>
-<section id="performance-profiling-tools-rprof-1" class="slide level2">
-<h2>Performance Profiling Tools: <code>Rprof()</code></h2>
+</div>
+</section><section id="performance-profiling-tools-rprof-1" class="slide level2"><h2>Performance Profiling Tools: <code>Rprof()</code>
+</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="do">## consider import fastR/profile.R</span></span>
-<span id="cb10-2"><a></a><span class="fu">Rprof</span>(<span class="at">interval=</span>.<span class="dv">99</span>)</span>
-<span id="cb10-3"><a></a><span class="fu">invisible</span>(<span class="fu">prcomp</span>(x))</span>
-<span id="cb10-4"><a></a><span class="fu">Rprof</span>(<span class="cn">NULL</span>)</span>
-<span id="cb10-5"><a></a><span class="fu">summaryRprof</span>()</span>
-<span id="cb10-6"><a></a></span>
-<span id="cb10-7"><a></a><span class="co"># $by.self</span></span>
-<span id="cb10-8"><a></a><span class="co"># [1] self.time  self.pct   total.time total.pct</span></span>
-<span id="cb10-9"><a></a><span class="co"># &lt;0 rows&gt; (or 0-length row.names)</span></span>
-<span id="cb10-10"><a></a></span>
-<span id="cb10-11"><a></a><span class="co"># $by.total</span></span>
-<span id="cb10-12"><a></a><span class="co"># [1] total.time total.pct  self.time  self.pct</span></span>
-<span id="cb10-13"><a></a><span class="co"># &lt;0 rows&gt; (or 0-length row.names)</span></span>
-<span id="cb10-14"><a></a></span>
-<span id="cb10-15"><a></a><span class="co"># $sample.interval</span></span>
-<span id="cb10-16"><a></a><span class="co"># [1] 0.99</span></span>
-<span id="cb10-17"><a></a></span>
-<span id="cb10-18"><a></a><span class="co"># $sampling.time</span></span>
-<span id="cb10-19"><a></a><span class="co"># [1] 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span>interval<span class="op">=</span><span class="fl">.005</span><span class="op">)</span></span>
+<span><span class="va">x_pr</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">x</span>, retx <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/Rprof.html">Rprof</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/summaryRprof.html">summaryRprof</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">by.self</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                self.time self.pct total.time total.pct
+"La.svd"            1.465    83.71      1.500     85.71
+"aperm.default"     0.170     9.71      0.170      9.71
+"array"             0.030     1.71      0.030      1.71
+"is.finite"         0.025     1.43      0.025      1.43
+"any"               0.020     1.14      0.020      1.14</code></pre>
 </div>
-</section>
-<section id="performance-profiling-tools-rbenchmark" class="slide level2">
-<h2>Performance Profiling Tools: <strong>rbenchmark</strong></h2>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                self.time self.pct total.time total.pct
+"La.svd"            1.370    83.03      1.420     86.06
+"aperm.default"     0.155     9.39      0.155      9.39
+"array"             0.025     1.52      0.025      1.52
+"is.finite"         0.025     1.52      0.025      1.52
+"matrix"            0.025     1.52      0.025      1.52</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                self.time self.pct total.time total.pct
+"La.svd"            1.400    83.83      1.450     86.83
+"aperm.default"     0.150     8.98      0.150      8.98
+"is.finite"         0.030     1.80      0.030      1.80
+"array"             0.025     1.50      0.025      1.50
+"matrix"            0.025     1.50      0.025      1.50</code></pre>
+</div>
+</div>
+</section><section id="lazy-evaluation" class="slide level2 smaller"><h2>Lazy Evaluation</h2>
+<ul>
+<li>Function parameters are not evaluated until needed!</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>square <span class="ot">=</span> <span class="cf">function</span>(x) { <span class="co"># "pass-by-value" but no x copy made</span></span>
+<span id="cb15-2"><a></a>  x <span class="ot">=</span> x<span class="sc">*</span>x              <span class="co"># x is just used, not copied </span></span>
+<span id="cb15-3"><a></a>  x</span>
+<span id="cb15-4"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Common in functional languages</li>
+<li>Speeds up computation by
+<ul>
+<li>Better memory access patterns</li>
+<li>Prevents extra copies of data</li>
+<li>Not wasting computation on things never used</li>
+</ul>
+</li>
+</ul>
+<p>Time or profile more than once to remove possible lazy evaluation effects</p>
+<p>Read more: <a href="https://www.r-bloggers.com/2018/07/about-lazy-evaluation/">About lazy evaluation (R-bloggers)</a>, <a href="https://www.r-bloggers.com/2018/01/how-environments-work-in-r-and-what-is-lazy-evaluation/">How environments work in R and what is lazy evaluation (R-bloggers)</a></p>
+</section><section id="performance-profiling-tools-rbenchmark" class="slide level2"><h2>Performance Profiling Tools: <strong>rbenchmark</strong>
+</h2>
 <h3 id="a-package-that-easily-benchmarks-different-functions">a package that easily benchmarks different functions</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>x <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">1000</span><span class="sc">*</span><span class="dv">500</span>), <span class="at">nrow=</span><span class="dv">1000</span>, <span class="at">ncol=</span><span class="dv">500</span>)</span>
-<span id="cb11-2"><a></a></span>
-<span id="cb11-3"><a></a>f <span class="ot">=</span> <span class="cf">function</span>(x) <span class="fu">t</span>(x) <span class="sc">%*%</span> x</span>
-<span id="cb11-4"><a></a>g <span class="ot">=</span> <span class="cf">function</span>(x) <span class="fu">crossprod</span>(x)</span>
-<span id="cb11-5"><a></a></span>
-<span id="cb11-6"><a></a><span class="fu">library</span>(rbenchmark)</span>
-<span id="cb11-7"><a></a><span class="fu">benchmark</span>(<span class="fu">f</span>(x), <span class="fu">g</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">*</span><span class="fl">500</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1000</span>, ncol<span class="op">=</span><span class="fl">500</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">f</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">x</span></span>
+<span><span class="va">g</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/crossprod.html">crossprod</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://rbenchmark.googlecode.com">rbenchmark</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/rbenchmark/man/benchmark.html">benchmark</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  test replications elapsed relative user.self sys.self user.child sys.child
-1 f(x)          100   0.248    2.505     0.221    0.026          0         0
-2 g(x)          100   0.099    1.000     0.089    0.011          0         0</code></pre>
+1 f(x)          100   0.233     2.56     0.205    0.028          0         0
+2 g(x)          100   0.091     1.00     0.083    0.007          0         0</code></pre>
 </div>
 </div>
-</section>
-<aside class="notes">
-<section id="test-replications-elapsed-relative" class="title-slide slide level1 center">
-<h1>test replications elapsed relative</h1>
+</section><aside class="notes"><section id="test-replications-elapsed-relative" class="title-slide slide level1 center"><h1>test replications elapsed relative</h1>
 
-</section>
+</section><section id="fx-100-64.153-2.063" class="title-slide slide level1 center"><h1>1 f(x) 100 64.153 2.063</h1>
 
-<section id="fx-100-64.153-2.063" class="title-slide slide level1 center">
-<h1>1 f(x) 100 64.153 2.063</h1>
+</section><section id="gx-100-31.098-1.000" class="title-slide slide level1 center"><h1>2 g(x) 100 31.098 1.000</h1>
 
-</section>
-
-<section id="gx-100-31.098-1.000" class="title-slide slide level1 center">
-<h1>2 g(x) 100 31.098 1.000</h1>
-
-</section>
-
-<style type="text/css">
+</section><style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
           clip: rect(1px, 1px, 1px, 1px);
@@ -553,205 +558,223 @@
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-<section id="profiling-summary" class="slide level2">
-<h2>Profiling Summary</h2>
+      }</style></aside><section id="profiling-summary" class="slide level2"><h2>Profiling Summary</h2>
 <ul>
 <li>Profile, profile, profile<br>
 </li>
-<li>Use <code>system.time()</code> to get a general sense of a method<br>
+<li>Use <code><a href="https://rdrr.io/r/base/system.time.html">system.time()</a></code> to get a general sense of a method<br>
 </li>
-<li>Use <strong>rbenchmark</strong>’s <code>benchmark()</code> function to compare 2 methods</li>
-<li>Use <code>Rprof()</code> for more detailed profiling</li>
-<li>Other tools exist for more advanced applications (<strong>pbdPAPI</strong> and <strong>pbdPROF</strong> on GitHub/RBigData)</li>
-</ul>
-</section>
-<section id="vectorizing" class="slide level2">
-<h2>Vectorizing</h2>
+<li>Use <strong>rbenchmark</strong>’s <code><a href="https://rdrr.io/pkg/rbenchmark/man/benchmark.html">benchmark()</a></code> function to compare 2 methods</li>
+<li>Use <code><a href="https://rdrr.io/r/utils/Rprof.html">Rprof()</a></code> for more detailed profiling</li>
+<li>Other tools exist for more advanced and graphical output: <code>profvis()</code>
+</li>
+</ul></section><section id="vectorizing" class="slide level2"><h2>Vectorizing</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>n <span class="ot">=</span> <span class="fl">1e5</span></span>
-<span id="cb13-2"><a></a>x <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out=</span>n)</span>
-<span id="cb13-3"><a></a>f <span class="ot">=</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> <span class="fl">2.5</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">12</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fl">0.12</span>)</span>
-<span id="cb13-4"><a></a>y1 <span class="ot">=</span> <span class="fu">numeric</span>(n)</span>
-<span id="cb13-5"><a></a></span>
-<span id="cb13-6"><a></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb13-7"><a></a><span class="fu">system.time</span>({</span>
-<span id="cb13-8"><a></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(n))</span>
-<span id="cb13-9"><a></a>    y1[i] <span class="ot">=</span> <span class="fu">f</span>(x[i]) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
-<span id="cb13-10"><a></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">1e6</span></span>
+<span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out<span class="op">=</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">f</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">2.5</span><span class="op">*</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">12</span><span class="op">*</span><span class="va">x</span> <span class="op">+</span> <span class="fl">0.12</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">y1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.103   0.009   0.112 </code></pre>
+  0.990   0.079   1.070 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb15-2"><a></a><span class="fu">system.time</span>({</span>
-<span id="cb15-3"><a></a>  y2 <span class="ot">=</span> <span class="fu">f</span>(x) <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb15-4"><a></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>  <span class="va">y2</span> <span class="op">=</span> <span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.003   0.000   0.003 </code></pre>
+  0.030   0.001   0.030 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">all.equal</span>(y1, y2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-</section>
-<section id="compute-once-if-not-changing" class="slide level2">
-<h2>Compute Once if not Changing</h2>
+</section><section id="compute-once-if-not-changing" class="slide level2"><h2>Compute Once if not Changing</h2>
 <p>A is a very large matrix</p>
-<div class="sourceCode" id="cb19" data-code-line-numbers="2,7,9,10,12,17,19-21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
-<span id="cb19-2"><a></a>  Y <span class="ot">=</span> <span class="fu">t</span>(A) <span class="sc">%*%</span> Q</span>
-<span id="cb19-3"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb19-4"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
-<span id="cb19-5"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb19-6"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24" data-code-line-numbers="2,7,9,10,12,17,19-21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
+<span id="cb24-2"><a></a>  Y <span class="ot">=</span> <span class="fu">t</span>(A) <span class="sc">%*%</span> Q</span>
+<span id="cb24-3"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb24-4"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb24-5"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb24-6"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Move the transpose outside the loop:</p>
-<div class="sourceCode" id="cb20" data-code-line-numbers="1,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>tA <span class="ot">=</span> <span class="fu">t</span>(A)</span>
-<span id="cb20-2"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
-<span id="cb20-3"><a></a>  Y <span class="ot">=</span> tA <span class="sc">%*%</span> Q</span>
-<span id="cb20-4"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb20-5"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
-<span id="cb20-6"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb20-7"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="check-that-code-is-still-correct" class="slide level2">
-<h2>Check that Code is Still Correct</h2>
-<div class="sourceCode" id="cb21" data-code-line-numbers="7,16-19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
-<span id="cb21-2"><a></a>  Y <span class="ot">=</span> <span class="fu">t</span>(A) <span class="sc">%*%</span> Q</span>
-<span id="cb21-3"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb21-4"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
-<span id="cb21-5"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb21-6"><a></a>}</span>
-<span id="cb21-7"><a></a>Q1 <span class="ot">=</span> Q</span>
-<span id="cb21-8"><a></a></span>
-<span id="cb21-9"><a></a>tA <span class="ot">=</span> <span class="fu">t</span>(A)</span>
-<span id="cb21-10"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
-<span id="cb21-11"><a></a>  Y <span class="ot">=</span> tA <span class="sc">%*%</span> Q</span>
-<span id="cb21-12"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb21-13"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
-<span id="cb21-14"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb21-15"><a></a>}</span>
-<span id="cb21-16"><a></a>Q2 <span class="ot">=</span> Q</span>
-<span id="cb21-17"><a></a><span class="fu">all.equal</span>(Q1, Q2)</span>
-<span id="cb21-18"><a></a><span class="fu">identical</span>(Q1, Q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="example-from-a-real-r-package-on-cran" class="slide level2">
-<h2>Example from a Real R Package on CRAN</h2>
-<div class="sourceCode" id="cb22" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># ...</span></span>
-<span id="cb22-2"><a></a><span class="cf">while</span>(i<span class="sc">&lt;=</span>N){</span>
-<span id="cb22-3"><a></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>i){</span>
-<span id="cb22-4"><a></a>    d.k <span class="ot">=</span> <span class="fu">as.matrix</span>(x)[l<span class="sc">==</span>j,l<span class="sc">==</span>j]}</span>
-<span id="cb22-5"><a></a><span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25" data-code-line-numbers="1,3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>tA <span class="ot">=</span> <span class="fu">t</span>(A)</span>
+<span id="cb25-2"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
+<span id="cb25-3"><a></a>  Y <span class="ot">=</span> tA <span class="sc">%*%</span> Q</span>
+<span id="cb25-4"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb25-5"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb25-6"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb25-7"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="check-that-faster-code-is-still-correct" class="slide level2"><h2>Check that Faster Code is Still Correct</h2>
+<div class="sourceCode" id="cb26" data-code-line-numbers="7,16-19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
+<span id="cb26-2"><a></a>  Y <span class="ot">=</span> <span class="fu">t</span>(A) <span class="sc">%*%</span> Q</span>
+<span id="cb26-3"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb26-4"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb26-5"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb26-6"><a></a>}</span>
+<span id="cb26-7"><a></a>Q1 <span class="ot">=</span> Q</span>
+<span id="cb26-8"><a></a></span>
+<span id="cb26-9"><a></a>tA <span class="ot">=</span> <span class="fu">t</span>(A)</span>
+<span id="cb26-10"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)){</span>
+<span id="cb26-11"><a></a>  Y <span class="ot">=</span> tA <span class="sc">%*%</span> Q</span>
+<span id="cb26-12"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb26-13"><a></a>  Y <span class="ot">=</span> A <span class="sc">%*%</span> Q</span>
+<span id="cb26-14"><a></a>  Q <span class="ot">=</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
+<span id="cb26-15"><a></a>}</span>
+<span id="cb26-16"><a></a>Q2 <span class="ot">=</span> Q</span>
+<span id="cb26-17"><a></a><span class="fu">all.equal</span>(Q1, Q2)</span>
+<span id="cb26-18"><a></a><span class="fu">identical</span>(Q1, Q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="example-from-a-real-r-package-on-cran" class="slide level2"><h2>Example from a Real R Package on CRAN</h2>
+<div class="sourceCode" id="cb27" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># ...</span></span>
+<span id="cb27-2"><a></a><span class="cf">while</span>(i<span class="sc">&lt;=</span>N){</span>
+<span id="cb27-3"><a></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>i){</span>
+<span id="cb27-4"><a></a>    d.k <span class="ot">=</span> <span class="fu">as.matrix</span>(x)[l<span class="sc">==</span>j,l<span class="sc">==</span>j]}</span>
+<span id="cb27-5"><a></a><span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Convert to matrix outside the loop:</p>
-<div class="sourceCode" id="cb23" data-code-line-numbers="2,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># ...</span></span>
-<span id="cb23-2"><a></a>x.mat <span class="ot">=</span> <span class="fu">as.matrix</span>(x)</span>
-<span id="cb23-3"><a></a><span class="cf">while</span>(i<span class="sc">&lt;=</span>N){</span>
-<span id="cb23-4"><a></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>i){</span>
-<span id="cb23-5"><a></a>    d.k <span class="ot">=</span> x.mat[l<span class="sc">==</span>j,l<span class="sc">==</span>j]</span>
-<span id="cb23-6"><a></a><span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28" data-code-line-numbers="2,5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co"># ...</span></span>
+<span id="cb28-2"><a></a>x.mat <span class="ot">=</span> <span class="fu">as.matrix</span>(x)</span>
+<span id="cb28-3"><a></a><span class="cf">while</span>(i<span class="sc">&lt;=</span>N){</span>
+<span id="cb28-4"><a></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>i){</span>
+<span id="cb28-5"><a></a>    d.k <span class="ot">=</span> x.mat[l<span class="sc">==</span>j,l<span class="sc">==</span>j]</span>
+<span id="cb28-6"><a></a><span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>By changing just 1 line of code, performance of the main method of the package improved <strong>over 3.5x</strong> !</p>
-</section>
-<section id="preallocate-lists-and-vectors-instead-of-growing-them" class="slide level2">
-<h2>Preallocate lists and vectors Instead of Growing Them</h2>
+</section><section id="preallocate-lists-and-vectors-instead-of-growing-them" class="slide level2"><h2>Preallocate lists and vectors Instead of Growing Them</h2>
 <div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">=</span> <span class="fl">1e3</span></span>
+<span><span class="va">n</span> <span class="op">=</span> <span class="fl">1e5</span></span>
+<span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">m</span><span class="op">*</span><span class="va">n</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="va">m</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="va">result1</span> <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">newres</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mat</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">result1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">result1</span>, <span class="va">newres</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  6.070   1.806   7.896 </code></pre>
+  6.452   1.773   8.250 </code></pre>
 </div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="va">result2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">newres</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mat</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">result2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="va">newres</span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.402   0.036   0.439 </code></pre>
+  0.408   0.044   0.452 </code></pre>
 </div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">result1</span>, <span class="va">result2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-</section>
-<section id="specialize-more-general-functions" class="slide level2">
-<h2>Specialize More General Functions</h2>
+</section><section id="specialize-more-general-functions" class="slide level2"><h2>Specialize More General Functions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>x <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">20000</span><span class="sc">*</span><span class="dv">750</span>), <span class="at">nrow=</span><span class="dv">20000</span>, <span class="at">ncol=</span><span class="dv">750</span>)</span>
-<span id="cb27-2"><a></a></span>
-<span id="cb27-3"><a></a><span class="fu">system.time</span>({cx1 <span class="ot">=</span> <span class="fu">cov</span>(x)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">20000</span><span class="op">*</span><span class="fl">750</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">20000</span>, ncol<span class="op">=</span><span class="fl">750</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">cx1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  3.905   0.001   3.912 </code></pre>
+  3.883   0.002   3.890 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">system.time</span>({cx2 <span class="ot">=</span> <span class="fu">crossprod</span>(<span class="fu">sweep</span>(x, <span class="dv">2</span>, <span class="fu">colMeans</span>(x)))<span class="sc">/</span>(<span class="fu">nrow</span>(x) <span class="sc">-</span> <span class="dv">1</span>)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">cx2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/crossprod.html">crossprod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sweep.html">sweep</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.114   0.008   0.121 </code></pre>
+  0.113   0.007   0.120 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">all.equal</span>(cx1, cx2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">cx1</span>, <span class="va">cx2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p><span class="math inline">\(Cov(X) = \frac{(X - {\bf 1}\bar{x})^T(X - {\bf 1}\bar{x})}{n - 1},\)</span> where <span class="math inline">\(\bar{x}\)</span> is a row vector of column means of <span class="math inline">\(X\)</span> and <span class="math inline">\(\bf 1\)</span> is a column of 1s.</p>
-</section>
-<section id="memory-hierarchy-considerations-with-matrices-and-data.frames" class="slide level2">
-<h2>Memory Hierarchy Considerations with Matrices and data.frames</h2>
+</section><section id="memory-hierarchy-considerations-with-matrices-and-data.frames" class="slide level2 smaller"><h2>Memory Hierarchy Considerations with Matrices and data.frames</h2>
 <ul>
 <li>R matrices are stored by columns</li>
 <li>R data.frames (lists) are stored by variables</li>
 </ul>
 <div class="cell">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">memuse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/memuse/man/constructor.html">memuse</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>762.940 MiB</code></pre>
 </div>
 </div>
 <ul>
-<li>Columns contain contiguous data</li>
+<li>Columns contain contiguous data<br>
+</li>
 <li>Rows are scattered across columns</li>
 </ul>
-<h3 id="r-julia-matlab-and-fortran-are-column-major">R, Julia, Matlab, and Fortran are column-major</h3>
-<h3 id="python-and-c-are-row-major">Python and C are row-major</h3>
-</section>
-<section id="favor-contigous-access-to-arrays-and-lists" class="slide level2">
-<h2>Favor contigous access to arrays and lists</h2>
+<p>R, Julia, Matlab, and Fortran are <strong>column-major</strong><br>
+Python and C are <strong>row-major</strong></p>
+</section><section id="favor-contigous-access-to-arrays-and-lists" class="slide level2"><h2>Favor contigous access to arrays and lists</h2>
 <div class="cell">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="va">result1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="va">m</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">result1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mat</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.890   0.072   0.964 </code></pre>
+  0.848   0.065   0.918 </code></pre>
 </div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">tmat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.359   0.041   0.400 </code></pre>
+  0.362   0.041   0.403 </code></pre>
 </div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="va">result2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="va">m</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">result2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">tmat</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.232   0.052   0.285 </code></pre>
+  0.240   0.055   0.295 </code></pre>
 </div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">result1</span>, <span class="va">result2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-</section>
-<section id="programming-languages-hierarchy" class="slide level2 smaller">
-<h2>Programming Languages Hierarchy</h2>
+</section><section id="programming-languages-hierarchy" class="slide level2 smaller"><h2>Programming Languages Hierarchy</h2>
 <ul>
-<li><strong>High-level, Scripting Languages:</strong> R, Python, …
+<li>
+<strong>High-level, Scripting Languages:</strong> R, Python, …
 <ul>
 <li>Efficient for vectors, matrices, and arrays</li>
 <li>Interpreted at runtime to run pre-compiled executables</li>
-</ul></li>
-<li><strong>Mid-level, Compiled Languages:</strong> C, C++, Fortran, …
+</ul>
+</li>
+<li>
+<strong>Mid-level, Compiled Languages:</strong> C, C++, Fortran, …
 <ul>
-<li><p>Fast enough for loops through elements of long vectors</p></li>
-<li><p>Need compiling and linking to machine libraries before they run<br>
-</p></li>
+<li><p>Fast enough for loops through single elements of long vectors</p></li>
+<li><p>Need compiling and linking to machine libraries before they run<br></p></li>
 <li><p>Still machine and operating system independent</p></li>
-</ul></li>
-<li><strong>Low-level, Machine code</strong>
+</ul>
+</li>
+<li>
+<strong>Low-level, Machine code</strong>
 <ul>
 <li>Hardware and operating system specific</li>
 <li>Manipulating data between registers and memory hierarchies</li>
-</ul></li>
 </ul>
-</section>
-<section id="rcpp-incorporating-c-code-into-r" class="slide level2">
-<h2><strong>Rcpp:</strong> Incorporating C++ Code into R</h2>
+</li>
+</ul></section><section id="rcpp-incorporating-c-code-into-r" class="slide level2"><h2>
+<strong>Rcpp:</strong> Incorporating C++ Code into R</h2>
 <ul>
 <li>Simplifies integrating C++ code with R</li>
 <li>Maps R objects (vectors, matrices, functions, environments, etc.) to C++ classes</li>
@@ -759,28 +782,26 @@
 <li>Appropriate when custom element-wise operations cannot be vectorized with R</li>
 </ul>
 <h4 id="read-advanced-r-high-performance-functions-with-rcpp-by-hadley-wickham">Read Advanced R: <a href="https://adv-r.hadley.nz/rcpp.html">High performance functions with Rcpp</a> by Hadley Wickham</h4>
-</section>
-<section id="rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions" class="slide level2">
-<h2><strong>Rfast and RFast2</strong> Packages: A collection of <strong>Rcpp</strong>-Implemented Functions</h2>
+</section><section id="rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions" class="slide level2"><h2>
+<strong>Rfast and RFast2</strong> Packages: A collection of <strong>Rcpp</strong>-Implemented Functions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">system.time</span>({cx2 <span class="ot">=</span> <span class="fu">crossprod</span>(<span class="fu">sweep</span>(x, <span class="dv">2</span>, <span class="fu">colMeans</span>(x)))<span class="sc">/</span>(<span class="fu">nrow</span>(x) <span class="sc">-</span> <span class="dv">1</span>)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">cx2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/crossprod.html">crossprod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sweep.html">sweep</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.327   0.033   0.363 </code></pre>
+  0.335   0.023   0.361 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">system.time</span>({cx3 <span class="ot">=</span> Rfast<span class="sc">::</span><span class="fu">cova</span>(x)})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">cx3</span> <span class="op">=</span> <span class="fu">Rfast</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rfast/man/cova.html">cova</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.064   0.003   0.067 </code></pre>
+  0.065   0.003   0.067 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">all.equal</span>(cx2, cx3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">cx2</span>, <span class="va">cx3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p><a href="https://peerj.com/preprints/26605">Taking R to its limits: 70+ tips</a> by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.</p>
-<aside class="notes">
-<p>Lots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!</p>
+<aside class="notes"><p>Lots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -792,34 +813,16 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
 </section>
-    </div>
+</div>
   </div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -1010,9 +1013,7 @@
           RevealZoom
         ]
       });
-    </script>
-    
-    <script>
+    </script><script>
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
       // slide changes (different for each slide format).
@@ -1047,9 +1048,7 @@
         }
 
       })();
-    </script>
-
-    <script id="quarto-html-after-body" type="application/javascript">
+    </script><script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -1203,6 +1202,6 @@
       }
     });
     </script>
-    
+
 
 </body></html>

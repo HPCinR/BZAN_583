@@ -1,19 +1,35 @@
 ---
 title: "Week 2 Assignment: Faster"
 editor: source
+engine: knitr
 ---
-**Still under development ...**
 
 Find some R code that YOU put together for a prior assignment or project in another class over the last year or two, profile it, and make changes that make it at least 2x faster. This can be a single function from a larger code but it should not be just trivial. Roughly 10 to 20 lines of your R code that originally takes more than, say, 30 seconds to run.
 
 This is your video game! When you get things 2x faster, you just beat the game and you move up a level!
 
+Two files `profile.sh` and `profile.R` have been added to the Template GitHub repository [HPCinR/BZAN_583_code](https://github.com/HPCinR/BZAN_583_code). You will need to have a copy of this repository in your GitHub account and clone the copy to your laptop and to login.delta.ncsa.illinois.edu. How you proceed, depends on whether you already have the ealier copy of the Template in your GitHub account.
+
+No earlier copy: (1) Copy [HPCinR/BZAN_583_code](https://github.com/HPCinR/BZAN_583_code) to your GitHub account with "Use this template" green button. (2) Clone your copy to your laptop RStudio as New Project. (3) Clone the same to your login.delta.ncsa.illinois.edu account with `git clone ...`.
+
+Have earlier copy: Easiest (and recommended) is to just copy and paste the two new files into your RStudio project of the earlier copy. Then `commit` and `push` to GitHub. At this point you are ready to `git pull` them on Delta. An alternative is to do a proper git update with these [Updating Templates](https://www.howtogeek.com/devops/how-to-create-and-manage-github-templates-to-easily-create-new-projects/) instructions.
+
+Once you have the two files `profile.sh` and `profile.R` on Delta, you can submit the batch job to run the code with
+```{bash}
+#| echo: true
+#| eval: false
+sbatch profile.sh
+```
+Replace the `prcomp()` function in `profile.R` with your code to profile. You do this in your laptop RStudio session, `commit` and `push` to GitHub and `pull` on Delta. Then you submit it again as above. Your output will be in `utk.e` and `utk.o`. Rinse and repeat until you have faster code.
+
+Submit the following four text files to Canvas as your solution:
+
 **Result 1:** Two or three sentences that describe where the code was used originally and its purpose. The intent is documentation that this is YOUR R code and to give me some understanding of the code.  
 
-**Result 2:** The code, its summary profile with 10 top components, and the `system.time()` of the code "before".  
+**Result 2:** The code, its summary profile with top components, and the `system.time()` of the code "before".  
 
-**Result 3:** The code, its summary profile with 10 top components, and the `system.time()` of the code "after".   
+**Result 3:** The code, its summary profile with top components, and the `system.time()` of the code "after".   
 
 **Result 4:** Two or three sentences that explain your changes and why things got faster.  
 
-Submit the results as 4 text files to Canvas.
+

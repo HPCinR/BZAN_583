@@ -228,26 +228,22 @@ method of the package improved **over 3.5x** !
 ```{r}
 #| code-line-numbers: false
 #| echo: true
-
 m = 1e3
 n = 1e5
 mat = matrix(runif(m*n), nrow = m)
-
 system.time({
 result1 = NULL
 for(i in seq_len(n)) {
     newres = mean(mat[, i])
     result1 = c(result1, newres)
-}
-})
+}})
 
 system.time({
 result2 = vector("double", n)
 for(i in seq_len(n)) {
     newres = mean(mat[, i])
     result2[i] = newres
-}
-})
+}})
 all.equal(result1, result2)
 ```
 

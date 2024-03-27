@@ -25,7 +25,7 @@ downloading packages practice, git and GitHub setup
 *Week 2, March 25 & 27*  
 
 Lectures: [Coding for Faster R](materials/lectures/2-faster)\
-[Hardware and Memory Hierarchy Concepts](materials/lectures/2-hardware)\
+[Memory Hierarchy and Hardware](materials/lectures/2-hardware)\
 Assignment: [Faster Code](materials/assignment/2-faster) 
 <!-- double down on faster with memory hierarchy examples -->
 

@@ -1,5 +1,5 @@
 ---
-title: "Memory Hierarchies and Hardware"
+title: "Memory Hierarchy and Hardware"
 format: 
   revealjs:
     chalkboard: true
@@ -19,7 +19,7 @@ editor: source
 - A cache miss triggers a memory page swap from level below  
 <br>
 
-Large data sets do not fit in cache: contiguous memory access patterns speed up code
+#### Large data sets do not fit in cache: contiguous memory access patterns speed up code
 
 ## Memory Hierarchy {background-image="/pics/ParallelHardware/MemHierarchy.png" background-size="80%" background-position="center" background-opacity=0.2}
 
@@ -43,7 +43,7 @@ Large data sets do not fit in cache: contiguous memory access patterns speed up 
 
 -   [*Single Instruction, Single Data (**SISD**):*]{style="color:green;"} scalar processor, serial program (old-style CPU)
 -   [*Single Instruction, Multiple Data (**SIMD**):*]{style="color:green;"} vector processor, array processor (old-style GPU)
--   [*Multiple Instruction, Multiple Data (**MIMD**):*]{style="color:green;"} multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today's CPU and GPU but leaning to legacy)
+-   [*Multiple Instruction, Multiple Data (**MIMD**):*]{style="color:green;"} multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today's CPU and GPU, but each still leans to legacy)
 -   [*Multiple Instruction, Single Data (**MISD**):*]{style="color:green;"} is not used much
 
 ## Three Processor Technology Streams
@@ -86,22 +86,6 @@ Large data sets do not fit in cache: contiguous memory access patterns speed up 
 #### [CPUs fast and versatile but limited parallelism]{style="color:green;"}  
 #### [GPUs slower and less versatile but extreme parallelism (4x+ cores)]{style="color:green;"}  
 
-## Parallel Programming Models {.smaller}
-
-### Shared Memory Parallel  
--   **Unix fork:** fork a process and let the OS manage it  
--   **Multithreading:** explicitly program parallel sections  
--   **OpenMP:** give explicit hints to a compiler to make it parallel  
-
-### Distributed Memory Parallel  
--   **Manager-workers:** most common in simple cases  
--   **Single program, multiple data (SPMD):** most common and most scalable across nodes on clusters  
--   **MapReduce:** common in customer database processing, continuous services  
--   **Dataflow:** dependency graph directed, can involve all of the above <br><br>
-
-#### Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.
-#### Unix fork more common in scripting languages like R and Python
-
 ## UMA and NUMA
 
 #### Uniform memory access
@@ -141,3 +125,19 @@ Large data sets do not fit in cache: contiguous memory access patterns speed up 
 ## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/Slide6.png" background-size="90%" background-position="center"}
 
 ## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/Slide7.png" background-size="90%" background-position="center"}
+
+## Parallel Programming Models {.smaller}
+
+### Shared Memory Parallel  
+-   **Unix fork:** fork a process and let the OS manage it  ([parallel pkg]{style="color:green;"})  
+-   **Multithreading:** explicitly program parallel sections ([libraries]{style="color:green;"})  
+-   **OpenMP:** give explicit hints to a compiler to make it parallel ([libraries]{style="color:green;"})
+
+### Distributed Memory Parallel  
+-   **Manager-workers:** most common in simple cases    
+-   **Single program, multiple data (SPMD):** common on clusters ([pbdMPI pkg]{style="color:green;"}) 
+-   **MapReduce:** common in customer processing, continuous services ([sparklyr pkg]{style="color:green;"})  
+-   **Dataflow:** dependency graph directed, can involve all of the above <br><br>
+
+#### [Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP]{style="color:green;"}
+#### [Unix fork more common in scripting languages like R and Python]{style="color:green;"}

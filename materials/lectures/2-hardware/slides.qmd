@@ -1,12 +1,32 @@
 ---
-title: "Hardware, and Memory Hierarchies"
+title: "Memory Hierarchies and Hardware"
 format: 
   revealjs:
     chalkboard: true
 editor: source
 ---
-## Titan: (2012-19){background-image="/pics/ParallelHardware/Titan.png" background-size="70%" background-position="bottom"}
+## Memory Hierarchy {background-image="/pics/ParallelHardware/MemHierarchy.png" background-size="80%" background-position="center"}
+
+::: footer
+[From Brown U, CSCI 0300 (2022)](https://cs.brown.edu/courses/csci0300/2022/assign/labs/lab4.html) CC-BY 4.0 License $\qquad$ **ns** = $10^{-9}$second $\quad$ **ms** = $10^{-3}$second
+:::
+
+## Memory Hierarchy {background-image="/pics/ParallelHardware/MemHierarchy.png" background-size="80%" background-position="center" background-opacity=0.2}
+
+- Each level serves as cache for the level below  
+- A data request checks each cache until satisfied
+- Not finding an item generates a "cache miss"  
+- A cache miss triggers a memory page swap from level below  
+<br>
+
+Large data sets do not fit in cache: contiguous memory access patterns speed up code
+
+## Memory Hierarchy {background-image="/pics/ParallelHardware/MemHierarchy.png" background-size="80%" background-position="center" background-opacity=0.2}
+
+
+## Titan{background-image="/pics/ParallelHardware/Titan.png" background-size="70%" background-position="bottom"}
 ### 27 PF
+#### 2012-19
 
 ## Delta: (2022){background-image="/pics/ParallelHardware/delta_front_1.png" background-size="90%" background-position="center"}
 ### 8 PF
@@ -17,84 +37,67 @@ editor: source
 ## Delta: (2022){background-image="/pics/ParallelHardware/delta-row.jpg" background-size="70%" background-position="center"}
 ### 8 PF
 
-## A High-Level Scripting Language View of Hardware
-
-### An 
-
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide7.png" background-size="90%" background-position="center"}
-
-<!--
-## same in mermaid
-```{mermaid}
-flowchart LR
-  subgraph Processor
-    direction TB
-    subgraph Cores
-        direction RL
-        core0 ~~~ core1 ~~~ core2 ~~~ core3
-        style core0 fill:lightblue,stroke:lightblue,stroke-width:20px
-        style core1 fill:lightblue,stroke:lightblue,stroke-width:20px
-        style core2 fill:lightblue,stroke:lightblue,stroke-width:20px
-        style core3 fill:lightblue,stroke:lightblue,stroke-width:20px
-    end
-    subgraph Network
-    end
-    subgraph Memory
-    end
-  end
-  Cores ~~~ Network
-```
--->
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware1.png" background-size="90%" background-position="center"}
 
 ## Flynn's Taxonomy (1972) 
 
--   *Single Instruction, Single Data (**SISD**):* scalar processor, serial program (old-style CPU)
--   *Single Instruction, Multiple Data (**SIMD**):* vector processor, array processor (old-style GPU)
--   *Multiple Instruction, Multiple Data (**MIMD**):* multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today's CPU and GPU but leaning to legacy)
--   *Multiple Instruction, Single Data (**MISD**):* is not used much
+-   [*Single Instruction, Single Data (**SISD**):*]{style="color:green;"} scalar processor, serial program (old-style CPU)
+-   [*Single Instruction, Multiple Data (**SIMD**):*]{style="color:green;"} vector processor, array processor (old-style GPU)
+-   [*Multiple Instruction, Multiple Data (**MIMD**):*]{style="color:green;"} multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today's CPU and GPU but leaning to legacy)
+-   [*Multiple Instruction, Single Data (**MISD**):*]{style="color:green;"} is not used much
+
+## Three Processor Technology Streams
+
+[**Computers:**]{style="color:green;"}  
+- **Fast and general** computing  
+<br>
+  
+[**Graphics:**]{style="color:green;"}  
+- Lots of pixels with same independent operations  
+- **Highly parallel and simple** processing  
+<br>
+
+[**Cellphones:**]{style="color:green;"}  
+- Small devices  
+- **Low power** operation  
+<br>
+
+[All three have matured into large cluster deployment]{style="color:green;"}
 
 ## Shared Memory Hardware {.smaller}
 
-**Multicore CPU**  
-- one or two chips with multiple cores  
-- Current high-end is 64 cores (e.g. AMD EPYC "Milan")  
+**CPU**  
+- one or two chips, each with multiple cores  
+- Current high-end is 64 cores (e.g. AMD EPYC "Milan" on Delta)  
 - Hosts operating system (OS)  
-
-**ARM CPU-GPU**  
-- A hybrid unified memory architecture  
-- Low power requirements  
-- Hosts OS
 
 **GPU**  
 - Excellent SIMD throughput at the expense of bad serial performance  
 - Separate memory, so "offloading" co-processor concept  
-- Low power requirements, lots of slow cores  
+- Lower power requirements per core, lots of slow cores  
 - Does not host OS  
 
-#### The takeaway:
+**ARM CPU-GPU**  
+- A hybrid unified memory architecture  
+- Low power requirements  
+- Hosts OS  
 
-CPU fast and versatile but limited parallelism  
-GPU slower and less versatile but extreme parallelism (4x+ cores)  
 
-::: notes  
--   ARM was big in cellphones, now big in HPC  
--   Nvidia is also heading toward ARM  
--   My bet would be with ARM. 
-:::
-
+#### [CPUs fast and versatile but limited parallelism]{style="color:green;"}  
+#### [GPUs slower and less versatile but extreme parallelism (4x+ cores)]{style="color:green;"}  
 
 ## Parallel Programming Models {.smaller}
 
 ### Shared Memory Parallel  
--   Unix fork  
--   Multithreading  
--   OpenMP
+-   **Unix fork:** fork a process and let the OS manage it  
+-   **Multithreading:** explicitly program parallel sections  
+-   **OpenMP:** give explicit hints to a compiler to make it parallel  
 
 ### Distributed Memory Parallel  
--   manager-workers: most common in simple cases  
--   Single program, multiple data (SPMD): most common and most scalable on clusters  
--   MapReduce: common in customer database processing, continuous services  
--   Dataflow: dependency graph directed, still evolving <br><br>
+-   **Manager-workers:** most common in simple cases  
+-   **Single program, multiple data (SPMD):** most common and most scalable across nodes on clusters  
+-   **MapReduce:** common in customer database processing, continuous services  
+-   **Dataflow:** dependency graph directed, can involve all of the above <br><br>
 
 #### Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.
 #### Unix fork more common in scripting languages like R and Python
@@ -109,18 +112,23 @@ GPU slower and less versatile but extreme parallelism (4x+ cores)
 
 - A larger collection of multicore chips with hardware/software enabled global memory access
 - Some memory is closer than other memory
+  - More complex cache strategies
 
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/Slide1.png" background-size="90%" background-position="center"}
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware1.png" background-size="90%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/Slide2.png" background-size="90%" background-position="center"}
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware2.png" background-size="90%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/Slide3.png" background-size="90%" background-position="center"}
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware3.png" background-size="90%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/Slide4.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware4.png" background-size="90%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/Slide5.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware5.png" background-size="90%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/Slide6.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware6.png" background-size="90%" background-position="center"}
+
+##  {background-image="/pics/ParallelHardware/ParallelHardware7.png" background-size="90%" background-position="center"}
+
+##  {background-image="/pics/ParallelHardware/ParallelHardware8.png" background-size="90%" background-position="center"}
 
 ## Native Programming Mindset {background-image="/pics/ParallelSoftware/Slide2.png" background-size="90%" background-position="center"}
 

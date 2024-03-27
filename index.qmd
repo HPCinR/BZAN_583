@@ -7,7 +7,7 @@ This course is intended to provide an ability to use modern HPC systems for data
 
 It is the first time this course has been offered so there will be some rough edges and some material provided "just in time." Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material. 
 
-**Material below is under construction!**
+**Material below Week 1 is under construction!**
 
 ::: {layout="[1,2]"}
 *Week 1, March 18 & 20*

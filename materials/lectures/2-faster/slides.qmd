@@ -241,8 +241,7 @@ for(i in seq_len(n)) {
 system.time({
 result2 = vector("double", n)
 for(i in seq_len(n)) {
-    newres = mean(mat[, i])
-    result2[i] = newres
+    result2[i] = mean(mat[, i])
 }})
 all.equal(result1, result2)
 ```

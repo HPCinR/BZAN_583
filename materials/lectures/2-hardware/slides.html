@@ -10,7 +10,7 @@
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.549">
 
-  <title>HPC for Data Science in R - BZAN 583 - Memory Hierarchies and Hardware</title>
+  <title>HPC for Data Science in R - BZAN 583 - Memory Hierarchy and Hardware</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,7 +327,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Memory Hierarchies and Hardware</h1>
+  <h1 class="title">Memory Hierarchy and Hardware</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -350,7 +350,7 @@
 <li>A cache miss triggers a memory page swap from level below<br>
 <br></li>
 </ul>
-<p>Large data sets do not fit in cache: contiguous memory access patterns speed up code</p>
+<h4 id="large-data-sets-do-not-fit-in-cache-contiguous-memory-access-patterns-speed-up-code">Large data sets do not fit in cache: contiguous memory access patterns speed up code</h4>
 </section>
 <section id="memory-hierarchy-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/MemHierarchy.png" data-background-size="80%" data-background-position="center" data-background-opacity="0.2">
 <h2>Memory Hierarchy</h2>
@@ -380,7 +380,7 @@
 <ul>
 <li><span style="color:green;"><em>Single Instruction, Single Data (<strong>SISD</strong>):</em></span> scalar processor, serial program (old-style CPU)</li>
 <li><span style="color:green;"><em>Single Instruction, Multiple Data (<strong>SIMD</strong>):</em></span> vector processor, array processor (old-style GPU)</li>
-<li><span style="color:green;"><em>Multiple Instruction, Multiple Data (<strong>MIMD</strong>):</em></span> multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today’s CPU and GPU but leaning to legacy)</li>
+<li><span style="color:green;"><em>Multiple Instruction, Multiple Data (<strong>MIMD</strong>):</em></span> multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today’s CPU and GPU, but each still leans to legacy)</li>
 <li><span style="color:green;"><em>Multiple Instruction, Single Data (<strong>MISD</strong>):</em></span> is not used much</li>
 </ul>
 </section>
@@ -416,29 +416,6 @@
 - Hosts OS</p>
 <h4 id="cpus-fast-and-versatile-but-limited-parallelism"><span style="color:green;">CPUs fast and versatile but limited parallelism</span></h4>
 <h4 id="gpus-slower-and-less-versatile-but-extreme-parallelism-4x-cores"><span style="color:green;">GPUs slower and less versatile but extreme parallelism (4x+ cores)</span></h4>
-</section>
-<section id="parallel-programming-models" class="slide level2 smaller">
-<h2>Parallel Programming Models</h2>
-<h3 id="shared-memory-parallel">Shared Memory Parallel</h3>
-<ul>
-<li><strong>Unix fork:</strong> fork a process and let the OS manage it<br>
-</li>
-<li><strong>Multithreading:</strong> explicitly program parallel sections<br>
-</li>
-<li><strong>OpenMP:</strong> give explicit hints to a compiler to make it parallel</li>
-</ul>
-<h3 id="distributed-memory-parallel">Distributed Memory Parallel</h3>
-<ul>
-<li><strong>Manager-workers:</strong> most common in simple cases<br>
-</li>
-<li><strong>Single program, multiple data (SPMD):</strong> most common and most scalable across nodes on clusters<br>
-</li>
-<li><strong>MapReduce:</strong> common in customer database processing, continuous services<br>
-</li>
-<li><strong>Dataflow:</strong> dependency graph directed, can involve all of the above <br><br></li>
-</ul>
-<h4 id="largest-codes-use-combination-of-spmd-dataflow-and-multithreading-or-openmp.">Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP.</h4>
-<h4 id="unix-fork-more-common-in-scripting-languages-like-r-and-python">Unix fork more common in scripting languages like R and Python</h4>
 </section>
 <section id="uma-and-numa" class="slide level2">
 <h2>UMA and NUMA</h2>
@@ -496,6 +473,28 @@
 </section>
 <section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7.png" data-background-size="90%" data-background-position="center">
 <h2>R Interfaces to Low-Level Native Tools</h2>
+</section>
+<section id="parallel-programming-models" class="slide level2 smaller">
+<h2>Parallel Programming Models</h2>
+<h3 id="shared-memory-parallel">Shared Memory Parallel</h3>
+<ul>
+<li><strong>Unix fork:</strong> fork a process and let the OS manage it (<span style="color:green;">parallel pkg</span>)<br>
+</li>
+<li><strong>Multithreading:</strong> explicitly program parallel sections (<span style="color:green;">libraries</span>)<br>
+</li>
+<li><strong>OpenMP:</strong> give explicit hints to a compiler to make it parallel (<span style="color:green;">libraries</span>)</li>
+</ul>
+<h3 id="distributed-memory-parallel">Distributed Memory Parallel</h3>
+<ul>
+<li><strong>Manager-workers:</strong> most common in simple cases<br>
+</li>
+<li><strong>Single program, multiple data (SPMD):</strong> common on clusters (<span style="color:green;">pbdMPI pkg</span>)</li>
+<li><strong>MapReduce:</strong> common in customer processing, continuous services (<span style="color:green;">sparklyr pkg</span>)<br>
+</li>
+<li><strong>Dataflow:</strong> dependency graph directed, can involve all of the above <br><br></li>
+</ul>
+<h4 id="largest-codes-use-combination-of-spmd-dataflow-and-multithreading-or-openmp"><span style="color:green;">Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP</span></h4>
+<h4 id="unix-fork-more-common-in-scripting-languages-like-r-and-python"><span style="color:green;">Unix fork more common in scripting languages like R and Python</span></h4>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

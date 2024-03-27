@@ -278,7 +278,7 @@ memuse::memuse(mat)
 R, Julia, Matlab, and Fortran are **column-major**  
 Python and C are **row-major**  
 
-## Favor contigous access to arrays and lists
+## Contiguous access to arrays and lists
 
 ```{r}
 #| code-line-numbers: false
@@ -286,17 +286,15 @@ Python and C are **row-major**
 system.time({
 result1 = vector("double", m)
 for(i in seq_len(m)) {
-    result1[i] = mean(mat[i, ])
-}
-})
+    result1[i] = mean(mat[i, ])  # non-contiguous access by rows
+}})
 
-system.time({tmat = t(mat)})
+system.time({tmat = t(mat)}) # transpose for columnar access
 system.time({
 result2 = vector("double", m)
 for(i in seq_len(m)) {
-    result2[i] = mean(tmat[, i])
-}
-})
+    result2[i] = mean(tmat[, i]) # contiguous access via columns
+}})
 all.equal(result1, result2)
 ```
 

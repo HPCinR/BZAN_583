@@ -23,12 +23,11 @@ editor: source
 
 ## Memory Hierarchy {background-image="/pics/ParallelHardware/MemHierarchy.png" background-size="80%" background-position="center" background-opacity=0.2}
 
-
-## Titan{background-image="/pics/ParallelHardware/Titan.png" background-size="70%" background-position="bottom"}
+## Titan{background-image="/pics/ParallelHardware/Titan.png" background-size="60%" background-position="bottom"}
 ### 27 PF
 #### 2012-19
 
-## Delta: (2022){background-image="/pics/ParallelHardware/delta_front_1.png" background-size="90%" background-position="center"}
+## Delta: (2022){background-image="/pics/ParallelHardware/delta_front_1.png" background-size="80%" background-position="center"}
 ### 8 PF
 
 ## Delta: (2022){background-image="/pics/ParallelHardware/ncsa-delta-back.jpg" background-size="80%" background-position="center"}
@@ -37,7 +36,7 @@ editor: source
 ## Delta: (2022){background-image="/pics/ParallelHardware/delta-row.jpg" background-size="70%" background-position="center"}
 ### 8 PF
 
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware1.png" background-size="90%" background-position="center"}
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware1.png" background-size="80%" background-position="center"}
 
 ## Flynn's Taxonomy (1972) 
 
@@ -46,7 +45,7 @@ editor: source
 -   [*Multiple Instruction, Multiple Data (**MIMD**):*]{style="color:green;"} multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today's CPU and GPU, but each still leans to legacy)
 -   [*Multiple Instruction, Single Data (**MISD**):*]{style="color:green;"} is not used much
 
-## Three Processor Technology Streams
+## Three Processor Technology Streams {.smaller}
 
 [**Computers:**]{style="color:green;"}  
 - **Fast and general** computing  
@@ -67,12 +66,12 @@ editor: source
 ## Shared Memory Hardware {.smaller}
 
 **CPU**  
-- one or two chips, each with multiple cores  
+- One or two chips, each with multiple cores  
 - Current high-end is 64 cores (e.g. AMD EPYC "Milan" on Delta)  
 - Hosts operating system (OS)  
 
 **GPU**  
-- Excellent SIMD throughput at the expense of bad serial performance  
+- Excellent SIMD throughput 
 - Separate memory, so "offloading" co-processor concept  
 - Lower power requirements per core, lots of slow cores  
 - Does not host OS  
@@ -98,33 +97,33 @@ editor: source
 - Some memory is closer than other memory
   - More complex cache strategies
 
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware1.png" background-size="90%" background-position="center"}
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware1.png" background-size="80%" background-position="center"}
 
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware2.png" background-size="90%" background-position="center"}
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware2.png" background-size="80%" background-position="center"}
 
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware3.png" background-size="90%" background-position="center"}
+## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelHardware/ParallelHardware3.png" background-size="80%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/ParallelHardware4.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware4.png" background-size="80%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/ParallelHardware5.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware5.png" background-size="80%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/ParallelHardware6.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware6.png" background-size="80%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/ParallelHardware7.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware7.png" background-size="80%" background-position="center"}
 
-##  {background-image="/pics/ParallelHardware/ParallelHardware8.png" background-size="90%" background-position="center"}
+##  {background-image="/pics/ParallelHardware/ParallelHardware8.png" background-size="80%" background-position="center"}
 
-## Native Programming Mindset {background-image="/pics/ParallelSoftware/Slide2.png" background-size="90%" background-position="center"}
+## Native Programming Mindset {background-image="/pics/ParallelSoftware/Slide2.png" background-size="80%" background-position="center"}
 
-## Native Programming Models and Tools {background-image="/pics/ParallelSoftware/Slide3.png" background-size="90%" background-position="center"}
+## Native Programming Models and Tools {background-image="/pics/ParallelSoftware/Slide3.png" background-size="80%" background-position="center"}
 
-## 40 Years of Parallel Computing {background-image="/pics/ParallelSoftware/Slide4.png" background-size="90%" background-position="center"}
+## 40 Years of Parallel Computing {background-image="/pics/ParallelSoftware/Slide4.png" background-size="80%" background-position="center"}
 
-## Last 20 years of Advances {background-image="/pics/ParallelSoftware/Slide5.png" background-size="90%" background-position="center"}
+## Last 20 years of Advances {background-image="/pics/ParallelSoftware/Slide5.png" background-size="80%" background-position="center"}
 
-## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/Slide6.png" background-size="90%" background-position="center"}
+## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/Slide6.png" background-size="80%" background-position="center"}
 
-## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/Slide7.png" background-size="90%" background-position="center"}
+## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/Slide7.png" background-size="80%" background-position="center"}
 
 ## Parallel Programming Models {.smaller}
 

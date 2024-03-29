@@ -11,8 +11,10 @@ editor: source
 * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
   * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
 
-* LAPACK: dense and banded matrix decompositions and more  
-  * $\quad LU$ $\quad LL^T$ $\quad QR$ $\quad UDV^T$ $\quad VD^2V^T$ $\quad\|\cdot\|_p$  
+* LAPACK: matrix decompositions and more  
+
+<!--
+$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
 
 * Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries  
 
@@ -29,7 +31,7 @@ $n$ - Number of chunks (or processes)
 $t_n$ - Single chunk time with $n$ chunks   
 $t_p$ - Parallel time  
 
-## Serial Section (Amdahl's Law) {background-image="/pics/fork/Slide3.png" background-size="1000px" background-position="center" .smaller}  
+## Serial Section (Amdahl's Law) {background-image="/pics/fork/Slide3.png" background-size="90%" background-position="center" .smaller}  
 
 $$\qquad$$  
 $$t_p = t_s + t_n > t_s$$  
@@ -43,7 +45,7 @@ $t_s$ - Serial section time
 
 #### Strong Scaling: fixed work, increasing resources  
 
-## Serial Section (Gustafson's Law) {background-image="/pics/fork/Slide3.png" background-size="1000px" background-position="center" .smaller}  
+## Serial Section (Gustafson's Law) {background-image="/pics/fork/Slide3.png" background-size="90%" background-position="center" .smaller}  
 
 $$\qquad$$  
 $$t_p = t_s + t_n$$  
@@ -61,7 +63,7 @@ $t_s$ - Serial section time
 Weak: misnomer: the speedup is actually great
 :::
 
-## Parallel Overhead {background-image="/pics/fork/Slide4.png" background-size="1000px" background-position="center" .smaller}
+## Parallel Overhead {background-image="/pics/fork/Slide4.png" background-size="90%" background-position="center" .smaller}
 
 $$\qquad$$  $$\qquad$$  
 $$t_p = t_s + t_n + t_o(n)$$  
@@ -72,7 +74,7 @@ $t_p$ - Parallel time
 $t_s$ - Serial section time  
 $t_o(n)$ - Parallel overhead time  
 
-## Replication of Serial Section {background-image="/pics/fork/Slide5.png" background-size="1000px" background-position="center" .smaller}
+## Replication of Serial Section {background-image="/pics/fork/Slide5.png" background-size="90%" background-position="center" .smaller}
 
 $$\qquad$$  $$\qquad$$  $$\qquad$$  $$\qquad$$  
 
@@ -87,7 +89,7 @@ $t_o(n)$ - Parallel overhead time
 
 #### Replication can reduce communication overhead due to communication
 
-## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/Slide8.png" background-size="900px" background-position="center"}
+## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/Slide8.png" background-size="80%" background-position="center"}
 
 ::: notes
 * we begin with `paralel`'s multicore parts
@@ -112,7 +114,7 @@ $t_o(n)$ - Parallel overhead time
 
 .footnote[A deeper discussion of `fork` memory (if you have interest) on [YouTube](https://www.youtube.com/watch?v=8hVLcyBkSXY) by Chris Kanich (UIC)]
 
-## Copy-on-write  {background-image="/pics/fork/Slide1.png" background-size="1100px" background-position="center"}
+## Copy-on-write  {background-image="/pics/fork/Slide1.png" background-size="90%" background-position="center"}
 
 ::: notes
 * All done with pointers
@@ -122,7 +124,7 @@ $t_o(n)$ - Parallel overhead time
 * 16 forks write = 16 copies of memory
 :::
 
-## Mapping Threads to Cores {background-image="/pics/fork/iDVTstR.jpg" background-size="400px" background-position="center right" .smaller}  
+## Mapping Threads to Cores {background-image="/pics/fork/iDVTstR.jpg" background-size="30%" background-position="center right" .smaller}  
 ### Theory and Reality  
 
 * Operating system manages core affinity  
@@ -215,7 +217,7 @@ tree. Then $\hat{C^B_{\rm rf}}(x)$ = majority vote $\{\widehat{C}_b(x)\}^B_1$
 
 [^*]: Algorithm 15.1 in Hastie, Tibshirani, and Friedman (2009). The Elements of Statistical Learning, Second Edition. [Link](https://link.springer.com/book/10.1007/978-0-387-84858-7)  
 
-## Shared memory considerations {background-image="/pics/fork/Slide7.png" background-size="1000px" background-position="center"}  
+## Shared memory considerations {background-image="/pics/fork/Slide7.png" background-size="90%" background-position="center"}  
 
 $$\qquad$$  
 $$\qquad$$  
@@ -312,7 +314,7 @@ flexiblas_get_num_threads()
 [https://cran.r-project.org/package=flexiblas](https://cran.r-project.org/package=flexiblas)
 ]
 
-## Example Random forest Code {background-image="/pics/fork/ML_FreySlate1991.png" background-size="1200px" background-position="center"}
+## Example Random forest Code {background-image="/pics/fork/ML_FreySlate1991.png" background-size="90%" background-position="center"}
 
 #### Letter recognition data ( $20\,000 \times 17$ )
 
@@ -324,7 +326,7 @@ flexiblas_get_num_threads()
 
 ### Use their majority votes to classify
 
-## Example Random Forest Classification Code {background-image="/pics/MC/benchmark_mc.png" background-size="1200px" background-position="center"}  
+## Example Random Forest Classification Code {background-image="/pics/MC/benchmark_mc.png" background-size="90%" background-position="center"}  
 #### Letter recognition data ( $20\,000 \times 17$ )
 
 ## `KPMS-IT4I-EX/code/rf_serial.r`  
@@ -335,15 +337,16 @@ flexiblas_get_num_threads()
 ```{.r include = "code/rf_mc.r"}
 ```
 
-## Pseudo Random Number Generators (RNG) {background-image="/(pics/fork/Slide6.png" background-size="1200px" background-position="center"}
-.pull-left[
-* Guaranteed reproducibility
+## Pseudo Random Number Generators (RNG) {background-image="/(pics/fork/Slide6.png" background-size="90%" background-position="center"}
+
+::: {layout="[1,1]"}
+* Guaranteed reproducibility  
+
 * Possibly overlapping streams
-]
-.pull-right[
+  
 * Reproducibility for same number of streams
 * Guaranteed independent streams 
-]
+:::
 
 ## `KPMS-IT4I-EX/code/rf_mc.r`  
 ```{.r include = "code/rf_mc.r"}

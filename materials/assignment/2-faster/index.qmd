@@ -20,7 +20,7 @@ Once you have the two files `profile.sh` and `profile.R` on Delta, you can submi
 #| eval: false
 sbatch profile.sh
 ```
-Replace the `prcomp()` function in `profile.R` with your code to profile. You do this in your laptop RStudio session, `commit` and `push` to GitHub and `pull` on Delta. Then you submit it again as above. Your output will be in `utk.e` and `utk.o`. Rinse and repeat until you have faster code.
+Replace the `prcomp()` function entire line in `profile.R` with your code to profile. You do this in your laptop RStudio session, `commit` and `push` to GitHub and `pull` on Delta. Then you submit it again as above. Your output will be in `utk.e` and `utk.o`. Rinse and repeat until you have faster code.
 
 Submit the following four text files to Canvas as your solution:
 
@@ -33,3 +33,17 @@ Submit the following four text files to Canvas as your solution:
 **Result 4:** Two or three sentences that explain your changes and why things got faster.  
 
 
+**Installing Packages on Delta:**  You will need to install any packages that your code uses on Delta. Packages can be installed on a Delta login node from an interactive R session. Login to Delta, then start an interactive R session at the `$` shell prompt:
+```{bash}
+#| eval: false
+#| echo: true
+module load r
+R
+```
+At this point you are in an R session. For example, to install **dplyr**
+```{r}
+#| eval: false
+#| echo: true
+install.packages("dplyr", repo = "https://cloud.r-project.org/")
+```
+and similarly for other packages. To exit R, use `q()`.

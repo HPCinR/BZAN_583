@@ -340,10 +340,11 @@
 <ul>
 <li>vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</li>
 </ul></li>
-<li>LAPACK: dense and banded matrix decompositions and more
+<li>LAPACK: matrix decompositions and more</li>
+</ul>
+<!--
+$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
 <ul>
-<li><span class="math inline">\(\quad LU\)</span> <span class="math inline">\(\quad LL^T\)</span> <span class="math inline">\(\quad QR\)</span> <span class="math inline">\(\quad UDV^T\)</span> <span class="math inline">\(\quad VD^2V^T\)</span> <span class="math inline">\(\quad\|\cdot\|_p\)</span></li>
-</ul></li>
 <li>Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries</li>
 </ul>
 </section>
@@ -361,7 +362,7 @@
 <span class="math inline">\(t_p\)</span> - Parallel time</li>
 </ul>
 </section>
-<section id="serial-section-amdahls-law" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide3.png" data-background-size="1000px" data-background-position="center">
+<section id="serial-section-amdahls-law" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide3.png" data-background-size="90%" data-background-position="center">
 <h2>Serial Section (Amdahl’s Law)</h2>
 <p><span class="math display">\[\qquad\]</span><br>
 <span class="math display">\[t_p = t_s + t_n &gt; t_s\]</span><br>
@@ -373,7 +374,7 @@
 <span class="math inline">\(t_s\)</span> - Serial section time</p>
 <h4 id="strong-scaling-fixed-work-increasing-resources">Strong Scaling: fixed work, increasing resources</h4>
 </section>
-<section id="serial-section-gustafsons-law" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide3.png" data-background-size="1000px" data-background-position="center">
+<section id="serial-section-gustafsons-law" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide3.png" data-background-size="90%" data-background-position="center">
 <h2>Serial Section (Gustafson’s Law)</h2>
 <p><span class="math display">\[\qquad\]</span><br>
 <span class="math display">\[t_p = t_s + t_n\]</span><br>
@@ -398,7 +399,7 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="parallel-overhead" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide4.png" data-background-size="1000px" data-background-position="center">
+<section id="parallel-overhead" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide4.png" data-background-size="90%" data-background-position="center">
 <h2>Parallel Overhead</h2>
 <p><span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span><br>
 <span class="math display">\[t_p = t_s + t_n + t_o(n)\]</span><br>
@@ -409,7 +410,7 @@
 <span class="math inline">\(t_s\)</span> - Serial section time<br>
 <span class="math inline">\(t_o(n)\)</span> - Parallel overhead time</p>
 </section>
-<section id="replication-of-serial-section" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide5.png" data-background-size="1000px" data-background-position="center">
+<section id="replication-of-serial-section" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide5.png" data-background-size="90%" data-background-position="center">
 <h2>Replication of Serial Section</h2>
 <p><span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span></p>
 <h4 id="suppose-the-serial-section-is-computed-on-one-rank-and-sent-to-all-ranks.-then-overhead-is-a-function-of-n">Suppose the serial section is computed on one rank and sent to all ranks. Then overhead is a function of <span class="math inline">\(n\)</span>!</h4>
@@ -421,7 +422,7 @@
 <span class="math inline">\(t_o(n)\)</span> - Parallel overhead time</p>
 <h4 id="replication-can-reduce-communication-overhead-due-to-communication">Replication can reduce communication overhead due to communication</h4>
 </section>
-<section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide8.png" data-background-size="900px" data-background-position="center">
+<section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide8.png" data-background-size="80%" data-background-position="center">
 <h2>R Interfaces to Low-Level Native Tools</h2>
 <aside class="notes">
 <ul>
@@ -470,7 +471,7 @@
 </ul>
 <p>.footnote[A deeper discussion of <code>fork</code> memory (if you have interest) on <a href="https://www.youtube.com/watch?v=8hVLcyBkSXY">YouTube</a> by Chris Kanich (UIC)]</p>
 </section>
-<section id="copy-on-write" class="slide level2" data-background-image="../../../pics/fork/Slide1.png" data-background-size="1100px" data-background-position="center">
+<section id="copy-on-write" class="slide level2" data-background-image="../../../pics/fork/Slide1.png" data-background-size="90%" data-background-position="center">
 <h2>Copy-on-write</h2>
 <aside class="notes">
 <ul>
@@ -492,7 +493,7 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="mapping-threads-to-cores" class="slide level2 smaller" data-background-image="../../../pics/fork/iDVTstR.jpg" data-background-size="400px" data-background-position="center right">
+<section id="mapping-threads-to-cores" class="slide level2 smaller" data-background-image="../../../pics/fork/iDVTstR.jpg" data-background-size="30%" data-background-position="center right">
 <h2>Mapping Threads to Cores</h2>
 <h3 id="theory-and-reality">Theory and Reality</h3>
 <ul>
@@ -587,7 +588,7 @@ Regression: <span class="math inline">\(\widehat{f^B_{\rm rf}}(x) = \frac{1}{B}\
 Classification: Let <span class="math inline">\(\widehat{C}_b(x)\)</span> be the class prediction of the <span class="math inline">\(b\)</span>th random-forest<br>
 tree. Then <span class="math inline">\(\hat{C^B_{\rm rf}}(x)\)</span> = majority vote <span class="math inline">\(\{\widehat{C}_b(x)\}^B_1\)</span></p>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Algorithm 15.1 in Hastie, Tibshirani, and Friedman (2009). The Elements of Statistical Learning, Second Edition. <a href="https://link.springer.com/book/10.1007/978-0-387-84858-7">Link</a></p></li></ol></aside></section>
-<section id="shared-memory-considerations" class="slide level2" data-background-image="../../../pics/fork/Slide7.png" data-background-size="1000px" data-background-position="center">
+<section id="shared-memory-considerations" class="slide level2" data-background-image="../../../pics/fork/Slide7.png" data-background-size="90%" data-background-position="center">
 <h2>Shared memory considerations</h2>
 <p><span class="math display">\[\qquad\]</span><br>
 <span class="math display">\[\qquad\]</span></p>
@@ -664,7 +665,7 @@ Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
 <p>.footnote[ <a href="https://github.com/Enchufa2/r-flexiblas">https://github.com/Enchufa2/r-flexiblas</a><br>
 <a href="https://cran.r-project.org/package=flexiblas">https://cran.r-project.org/package=flexiblas</a>]</p>
 </section>
-<section id="example-random-forest-code" class="slide level2" data-background-image="../../../pics/fork/ML_FreySlate1991.png" data-background-size="1200px" data-background-position="center">
+<section id="example-random-forest-code" class="slide level2" data-background-image="../../../pics/fork/ML_FreySlate1991.png" data-background-size="90%" data-background-position="center">
 <h2>Example Random forest Code</h2>
 <h4 id="letter-recognition-data-20000-times-17">Letter recognition data ( <span class="math inline">\(20\,000 \times 17\)</span> )</h4>
 <p>.footnote[*Parallel Statistical Computing with R: An Illustration on Two Architectures <a href="https://arxiv.org/abs/1709.01195">arXiv:1709.01195</a>]</p>
@@ -674,7 +675,7 @@ Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
 <h3 id="build-many-decision-trees-from-random-subsets-of-variables">Build many decision trees from random subsets of variables</h3>
 <h3 id="use-their-majority-votes-to-classify">Use their majority votes to classify</h3>
 </section>
-<section id="example-random-forest-classification-code" class="slide level2" data-background-image="../../../pics/MC/benchmark_mc.png" data-background-size="1200px" data-background-position="center">
+<section id="example-random-forest-classification-code" class="slide level2" data-background-image="../../../pics/MC/benchmark_mc.png" data-background-size="90%" data-background-position="center">
 <h2>Example Random Forest Classification Code</h2>
 <h4 id="letter-recognition-data-20000-times-17-1">Letter recognition data ( <span class="math inline">\(20\,000 \times 17\)</span> )</h4>
 </section>
@@ -686,9 +687,20 @@ Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
 <h2><code>KPMS-IT4I-EX/code/rf_mc.r</code></h2>
 <p><code>{.r include = "code/rf_mc.r"}</code></p>
 </section>
-<section id="pseudo-random-number-generators-rng" class="slide level2" data-background-image="../../../(pics/fork/Slide6.png" data-background-size="1200px" data-background-position="center">
+<section id="pseudo-random-number-generators-rng" class="slide level2" data-background-image="../../../(pics/fork/Slide6.png" data-background-size="90%" data-background-position="center">
 <h2>Pseudo Random Number Generators (RNG)</h2>
-<p>.pull-left[ * Guaranteed reproducibility * Possibly overlapping streams] .pull-right[ * Reproducibility for same number of streams * Guaranteed independent streams ]</p>
+<div class="quarto-layout-panel" data-layout="[1,1]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<ul>
+<li><p>Guaranteed reproducibility</p></li>
+<li><p>Possibly overlapping streams</p></li>
+<li><p>Reproducibility for same number of streams</p></li>
+<li><p>Guaranteed independent streams</p></li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="kpms-it4i-excoderf_mc.r-1" class="slide level2">
 <h2><code>KPMS-IT4I-EX/code/rf_mc.r</code></h2>

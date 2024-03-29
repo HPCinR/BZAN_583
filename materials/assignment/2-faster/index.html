@@ -158,12 +158,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> profile.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Replace the <code><a href="https://rdrr.io/r/stats/prcomp.html">prcomp()</a></code> function in <code>profile.R</code> with your code to profile. You do this in your laptop RStudio session, <code>commit</code> and <code>push</code> to GitHub and <code>pull</code> on Delta. Then you submit it again as above. Your output will be in <code>utk.e</code> and <code>utk.o</code>. Rinse and repeat until you have faster code.</p>
+<p>Replace the <code><a href="https://rdrr.io/r/stats/prcomp.html">prcomp()</a></code> function entire line in <code>profile.R</code> with your code to profile. You do this in your laptop RStudio session, <code>commit</code> and <code>push</code> to GitHub and <code>pull</code> on Delta. Then you submit it again as above. Your output will be in <code>utk.e</code> and <code>utk.o</code>. Rinse and repeat until you have faster code.</p>
 <p>Submit the following four text files to Canvas as your solution:</p>
 <p><strong>Result 1:</strong> Two or three sentences that describe where the code was used originally and its purpose. The intent is documentation that this is YOUR R code and to give me some understanding of the code.</p>
 <p><strong>Result 2:</strong> The code, its summary profile with top components, and the <code><a href="https://rdrr.io/r/base/system.time.html">system.time()</a></code> of the code “before”.</p>
 <p><strong>Result 3:</strong> The code, its summary profile with top components, and the <code><a href="https://rdrr.io/r/base/system.time.html">system.time()</a></code> of the code “after”.</p>
 <p><strong>Result 4:</strong> Two or three sentences that explain your changes and why things got faster.</p>
+<p><strong>Installing Packages on Delta:</strong> You will need to install any packages that your code uses on Delta. Packages can be installed on a Delta login node from an interactive R session. Login to Delta, then start an interactive R session at the <code>$</code> shell prompt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load r</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>At this point you are in an R session. For example, to install <strong>dplyr</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span>, repo <span class="op">=</span> <span class="st">"https://cloud.r-project.org/"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and similarly for other packages. To exit R, use <code><a href="https://rdrr.io/r/base/quit.html">q()</a></code>.</p>
 
 
 

@@ -1,0 +1,26 @@
+---
+title: "BLAS Libraries"
+format: 
+  revealjs:
+    slide-number: c/t
+    width: 1200
+    height: 800
+    chalkboard: true
+    code-line-numbers: false
+editor: source
+engine: knitr
+---
+
+## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="80%" background-position="center"}
+
+## `parallel::mclapply()` {background-image="/pics/ParallelSoftware/ParallelSoftware9.png" background-size="80%" background-position="center"}
+
+## BLAS Libraries {background-image="/pics/ParallelSoftware/ParallelSoftware10.png" background-size="80%" background-position="center"}
+
+## BLAS Libraries
+
+### Fedora -> CentOS Stream -> Red Hat Enterprise Linux
+
+#### R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, ...)
+
+#### cuBLAS ?

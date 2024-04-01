@@ -1,0 +1,16 @@
+---
+title: "Assignment 3: Project Proposals"
+editor: source
+---
+
+This assignment is the first to be completed, turned in, and graded by groups.
+
+The proposal should include (1) a large data set (2) a description of what will be studied, tested, or predicted, (3) a description of the ML methodologies expected to be used.
+
+Groups are encouraged to meet on their own one or more times before discussing the proposal with the instructor.
+
+Each group will set up a 30 minute meeting time with the Instructor during this week to discuss their proposed project.
+
+Various times to meet are available on Tuesday, Wednesday, Thursday, and Friday of this week. Suggest two possible time slots so I have some leeway of consolidating.
+
+An approved proposal gets the full 12 points for each group member.

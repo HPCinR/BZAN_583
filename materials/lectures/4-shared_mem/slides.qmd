@@ -6,7 +6,7 @@ format:
 editor: source
 ---
 
-## R-LAPACK-BLAS {background-image="/pics/01-intro/pbdRlib.jpg" background-size="300px" background-position="top right"}
+## R-LAPACK-BLAS
 
 * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
   * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
@@ -16,7 +16,7 @@ editor: source
 <!--
 $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
 
-* Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries  
+* Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,
 
 ## Measurement and terminology of parallel speedup  
 
@@ -337,7 +337,7 @@ flexiblas_get_num_threads()
 ```{.r include = "code/rf_mc.r"}
 ```
 
-## Pseudo Random Number Generators (RNG) {background-image="/(pics/fork/Slide6.png" background-size="90%" background-position="center"}
+## Pseudo Random Number Generators (RNG) {background-image="/pics/fork/Slide6.png" background-size="90%" background-position="center"}
 
 ::: {layout="[1,1]"}
 * Guaranteed reproducibility  

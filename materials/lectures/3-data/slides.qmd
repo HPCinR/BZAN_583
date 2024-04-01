@@ -1,0 +1,173 @@
+---
+title: "Data"
+format: 
+  revealjs:
+    slide-number: c/t
+    width: 1200
+    height: 800
+    chalkboard: true
+    code-line-numbers: false
+editor: source
+engine: knitr
+---
+
+## Today
+
+- Go over 1st homework results
+- Package installs on Delta
+
+
+## File Systems on Delta {.incremental}
+
+- Our project name on Delta is `bckj`.
+
+- Each user has access to three file systems `/u/<username>`, `/projects/bckj/<username>`, and `/scratch/bcjk/<username>`. See   
+[File Systems](https://docs.ncsa.illinois.edu/systems/delta/en/latest/user_guide/architecture.html?highlight=file%20systems#file-systems), and  
+[Delta: Data Management](https://docs.ncsa.illinois.edu/systems/delta/en/latest/user_guide/data_mgmt.html) for more details.
+
+- None of the Delta file systems are backed up - another good reason to work via GitHub.
+
+## The directories from your instructor's viewpoint:
+
+```{bash}
+#| eval: false
+#| echo: true
+ls -ld $HOME
+```
+
+::: {.cell-output-stdout}
+```
+drwxrwx---+ 9 root root 4096 Mar 29 16:14 /u/gostrouc/
+```
+:::
+
+```{bash}
+#| eval: false
+#| echo: true
+ls -ld /projects/bckj
+```
+
+::: {.cell-output-stdout}
+```
+drwxrws---+ 26 root delta_bckj 12288 Mar 26 04:55 /projects/bckj/
+```
+:::
+
+```{bash}
+#| eval: false
+#| echo: true
+ls -ld /scratch/bckj
+```
+
+::: {.cell-output-stdout}
+```
+drwxrws---+ 26 root delta_bckj 8192 Mar 26 04:55 /scratch/bckj/
+```
+:::
+
+## `/projects/bcjk`
+
+```{bash}
+#| eval: false
+#| echo: true
+ls -l /projects/bckj
+```
+
+::: {.cell-output-stdout}
+```
+total 96
+drwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/
+drwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/
+drwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/
+drwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/
+drwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/
+drwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/
+drwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/
+drwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/
+drwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/
+drwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/
+drwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/
+drwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/
+drwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/
+drwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/
+drwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/
+drwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/
+drwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/
+drwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/
+drwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/
+drwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/
+drwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/
+drwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/
+drwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/
+drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/
+```
+:::
+
+## `/scratch/bcjk`
+
+```{bash}
+#| eval: false
+#| echo: true
+ls -l /scratch/bckj
+```
+
+::: {.cell-output-stdout}
+```
+total 96
+drwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/
+drwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/
+drwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/
+drwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/
+drwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/
+drwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/
+drwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/
+drwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/
+drwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/
+drwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/
+drwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/
+drwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/
+drwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/
+drwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/
+drwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/
+drwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/
+drwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/
+drwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/
+drwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/
+drwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/
+drwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/
+drwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/
+drwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/
+drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/
+```
+:::
+
+## Reading Data Overview
+
+- Binary file formats preferred for large data (speed & size) 
+  - Parquet: chunked column-oriented format (.parquet extension)  
+    - **arrow** package on CRAN  
+    - [Arrow for R Cheatsheet](https://github.com/apache/arrow/blob/main/r/cheatsheet/arrow-cheatsheet.pdf)   
+  - HDF5 - hierarchical array-oriented format (.h5 extension)   
+    - **rhdf5** package on Bioconductor   
+ 
+- Text files (.csv, .tsv, .txt, ... )  
+  - `fread()` fastest reader (from **data.table** package)  
+  - `read_delim()` fast reader (from **readr** package)  
+
+- Other formats (.xlsx, etc. )  
+  
+## New York TLC Trip Record Data
+
+- [TLC: Taxi and Limousine Commission](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)  
+- Includes: pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts
+
+- [Data overview](https://tlcpolicy.maps.arcgis.com/apps/instant/portfolio/index.html?appid=be00fce0963540628e37fd7c75a6d386)  
+
+- [Yellow Trip Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf)
+
+- [Green Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf)  
+
+- [FHV Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_fhv.pdf)  
+
+- [High Volume FHV Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf)  
+

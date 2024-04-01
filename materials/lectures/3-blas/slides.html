@@ -10,7 +10,7 @@
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.549">
 
-  <title>HPC for Data Science in R - BZAN 583 - Memory Hierarchy and Hardware</title>
+  <title>HPC for Data Science in R - BZAN 583 - BLAS Libraries</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,150 +327,26 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Memory Hierarchy and Hardware</h1>
+  <h1 class="title">BLAS Libraries</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="memory-hierarchy" class="slide level2" data-background-image="../../../pics/ParallelHardware/MemHierarchy.png" data-background-size="80%" data-background-position="center">
-<h2>Memory Hierarchy</h2>
-<div class="footer">
-<p><a href="https://cs.brown.edu/courses/csci0300/2022/assign/labs/lab4.html">From Brown U, CSCI 0300 (2022)</a> CC-BY 4.0 License <span class="math inline">\(\qquad\)</span> <strong>ns</strong> = <span class="math inline">\(10^{-9}\)</span>second <span class="math inline">\(\quad\)</span> <strong>ms</strong> = <span class="math inline">\(10^{-3}\)</span>second</p>
-</div>
+<section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center">
+<h2>R Interfaces to Low-Level Native Tools</h2>
 </section>
-<section id="memory-hierarchy-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/MemHierarchy.png" data-background-size="80%" data-background-position="center" data-background-opacity="0.2">
-<h2>Memory Hierarchy</h2>
-<ul>
-<li>Each level serves as cache for the level below<br>
-</li>
-<li>A data request checks each cache until satisfied</li>
-<li>Not finding an item generates a “cache miss”<br>
-</li>
-<li>A cache miss triggers a memory page swap from level below<br>
-<br></li>
-</ul>
-<h4 id="large-data-sets-do-not-fit-in-cache-contiguous-memory-access-patterns-speed-up-code">Large data sets do not fit in cache: contiguous memory access patterns speed up code</h4>
+<section id="parallelmclapply" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware9.png" data-background-size="80%" data-background-position="center">
+<h2><code>parallel::mclapply()</code></h2>
 </section>
-<section id="memory-hierarchy-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/MemHierarchy.png" data-background-size="80%" data-background-position="center" data-background-opacity="0.2">
-<h2>Memory Hierarchy</h2>
+<section id="blas-libraries" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware10.png" data-background-size="80%" data-background-position="center">
+<h2>BLAS Libraries</h2>
 </section>
-<section id="titan" class="slide level2" data-background-image="../../../pics/ParallelHardware/Titan.png" data-background-size="60%" data-background-position="bottom">
-<h2>Titan</h2>
-<h3 id="pf">27 PF</h3>
-<h4 id="section">2012-19</h4>
-</section>
-<section id="delta-2022" class="slide level2" data-background-image="../../../pics/ParallelHardware/delta_front_1.png" data-background-size="80%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-1">8 PF</h3>
-</section>
-<section id="delta-2022-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/ncsa-delta-back.jpg" data-background-size="80%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-2">8 PF</h3>
-</section>
-<section id="delta-2022-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/delta-row.jpg" data-background-size="70%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-3">8 PF</h3>
-</section>
-<section id="two-three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware1.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="flynns-taxonomy-1972" class="slide level2">
-<h2>Flynn’s Taxonomy (1972)</h2>
-<ul>
-<li><span style="color:green;"><em>Single Instruction, Single Data (<strong>SISD</strong>):</em></span> scalar processor, serial program (old-style CPU)</li>
-<li><span style="color:green;"><em>Single Instruction, Multiple Data (<strong>SIMD</strong>):</em></span> vector processor, array processor (old-style GPU)</li>
-<li><span style="color:green;"><em>Multiple Instruction, Multiple Data (<strong>MIMD</strong>):</em></span> multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today’s CPU and GPU, but each still leans to legacy)</li>
-<li><span style="color:green;"><em>Multiple Instruction, Single Data (<strong>MISD</strong>):</em></span> is not used much</li>
-</ul>
-</section>
-<section id="three-processor-technology-streams" class="slide level2 smaller">
-<h2>Three Processor Technology Streams</h2>
-<p><span style="color:green;"><strong>Computers:</strong></span><br>
-- <strong>Fast and general</strong> computing<br>
-<br></p>
-<p><span style="color:green;"><strong>Graphics:</strong></span><br>
-- Lots of pixels with same independent operations<br>
-- <strong>Highly parallel and simple</strong> processing<br>
-<br></p>
-<p><span style="color:green;"><strong>Cellphones:</strong></span><br>
-- Small devices<br>
-- <strong>Low power</strong> operation<br>
-<br></p>
-<p><span style="color:green;">All three have matured into large cluster deployment</span></p>
-</section>
-<section id="shared-memory-hardware" class="slide level2 smaller">
-<h2>Shared Memory Hardware</h2>
-<p><strong>CPU</strong> - <span style="color:green;">Computer technology stream</span><br>
-- One or two chips, each with multiple cores<br>
-- Current high-end is 64 cores (e.g.&nbsp;AMD EPYC “Milan” on Delta)<br>
-- Hosts operating system (OS)</p>
-<p><strong>GPU</strong> - <span style="color:green;">Graphics technology stream</span><br>
-- Excellent SIMD throughput - Separate memory, so “offloading” co-processor concept<br>
-- Lower power requirements per core, lots of slow cores<br>
-- Does not host OS</p>
-<p><strong>ARM CPU-GPU</strong> - <span style="color:green;">Cellphone technology stream</span><br>
-- A hybrid unified memory architecture<br>
-- Low power requirements<br>
-- Hosts OS</p>
-<h4 id="cpus-fast-and-versatile-but-limited-parallelism"><span style="color:green;">CPUs fast and versatile but limited parallelism</span></h4>
-<h4 id="gpus-slower-and-less-versatile-but-extreme-parallelism-4x-cores"><span style="color:green;">GPUs slower and less versatile but extreme parallelism (4x+ cores)</span></h4>
-</section>
-<section id="uma-and-numa" class="slide level2">
-<h2>UMA and NUMA</h2>
-<h4 id="uniform-memory-access">Uniform memory access</h4>
-<ul>
-<li>A typical multicore CPU chip</li>
-</ul>
-<h4 id="non-uniform-memory-access">Non-Uniform memory access</h4>
-<ul>
-<li>A larger collection of multicore chips with hardware/software enabled global memory access</li>
-<li>Some memory is closer than other memory
-<ul>
-<li>More complex cache strategies</li>
-</ul></li>
-</ul>
-</section>
-<section id="two-three-basic-concepts-in-hardware-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware1.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="two-three-basic-concepts-in-hardware-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware2.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="two-three-basic-concepts-in-hardware-3" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware3.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="section-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware4.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware5.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-3" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware6.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-4" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware7.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-5" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware8.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-<!--
-## Parallel Programming Models {.smaller}
-
-### Shared Memory Parallel  
--   **Unix fork:** fork a process and let the OS manage it  ([parallel pkg]{style="color:green;"})  
--   **Multithreading:** explicitly program parallel sections ([libraries]{style="color:green;"})  
--   **OpenMP:** give explicit hints to a compiler to make it parallel ([libraries]{style="color:green;"})
-
-### Distributed Memory Parallel  
--   **Manager-workers:** most common in simple cases    
--   **Single program, multiple data (SPMD):** common on clusters ([pbdMPI pkg]{style="color:green;"}) 
--   **MapReduce:** common in customer processing, continuous services ([sparklyr pkg]{style="color:green;"})  
--   **Dataflow:** dependency graph directed, can involve all of the above <br><br>
-
-#### [Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP]{style="color:green;"}
-#### [Unix fork more common in scripting languages like R and Python]{style="color:green;"}
--->
+<section id="blas-libraries-1" class="slide level2">
+<h2>BLAS Libraries</h2>
+<h3 id="fedora---centos-stream---red-hat-enterprise-linux">Fedora -&gt; CentOS Stream -&gt; Red Hat Enterprise Linux</h3>
+<h4 id="r---flexiblas---netlib-openblas-veclib">R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)</h4>
+<h4 id="cublas">cuBLAS ?</h4>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -531,7 +407,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -656,9 +532,9 @@
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1200,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -690,6 +566,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

@@ -333,7 +333,7 @@
 </div>
 
 </section>
-<section id="r-lapack-blas" class="slide level2" data-background-image="../../../pics/01-intro/pbdRlib.jpg" data-background-size="300px" data-background-position="top right">
+<section id="r-lapack-blas" class="slide level2">
 <h2>R-LAPACK-BLAS</h2>
 <ul>
 <li>BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library
@@ -345,7 +345,7 @@
 <!--
 $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
 <ul>
-<li>Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries</li>
+<li>Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,</li>
 </ul>
 </section>
 <section id="measurement-and-terminology-of-parallel-speedup" class="slide level2">
@@ -443,78 +443,6 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="unix-fork" class="slide level2 smaller">
-<h2>Unix <code>fork</code></h2>
-<ul>
-<li>Copy-on-write<br>
-</li>
-<li>A memory efficient parallelism on shared memory devices<br>
-</li>
-<li><strong>parallel</strong> package <code>mclapply</code> and friends<br>
-</li>
-<li>Use for numerical sections only
-<ul>
-<li>Avoid GUI, I/O, and graphics sections<br>
-</li>
-</ul></li>
-<li>Convenient for data (not modified)<br>
-</li>
-<li>Convenient for functional languages like R<br>
-</li>
-<li>Avoid or manage nested parallelism
-<ul>
-<li>OpenBLAS takes all cores by default<br>
-</li>
-<li>data.table automatically switches to single threaded mode upon fork</li>
-</ul></li>
-</ul>
-<p>.footnote[A deeper discussion of <code>fork</code> memory (if you have interest) on <a href="https://www.youtube.com/watch?v=8hVLcyBkSXY">YouTube</a> by Chris Kanich (UIC)]</p>
-</section>
-<section id="copy-on-write" class="slide level2" data-background-image="../../../pics/fork/Slide1.png" data-background-size="90%" data-background-position="center">
-<h2>Copy-on-write</h2>
-<aside class="notes">
-<ul>
-<li>All done with pointers</li>
-<li>Memory is in pages</li>
-<li>Processes not aware of each other or other’s memory use</li>
-<li>OS is aware of memory use</li>
-<li>16 forks write = 16 copies of memory</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="mapping-threads-to-cores" class="slide level2 smaller" data-background-image="../../../pics/fork/iDVTstR.jpg" data-background-size="30%" data-background-position="center right">
-<h2>Mapping Threads to Cores</h2>
-<h3 id="theory-and-reality">Theory and Reality</h3>
-<ul>
-<li><p>Operating system manages core affinity</p></li>
-<li><p>Operating system tasks can compete</p></li>
-<li><p>Core switching occurs frequently</p></li>
-<li><p><strong>But it works rather well!</strong></p></li>
-</ul>
-</section>
-<section id="drop-in-replacements-almost-for-lapply-mapply-and-map" class="slide level2 smaller">
-<h2>Drop-in replacements (almost) for <code>lapply</code>, <code>mapply</code>, and <code>Map</code></h2>
-<p><code>mclapply(X, FUN, ...,</code><br>
-<code>mc.preschedule = TRUE, mc.set.seed = TRUE,</code><br>
-<code>mc.silent = FALSE, mc.cores = getOption("mc.cores", 2L),</code><br>
-<code>mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)</code></p>
-<p><code>mcmapply(FUN, ...,</code><br>
-<code>MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,</code><br>
-<code>mc.preschedule = TRUE, mc.set.seed = TRUE,</code><br>
-<code>mc.silent = FALSE, mc.cores = getOption("mc.cores", 2L),</code><br>
-<code>mc.cleanup = TRUE, affinity.list = NULL)</code></p>
-<p><code>mcMap(f, ...)</code></p>
 </section>
 <section id="bootstrap-bagging-boosting-and-crossvalidation" class="slide level2">
 <h2>Bootstrap, Bagging, Boosting, and Crossvalidation</h2>
@@ -679,15 +607,7 @@ Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
 <h2>Example Random Forest Classification Code</h2>
 <h4 id="letter-recognition-data-20000-times-17-1">Letter recognition data ( <span class="math inline">\(20\,000 \times 17\)</span> )</h4>
 </section>
-<section id="kpms-it4i-excoderf_serial.r-1" class="slide level2">
-<h2><code>KPMS-IT4I-EX/code/rf_serial.r</code></h2>
-<p><code>{.r include = "code/rf_serial.r"}</code></p>
-</section>
-<section id="kpms-it4i-excoderf_mc.r" class="slide level2">
-<h2><code>KPMS-IT4I-EX/code/rf_mc.r</code></h2>
-<p><code>{.r include = "code/rf_mc.r"}</code></p>
-</section>
-<section id="pseudo-random-number-generators-rng" class="slide level2" data-background-image="../../../(pics/fork/Slide6.png" data-background-size="90%" data-background-position="center">
+<section id="pseudo-random-number-generators-rng" class="slide level2" data-background-image="../../../pics/fork/Slide6.png" data-background-size="90%" data-background-position="center">
 <h2>Pseudo Random Number Generators (RNG)</h2>
 <div class="quarto-layout-panel" data-layout="[1,1]">
 <div class="quarto-layout-row">
@@ -702,7 +622,7 @@ Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
 </div>
 </div>
 </section>
-<section id="kpms-it4i-excoderf_mc.r-1" class="slide level2">
+<section id="kpms-it4i-excoderf_mc.r" class="slide level2">
 <h2><code>KPMS-IT4I-EX/code/rf_mc.r</code></h2>
 <p><code>{.r include = "code/rf_mc.r"}</code></p>
 </section>

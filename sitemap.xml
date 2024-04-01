@@ -6,11 +6,15 @@
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/index.html</loc>
-    <lastmod>2024-03-27T17:37:10.363Z</lastmod>
+    <lastmod>2024-04-01T02:35:03.137Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/6-distributed/slides.html</loc>
     <lastmod>2024-03-17T04:56:08.573Z</lastmod>
+  </url>
+  <url>
+    <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/3-data/slides.html</loc>
+    <lastmod>2024-04-01T19:04:27.704Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/5-nn/slides.html</loc>
@@ -22,7 +26,7 @@
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/4-shared_mem/slides.html</loc>
-    <lastmod>2024-03-28T17:51:36.201Z</lastmod>
+    <lastmod>2024-04-01T19:52:25.608Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/7-projects/slides.html</loc>
@@ -38,7 +42,7 @@
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/3-software/slides.html</loc>
-    <lastmod>2024-03-17T04:56:08.570Z</lastmod>
+    <lastmod>2024-04-01T19:49:57.981Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/8-presentations/slides.html</loc>
@@ -46,7 +50,11 @@
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/2-hardware/slides.html</loc>
-    <lastmod>2024-03-28T03:55:33.081Z</lastmod>
+    <lastmod>2024-04-01T19:43:24.138Z</lastmod>
+  </url>
+  <url>
+    <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/3-blas/slides.html</loc>
+    <lastmod>2024-04-01T02:52:44.099Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/1-welcome/slides.html</loc>
@@ -57,8 +65,8 @@
     <lastmod>2024-03-29T01:38:38.938Z</lastmod>
   </url>
   <url>
-    <loc>https://HPCinR.github.io/BZAN_583/materials/assignment/6-mpi/index.html</loc>
-    <lastmod>2024-03-17T04:56:08.567Z</lastmod>
+    <loc>https://HPCinR.github.io/BZAN_583/materials/assignment/3-project/index.html</loc>
+    <lastmod>2024-04-01T18:27:37.622Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/assignment/1-workflow/index.html</loc>
@@ -69,8 +77,8 @@
     <lastmod>2024-03-17T04:56:08.563Z</lastmod>
   </url>
   <url>
-    <loc>https://HPCinR.github.io/BZAN_583/materials/assignment/3-library/index.html</loc>
-    <lastmod>2024-03-17T04:56:08.565Z</lastmod>
+    <loc>https://HPCinR.github.io/BZAN_583/materials/assignment/6-mpi/index.html</loc>
+    <lastmod>2024-03-17T04:56:08.567Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/assignment/4-mclapply/index.html</loc>
@@ -83,6 +91,10 @@
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/1-welcome/index.html</loc>
     <lastmod>2024-03-17T04:56:08.567Z</lastmod>
+  </url>
+  <url>
+    <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/3-blas/index.html</loc>
+    <lastmod>2024-04-01T02:37:19.992Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/2-hardware/index.html</loc>
@@ -119,6 +131,10 @@
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/5-nn/index.html</loc>
     <lastmod>2024-03-17T04:56:08.570Z</lastmod>
+  </url>
+  <url>
+    <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/3-data/index.html</loc>
+    <lastmod>2024-03-29T20:10:32.526Z</lastmod>
   </url>
   <url>
     <loc>https://HPCinR.github.io/BZAN_583/materials/lectures/6-distributed/index.html</loc>

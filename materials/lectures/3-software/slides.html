@@ -7,16 +7,16 @@
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
-
-  <title>HPC for Data Science in R - BZAN 583 - HPC Software</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
-  <style>
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<title>HPC for Data Science in R - BZAN 583 - HPC Software</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+<style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -28,15 +28,80 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+<link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
 
   .callout {
     margin-top: 1em;
@@ -234,7 +299,7 @@
   }
 
   </style>
-  <style type="text/css">
+<style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -326,15 +391,92 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">HPC Software</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">HPC Software</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section id="parallel-software" class="slide level2">
-<h2>Parallel Software</h2>
+</section><section id="two-three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware1.png" data-background-size="80%" data-background-position="center"><h2>Two (Three) Basic Concepts in Hardware</h2>
+</section><section id="two-three-basic-concepts-from-software-viewpoint" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware2.png" data-background-size="80%" data-background-position="center"><h2>(Two) Three Basic Concepts from Software Viewpoint</h2>
+</section><section id="native-programming-mindset" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware3.png" data-background-size="80%" data-background-position="center"><h2>Native Programming Mindset</h2>
+</section><section id="native-programming-models-and-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware4.png" data-background-size="80%" data-background-position="center"><h2>Native Programming Models and Tools</h2>
+</section><section id="years-of-parallel-computing" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware5.png" data-background-size="80%" data-background-position="center"><h2>40 Years of Parallel Computing</h2>
+</section><section id="last-20-years-of-advances" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware6.png" data-background-size="80%" data-background-position="center"><h2>Last 20 years of Advances</h2>
+</section><section id="distributed-programming-works-in-shared-memory" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware7.png" data-background-size="80%" data-background-position="center"><h2>Distributed Programming Works in Shared Memory</h2>
+</section><section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center"><h2>R Interfaces to Low-Level Native Tools</h2>
+</section><section id="parallelmclapply" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware9.png" data-background-size="80%" data-background-position="center"><h2><code>parallel::mclapply()</code></h2>
+</section><section id="unix-fork" class="slide level2 smaller"><h2>Unix <code>fork</code>
+</h2>
+<h4 id="operating-system-forks-a-new-process-with-pointers-to-same-memory-a-memory-efficient-parallelism-on-shared-memory-devices-running-unix-like-os">Operating system forks a new process with pointers to same memory: A memory-efficient parallelism on shared memory devices running Unix-like OS</h4>
+<ul>
+<li>
+<strong>Copy-on-write:</strong> memory copied only if modified</li>
+<li>
+<strong>parallel</strong> package <code>mclapply()</code> and friends<br>
+</li>
+<li>Use for numerical sections only
+<ul>
+<li>Avoid GUI, I/O, and graphics sections (common device handles)<br>
+</li>
+</ul>
+</li>
+<li>Convenient for data (read, not modified)<br>
+</li>
+<li>Convenient for functional languages like R<br>
+</li>
+<li>Avoid or manage nested parallelism
+<ul>
+<li>OpenBLAS takes all cores by default<br>
+</li>
+<li>
+<strong>data.table</strong> automatically switches to single threaded mode upon fork<br><br>
+</li>
+</ul>
+</li>
+</ul>
+<p>A deeper discussion of <code>fork</code> memory (if you have interest) on <a href="https://www.youtube.com/watch?v=8hVLcyBkSXY">YouTube</a> by Chris Kanich (UIC)</p>
+</section><section id="copy-on-write" class="slide level2" data-background-image="../../../pics/fork/Slide1.png" data-background-size="90%" data-background-position="center"><h2>Copy-on-write</h2>
+<aside class="notes"><ul>
+<li>All done with pointers</li>
+<li>Memory is in pages</li>
+<li>Processes not aware of each other or other’s memory use</li>
+<li>OS is aware of memory use</li>
+<li>16 forks write = 16 copies of memory</li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="mapping-threads-to-cores" class="slide level2 smaller" data-background-image="../../../pics/fork/iDVTstR.jpg" data-background-size="30%" data-background-position="center right"><h2>Mapping Threads to Cores</h2>
+<h3 id="theory-and-reality">Theory and Reality</h3>
+<ul>
+<li><p>Operating system manages core affinity</p></li>
+<li><p>Operating system tasks can compete</p></li>
+<li><p>Core switching occurs frequently</p></li>
+<li><p><strong>But it works rather well!</strong></p></li>
+</ul></section><section id="code-first-with-lapply-then-switch-to-mclapply" class="slide level2 smaller"><h2>Code first with <code>lapply()</code>, then switch to <code>mclapply()</code>
+</h2>
+<p>Drop-in replacements (almost) for <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>, <code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code>, and <code><a href="https://rdrr.io/r/base/funprog.html">Map()</a></code></p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">mclapply</span><span class="op">(</span><span class="va">X</span>, <span class="va">FUN</span>, <span class="va">...</span>,</span>
+<span>         mc.preschedule <span class="op">=</span> <span class="cn">TRUE</span>, mc.set.seed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         mc.silent <span class="op">=</span> <span class="cn">FALSE</span>, mc.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"mc.cores"</span>, <span class="fl">2L</span><span class="op">)</span>,</span>
+<span>         mc.cleanup <span class="op">=</span> <span class="cn">TRUE</span>, mc.allow.recursive <span class="op">=</span> <span class="cn">TRUE</span>, affinity.list <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">mcmapply</span><span class="op">(</span><span class="va">FUN</span>, <span class="va">...</span>,</span>
+<span>         MoreArgs <span class="op">=</span> <span class="cn">NULL</span>, SIMPLIFY <span class="op">=</span> <span class="cn">TRUE</span>, USE.NAMES <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         mc.preschedule <span class="op">=</span> <span class="cn">TRUE</span>, mc.set.seed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         mc.silent <span class="op">=</span> <span class="cn">FALSE</span>, mc.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"mc.cores"</span>, <span class="fl">2L</span><span class="op">)</span>,</span>
+<span>         mc.cleanup <span class="op">=</span> <span class="cn">TRUE</span>, affinity.list <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu">mcMap</span><span class="op">(</span><span class="va">f</span>, <span class="va">...</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Debugging easier with <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code></p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -342,27 +484,10 @@
 </div>
 </div>
 </section>
-    </div>
+</div>
   </div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -395,7 +520,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -520,9 +645,9 @@
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1200,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -553,8 +678,42 @@
           RevealZoom
         ]
       });
-    </script>
-    <script id="quarto-html-after-body" type="application/javascript">
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -708,6 +867,6 @@
       }
     });
     </script>
-    
+
 
 </body></html>

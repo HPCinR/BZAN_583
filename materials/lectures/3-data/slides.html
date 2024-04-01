@@ -7,16 +7,16 @@
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
-
-  <title>HPC for Data Science in R - BZAN 583 - Memory Hierarchy and Hardware</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
-  <style>
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<title>HPC for Data Science in R - BZAN 583 - Data</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+<style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -28,15 +28,80 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+<link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
 
   .callout {
     margin-top: 1em;
@@ -234,7 +299,7 @@
   }
 
   </style>
-  <style type="text/css">
+<style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -326,151 +391,214 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Memory Hierarchy and Hardware</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Data</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section id="memory-hierarchy" class="slide level2" data-background-image="../../../pics/ParallelHardware/MemHierarchy.png" data-background-size="80%" data-background-position="center">
-<h2>Memory Hierarchy</h2>
-<div class="footer">
-<p><a href="https://cs.brown.edu/courses/csci0300/2022/assign/labs/lab4.html">From Brown U, CSCI 0300 (2022)</a> CC-BY 4.0 License <span class="math inline">\(\qquad\)</span> <strong>ns</strong> = <span class="math inline">\(10^{-9}\)</span>second <span class="math inline">\(\quad\)</span> <strong>ms</strong> = <span class="math inline">\(10^{-3}\)</span>second</p>
+</section><section id="today" class="slide level2"><h2>Today</h2>
+<h4 id="assignment-1">Assignment 1:</h4>
+<h4 id="assignment-2-due-tuesday">Assignment 2: due Tuesday</h4>
+<h4 id="assignment-3-project-proposals">Assignment 3: Project proposals</h4>
+<h4 id="package-installs-on-delta">Package installs on Delta:</h4>
+<ul>
+<li>Login to Delta</li>
+<li><code>module load r</code></li>
+<li>
+<code>R</code> starts an interactive R session</li>
+<li>E.g. to install package <code>dplyr</code>:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span>, repo <span class="op">=</span> <span class="st">"https://cloud.r-project.org/"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+<h4 id="delta-file-systems">Delta File Systems</h4>
+<h4 id="reading-data-and-tlc-data">Reading data and TLC Data</h4>
+<h4 id="updated-software-slides">Updated software slides</h4>
+<h4 id="lapply-mclapply">
+<code>lapply()</code>, <code>mclapply()</code>
+</h4>
+</section><section id="file-systems-on-delta" class="slide level2 incremental"><h2>File Systems on Delta</h2>
+<ul>
+<li><p>Our project name on Delta is <code>bckj</code>.</p></li>
+<li><p>Each user has access to three file systems <code>/u/&lt;username&gt;</code>, <code>/projects/bckj/&lt;username&gt;</code>, and <code>/scratch/bcjk/&lt;username&gt;</code><br></p></li>
+<li><p>See <a href="https://docs.ncsa.illinois.edu/systems/delta/en/latest/user_guide/architecture.html?highlight=file%20systems#file-systems">Delta: File Systems</a>, and<br><a href="https://docs.ncsa.illinois.edu/systems/delta/en/latest/user_guide/data_mgmt.html">Delta: Data Management</a> for more details.</p></li>
+<li><p>None of the Delta file systems are backed up - another good reason to work via GitHub.</p></li>
+</ul></section><section id="permissions-on-the-directories" class="slide level2"><h2>Permissions on the directories</h2>
+<p>(<code>gostrouc</code> user view):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> <span class="va">$HOME</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="memory-hierarchy-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/MemHierarchy.png" data-background-size="80%" data-background-position="center" data-background-opacity="0.2">
-<h2>Memory Hierarchy</h2>
+<div class="cell-output-stdout">
+<pre><code>drwxrwx---+ 9 root root 4096 Mar 29 16:14 /u/gostrouc/</code></pre>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /projects/bckj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-stdout">
+<pre><code>drwxrws---+ 26 root delta_bckj 12288 Mar 26 04:55 /projects/bckj/</code></pre>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /scratch/bckj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-stdout">
+<pre><code>drwxrws---+ 26 root delta_bckj 8192 Mar 26 04:55 /scratch/bckj/</code></pre>
+</div>
+<p><br><code>d|uuu|ggg|ooo</code> <span class="math inline">\(\quad\)</span><br>
+dir|user|group|others</p>
+<p>Exec permissions (from <code>man</code> page):<br>
+- x The execute/search bits<br>
+- s The set-user-ID-on-execution and set-group-ID-on-execution bits</p>
+</section><section id="projectsbcjk" class="slide level2"><h2><code>/projects/bcjk</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /projects/bckj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-stdout">
+<pre><code>total 96
+drwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/
+drwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/
+drwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/
+drwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/
+drwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/
+drwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/
+drwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/
+drwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/
+drwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/
+drwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/
+drwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/
+drwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/
+drwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/
+drwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/
+drwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/
+drwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/
+drwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/
+drwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/
+drwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/
+drwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/
+drwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/
+drwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/
+drwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/
+drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/</code></pre>
+</div>
+</section><section id="scratchbcjk" class="slide level2"><h2><code>/scratch/bcjk</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /scratch/bckj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-stdout">
+<pre><code>total 96
+drwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/
+drwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/
+drwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/
+drwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/
+drwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/
+drwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/
+drwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/
+drwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/
+drwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/
+drwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/
+drwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/
+drwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/
+drwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/
+drwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/
+drwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/
+drwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/
+drwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/
+drwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/
+drwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/
+drwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/
+drwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/
+drwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/
+drwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/
+drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/</code></pre>
+</div>
+</section><section id="reading-data-overview" class="slide level2"><h2>Reading Data Overview</h2>
 <ul>
-<li>Each level serves as cache for the level below<br>
+<li>Text files (.csv, .tsv, .txt, … ): variable length records<br>
 </li>
-<li>A data request checks each cache until satisfied</li>
-<li>Not finding an item generates a “cache miss”<br>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># fastest reader</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># fast reader    </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Binary file formats faster for large data (&amp; smaller): fixed length records<br>
 </li>
-<li>A cache miss triggers a memory page swap from level below<br>
-<br></li>
 </ul>
-<h4 id="large-data-sets-do-not-fit-in-cache-contiguous-memory-access-patterns-speed-up-code">Large data sets do not fit in cache: contiguous memory access patterns speed up code</h4>
-</section>
-<section id="memory-hierarchy-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/MemHierarchy.png" data-background-size="80%" data-background-position="center" data-background-opacity="0.2">
-<h2>Memory Hierarchy</h2>
-</section>
-<section id="titan" class="slide level2" data-background-image="../../../pics/ParallelHardware/Titan.png" data-background-size="60%" data-background-position="bottom">
-<h2>Titan</h2>
-<h3 id="pf">27 PF</h3>
-<h4 id="section">2012-19</h4>
-</section>
-<section id="delta-2022" class="slide level2" data-background-image="../../../pics/ParallelHardware/delta_front_1.png" data-background-size="80%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-1">8 PF</h3>
-</section>
-<section id="delta-2022-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/ncsa-delta-back.jpg" data-background-size="80%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-2">8 PF</h3>
-</section>
-<section id="delta-2022-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/delta-row.jpg" data-background-size="70%" data-background-position="center">
-<h2>Delta: (2022)</h2>
-<h3 id="pf-3">8 PF</h3>
-</section>
-<section id="two-three-basic-concepts-in-hardware" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware1.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="flynns-taxonomy-1972" class="slide level2">
-<h2>Flynn’s Taxonomy (1972)</h2>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">arrow</span><span class="fu">::</span><span class="fu"><a href="https://arrow.apache.org/docs/r/reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># chunked column-oriented format (.parquet extension)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><span style="color:green;"><em>Single Instruction, Single Data (<strong>SISD</strong>):</em></span> scalar processor, serial program (old-style CPU)</li>
-<li><span style="color:green;"><em>Single Instruction, Multiple Data (<strong>SIMD</strong>):</em></span> vector processor, array processor (old-style GPU)</li>
-<li><span style="color:green;"><em>Multiple Instruction, Multiple Data (<strong>MIMD</strong>):</em></span> multiple cores in a single processor, multiple processors in a single computer, and multiple computers in a cluster (today’s CPU and GPU, but each still leans to legacy)</li>
-<li><span style="color:green;"><em>Multiple Instruction, Single Data (<strong>MISD</strong>):</em></span> is not used much</li>
+<li><a href="https://github.com/apache/arrow/blob/main/r/cheatsheet/arrow-cheatsheet.pdf">Arrow for R Cheatsheet</a></li>
 </ul>
-</section>
-<section id="three-processor-technology-streams" class="slide level2 smaller">
-<h2>Three Processor Technology Streams</h2>
-<p><span style="color:green;"><strong>Computers:</strong></span><br>
-- <strong>Fast and general</strong> computing<br>
-<br></p>
-<p><span style="color:green;"><strong>Graphics:</strong></span><br>
-- Lots of pixels with same independent operations<br>
-- <strong>Highly parallel and simple</strong> processing<br>
-<br></p>
-<p><span style="color:green;"><strong>Cellphones:</strong></span><br>
-- Small devices<br>
-- <strong>Low power</strong> operation<br>
-<br></p>
-<p><span style="color:green;">All three have matured into large cluster deployment</span></p>
-</section>
-<section id="shared-memory-hardware" class="slide level2 smaller">
-<h2>Shared Memory Hardware</h2>
-<p><strong>CPU</strong> - <span style="color:green;">Computer technology stream</span><br>
-- One or two chips, each with multiple cores<br>
-- Current high-end is 64 cores (e.g.&nbsp;AMD EPYC “Milan” on Delta)<br>
-- Hosts operating system (OS)</p>
-<p><strong>GPU</strong> - <span style="color:green;">Graphics technology stream</span><br>
-- Excellent SIMD throughput - Separate memory, so “offloading” co-processor concept<br>
-- Lower power requirements per core, lots of slow cores<br>
-- Does not host OS</p>
-<p><strong>ARM CPU-GPU</strong> - <span style="color:green;">Cellphone technology stream</span><br>
-- A hybrid unified memory architecture<br>
-- Low power requirements<br>
-- Hosts OS</p>
-<h4 id="cpus-fast-and-versatile-but-limited-parallelism"><span style="color:green;">CPUs fast and versatile but limited parallelism</span></h4>
-<h4 id="gpus-slower-and-less-versatile-but-extreme-parallelism-4x-cores"><span style="color:green;">GPUs slower and less versatile but extreme parallelism (4x+ cores)</span></h4>
-</section>
-<section id="uma-and-numa" class="slide level2">
-<h2>UMA and NUMA</h2>
-<h4 id="uniform-memory-access">Uniform memory access</h4>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rhdf5</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rhdf5/man/h5_read.html">h5read</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># hierarchical array-oriented format (.h5 extension)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>A typical multicore CPU chip</li>
-</ul>
-<h4 id="non-uniform-memory-access">Non-Uniform memory access</h4>
+<li><p><a href="https://bioconductor.org/packages/devel/bioc/vignettes/rhdf5/inst/doc/practical_tips.html"><code>rhdf5</code> Practical Tips</a> on Bioconductor</p></li>
+<li><p>Other formats (.xlsx, etc. )</p></li>
+</ul></section><section id="new-york-tlc-trip-record-data" class="slide level2"><h2>New York TLC Trip Record Data</h2>
 <ul>
-<li>A larger collection of multicore chips with hardware/software enabled global memory access</li>
-<li>Some memory is closer than other memory
-<ul>
-<li>More complex cache strategies</li>
-</ul></li>
-</ul>
-</section>
-<section id="two-three-basic-concepts-in-hardware-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware1.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="two-three-basic-concepts-in-hardware-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware2.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="two-three-basic-concepts-in-hardware-3" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware3.png" data-background-size="80%" data-background-position="center">
-<h2>Two (Three) Basic Concepts in Hardware</h2>
-</section>
-<section id="section-1" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware4.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-2" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware5.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-3" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware6.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-4" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware7.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-</section>
-<section id="section-5" class="slide level2" data-background-image="../../../pics/ParallelHardware/ParallelHardware8.png" data-background-size="80%" data-background-position="center">
-<h2></h2>
-<!--
-## Parallel Programming Models {.smaller}
-
-### Shared Memory Parallel  
--   **Unix fork:** fork a process and let the OS manage it  ([parallel pkg]{style="color:green;"})  
--   **Multithreading:** explicitly program parallel sections ([libraries]{style="color:green;"})  
--   **OpenMP:** give explicit hints to a compiler to make it parallel ([libraries]{style="color:green;"})
-
-### Distributed Memory Parallel  
--   **Manager-workers:** most common in simple cases    
--   **Single program, multiple data (SPMD):** common on clusters ([pbdMPI pkg]{style="color:green;"}) 
--   **MapReduce:** common in customer processing, continuous services ([sparklyr pkg]{style="color:green;"})  
--   **Dataflow:** dependency graph directed, can involve all of the above <br><br>
-
-#### [Largest codes use combination of SPMD, Dataflow, and Multithreading or OpenMP]{style="color:green;"}
-#### [Unix fork more common in scripting languages like R and Python]{style="color:green;"}
--->
+<li><p><a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">TLC: Taxi and Limousine Commission</a><br></p></li>
+<li><p>Includes: pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts</p></li>
+<li><p><a href="https://tlcpolicy.maps.arcgis.com/apps/instant/portfolio/index.html?appid=be00fce0963540628e37fd7c75a6d386">Data overview</a></p></li>
+<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf">Yellow Trip Data Dictionary</a></p></li>
+<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf">Green Trips Data Dictionary</a></p></li>
+<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_fhv.pdf">FHV Trips Data Dictionary</a></p></li>
+<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf">High Volume FHV Trips Data Dictionary</a></p></li>
+</ul></section><section id="yellow-trip-data-projectsbckjtlc" class="slide level2"><h2>Yellow Trip Data <code>/projects/bckj/TLC</code>
+</h2>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cd</span> <span class="op">/</span><span class="va">projects</span><span class="op">/</span><span class="va">bcjk</span><span class="op">/</span><span class="va">TLC</span></span>
+<span><span class="va">ls</span> <span class="op">-</span><span class="va">l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>total 60
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 16:52 2009/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:25 2010/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:26 2011/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:26 2012/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:27 2013/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:27 2014/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:20 2015/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:20 2016/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:21 2017/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:13 2018/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:13 2019/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:06 2020/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:31 2021/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:32 2022/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 22:40 2023/</code></pre>
+</div>
+</section><section id="yellow-trip-data-projectsbckjtlc-1" class="slide level2"><h2>Yellow Trip Data <code>/projects/bckj/TLC</code>
+</h2>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">du</span> <span class="op">-</span><span class="va">h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[gostrouc@dt-login01 TLC]$ du -h .
+587M    ./2022
+1.8G    ./2016
+458M    ./2021
+2.0G    ./2013
+1.4G    ./2018
+2.1G    ./2011
+1.2G    ./2019
+358M    ./2020
+2.1G    ./2012
+1.5G    ./2017
+2.1G    ./2014
+607M    ./2023
+5.3G    ./2010
+1.9G    ./2015
+5.4G    ./2009
+29G .</code></pre>
+</div>
+</section><section id="yellow-trip-data-2009" class="slide level2"><h2>Yellow Trip Data <code>2009</code>
+</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a>ls <span class="sc">-</span>l <span class="dv">2009</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>total 5583552
+-rw-rw----+ 1 gostrouc delta_bckj 469759995 Mar 30 16:51 yellow_tripdata_2009-01.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 443434087 Mar 30 16:51 yellow_tripdata_2009-02.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 482592227 Mar 30 16:51 yellow_tripdata_2009-03.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 478134464 Mar 30 16:51 yellow_tripdata_2009-04.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 495321625 Mar 30 16:52 yellow_tripdata_2009-05.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 473587848 Mar 30 16:52 yellow_tripdata_2009-06.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 454608768 Mar 30 16:52 yellow_tripdata_2009-07.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 458271722 Mar 30 16:52 yellow_tripdata_2009-08.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 468346719 Mar 30 16:52 yellow_tripdata_2009-09.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 527529176 Mar 30 16:52 yellow_tripdata_2009-10.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 478304085 Mar 30 16:52 yellow_tripdata_2009-11.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 487584891 Mar 30 16:52 yellow_tripdata_2009-12.parquet</code></pre>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -478,27 +606,10 @@
 </div>
 </div>
 </section>
-    </div>
+</div>
   </div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -531,7 +642,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -656,9 +767,9 @@
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1200,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -689,8 +800,42 @@
           RevealZoom
         ]
       });
-    </script>
-    <script id="quarto-html-after-body" type="application/javascript">
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -844,6 +989,6 @@
       }
     });
     </script>
-    
+
 
 </body></html>

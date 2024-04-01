@@ -113,24 +113,6 @@ editor: source
 
 ##  {background-image="/pics/ParallelHardware/ParallelHardware8.png" background-size="80%" background-position="center"}
 
-## Two (Three) Basic Concepts in Hardware {background-image="/pics/ParallelSoftware/ParallelSoftware1.png" background-size="80%" background-position="center"}
-
-## (Two) Three Basic Concepts from Software Viewpoint {background-image="/pics/ParallelSoftware/ParallelSoftware2.png" background-size="80%" background-position="center"}
-
-## Native Programming Mindset {background-image="/pics/ParallelSoftware/ParallelSoftware3.png" background-size="80%" background-position="center"}
-
-## Native Programming Models and Tools {background-image="/pics/ParallelSoftware/ParallelSoftware4.png" background-size="80%" background-position="center"}
-
-## 40 Years of Parallel Computing {background-image="/pics/ParallelSoftware/ParallelSoftware5.png" background-size="80%" background-position="center"}
-
-## Last 20 years of Advances {background-image="/pics/ParallelSoftware/ParallelSoftware6.png" background-size="80%" background-position="center"}
-
-## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/ParallelSoftware7.png" background-size="80%" background-position="center"}
-
-## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="80%" background-position="center"}
-
-## `parallel::mclapply()` {background-image="/pics/ParallelSoftware/ParallelSoftware9.png" background-size="80%" background-position="center"}
-
 <!--
 ## Parallel Programming Models {.smaller}
 

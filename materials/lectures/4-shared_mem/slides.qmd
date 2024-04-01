@@ -100,55 +100,6 @@ $t_o(n)$ - Parallel overhead time
 * Distributed - some things are recomputed rather than communicated
 :::
 
-## Unix `fork`   {.smaller}
-* Copy-on-write  
-* A memory efficient parallelism on shared memory devices  
-* **parallel** package `mclapply` and friends  
-* Use for numerical sections only  
-  * Avoid GUI, I/O, and graphics sections  
-* Convenient for data (not modified)  
-* Convenient for functional languages like R  
-* Avoid or manage nested parallelism  
-  * OpenBLAS takes all cores by default  
-  * data.table automatically switches to single threaded mode upon fork  
-
-.footnote[A deeper discussion of `fork` memory (if you have interest) on [YouTube](https://www.youtube.com/watch?v=8hVLcyBkSXY) by Chris Kanich (UIC)]
-
-## Copy-on-write  {background-image="/pics/fork/Slide1.png" background-size="90%" background-position="center"}
-
-::: notes
-* All done with pointers
-* Memory is in pages
-* Processes not aware of each other or other's memory use
-* OS is aware of memory use
-* 16 forks write = 16 copies of memory
-:::
-
-## Mapping Threads to Cores {background-image="/pics/fork/iDVTstR.jpg" background-size="30%" background-position="center right" .smaller}  
-### Theory and Reality  
-
-* Operating system manages core affinity  
-
-* Operating system tasks can compete  
-
-* Core switching occurs frequently  
-
-* **But it works rather well!**  
-
-## Drop-in replacements (almost) for `lapply`, `mapply`, and `Map` {.smaller}
-
-`mclapply(X, FUN, ...,`  
-`         mc.preschedule = TRUE, mc.set.seed = TRUE,`  
-`         mc.silent = FALSE, mc.cores = getOption("mc.cores", 2L),`  
-`         mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)`  
-
-`mcmapply(FUN, ...,`  
-`         MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,`  
-`         mc.preschedule = TRUE, mc.set.seed = TRUE,`  
-`         mc.silent = FALSE, mc.cores = getOption("mc.cores", 2L),`  
-`         mc.cleanup = TRUE, affinity.list = NULL)`  
-
-`mcMap(f, ...)`  
 
 ## Bootstrap, Bagging, Boosting, and Crossvalidation
 
@@ -329,13 +280,6 @@ flexiblas_get_num_threads()
 ## Example Random Forest Classification Code {background-image="/pics/MC/benchmark_mc.png" background-size="90%" background-position="center"}  
 #### Letter recognition data ( $20\,000 \times 17$ )
 
-## `KPMS-IT4I-EX/code/rf_serial.r`  
-```{.r include = "code/rf_serial.r"}
-```
-
-## `KPMS-IT4I-EX/code/rf_mc.r`  
-```{.r include = "code/rf_mc.r"}
-```
 
 ## Pseudo Random Number Generators (RNG) {background-image="/pics/fork/Slide6.png" background-size="90%" background-position="center"}
 

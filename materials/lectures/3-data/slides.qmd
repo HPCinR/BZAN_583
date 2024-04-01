@@ -6,6 +6,7 @@ format:
     width: 1200
     height: 800
     chalkboard: true
+    code-link: true
     code-line-numbers: false
 editor: source
 engine: knitr
@@ -13,21 +14,39 @@ engine: knitr
 
 ## Today
 
-- Go over 1st homework results
-- Package installs on Delta
+#### Assignment 1:  
+#### Assignment 2:  due Tuesday  
+#### Assignment 3:  Project proposals  
+#### Package installs on Delta:
+  - Login to Delta
+  - `module load r`
+  - `R` starts an interactive R session
+  - E.g. to install package `dplyr`:
+```{.r}
+install.packages("dplyr", repo = "https://cloud.r-project.org/")
+```
+<br>
+
+#### Delta File Systems
+#### Reading data and TLC Data
+#### Updated software slides
+#### `lapply()`, `mclapply()`
 
 
 ## File Systems on Delta {.incremental}
 
 - Our project name on Delta is `bckj`.
 
-- Each user has access to three file systems `/u/<username>`, `/projects/bckj/<username>`, and `/scratch/bcjk/<username>`. See   
-[File Systems](https://docs.ncsa.illinois.edu/systems/delta/en/latest/user_guide/architecture.html?highlight=file%20systems#file-systems), and  
+- Each user has access to three file systems `/u/<username>`, `/projects/bckj/<username>`, and `/scratch/bcjk/<username>`  
+- See
+[Delta: File Systems](https://docs.ncsa.illinois.edu/systems/delta/en/latest/user_guide/architecture.html?highlight=file%20systems#file-systems), and  
 [Delta: Data Management](https://docs.ncsa.illinois.edu/systems/delta/en/latest/user_guide/data_mgmt.html) for more details.
 
 - None of the Delta file systems are backed up - another good reason to work via GitHub.
 
-## The directories from your instructor's viewpoint:
+## Permissions on the directories
+
+(`gostrouc` user view):
 
 ```{bash}
 #| eval: false
@@ -64,6 +83,13 @@ ls -ld /scratch/bckj
 drwxrws---+ 26 root delta_bckj 8192 Mar 26 04:55 /scratch/bckj/
 ```
 :::
+<br>
+`d|uuu|ggg|ooo` $\quad$  
+dir|user|group|others  
+
+Exec permissions (from `man` page):    
+- x   The execute/search bits  
+- s   The set-user-ID-on-execution and set-group-ID-on-execution bits  
 
 ## `/projects/bcjk`
 
@@ -142,17 +168,28 @@ drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/
 :::
 
 ## Reading Data Overview
-
-- Binary file formats preferred for large data (speed & size) 
-  - Parquet: chunked column-oriented format (.parquet extension)  
-    - **arrow** package on CRAN  
-    - [Arrow for R Cheatsheet](https://github.com/apache/arrow/blob/main/r/cheatsheet/arrow-cheatsheet.pdf)   
-  - HDF5 - hierarchical array-oriented format (.h5 extension)   
-    - **rhdf5** package on Bioconductor   
  
-- Text files (.csv, .tsv, .txt, ... )  
-  - `fread()` fastest reader (from **data.table** package)  
-  - `read_delim()` fast reader (from **readr** package)  
+- Text files (.csv, .tsv, .txt, ... ): variable length records  
+```{.r}
+data.table::fread()  # fastest reader
+```
+
+```{.r}
+readr::read_delim()  # fast reader    
+```
+
+- Binary file formats faster for large data (& smaller): fixed length records  
+```{.r}
+arrow::read_parquet()  # chunked column-oriented format (.parquet extension)
+```
+
+  - [Arrow for R Cheatsheet](https://github.com/apache/arrow/blob/main/r/cheatsheet/arrow-cheatsheet.pdf)  
+      
+```{.r}
+rhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)
+```
+
+   -  [`rhdf5` Practical Tips](https://bioconductor.org/packages/devel/bioc/vignettes/rhdf5/inst/doc/practical_tips.html) on Bioconductor   
 
 - Other formats (.xlsx, etc. )  
   
@@ -171,3 +208,82 @@ drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/
 
 - [High Volume FHV Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf)  
 
+## Yellow Trip Data `/projects/bckj/TLC`
+
+```{.r}
+cd /projects/bcjk/TLC
+ls -l
+```
+
+::: {.cell-output-stdout}
+```
+total 60
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 16:52 2009/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:25 2010/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:26 2011/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:26 2012/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:27 2013/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:27 2014/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:20 2015/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:20 2016/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:21 2017/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:13 2018/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:13 2019/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:06 2020/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:31 2021/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:32 2022/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 22:40 2023/
+```
+:::
+
+## Yellow Trip Data `/projects/bckj/TLC`
+
+```{.r}
+du -h
+```
+
+::: {.cell-output-stdout}
+```
+[gostrouc@dt-login01 TLC]$ du -h .
+587M	./2022
+1.8G	./2016
+458M	./2021
+2.0G	./2013
+1.4G	./2018
+2.1G	./2011
+1.2G	./2019
+358M	./2020
+2.1G	./2012
+1.5G	./2017
+2.1G	./2014
+607M	./2023
+5.3G	./2010
+1.9G	./2015
+5.4G	./2009
+29G	.
+```
+:::
+
+## Yellow Trip Data `2009`
+
+```{.r}
+ls -l 2009
+```
+
+::: {.cell-output-stdout}
+```
+total 5583552
+-rw-rw----+ 1 gostrouc delta_bckj 469759995 Mar 30 16:51 yellow_tripdata_2009-01.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 443434087 Mar 30 16:51 yellow_tripdata_2009-02.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 482592227 Mar 30 16:51 yellow_tripdata_2009-03.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 478134464 Mar 30 16:51 yellow_tripdata_2009-04.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 495321625 Mar 30 16:52 yellow_tripdata_2009-05.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 473587848 Mar 30 16:52 yellow_tripdata_2009-06.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 454608768 Mar 30 16:52 yellow_tripdata_2009-07.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 458271722 Mar 30 16:52 yellow_tripdata_2009-08.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 468346719 Mar 30 16:52 yellow_tripdata_2009-09.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 527529176 Mar 30 16:52 yellow_tripdata_2009-10.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 478304085 Mar 30 16:52 yellow_tripdata_2009-11.parquet
+-rw-rw----+ 1 gostrouc delta_bckj 487584891 Mar 30 16:52 yellow_tripdata_2009-12.parquet
+```
+:::

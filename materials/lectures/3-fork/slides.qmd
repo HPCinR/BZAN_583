@@ -1,0 +1,75 @@
+---
+title: "Parallel via the Unix fork"
+format: 
+  revealjs:
+    slide-number: c/t
+    width: 1200
+    height: 800
+    chalkboard: true
+    code-link: true
+    code-line-numbers: false
+editor: source
+engine: knitr
+---
+
+## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="80%" background-position="center"}
+
+## `parallel::mclapply()` {background-image="/pics/ParallelSoftware/ParallelSoftware9.png" background-size="80%" background-position="center"}
+
+
+## Unix `fork`   {.smaller}
+
+#### Operating system forks a new process with pointers to same memory: A memory-efficient parallelism on shared memory devices running Unix-like OS   
+* Copy-on-write: memory copied only if modified 
+* **parallel** package function `mclapply()` and friends  
+* Use for numerical sections only:  
+  * Avoid GUI, I/O, and graphics sections (common device handles)  
+  * Great in a batch `Rscript` on Unix-like OS
+* Convenient for data (read, not modified)  
+* Convenient for functional languages like R (parameters by value)  
+* Manage or avoid nested parallelism:  
+  * Set OpenBLAS cores  
+  * **data.table** automatically switches to single threaded mode upon fork  
+<br>
+
+A deeper discussion of `fork` memory (if you have interest) on [YouTube](https://www.youtube.com/watch?v=8hVLcyBkSXY) by Chris Kanich (UIC)
+
+## Copy-on-write  {background-image="/pics/fork/Fork1.png" background-size="90%" background-position="center"}
+
+::: notes
+* All done with pointers
+* Memory is in pages
+* Processes not aware of each other or other's memory use 
+* OS is aware of memory use
+* 16 forks write = 16 copies of memory
+:::
+
+
+## OS manages core affinity  {background-image="/pics/fork/Fork9.png" background-size="90%" background-position="center"}
+
+::: aside
+ $\qquad$ OS tasks compete $\qquad$ Core switching occurs frequently   
+:::
+
+## Code first with `lapply()`, then switch to `mclapply()` {.smaller}
+
+Drop-in replacements (almost) for `lapply()`, `mapply()`, and `Map()`
+
+```{r}
+#| echo: true
+#| eval: false
+mclapply(X, FUN, ...,
+         mc.preschedule = TRUE, mc.set.seed = TRUE,
+         mc.silent = FALSE, mc.cores = getOption("mc.cores", 2L),
+         mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)
+
+mcmapply(FUN, ...,
+         MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,
+         mc.preschedule = TRUE, mc.set.seed = TRUE,
+         mc.silent = FALSE, mc.cores = getOption("mc.cores", 2L),
+         mc.cleanup = TRUE, affinity.list = NULL) 
+
+mcMap(f, ...)
+```
+
+Debugging easier with `lapply()`

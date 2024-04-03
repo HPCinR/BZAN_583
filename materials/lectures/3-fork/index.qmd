@@ -1,0 +1,12 @@
+---
+title: "Th Unix fork"
+editor: source
+---
+
+Using the Unix `fork` from R via the **parallel** package
+
+[Full Screen](slides.qmd)
+
+```{=html}
+<iframe class="slide-deck" src="slides.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
+```

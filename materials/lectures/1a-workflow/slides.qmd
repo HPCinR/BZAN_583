@@ -2,9 +2,14 @@
 title: "Workflow for Remote Computing with R"
 format: 
   revealjs:
+    slide-number: c/t
+    width: 1200
+    height: 800
     chalkboard: true
+    code-link: true
+    code-line-numbers: false
 editor: source
-knitr: true
+engine: knitr
 ---
 
 ## Workflow for Remote Computing in R  
@@ -92,11 +97,15 @@ knitr: true
 ::: {layout="[1,3,1]"}
 ![](/pics/01-intro/WorkflowGit.jpg)
 
-![](/pics/01-intro/Git_operations.svg) [<small>By Daniel Kinzler - Own work, CC BY 3.0</small>](https://commons.wikimedia.org/w/index.php?curid=25223536)
+![](/pics/01-intro/Git_operations.svg) 
 
 ![](/pics/01-intro/WorkflowCluster.jpg){fig-align="top"}
 $$\qquad$$
 ![](/pics/01-intro/WorkflowLaptop.jpg){fig-align="bottom"}
+:::
+
+::: aside
+[<small>Git diagram by Daniel Kinzler - CC BY 3.0</small>](https://commons.wikimedia.org/w/index.php?curid=25223536)
 :::
 
 ::: notes
@@ -129,10 +138,12 @@ $$\qquad$$
     -   Everything in Linux is a file (some are directory files)
     -   Linux files are organized as a tree
     -   Every file has permissions: d r w x | r w x | r w x
-        -  delete, read, write, execute
-        -  owner, group, all
+        - the first is a directory bit
+        - the triples are read, write, execute
+        - the grouping is owner, group, all
     -   Every file has *owner*, *group*, and a few other attributes
     -   Available commands are executable files in your PATH directories
+    -   PATH value can be seen with `echo $PATH`
 
 ::: notes
 *Unix* (Bell Labs) was a play on an earlier *Multics* operating system (designed at MIT)
@@ -156,6 +167,119 @@ Commands are files in directories listed in your PATH variable (try "echo \$PATH
 
 There are many resources on the web to learn Linux basics
 
+## Use of Login Nodes and Compute Nodes {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="60%" background-position="bottom right" .smaller} 
+
+**Login nodes:**  
+
+- Code downloads, GitHub or other  
+- Data downloads from Internet  
+- No RStudio
+- Interactive R or `Rscript` sessions:  
+
+   - Package installs  
+   - Interactive debugging  
+   - Rscript debugging
+
+**Compute nodes:**  
+- No Internet access  
+- No RStudio  
+- Batch `Rscript` submission via Slurm  
+
+
+::: notes
+
+-   Blue squares are nodes, circles are storage/disk
+-   Interconnect is communication between nodes
+-   Laptop - login node - resource script  
+-   BIG data on parallel file system - not on laptop!  
+-   Can monitor a longer run with logins to compute nodes  
+-   Batch  
+:::
+
+## On a Cluster Login Node {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="20%" background-position="top right" .smaller} 
+
+You are interacting with a `bash` shell (`$` prompt)  
+Submit batch scripts to the compute nodes (next slide)  
+Tp run R on the login node, load its module  
+```{bash}
+#| eval: false
+#| echo: true
+$ module load r
+```
+Then you can run of your `script.R` file with
+```{bash}
+#| eval: false
+#| echo: true
+$ Rscript script.R
+```
+Output goes to the terminal but you can also redirect it to a file
+```{bash}
+#| eval: false
+#| echo: true
+$ Rscript script.R > outfile_name
+```
+Or start an interactive R session with
+```{bash}
+#| eval: false
+#| echo: true
+$ R
+```
+which will give you a `>` prompt. You quit the R session with
+```{.r}
+> q()
+```
+and logout with
+```{bash}
+#| eval: false
+#| echo: true
+$ exit
+```
+
+::: aside
+Prompts `$` and `>` are not part of the shown commands
+:::
+
+## Submit scripts to the compute nodes {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="20%" background-position="top right" .smaller} 
+
+To run your R script on one or more compute nodes, you need two files
+
+- The R script, say `script.R`  
+- A bash shell script that requests the nodes, cores, etc. and specifies how to run your `script.R`, whis is usually `Rscript script.R`.
+
+Here is an example shell script to run `script.R`
+```{bash}
+#| eval: false
+#| echo: true
+#!/bin/bash
+#SBATCH --job-name utk
+#SBATCH --account=bckj-delta-cpu
+#SBATCH --partition=cpu
+#SBATCH --nodes=1
+#SBATCH --mem=16g
+#SBATCH --cpus-per-task=1
+#SBATCH --time 00:00:30
+#SBATCH -e ./utk.e
+#SBATCH -o ./utk.o
+
+module load r
+Rscript script.R
+```
+requesting one core on one node, limit of 30 seconds. If this file is saved as `script.sh`
+```{bash}
+#| eval: false
+#| echo: true
+sbatch script.sh
+```
+submits the job. Check on its status with
+```{bash}
+#| eval: false
+#| echo: true
+squeue -u <your-user-name>
+```
+
+
+
+<!--
 ## Job Submission on Cluster {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="30%" background-position="top right"}
 
 -   Command line submission  
@@ -181,4 +305,29 @@ Modules set software environment (PATH)
 *module list* - list what is loaded  
 *module avail* - list what is available  
 *module load r*  
+-->
 
+## Package Installation on Cluster {.smaller}
+
+#### Install packages in an interactive R session on a login node
+
+Login to the cluster, then at the shell prompt:
+```{bash}
+#| eval: false
+#| echo: true
+module load r
+R
+```
+starts an interactive R session. Now, for example, to install package `dplyr`:
+```{.r}
+install.packages("dplyr", repo = "https://cloud.r-project.org/")
+```
+The `repo` parameter can be skipped if it is set in `options()`. R may also ask to choose a repository location.
+
+#### You may need to load other modules if a package has external to R dependencies.
+```{bash}
+#| eval: false
+#| echo: true
+module avail
+```
+will list available software modules. If you don't see the software, ask `help@ncsa.illinois.edu` to have it installed. Note that this is for external to R software (not R packages).

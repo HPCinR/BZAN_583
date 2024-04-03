@@ -24,7 +24,7 @@ downloading packages practice, git and GitHub setup
 
 *Week 2, March 25 & 27*  
 
-Lectures: [Coding for Faster R](materials/lectures/2-faster)\
+Lectures: [Coding for Faster R](materials/lectures/2-faster),
 [Memory Hierarchy and Hardware](materials/lectures/2-hardware)\
 Assignment: [Faster Code](materials/assignment/2-faster) 
 <!-- double down on faster with memory hierarchy examples -->
@@ -32,7 +32,7 @@ Assignment: [Faster Code](materials/assignment/2-faster)
 *Week 3, April 1 & 3* \
 Project Proposals Due by Friday, April 5.
 
-Lectures: [File System and Data](materials/lectures/3-data) [HPC Software](materials/lectures/3-software) [parallel::mclapply()](materials/lectures/3-fork) [BLAS Libraries](materials/lectures/3-blas)\
+Lectures: [File System and Data](materials/lectures/3-data), [HPC Software](materials/lectures/3-software), [The Unix fork](materials/lectures/3-fork), [BLAS Libraries](materials/lectures/3-blas)\
 Assignment: [Project Proposal](materials/assignment/3-project) 
 <!-- start library parallel FlexiBLAS & OpenBLAS -->
 

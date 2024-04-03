@@ -7,16 +7,16 @@
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
-
-  <title>HPC for Data Science in R - BZAN 583 - Workflow for Remote Computing with R</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
-  <style>
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<title>HPC for Data Science in R - BZAN 583 - Workflow for Remote Computing with R</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+<style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -94,14 +94,14 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
-  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+<link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
 
   .callout {
     margin-top: 1em;
@@ -299,7 +299,7 @@
   }
 
   </style>
-  <style type="text/css">
+<style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -391,19 +391,14 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Workflow for Remote Computing with R</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Workflow for Remote Computing with R</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section id="workflow-for-remote-computing-in-r" class="slide level2">
-<h2>Workflow for Remote Computing in R</h2>
+</section><section id="workflow-for-remote-computing-in-r" class="slide level2"><h2>Workflow for Remote Computing in R</h2>
 
-<img data-src="../../../pics/01-intro/Workflow.png" class="r-stretch"></section>
-<section id="workflow-for-remote-computing-in-r-1" class="slide level2 smaller" data-background-image="../../../pics/01-intro//Workflow.png" data-background-size="30%" data-background-position="bottom right">
-<h2>Workflow for Remote Computing in R</h2>
+<img data-src="../../../pics/01-intro/Workflow.png" class="r-stretch"></section><section id="workflow-for-remote-computing-in-r-1" class="slide level2 smaller" data-background-image="../../../pics/01-intro//Workflow.png" data-background-size="30%" data-background-position="bottom right"><h2>Workflow for Remote Computing in R</h2>
 <h4 id="laptop-rstudio">Laptop RStudio</h4>
 <ul>
 <li>Familiar custom editing environment (Windows, Mac, Unix)</li>
@@ -420,13 +415,11 @@
 <li>Same environment for all</li>
 <li>Batch job submission</li>
 </ul>
-<aside class="notes">
-<ul>
+<aside class="notes"><ul>
 <li>Portability - in your basement or on another continent</li>
 <li>RStudio installs difficult - legacy OS on HPC</li>
 <li>Bandwidth</li>
-</ul>
-<style type="text/css">
+</ul><style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
           clip: rect(1px, 1px, 1px, 1px);
@@ -436,17 +429,12 @@
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-<section id="cooperating-r-sessions-on-a-modern-cluster" class="slide level2" data-background-image="../../../pics/01-intro/BatchRonClusterLaptop.jpg" data-background-size="70%" data-background-position="bottom right">
-<h2>Cooperating R Sessions on a Modern Cluster</h2>
+      }</style></aside></section><section id="cooperating-r-sessions-on-a-modern-cluster" class="slide level2" data-background-image="../../../pics/01-intro/BatchRonClusterLaptop.jpg" data-background-size="70%" data-background-position="bottom right"><h2>Cooperating R Sessions on a Modern Cluster</h2>
 <p>8 Nodes (124 + 4 cores each)<br>
 - 32 R sessions<br>
 - each using 31 cores<br>
-- 992 cores total<br>
-</p>
-<aside class="notes">
-<ul>
+- 992 cores total<br></p>
+<aside class="notes"><ul>
 <li>Blue squares are nodes, circles are storage/disk</li>
 <li>Interconnect is communication between nodes</li>
 <li>Laptop - login node - resource script<br>
@@ -457,8 +445,7 @@
 </li>
 <li>Batch<br>
 </li>
-</ul>
-<style type="text/css">
+</ul><style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
           clip: rect(1px, 1px, 1px, 1px);
@@ -468,27 +455,23 @@
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-<section id="software-needed-on-laptop" class="slide level2" data-background-image="../../../pics/01-intro//Workflow.png" data-background-size="30%" data-background-position="bottom right">
-<h2>Software Needed on Laptop</h2>
+      }</style></aside></section><section id="software-needed-on-laptop" class="slide level2" data-background-image="../../../pics/01-intro//Workflow.png" data-background-size="30%" data-background-position="bottom right"><h2>Software Needed on Laptop</h2>
 <ul>
 <li>Mac
 <ul>
 <li><p>R, RStudio</p></li>
 <li><p>terminal, git (in Xcode)</p></li>
-</ul></li>
+</ul>
+</li>
 <li>Windows
 <ul>
 <li><p>R, RStudio</p></li>
 <li><p>putty</p></li>
 <li><p>git</p></li>
 <li><p>WinSCP</p></li>
-</ul></li>
 </ul>
-</section>
-<section id="software-on-cluster" class="slide level2 smaller" data-background-image="../../../pics/01-intro//Workflow.png" data-background-size="30%" data-background-position="top right">
-<h2>Software on Cluster</h2>
+</li>
+</ul></section><section id="software-on-cluster" class="slide level2 smaller" data-background-image="../../../pics/01-intro//Workflow.png" data-background-size="30%" data-background-position="top right"><h2>Software on Cluster</h2>
 <ul>
 <li>FlexiBLAS, OpenBLAS</li>
 <li>OpenMPI</li>
@@ -497,18 +480,17 @@
 </ul>
 <h3 id="above-managed-by-center-below-by-you">Above managed by center, below by you</h3>
 <ul>
-<li>And various packages, including <code>pbdMPI</code></li>
+<li>And various packages, including <code>pbdMPI</code>
+</li>
 </ul>
 <h4 id="r-vs-conda-r-deployment">R vs conda-R Deployment:</h4>
 <ul>
 <li>Different package management philosophy</li>
 <li>Can create conflicts if mixing, a layer of complexity</li>
 </ul>
-<aside class="notes">
-<ul>
+<aside class="notes"><ul>
 <li>Solves some dependency issues but creates others</li>
-</ul>
-<style type="text/css">
+</ul><style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
           clip: rect(1px, 1px, 1px, 1px);
@@ -518,29 +500,26 @@
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-<section id="github-git-laptop-to-cluster" class="slide level2">
-<h2>GitHub + git (laptop to cluster)</h2>
+      }</style></aside></section><section id="github-git-laptop-to-cluster" class="slide level2"><h2>GitHub + git (laptop to cluster)</h2>
 <div class="quarto-layout-panel" data-layout="[1,3,1]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
 <p><img data-src="../../../pics/01-intro/WorkflowGit.jpg"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
-<p><img data-src="../../../pics/01-intro/Git_operations.svg"> <a href="https://commons.wikimedia.org/w/index.php?curid=25223536"><small>By Daniel Kinzler - Own work, CC BY 3.0</small></a></p>
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><img data-src="../../../pics/01-intro/Git_operations.svg"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: flex-start;">
-<p><img data-src="../../../pics/01-intro/WorkflowCluster.jpg" class="quarto-figure quarto-figure-top"> <span class="math display">\[\qquad\]</span> <img data-src="../../../pics/01-intro/WorkflowLaptop.jpg" class="quarto-figure quarto-figure-bottom"></p>
+<p><img data-src="../../../pics/01-intro/WorkflowCluster.jpg" class="quarto-figure quarto-figure-top"><span class="math display">\[\qquad\]</span> <img data-src="../../../pics/01-intro/WorkflowLaptop.jpg" class="quarto-figure quarto-figure-bottom"></p>
 </div>
 </div>
 </div>
-<aside class="notes">
-<ul>
-<li>RStudio demo and checkbox <code>add</code></li>
+
+<aside class="notes"><ul>
+<li>RStudio demo and checkbox <code>add</code>
+</li>
 <li>names for head, remote,</li>
-</ul>
-<style type="text/css">
+</ul><style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
           clip: rect(1px, 1px, 1px, 1px);
@@ -550,47 +529,60 @@
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-<section id="making-git-easy" class="slide level2 smaller" data-background-image="../../../pics/01-intro/WorkflowPushPull.jpg" data-background-size="30%" data-background-position="top right">
-<h2>Making <strong>git</strong> easy</h2>
+      }</style></aside><aside><div>
+<p><a href="https://commons.wikimedia.org/w/index.php?curid=25223536"><small>Git diagram by Daniel Kinzler - CC BY 3.0</small></a></p>
+</div></aside></section><section id="making-git-easy" class="slide level2 smaller" data-background-image="../../../pics/01-intro/WorkflowPushPull.jpg" data-background-size="30%" data-background-position="top right"><h2>Making <strong>git</strong> easy</h2>
 <ul>
-<li><p>Private and Public key pairs for Client and Server</p>
+<li>
+<p>Private and Public key pairs for Client and Server</p>
 <ul>
-<li>Git repository (GitHub, GitLab) is the <strong>server</strong></li>
-<li>Your laptop and remote cluster are <strong>clients</strong></li>
-</ul></li>
-<li><p>Each <strong>client</strong> has own <em>key-pair</em></p>
+<li>Git repository (GitHub, GitLab) is the <strong>server</strong>
+</li>
+<li>Your laptop and remote cluster are <strong>clients</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>Each <strong>client</strong> has own <em>key-pair</em></p>
 <ul>
-<li><em>Private key</em> stays on the <strong>client</strong></li>
-<li><em>Public key</em> is copied to the <strong>server</strong></li>
-</ul></li>
-<li><p>Works like a single-use password generator and authentication</p>
+<li>
+<em>Private key</em> stays on the <strong>client</strong>
+</li>
+<li>
+<em>Public key</em> is copied to the <strong>server</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>Works like a single-use password generator and authentication</p>
 <ul>
 <li>Client contacts server, server responds with a random string encrypted by client’s public key</li>
 <li>Client decrypts with own private key and sends to server</li>
 <li>Server verifies agreement and opens secure connection</li>
-</ul></li>
 </ul>
-</section>
-<section id="clusters-are-linux-systems" class="slide level2 smaller" data-background-image="../../../pics/01-intro//WorkflowCluster.jpg" data-background-size="30%" data-background-position="top right">
-<h2>Clusters are Linux systems</h2>
+</li>
+</ul></section><section id="clusters-are-linux-systems" class="slide level2 smaller" data-background-image="../../../pics/01-intro//WorkflowCluster.jpg" data-background-size="30%" data-background-position="top right"><h2>Clusters are Linux systems</h2>
 <ul>
-<li><p>Linux is one of many descendants of original Unix. MacOS is another.</p>
+<li>
+<p>Linux is one of many descendants of original Unix. MacOS is another.</p>
 <ul>
 <li>Everything in Linux is a file (some are directory files)</li>
 <li>Linux files are organized as a tree</li>
 <li>Every file has permissions: d r w x | r w x | r w x
 <ul>
-<li>delete, read, write, execute</li>
-<li>owner, group, all</li>
-</ul></li>
+<li>the first is a directory bit</li>
+<li>the triples are read, write, execute</li>
+<li>the grouping is owner, group, all</li>
+</ul>
+</li>
 <li>Every file has <em>owner</em>, <em>group</em>, and a few other attributes</li>
 <li>Available commands are executable files in your PATH directories</li>
-</ul></li>
+<li>PATH value can be seen with <code>echo $PATH</code>
+</li>
 </ul>
-<aside class="notes">
-<p><em>Unix</em> (Bell Labs) was a play on an earlier <em>Multics</em> operating system (designed at MIT)</p>
+</li>
+</ul>
+<aside class="notes"><p><em>Unix</em> (Bell Labs) was a play on an earlier <em>Multics</em> operating system (designed at MIT)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -601,45 +593,171 @@
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside>
-</section>
-<section id="linux-commands" class="slide level2 smaller" data-background-image="../../../pics/01-intro//WorkflowCluster.jpg" data-background-size="30%" data-background-position="top right">
-<h2>Linux Commands</h2>
+      }</style></aside></section><section id="linux-commands" class="slide level2 smaller" data-background-image="../../../pics/01-intro//WorkflowCluster.jpg" data-background-size="30%" data-background-position="top right"><h2>Linux Commands</h2>
 <p>In a terminal, you talk to a <em>shell</em> program (<em>bash</em> is most common)</p>
 <ul>
-<li>Commands (executable files) can have <em>options</em> and <em>arguments</em></li>
+<li>Commands (executable files) can have <em>options</em> and <em>arguments</em>
+</li>
 </ul>
 <p><em>Standard input</em> and <em>standard output</em> of a command is the terminal but can be redirected</p>
 <ul>
-<li><strong>&lt;</strong>, <strong>&lt;&lt;</strong>, <strong>&gt;</strong>, <strong>&gt;&gt;</strong> redirect standard input and output</li>
-<li><em>command1</em> <strong>|</strong> <em>command2</em> pipes standard output1 to standard input2</li>
+<li>
+<strong>&lt;</strong>, <strong>&lt;&lt;</strong>, <strong>&gt;</strong>, <strong>&gt;&gt;</strong> redirect standard input and output</li>
+<li>
+<em>command1</em> <strong>|</strong> <em>command2</em> pipes standard output1 to standard input2</li>
 </ul>
 <p>Commands are files in directories listed in your PATH variable (try “echo $PATH”)</p>
 <ul>
 <li>$ means substitute variable value</li>
-<li><em>export</em> lists (or sets) variables and their values</li>
+<li>
+<em>export</em> lists (or sets) variables and their values</li>
 </ul>
 <p>There are many resources on the web to learn Linux basics</p>
-</section>
-<section id="job-submission-on-cluster" class="slide level2 smaller" data-background-image="../../../pics/01-intro//WorkflowCluster.jpg" data-background-size="30%" data-background-position="top right">
-<h2>Job Submission on Cluster</h2>
+</section><section id="use-of-login-nodes-and-compute-nodes" class="slide level2 smaller" data-background-image="../../../pics/01-intro/BatchRonClusterLaptop.jpg" data-background-size="60%" data-background-position="bottom right"><h2>Use of Login Nodes and Compute Nodes</h2>
+<p><strong>Login nodes:</strong></p>
 <ul>
-<li>Command line submission<br>
+<li><p>Code downloads, GitHub or other<br></p></li>
+<li><p>Data downloads from Internet<br></p></li>
+<li><p>No RStudio</p></li>
+<li>
+<p>Interactive R or <code>Rscript</code> sessions:</p>
+<ul>
+<li>Package installs<br>
 </li>
-<li>Shell script submission (preferred)</li>
+<li>Interactive debugging<br>
+</li>
+<li>Rscript debugging</li>
 </ul>
-<h3 id="slurm-workload-manager">SLURM workload manager</h3>
-<p>Submit a shell script, check the job queue, cancel a job.</p>
+</li>
+</ul>
+<p><strong>Compute nodes:</strong><br>
+- No Internet access<br>
+- No RStudio<br>
+- Batch <code>Rscript</code> submission via Slurm</p>
+<aside class="notes"><ul>
+<li>Blue squares are nodes, circles are storage/disk</li>
+<li>Interconnect is communication between nodes</li>
+<li>Laptop - login node - resource script<br>
+</li>
+<li>BIG data on parallel file system - not on laptop!<br>
+</li>
+<li>Can monitor a longer run with logins to compute nodes<br>
+</li>
+<li>Batch<br>
+</li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="on-a-cluster-login-node" class="slide level2 smaller" data-background-image="../../../pics/01-intro/BatchRonClusterLaptop.jpg" data-background-size="20%" data-background-position="top right"><h2>On a Cluster Login Node</h2>
+<p>You are interacting with a <code>bash</code> shell (<code>$</code> prompt)<br>
+Submit batch scripts to the compute nodes (next slide)<br>
+Tp run R on the login node, load its module</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="ex">sbatch</span> your-shell-script.sh</span>
-<span id="cb1-2"><a></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="pp">*</span>uid<span class="pp">*</span>  </span>
-<span id="cb1-3"><a></a><span class="ex">scancel</span> <span class="pp">*</span>jobnumber<span class="pp">*</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> module load r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<h3 id="software-modules">Software Modules</h3>
-<p>Modules set software environment (PATH)</p>
-<p><em>module list</em> - list what is loaded<br>
-<em>module avail</em> - list what is available<br>
-<em>module load r</em></p>
+<p>Then you can run of your <code>script.R</code> file with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript script.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Output goes to the terminal but you can also redirect it to a file</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript script.R <span class="op">&gt;</span> outfile_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or start an interactive R session with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>which will give you a <code>&gt;</code> prompt. You quit the R session with</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">q</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and logout with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> exit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Prompts <code>$</code> and <code>&gt;</code> are not part of the shown commands</p>
+</div></aside></section><section id="submit-scripts-to-the-compute-nodes" class="slide level2 smaller" data-background-image="../../../pics/01-intro/BatchRonClusterLaptop.jpg" data-background-size="20%" data-background-position="top right"><h2>Submit scripts to the compute nodes</h2>
+<p>To run your R script on one or more compute nodes, you need two files</p>
+<ul>
+<li>The R script, say <code>script.R</code><br>
+</li>
+<li>A bash shell script that requests the nodes, cores, etc. and specifies how to run your <code>script.R</code>, whis is usually <code>Rscript script.R</code>.</li>
+</ul>
+<p>Here is an example shell script to run <code>script.R</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name utk</span></span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=bckj-delta-cpu</span></span>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=cpu</span></span>
+<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16g</span></span>
+<span id="cb7-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb7-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 00:00:30</span></span>
+<span id="cb7-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -e ./utk.e</span></span>
+<span id="cb7-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -o ./utk.o</span></span>
+<span id="cb7-11"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load r</span>
+<span id="cb7-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> script.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>requesting one core on one node, limit of 30 seconds. If this file is saved as <code>script.sh</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> script.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>submits the job. Check on its status with</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>your-user-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--
+## Job Submission on Cluster {.smaller background-image="/pics/01-intro//WorkflowCluster.jpg" background-size="30%" background-position="top right"}
+
+-   Command line submission  
+-   Shell script submission (preferred)  
+
+### SLURM workload manager
+
+Submit a shell script, check the job queue, cancel a job. 
+
+
+::: {.cell}
+
+```{.bash .cell-code}
+sbatch your-shell-script.sh
+squeue -u *uid*  
+scancel *jobnumber*  
+```
+:::
+
+
+### Software Modules  
+
+Modules set software environment (PATH)  
+
+*module list* - list what is loaded  
+*module avail* - list what is available  
+*module load r*  
+-->
+</section><section id="package-installation-on-cluster" class="slide level2 smaller"><h2>Package Installation on Cluster</h2>
+<h4 id="install-packages-in-an-interactive-r-session-on-a-login-node">Install packages in an interactive R session on a login node</h4>
+<p>Login to the cluster, then at the shell prompt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load r</span>
+<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>starts an interactive R session. Now, for example, to install package <code>dplyr</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dplyr"</span>, repo <span class="op">=</span> <span class="st">"https://cloud.r-project.org/"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>repo</code> parameter can be skipped if it is set in <code><a href="https://rdrr.io/r/base/options.html">options()</a></code>. R may also ask to choose a repository location.</p>
+<h4 id="you-may-need-to-load-other-modules-if-a-package-has-external-to-r-dependencies.">You may need to load other modules if a package has external to R dependencies.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>will list available software modules. If you don’t see the software, ask <code>help@ncsa.illinois.edu</code> to have it installed. Note that this is for external to R software (not R packages).</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -647,27 +765,10 @@
 </div>
 </div>
 </section>
-    </div>
+</div>
   </div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -700,7 +801,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -825,9 +926,9 @@
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1200,
 
-        height: 700,
+        height: 800,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -858,9 +959,7 @@
           RevealZoom
         ]
       });
-    </script>
-    
-    <script>
+    </script><script>
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
       // slide changes (different for each slide format).
@@ -895,9 +994,7 @@
         }
 
       })();
-    </script>
-
-    <script id="quarto-html-after-body" type="application/javascript">
+    </script><script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -1051,6 +1148,6 @@
       }
     });
     </script>
-    
+
 
 </body></html>

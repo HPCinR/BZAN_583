@@ -46,7 +46,7 @@
     "href": "index.html",
     "title": "HPC for Data Science in R - BZAN 583",
     "section": "",
-    "text": "This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.\nMaterial below Week 1 is under construction!\n\n\n\n\n\n\nWeek 1, March 18 & 20\n\n\nLectures: Welcome and Setup Workflow Introduction Setup and Demo\nAssignment: Installs and Workflow \n\n\n\n\nWeek 2, March 25 & 27\n\n\nLectures: Coding for Faster R\nMemory Hierarchy and Hardware\nAssignment: Faster Code \n\n\n\n\nWeek 3, April 1 & 3\nProject Proposals Due by Friday, April 5.\n\n\nLectures: File System and Data HPC Software parallel::mclapply() BLAS Libraries\nAssignment: Project Proposal \n\n\n\n\nWeek 4, April 8 & 10\n\n\nLectures: Shared Memory Parallel\nAssignment: Multicore \n\n\n\n\nWeek 5, April 15 & 17\n\n\nLectures: LLM or Torch for R\nAssignment: A classification task \n\n\n\n\nWeek 6, April 22 & 24\n\n\nLectures: Distributed Computing\nAssignment: pbdMPI application \n\n\n\n\nWeek 7, April 29 & May 1\n\n\nLectures: TBD Your choice\n\n\n\n\n\nWeek 8, May 6\n\n\nProject: Presentations\n\n\n\nNotes: Programming Style"
+    "text": "This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.\nMaterial below Week 1 is under construction!\n\n\n\n\n\n\nWeek 1, March 18 & 20\n\n\nLectures: Welcome and Setup Workflow Introduction Setup and Demo\nAssignment: Installs and Workflow \n\n\n\n\nWeek 2, March 25 & 27\n\n\nLectures: Coding for Faster R, Memory Hierarchy and Hardware\nAssignment: Faster Code \n\n\n\n\nWeek 3, April 1 & 3\nProject Proposals Due by Friday, April 5.\n\n\nLectures: File System and Data, HPC Software, The Unix fork, BLAS Libraries\nAssignment: Project Proposal \n\n\n\n\nWeek 4, April 8 & 10\n\n\nLectures: Shared Memory Parallel\nAssignment: Multicore \n\n\n\n\nWeek 5, April 15 & 17\n\n\nLectures: LLM or Torch for R\nAssignment: A classification task \n\n\n\n\nWeek 6, April 22 & 24\n\n\nLectures: Distributed Computing\nAssignment: pbdMPI application \n\n\n\n\nWeek 7, April 29 & May 1\n\n\nLectures: TBD Your choice\n\n\n\n\n\nWeek 8, May 6\n\n\nProject: Presentations\n\n\n\nNotes: Programming Style"
   },
   {
     "objectID": "materials/lectures/6-distributed/slides.html#distributed-memory-computing",
@@ -340,14 +340,14 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.405    82.16      1.450     84.80\n\"aperm.default\"     0.140     8.19      0.140      8.19\n\"array\"             0.040     2.34      0.040      2.34\n\"is.finite\"         0.030     1.75      0.030      1.75\n\"colMeans\"          0.025     1.46      0.025      1.46\n\"matrix\"            0.025     1.46      0.025      1.46\n\"svd\"               0.015     0.88      1.490     87.13\n\"sweep\"             0.015     0.88      0.195     11.40\n\"any\"               0.015     0.88      0.015      0.88"
+    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                  self.time self.pct total.time total.pct\n\"La.svd\"              1.490    82.78      1.535     85.28\n\"aperm.default\"       0.140     7.78      0.140      7.78\n\"array\"               0.035     1.94      0.035      1.94\n\"colMeans\"            0.035     1.94      0.035      1.94\n\"is.finite\"           0.035     1.94      0.035      1.94\n\"matrix\"              0.020     1.11      0.020      1.11\n\"sweep\"               0.015     0.83      0.190     10.56\n\"any\"                 0.015     0.83      0.015      0.83\n\"svd\"                 0.010     0.56      1.575     87.50\n\"lazyLoadDBfetch\"     0.005     0.28      0.005      0.28"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.405    84.89      1.440     87.01\n\"aperm.default\"     0.150     9.06      0.150      9.06\n\"is.finite\"         0.030     1.81      0.030      1.81\n\"array\"             0.020     1.21      0.020      1.21\n\"any\"               0.015     0.91      0.015      0.91\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.360    82.93      1.410     85.98\n\"aperm.default\"     0.140     8.54      0.140      8.54\n\"is.finite\"         0.030     1.83      0.030      1.83\n\"any\"               0.025     1.52      0.025      1.52\n\"sweep\"             0.020     1.22      0.180     10.98\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.405    84.13      1.455     87.13\n\"aperm.default\"     0.145     8.68      0.145      8.68\n\"is.finite\"         0.030     1.80      0.030      1.80\n\"array\"             0.025     1.50      0.025      1.50\n\"matrix\"            0.025     1.50      0.025      1.50"
+    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.420    83.53      1.465     86.18\n\"aperm.default\"     0.155     9.12      0.155      9.12\n\"is.finite\"         0.035     2.06      0.035      2.06\n\"array\"             0.030     1.76      0.030      1.76\n\"any\"               0.020     1.18      0.020      1.18\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.360    82.42      1.415     85.76\n\"aperm.default\"     0.150     9.09      0.150      9.09\n\"is.finite\"         0.030     1.82      0.030      1.82\n\"any\"               0.025     1.52      0.025      1.52\n\"array\"             0.025     1.52      0.025      1.52\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.430    83.63      1.480     86.55\n\"aperm.default\"     0.150     8.77      0.150      8.77\n\"is.finite\"         0.030     1.75      0.030      1.75\n\"array\"             0.025     1.46      0.025      1.46\n\"colMeans\"          0.025     1.46      0.025      1.46"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#lazy-evaluation",
@@ -361,7 +361,7 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark\n",
-    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.250    2.747     0.202    0.033          0         0\n2 g(x)          100   0.091    1.000     0.083    0.008          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.240    2.609     0.200    0.037          0         0\n2 g(x)          100   0.092    1.000     0.084    0.008          0         0"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#profiling-summary",
@@ -375,7 +375,7 @@
     "href": "materials/lectures/2-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  1.007   0.078   1.087 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.031   0.001   0.032 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.955   0.073   1.030 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.031 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#compute-once-if-not-changing",
@@ -403,7 +403,7 @@
     "href": "materials/lectures/2-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Preallocate lists and vectors Instead of Growing Them",
-    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  5.897   1.875   7.823 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.405   0.045   0.450 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.431   1.903   8.389 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.411   0.060   0.470 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#specialize-more-general-functions",
@@ -424,7 +424,7 @@
     "href": "materials/lectures/2-faster/slides.html#contiguous-access-to-arrays-and-lists",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Contiguous access to arrays and lists",
-    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.900   0.072   0.974 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.375   0.042   0.417 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.233   0.062   0.298 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.842   0.070   0.916 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.376   0.043   0.420 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.235   0.054   0.291 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#programming-languages-hierarchy",
@@ -445,7 +445,7 @@
     "href": "materials/lectures/2-faster/slides.html#rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "\nRfast and RFast2 Packages: A collection of Rcpp-Implemented Functions",
-    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.336   0.019   0.367 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.065   0.005   0.077 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
+    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.331   0.024   0.359 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.066   0.005   0.082 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
   },
   {
     "objectID": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas",
@@ -718,63 +718,84 @@
     "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r-1",
     "title": "Workflow for Remote Computing with R",
     "section": "Workflow for Remote Computing in R",
-    "text": "Workflow for Remote Computing in R\nLaptop RStudio\n\nFamiliar custom editing environment (Windows, Mac, Unix)\nInteractive Syntax checking\n\ngit, GitHub (or GitLab and Bitbucket)\n\nPortability to remote computing\nVersion control\nCollaboration\n\nCluster unix\n\nSame environment for all\nBatch job submission\n\n\n\nPortability - in your basement or on another continent\nRStudio installs difficult - legacy OS on HPC\nBandwidth"
+    "text": "Workflow for Remote Computing in R\nLaptop RStudio\n\nFamiliar custom editing environment (Windows, Mac, Unix)\nInteractive Syntax checking\n\ngit, GitHub (or GitLab and Bitbucket)\n\nPortability to remote computing\nVersion control\nCollaboration\n\nCluster unix\n\nSame environment for all\nBatch job submission\n\n\nPortability - in your basement or on another continent\nRStudio installs difficult - legacy OS on HPC\nBandwidth"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
     "href": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
     "title": "Workflow for Remote Computing with R",
     "section": "Cooperating R Sessions on a Modern Cluster",
-    "text": "Cooperating R Sessions on a Modern Cluster\n8 Nodes (124 + 4 cores each)\n- 32 R sessions\n- each using 31 cores\n- 992 cores total\n\n\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
+    "text": "Cooperating R Sessions on a Modern Cluster\n8 Nodes (124 + 4 cores each)\n- 32 R sessions\n- each using 31 cores\n- 992 cores total\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
     "href": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
     "title": "Workflow for Remote Computing with R",
     "section": "Software Needed on Laptop",
-    "text": "Software Needed on Laptop\n\nMac\n\nR, RStudio\nterminal, git (in Xcode)\n\nWindows\n\nR, RStudio\nputty\ngit\nWinSCP"
+    "text": "Software Needed on Laptop\n\nMac\n\nR, RStudio\nterminal, git (in Xcode)\n\n\nWindows\n\nR, RStudio\nputty\ngit\nWinSCP"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
     "href": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
     "title": "Workflow for Remote Computing with R",
     "section": "Software on Cluster",
-    "text": "Software on Cluster\n\nFlexiBLAS, OpenBLAS\nOpenMPI\nArrow or HDF5 (for parallel I/O)\nR (&gt;= 4.0)\n\nAbove managed by center, below by you\n\nAnd various packages, including pbdMPI\n\nR vs conda-R Deployment:\n\nDifferent package management philosophy\nCan create conflicts if mixing, a layer of complexity\n\n\n\nSolves some dependency issues but creates others"
+    "text": "Software on Cluster\n\nFlexiBLAS, OpenBLAS\nOpenMPI\nArrow or HDF5 (for parallel I/O)\nR (&gt;= 4.0)\n\nAbove managed by center, below by you\n\nAnd various packages, including pbdMPI\n\n\nR vs conda-R Deployment:\n\nDifferent package management philosophy\nCan create conflicts if mixing, a layer of complexity\n\n\nSolves some dependency issues but creates others"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
     "href": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
     "title": "Workflow for Remote Computing with R",
     "section": "GitHub + git (laptop to cluster)",
-    "text": "GitHub + git (laptop to cluster)\n\n\n\n\n\n\n By Daniel Kinzler - Own work, CC BY 3.0\n\n\n \\[\\qquad\\] \n\n\n\n\n\nRStudio demo and checkbox add\nnames for head, remote,"
+    "text": "GitHub + git (laptop to cluster)\n\n\n\n\n\n\n\n\n\n\\[\\qquad\\] \n\n\n\n\n\nRStudio demo and checkbox add\n\nnames for head, remote,\n\nGit diagram by Daniel Kinzler - CC BY 3.0"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#making-git-easy",
     "href": "materials/lectures/1a-workflow/slides.html#making-git-easy",
     "title": "Workflow for Remote Computing with R",
     "section": "Making git easy",
-    "text": "Making git easy\n\nPrivate and Public key pairs for Client and Server\n\nGit repository (GitHub, GitLab) is the server\nYour laptop and remote cluster are clients\n\nEach client has own key-pair\n\nPrivate key stays on the client\nPublic key is copied to the server\n\nWorks like a single-use password generator and authentication\n\nClient contacts server, server responds with a random string encrypted by client’s public key\nClient decrypts with own private key and sends to server\nServer verifies agreement and opens secure connection"
+    "text": "Making git easy\n\n\nPrivate and Public key pairs for Client and Server\n\nGit repository (GitHub, GitLab) is the server\n\nYour laptop and remote cluster are clients\n\n\n\n\nEach client has own key-pair\n\n\nPrivate key stays on the client\n\n\nPublic key is copied to the server\n\n\n\n\nWorks like a single-use password generator and authentication\n\nClient contacts server, server responds with a random string encrypted by client’s public key\nClient decrypts with own private key and sends to server\nServer verifies agreement and opens secure connection"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
     "href": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
     "title": "Workflow for Remote Computing with R",
     "section": "Clusters are Linux systems",
-    "text": "Clusters are Linux systems\n\nLinux is one of many descendants of original Unix. MacOS is another.\n\nEverything in Linux is a file (some are directory files)\nLinux files are organized as a tree\nEvery file has permissions: d r w x | r w x | r w x\n\ndelete, read, write, execute\nowner, group, all\n\nEvery file has owner, group, and a few other attributes\nAvailable commands are executable files in your PATH directories\n\n\n\nUnix (Bell Labs) was a play on an earlier Multics operating system (designed at MIT)"
+    "text": "Clusters are Linux systems\n\n\nLinux is one of many descendants of original Unix. MacOS is another.\n\nEverything in Linux is a file (some are directory files)\nLinux files are organized as a tree\nEvery file has permissions: d r w x | r w x | r w x\n\nthe first is a directory bit\nthe triples are read, write, execute\nthe grouping is owner, group, all\n\n\nEvery file has owner, group, and a few other attributes\nAvailable commands are executable files in your PATH directories\nPATH value can be seen with echo $PATH\n\n\n\n\nUnix (Bell Labs) was a play on an earlier Multics operating system (designed at MIT)"
   },
   {
     "objectID": "materials/lectures/1a-workflow/slides.html#linux-commands",
     "href": "materials/lectures/1a-workflow/slides.html#linux-commands",
     "title": "Workflow for Remote Computing with R",
     "section": "Linux Commands",
-    "text": "Linux Commands\nIn a terminal, you talk to a shell program (bash is most common)\n\nCommands (executable files) can have options and arguments\n\nStandard input and standard output of a command is the terminal but can be redirected\n\n&lt;, &lt;&lt;, &gt;, &gt;&gt; redirect standard input and output\ncommand1 | command2 pipes standard output1 to standard input2\n\nCommands are files in directories listed in your PATH variable (try “echo $PATH”)\n\n$ means substitute variable value\nexport lists (or sets) variables and their values\n\nThere are many resources on the web to learn Linux basics"
+    "text": "Linux Commands\nIn a terminal, you talk to a shell program (bash is most common)\n\nCommands (executable files) can have options and arguments\n\n\nStandard input and standard output of a command is the terminal but can be redirected\n\n\n&lt;, &lt;&lt;, &gt;, &gt;&gt; redirect standard input and output\n\ncommand1 | command2 pipes standard output1 to standard input2\n\nCommands are files in directories listed in your PATH variable (try “echo $PATH”)\n\n$ means substitute variable value\n\nexport lists (or sets) variables and their values\n\nThere are many resources on the web to learn Linux basics"
   },
   {
-    "objectID": "materials/lectures/1a-workflow/slides.html#job-submission-on-cluster",
-    "href": "materials/lectures/1a-workflow/slides.html#job-submission-on-cluster",
+    "objectID": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
+    "href": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
     "title": "Workflow for Remote Computing with R",
-    "section": "Job Submission on Cluster",
-    "text": "Job Submission on Cluster\n\nCommand line submission\n\nShell script submission (preferred)\n\nSLURM workload manager\nSubmit a shell script, check the job queue, cancel a job.\n\nsbatch your-shell-script.sh\nsqueue -u *uid*  \nscancel *jobnumber*  \n\nSoftware Modules\nModules set software environment (PATH)\nmodule list - list what is loaded\nmodule avail - list what is available\nmodule load r"
+    "section": "Use of Login Nodes and Compute Nodes",
+    "text": "Use of Login Nodes and Compute Nodes\nLogin nodes:\n\nCode downloads, GitHub or other\nData downloads from Internet\nNo RStudio\n\nInteractive R or Rscript sessions:\n\nPackage installs\n\nInteractive debugging\n\nRscript debugging\n\n\n\nCompute nodes:\n- No Internet access\n- No RStudio\n- Batch Rscript submission via Slurm\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#on-a-cluster-login-node",
+    "href": "materials/lectures/1a-workflow/slides.html#on-a-cluster-login-node",
+    "title": "Workflow for Remote Computing with R",
+    "section": "On a Cluster Login Node",
+    "text": "On a Cluster Login Node\nYou are interacting with a bash shell ($ prompt)\nSubmit batch scripts to the compute nodes (next slide)\nTp run R on the login node, load its module\n\n$ module load r\n\nThen you can run of your script.R file with\n\n$ Rscript script.R\n\nOutput goes to the terminal but you can also redirect it to a file\n\n$ Rscript script.R &gt; outfile_name\n\nOr start an interactive R session with\n\n$ R\n\nwhich will give you a &gt; prompt. You quit the R session with\n&gt; q()\nand logout with\n\n$ exit\n\n\n\nPrompts $ and &gt; are not part of the shown commands"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#submit-scripts-to-the-compute-nodes",
+    "href": "materials/lectures/1a-workflow/slides.html#submit-scripts-to-the-compute-nodes",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Submit scripts to the compute nodes",
+    "text": "Submit scripts to the compute nodes\nTo run your R script on one or more compute nodes, you need two files\n\nThe R script, say script.R\n\nA bash shell script that requests the nodes, cores, etc. and specifies how to run your script.R, whis is usually Rscript script.R.\n\nHere is an example shell script to run script.R\n\n#!/bin/bash\n#SBATCH --job-name utk\n#SBATCH --account=bckj-delta-cpu\n#SBATCH --partition=cpu\n#SBATCH --nodes=1\n#SBATCH --mem=16g\n#SBATCH --cpus-per-task=1\n#SBATCH --time 00:00:30\n#SBATCH -e ./utk.e\n#SBATCH -o ./utk.o\n\nmodule load r\nRscript script.R\n\nrequesting one core on one node, limit of 30 seconds. If this file is saved as script.sh\n\nsbatch script.sh\n\nsubmits the job. Check on its status with\n\nsqueue -u &lt;your-user-name&gt;"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#package-installation-on-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#package-installation-on-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Package Installation on Cluster",
+    "text": "Package Installation on Cluster\nInstall packages in an interactive R session on a login node\nLogin to the cluster, then at the shell prompt:\n\nmodule load r\nR\n\nstarts an interactive R session. Now, for example, to install package dplyr:\ninstall.packages(\"dplyr\", repo = \"https://cloud.r-project.org/\")\nThe repo parameter can be skipped if it is set in options(). R may also ask to choose a repository location.\nYou may need to load other modules if a package has external to R dependencies.\n\nmodule avail\n\nwill list available software modules. If you don’t see the software, ask help@ncsa.illinois.edu to have it installed. Note that this is for external to R software (not R packages)."
   },
   {
     "objectID": "materials/lectures/3-software/slides.html#two-three-basic-concepts-in-hardware",
@@ -831,41 +852,6 @@
     "title": "HPC Software",
     "section": "R Interfaces to Low-Level Native Tools",
     "text": "R Interfaces to Low-Level Native Tools"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#parallelmclapply",
-    "href": "materials/lectures/3-software/slides.html#parallelmclapply",
-    "title": "HPC Software",
-    "section": "parallel::mclapply()",
-    "text": "parallel::mclapply()"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#unix-fork",
-    "href": "materials/lectures/3-software/slides.html#unix-fork",
-    "title": "HPC Software",
-    "section": "Unix fork\n",
-    "text": "Unix fork\n\nOperating system forks a new process with pointers to same memory: A memory-efficient parallelism on shared memory devices running Unix-like OS\n\n\nCopy-on-write: memory copied only if modified\n\nparallel package mclapply() and friends\n\nUse for numerical sections only\n\nAvoid GUI, I/O, and graphics sections (common device handles)\n\n\n\nConvenient for data (read, not modified)\n\nConvenient for functional languages like R\n\nAvoid or manage nested parallelism\n\nOpenBLAS takes all cores by default\n\n\ndata.table automatically switches to single threaded mode upon fork\n\n\n\n\nA deeper discussion of fork memory (if you have interest) on YouTube by Chris Kanich (UIC)"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#copy-on-write",
-    "href": "materials/lectures/3-software/slides.html#copy-on-write",
-    "title": "HPC Software",
-    "section": "Copy-on-write",
-    "text": "Copy-on-write\n\nAll done with pointers\nMemory is in pages\nProcesses not aware of each other or other’s memory use\nOS is aware of memory use\n16 forks write = 16 copies of memory"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#mapping-threads-to-cores",
-    "href": "materials/lectures/3-software/slides.html#mapping-threads-to-cores",
-    "title": "HPC Software",
-    "section": "Mapping Threads to Cores",
-    "text": "Mapping Threads to Cores\nTheory and Reality\n\nOperating system manages core affinity\nOperating system tasks can compete\nCore switching occurs frequently\nBut it works rather well!"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#code-first-with-lapply-then-switch-to-mclapply",
-    "href": "materials/lectures/3-software/slides.html#code-first-with-lapply-then-switch-to-mclapply",
-    "title": "HPC Software",
-    "section": "Code first with lapply(), then switch to mclapply()\n",
-    "text": "Code first with lapply(), then switch to mclapply()\n\nDrop-in replacements (almost) for lapply(), mapply(), and Map()\n\nmclapply(X, FUN, ...,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)\n\nmcmapply(FUN, ...,\n         MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, affinity.list = NULL) \n\nmcMap(f, ...)\n\nDebugging easier with lapply()"
   },
   {
     "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
@@ -985,6 +971,48 @@
     "title": "Memory Hierarchy and Hardware",
     "section": "Two (Three) Basic Concepts in Hardware",
     "text": "Two (Three) Basic Concepts in Hardware"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/3-fork/slides.html#r-interfaces-to-low-level-native-tools",
+    "title": "Parallel via the Unix fork",
+    "section": "R Interfaces to Low-Level Native Tools",
+    "text": "R Interfaces to Low-Level Native Tools"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#parallelmclapply",
+    "href": "materials/lectures/3-fork/slides.html#parallelmclapply",
+    "title": "Parallel via the Unix fork",
+    "section": "parallel::mclapply()",
+    "text": "parallel::mclapply()"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#unix-fork",
+    "href": "materials/lectures/3-fork/slides.html#unix-fork",
+    "title": "Parallel via the Unix fork",
+    "section": "Unix fork\n",
+    "text": "Unix fork\n\nOperating system forks a new process with pointers to same memory: A memory-efficient parallelism on shared memory devices running Unix-like OS\n\nCopy-on-write: memory copied only if modified\n\nparallel package function mclapply() and friends\n\nUse for numerical sections only:\n\nAvoid GUI, I/O, and graphics sections (common device handles)\n\nGreat in a batch Rscript on Unix-like OS\n\n\nConvenient for data (read, not modified)\n\nConvenient for functional languages like R (parameters by value)\n\nManage or avoid nested parallelism:\n\nSet OpenBLAS cores\n\n\ndata.table automatically switches to single threaded mode upon fork\n\n\n\n\nA deeper discussion of fork memory (if you have interest) on YouTube by Chris Kanich (UIC)"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#copy-on-write",
+    "href": "materials/lectures/3-fork/slides.html#copy-on-write",
+    "title": "Parallel via the Unix fork",
+    "section": "Copy-on-write",
+    "text": "Copy-on-write\n\nAll done with pointers\nMemory is in pages\nProcesses not aware of each other or other’s memory use\nOS is aware of memory use\n16 forks write = 16 copies of memory"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#os-manages-core-affinity",
+    "href": "materials/lectures/3-fork/slides.html#os-manages-core-affinity",
+    "title": "Parallel via the Unix fork",
+    "section": "OS manages core affinity",
+    "text": "OS manages core affinity\n\n\n\\(\\qquad\\) OS tasks compete \\(\\qquad\\) Core switching occurs frequently"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#code-first-with-lapply-then-switch-to-mclapply",
+    "href": "materials/lectures/3-fork/slides.html#code-first-with-lapply-then-switch-to-mclapply",
+    "title": "Parallel via the Unix fork",
+    "section": "Code first with lapply(), then switch to mclapply()\n",
+    "text": "Code first with lapply(), then switch to mclapply()\n\nDrop-in replacements (almost) for lapply(), mapply(), and Map()\n\nmclapply(X, FUN, ...,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)\n\nmcmapply(FUN, ...,\n         MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, affinity.list = NULL) \n\nmcMap(f, ...)\n\nDebugging easier with lapply()"
   },
   {
     "objectID": "materials/lectures/3-blas/slides.html#r-interfaces-to-low-level-native-tools",
@@ -1118,6 +1146,13 @@
     "title": "BLAS Libraries",
     "section": "",
     "text": "Basic Linear Algebra Software (BLAS) Libraries\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/index.html",
+    "href": "materials/lectures/3-fork/index.html",
+    "title": "Th Unix fork",
+    "section": "",
+    "text": "Using the Unix fork from R via the parallel package\nFull Screen"
   },
   {
     "objectID": "materials/lectures/2-hardware/index.html",

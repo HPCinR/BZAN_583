@@ -546,7 +546,10 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team6/</code>
 <ul>
 <li><p><a href="https://bioconductor.org/packages/devel/bioc/vignettes/rhdf5/inst/doc/practical_tips.html"><code>rhdf5</code> Practical Tips</a> on Bioconductor</p></li>
 <li><p>Other formats (.xlsx, etc. )</p></li>
-</ul></section><section id="new-york-tlc-trip-record-data" class="slide level2"><h2>New York TLC Trip Record Data</h2>
+</ul></section><section id="downloading-data-overview" class="slide level2"><h2>Downloading Data Overview</h2>
+<p><strong>Unix:</strong> <code>wget</code>, <code>curl</code>, <code>scp</code></p>
+<p><strong>R:</strong> <code><a href="https://rdrr.io/r/utils/download.file.html">utils::download.file()</a></code></p>
+</section><section id="new-york-tlc-trip-record-data" class="slide level2"><h2>New York TLC Trip Record Data</h2>
 <ul>
 <li><p><a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">TLC: Taxi and Limousine Commission</a><br></p></li>
 <li><p>Includes: pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts</p></li>
@@ -555,7 +558,7 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team6/</code>
 <li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf">Green Trips Data Dictionary</a></p></li>
 <li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_fhv.pdf">FHV Trips Data Dictionary</a></p></li>
 <li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf">High Volume FHV Trips Data Dictionary</a></p></li>
-</ul></section><section id="yellow-trip-data" class="slide level2"><h2>Yellow Trip Data</h2>
+</ul></section><section id="yellow-taxi-trip-data" class="slide level2"><h2>Yellow Taxi Trip Data</h2>
 <p>Yellow taxi trip data is downloaded on Delta in <code>parquet</code> format with an <code>arrow</code>-friendly directory structure.</p>
 <div class="cell-output-stdout">
 <pre><code>[gostrouc@dt-login03 ~]$ cd /projects/bckj/TLC_yellow
@@ -577,7 +580,7 @@ drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2021'/
 drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2022'/
 drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/</code></pre>
 </div>
-</section><section id="yellow-trip-data-projectsbckjtlc_yellow" class="slide level2"><h2>Yellow Trip Data <code>/projects/bckj/TLC_yellow</code>
+</section><section id="yellow-taxi-trip-data-projectsbckjtlc_yellow" class="slide level2"><h2>Yellow Taxi Trip Data <code>/projects/bckj/TLC_yellow</code>
 </h2>
 <div class="cell-output-stdout">
 <pre><code>[gostrouc@dt-login03 TLC_yellow]$ du -hs ./*
@@ -598,7 +601,7 @@ drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/</code></pre>
 [gostrouc@dt-login03 TLC_yellow]$ du -hs .
 29G .</code></pre>
 </div>
-</section><section id="yellow-trip-data-2009" class="slide level2"><h2>Yellow Trip Data <code>2009</code>
+</section><section id="yellow-taxi-trip-data-2009" class="slide level2"><h2>Yellow Taxi Trip Data <code>2009</code>
 </h2>
 <div class="cell-output-stdout">
 <pre><code>[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009'
@@ -616,24 +619,80 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=7'/
 drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=8'/
 drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/</code></pre>
 </div>
-</section><section id="yellow-trip-data-2009-01" class="slide level2"><h2>Yellow Trip Data <code>2009-01</code>
+</section><section id="yellow-taxi-trip-data-2009-01" class="slide level2"><h2>Yellow Taxi Trip Data <code>2009-01</code>
 </h2>
-<div class="cell-output-stdout">
-<pre><code>[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1'
-total 458756
--rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet
-[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2'
-total 433048
--rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet
-[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3'
-total 471288
--rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet
-[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11'
-total 457M
--rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet
-[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12'
-total 466M
--rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet</code></pre>
+<p>::: {.cell-output-stdout}<code>[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1' total 458756 -rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2' total 433048 -rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3' total 471288 -rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11' total 457M -rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12' total 466M -rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet</code> :::</p>
+</section><section id="yellow-taxi-trip-data-1" class="slide level2"><h2>Yellow Taxi Trip Data</h2>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' tlc_get_ym: Gets one month of TLC yellow taxi data and writes it in Hive</span></span>
+<span><span class="co">#' style directory names, such as `dest/year=2015/month=8/file_name.parquet`.</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @param ymd</span></span>
+<span><span class="co">#' A **lubridate** "YYYY-MM-01" giving the year and month to be retrieved.</span></span>
+<span><span class="co">#' @param name</span></span>
+<span><span class="co">#' Character file name base (such as 'yellow_tripdata') from the TLC </span></span>
+<span><span class="co">#' repository documentation.</span></span>
+<span><span class="co">#' @param dest</span></span>
+<span><span class="co">#' Character destination directory path.</span></span>
+<span><span class="co">#' @param url</span></span>
+<span><span class="co">#' Character URL of data source location.</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @details</span></span>
+<span><span class="co">#' Uses `method = wget` to get one month of TLC yellow taxi data into the</span></span>
+<span><span class="co">#' `dest` directory. Since `download.file()` engages `wget`</span></span>
+<span><span class="co">#' with a `system()` call, generating these calls to `tlcYM_get()` can be </span></span>
+<span><span class="co">#' completely parallel and the data never touches R. </span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @returns </span></span>
+<span><span class="co">#' Invisibly, returns the character URL/file combination used in data retrieval.</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="va">tlc_get_ym</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">ymd</span>, <span class="va">name</span> <span class="op">=</span> <span class="st">"yellow_tripdata"</span>, </span>
+<span>                     <span class="va">dest</span> <span class="op">=</span> <span class="st">"/projects/bckj/TLC_yellow"</span>,</span>
+<span>                     <span class="va">url</span> <span class="op">=</span> <span class="st">"https://d37ci6vzurychx.cloudfront.net/trip-data"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">yr</span> <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">ymd</span><span class="op">)</span></span>
+<span>  <span class="va">month</span> <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">ymd</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co">## Construct source url/file</span></span>
+<span>  <span class="va">file_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"_"</span>, <span class="va">yr</span>, <span class="st">'-'</span>, <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">'%02d'</span>, <span class="va">month</span><span class="op">)</span>, <span class="st">'.parquet'</span><span class="op">)</span></span>
+<span>  <span class="va">file_url</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">url</span>, <span class="st">'/'</span>, <span class="va">file_name</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">## Construct destination directory</span></span>
+<span>  <span class="va">dest_dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">dest</span>, <span class="st">"/year="</span>, <span class="va">yr</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="va">dest_dir</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">dest_dir</span><span class="op">)</span></span>
+<span>  <span class="va">dest_dir</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">dest_dir</span>, <span class="st">"/month="</span>, <span class="va">month</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.exists</a></span><span class="op">(</span><span class="va">dest_dir</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">dest_dir</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">file_url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">dest_dir</span>, <span class="st">"/"</span>, <span class="va">file_name</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"curl"</span>,</span>
+<span>                quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="va">file_url</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">#' tlc_get_range: A wrapper for `tlc_get_ym()` to get a range of months and do</span></span>
+<span><span class="co">#' it in parallel.</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @param first</span></span>
+<span><span class="co">#' Character "YYYY-MM" first month. Uses `lubridate::ym()` to read</span></span>
+<span><span class="co">#' @param last</span></span>
+<span><span class="co">#' Character "YYYY-MM" last month</span></span>
+<span><span class="co">#' @param cores</span></span>
+<span><span class="co">#' Integer number of cores to use for running `wget` instances in parallel</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @details</span></span>
+<span><span class="co">#' Since the function does a system call to `wget`, its time does not include</span></span>
+<span><span class="co">#' the core time used by `wget` and includes only the R function time. But</span></span>
+<span><span class="co">#' the *real* or *elapsed* time is correct.</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' @returns</span></span>
+<span><span class="co">#' Invisibly returns the full vector of months retrieved</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="va">tlc_get_range</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">first</span>, <span class="va">last</span>, <span class="va">cores</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co">## construct vector of yr-month-day requests</span></span>
+<span>  <span class="va">dates</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ym</a></span><span class="op">(</span><span class="va">first</span><span class="op">)</span>, <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ym</a></span><span class="op">(</span><span class="va">last</span><span class="op">)</span>, <span class="st">"months"</span><span class="op">)</span></span>
+<span>  <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span><span class="op">(</span><span class="va">dates</span>, <span class="va">tlc_get_ym</span>, mc.cores <span class="op">=</span> <span class="va">cores</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># tlc_get_range("2021-01", "2022-12", cores = 1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="compare-csv-to-parquet-reads-in-r" class="slide level2 smaller"><h2>Compare <code>csv</code> to <code>parquet</code> reads in R</h2>
 <p><strong>arrow</strong> (parquet 0.423GB, csv 1.7GB)</p>
@@ -666,8 +725,12 @@ dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
  29.299  28.551  25.260 </code></pre>
 </section><section id="convert-your-csv-data-to-parquet" class="slide level2"><h2>Convert your <code>csv</code> data to <code>parquet</code>
 </h2>
-<pre><code>&gt; tlc = arrow::open_dataset("/projects/bckj/TLC_yellow")
-&gt; tlc2009.02 = tlc %&gt;% filter(year == 2009, month == 2) %&gt;% collect()</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/">arrow</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">tlc</span> <span class="op">=</span> <span class="fu"><a href="https://arrow.apache.org/docs/r/reference/open_dataset.html">open_dataset</a></span><span class="op">(</span><span class="st">"/projects/bckj/TLC_yellow"</span><span class="op">)</span></span>
+<span><span class="va">tlc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2009</span>, <span class="va">month</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://arrow.apache.org/docs/r/reference/write_parquet.html">write_parquet</a></span><span class="op">(</span>sink <span class="op">=</span> <span class="st">"&lt;dest_ditr&gt;"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

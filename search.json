@@ -294,6 +294,13 @@
     "text": "Reading Data Overview\n\nText files (.csv, .tsv, .txt, … ): variable length records\n\n\ndata.table::fread()  # fastest reader\nreadr::read_delim()  # fast reader    \n\nBinary file formats faster for large data (& smaller): fixed length records\n\n\narrow::read_parquet()  # chunked column-oriented format (.parquet extension)\n\nArrow for R Cheatsheet\n\nrhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)\n\nrhdf5 Practical Tips on Bioconductor\nOther formats (.xlsx, etc. )"
   },
   {
+    "objectID": "materials/lectures/3-data/slides.html#downloading-data-overview",
+    "href": "materials/lectures/3-data/slides.html#downloading-data-overview",
+    "title": "Data",
+    "section": "Downloading Data Overview",
+    "text": "Downloading Data Overview\nUnix: wget, curl, scp\nR: utils::download.file()"
+  },
+  {
     "objectID": "materials/lectures/3-data/slides.html#new-york-tlc-trip-record-data",
     "href": "materials/lectures/3-data/slides.html#new-york-tlc-trip-record-data",
     "title": "Data",
@@ -301,32 +308,39 @@
     "text": "New York TLC Trip Record Data\n\nTLC: Taxi and Limousine Commission\nIncludes: pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts\nData overview\nYellow Trip Data Dictionary\nGreen Trips Data Dictionary\nFHV Trips Data Dictionary\nHigh Volume FHV Trips Data Dictionary"
   },
   {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-trip-data",
-    "href": "materials/lectures/3-data/slides.html#yellow-trip-data",
+    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data",
+    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data",
     "title": "Data",
-    "section": "Yellow Trip Data",
-    "text": "Yellow Trip Data\nYellow taxi trip data is downloaded on Delta in parquet format with an arrow-friendly directory structure.\n\n[gostrouc@dt-login03 ~]$ cd /projects/bckj/TLC_yellow\n[gostrouc@dt-login03 TLC_yellow]$ ls -l\ntotal 60\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:06 'year=2009'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:07 'year=2010'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:08 'year=2011'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2012'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2013'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2014'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2015'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2016'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2017'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2018'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2019'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2020'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2021'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2022'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/"
+    "section": "Yellow Taxi Trip Data",
+    "text": "Yellow Taxi Trip Data\nYellow taxi trip data is downloaded on Delta in parquet format with an arrow-friendly directory structure.\n\n[gostrouc@dt-login03 ~]$ cd /projects/bckj/TLC_yellow\n[gostrouc@dt-login03 TLC_yellow]$ ls -l\ntotal 60\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:06 'year=2009'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:07 'year=2010'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:08 'year=2011'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2012'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2013'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2014'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2015'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2016'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2017'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2018'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2019'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2020'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2021'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2022'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/"
   },
   {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-trip-data-projectsbckjtlc_yellow",
-    "href": "materials/lectures/3-data/slides.html#yellow-trip-data-projectsbckjtlc_yellow",
+    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-projectsbckjtlc_yellow",
+    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-projectsbckjtlc_yellow",
     "title": "Data",
-    "section": "Yellow Trip Data /projects/bckj/TLC_yellow\n",
-    "text": "Yellow Trip Data /projects/bckj/TLC_yellow\n\n\n[gostrouc@dt-login03 TLC_yellow]$ du -hs ./*\n5.4G    ./year=2009\n5.3G    ./year=2010\n2.1G    ./year=2011\n2.1G    ./year=2012\n2.0G    ./year=2013\n2.1G    ./year=2014\n1.9G    ./year=2015\n1.8G    ./year=2016\n1.5G    ./year=2017\n1.4G    ./year=2018\n1.2G    ./year=2019\n358M    ./year=2020\n458M    ./year=2021\n587M    ./year=2022\n[gostrouc@dt-login03 TLC_yellow]$ du -hs .\n29G ."
+    "section": "Yellow Taxi Trip Data /projects/bckj/TLC_yellow\n",
+    "text": "Yellow Taxi Trip Data /projects/bckj/TLC_yellow\n\n\n[gostrouc@dt-login03 TLC_yellow]$ du -hs ./*\n5.4G    ./year=2009\n5.3G    ./year=2010\n2.1G    ./year=2011\n2.1G    ./year=2012\n2.0G    ./year=2013\n2.1G    ./year=2014\n1.9G    ./year=2015\n1.8G    ./year=2016\n1.5G    ./year=2017\n1.4G    ./year=2018\n1.2G    ./year=2019\n358M    ./year=2020\n458M    ./year=2021\n587M    ./year=2022\n[gostrouc@dt-login03 TLC_yellow]$ du -hs .\n29G ."
   },
   {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-trip-data-2009",
-    "href": "materials/lectures/3-data/slides.html#yellow-trip-data-2009",
+    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009",
+    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009",
     "title": "Data",
-    "section": "Yellow Trip Data 2009\n",
-    "text": "Yellow Trip Data 2009\n\n\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009'\ntotal 48\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=1'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=10'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=11'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=12'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=2'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=3'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=4'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=5'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=6'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=7'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=8'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/"
+    "section": "Yellow Taxi Trip Data 2009\n",
+    "text": "Yellow Taxi Trip Data 2009\n\n\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009'\ntotal 48\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=1'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=10'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=11'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=12'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=2'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=3'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=4'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=5'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=6'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=7'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=8'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/"
   },
   {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-trip-data-2009-01",
-    "href": "materials/lectures/3-data/slides.html#yellow-trip-data-2009-01",
+    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009-01",
+    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009-01",
     "title": "Data",
-    "section": "Yellow Trip Data 2009-01\n",
-    "text": "Yellow Trip Data 2009-01\n\n\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1'\ntotal 458756\n-rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2'\ntotal 433048\n-rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3'\ntotal 471288\n-rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11'\ntotal 457M\n-rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12'\ntotal 466M\n-rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet"
+    "section": "Yellow Taxi Trip Data 2009-01\n",
+    "text": "Yellow Taxi Trip Data 2009-01\n\n::: {.cell-output-stdout}[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1' total 458756 -rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2' total 433048 -rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3' total 471288 -rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11' total 457M -rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12' total 466M -rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet :::"
+  },
+  {
+    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-1",
+    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-1",
+    "title": "Data",
+    "section": "Yellow Taxi Trip Data",
+    "text": "Yellow Taxi Trip Data\n\n#' tlc_get_ym: Gets one month of TLC yellow taxi data and writes it in Hive\n#' style directory names, such as `dest/year=2015/month=8/file_name.parquet`.\n#' \n#' @param ymd\n#' A **lubridate** \"YYYY-MM-01\" giving the year and month to be retrieved.\n#' @param name\n#' Character file name base (such as 'yellow_tripdata') from the TLC \n#' repository documentation.\n#' @param dest\n#' Character destination directory path.\n#' @param url\n#' Character URL of data source location.\n#' \n#' @details\n#' Uses `method = wget` to get one month of TLC yellow taxi data into the\n#' `dest` directory. Since `download.file()` engages `wget`\n#' with a `system()` call, generating these calls to `tlcYM_get()` can be \n#' completely parallel and the data never touches R. \n#' \n#' @returns \n#' Invisibly, returns the character URL/file combination used in data retrieval.\n#' \ntlc_get_ym = function(ymd, name = \"yellow_tripdata\", \n                     dest = \"/projects/bckj/TLC_yellow\",\n                     url = \"https://d37ci6vzurychx.cloudfront.net/trip-data\") {\n  yr = lubridate::year(ymd)\n  month = lubridate::month(ymd)\n\n  ## Construct source url/file\n  file_name = paste0(name, \"_\", yr, '-', sprintf('%02d', month), '.parquet')\n  file_url = paste0(url, '/', file_name)\n  \n  ## Construct destination directory\n  dest_dir = paste0(dest, \"/year=\", yr)\n  if(!dir.exists(dest_dir)) dir.create(dest_dir)\n  dest_dir = paste0(dest_dir, \"/month=\", month)\n  if(!dir.exists(dest_dir)) dir.create(dest_dir)\n  \n  download.file(file_url, paste0(dest_dir, \"/\", file_name), method = \"curl\",\n                quiet = TRUE)\n  invisible(file_url)\n}\n\n#' tlc_get_range: A wrapper for `tlc_get_ym()` to get a range of months and do\n#' it in parallel.\n#' \n#' @param first\n#' Character \"YYYY-MM\" first month. Uses `lubridate::ym()` to read\n#' @param last\n#' Character \"YYYY-MM\" last month\n#' @param cores\n#' Integer number of cores to use for running `wget` instances in parallel\n#' \n#' @details\n#' Since the function does a system call to `wget`, its time does not include\n#' the core time used by `wget` and includes only the R function time. But\n#' the *real* or *elapsed* time is correct.\n#' \n#' @returns\n#' Invisibly returns the full vector of months retrieved\n#' \ntlc_get_range = function(first, last, cores = 1) {\n  ## construct vector of yr-month-day requests\n  dates = seq(lubridate::ym(first), lubridate::ym(last), \"months\")\n  parallel::mclapply(dates, tlc_get_ym, mc.cores = cores)\n  invisible(dates)\n}\n\n# tlc_get_range(\"2021-01\", \"2022-12\", cores = 1)"
   },
   {
     "objectID": "materials/lectures/3-data/slides.html#compare-csv-to-parquet-reads-in-r",
@@ -340,7 +354,7 @@
     "href": "materials/lectures/3-data/slides.html#convert-your-csv-data-to-parquet",
     "title": "Data",
     "section": "Convert your csv data to parquet\n",
-    "text": "Convert your csv data to parquet\n\n&gt; tlc = arrow::open_dataset(\"/projects/bckj/TLC_yellow\")\n&gt; tlc2009.02 = tlc %&gt;% filter(year == 2009, month == 2) %&gt;% collect()"
+    "text": "Convert your csv data to parquet\n\n\nlibrary(arrow)\nlibrary(dplyr)\ntlc = open_dataset(\"/projects/bckj/TLC_yellow\")\ntlc %&gt;% filter(year == 2009, month == 2) %&gt;% collect() %&gt;% write_parquet(sink = \"&lt;dest_ditr&gt;\")"
   },
   {
     "objectID": "materials/lectures/5-nn/slides.html#a-short-excursion",
@@ -368,14 +382,14 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.420    82.32      1.465     84.93\n\"aperm.default\"     0.145     8.41      0.145      8.41\n\"array\"             0.035     2.03      0.035      2.03\n\"colMeans\"          0.035     2.03      0.035      2.03\n\"is.finite\"         0.030     1.74      0.030      1.74\n\"any\"               0.020     1.16      0.020      1.16\n\"matrix\"            0.020     1.16      0.020      1.16\n\"svd\"               0.010     0.58      1.500     86.96\n\"sweep\"             0.010     0.58      0.190     11.01"
+    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.370    83.03      1.415     85.76\n\"aperm.default\"     0.135     8.18      0.135      8.18\n\"array\"             0.035     2.12      0.035      2.12\n\"colMeans\"          0.030     1.82      0.030      1.82\n\"is.finite\"         0.030     1.82      0.030      1.82\n\"matrix\"            0.020     1.21      0.020      1.21\n\"any\"               0.015     0.91      0.015      0.91\n\"svd\"               0.010     0.61      1.445     87.58\n\"sweep\"             0.005     0.30      0.175     10.61"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.385    84.45      1.415     86.28\n\"aperm.default\"     0.150     9.15      0.150      9.15\n\"array\"             0.030     1.83      0.030      1.83\n\"is.finite\"         0.025     1.52      0.025      1.52\n\"any\"               0.015     0.91      0.015      0.91\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.370    83.03      1.420     86.06\n\"aperm.default\"     0.140     8.48      0.140      8.48\n\"any\"               0.025     1.52      0.025      1.52\n\"array\"             0.025     1.52      0.025      1.52\n\"matrix\"            0.025     1.52      0.025      1.52\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.375    83.33      1.425     86.36\n\"aperm.default\"     0.150     9.09      0.150      9.09\n\"array\"             0.025     1.52      0.025      1.52\n\"is.finite\"         0.025     1.52      0.025      1.52\n\"matrix\"            0.025     1.52      0.025      1.52"
+    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.415    84.23      1.455     86.61\n\"aperm.default\"     0.155     9.23      0.155      9.23\n\"is.finite\"         0.030     1.79      0.030      1.79\n\"any\"               0.025     1.49      0.025      1.49\n\"array\"             0.025     1.49      0.025      1.49\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.380    83.89      1.435     87.23\n\"aperm.default\"     0.135     8.21      0.135      8.21\n\"any\"               0.025     1.52      0.025      1.52\n\"array\"             0.025     1.52      0.025      1.52\n\"is.finite\"         0.025     1.52      0.025      1.52\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.445    85.00      1.495     87.94\n\"aperm.default\"     0.140     8.24      0.140      8.24\n\"is.finite\"         0.030     1.76      0.030      1.76\n\"matrix\"            0.030     1.76      0.030      1.76\n\"array\"             0.020     1.18      0.020      1.18"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#lazy-evaluation",
@@ -389,7 +403,7 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark\n",
-    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.226    2.457     0.200    0.025          0         0\n2 g(x)          100   0.092    1.000     0.087    0.006          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.242    2.689     0.200    0.039          0         0\n2 g(x)          100   0.090    1.000     0.084    0.006          0         0"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#profiling-summary",
@@ -403,7 +417,7 @@
     "href": "materials/lectures/2-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  1.022   0.071   1.095 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.032   0.001   0.034 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.952   0.069   1.022 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.030 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#compute-once-if-not-changing",
@@ -431,7 +445,7 @@
     "href": "materials/lectures/2-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Preallocate lists and vectors Instead of Growing Them",
-    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.438   1.791   8.253 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.407   0.044   0.452 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.338   1.872   8.228 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.406   0.045   0.451 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#specialize-more-general-functions",
@@ -452,7 +466,7 @@
     "href": "materials/lectures/2-faster/slides.html#contiguous-access-to-arrays-and-lists",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Contiguous access to arrays and lists",
-    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.850   0.071   0.922 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.343   0.040   0.382 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.237   0.062   0.299 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.896   0.065   0.962 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.378   0.044   0.422 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.231   0.050   0.282 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#programming-languages-hierarchy",
@@ -473,7 +487,7 @@
     "href": "materials/lectures/2-faster/slides.html#rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "\nRfast and RFast2 Packages: A collection of Rcpp-Implemented Functions",
-    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.327   0.018   0.352 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.065   0.004   0.071 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
+    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.325   0.024   0.349 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.065   0.004   0.071 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
   },
   {
     "objectID": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas",

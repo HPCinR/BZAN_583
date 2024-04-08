@@ -456,16 +456,15 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/summaryRprof.html">summaryRprof</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">by.self</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                self.time self.pct total.time total.pct
-"La.svd"            1.525    82.43      1.575     85.14
-"aperm.default"     0.155     8.38      0.155      8.38
-"array"             0.040     2.16      0.040      2.16
-"is.finite"         0.035     1.89      0.035      1.89
-"colMeans"          0.030     1.62      0.030      1.62
-"matrix"            0.020     1.08      0.020      1.08
-"sweep"             0.015     0.81      0.210     11.35
-"any"               0.015     0.81      0.015      0.81
-"svd"               0.010     0.54      1.610     87.03
-"t.default"         0.005     0.27      0.005      0.27</code></pre>
+"La.svd"            1.420    82.32      1.465     84.93
+"aperm.default"     0.145     8.41      0.145      8.41
+"array"             0.035     2.03      0.035      2.03
+"colMeans"          0.035     2.03      0.035      2.03
+"is.finite"         0.030     1.74      0.030      1.74
+"any"               0.020     1.16      0.020      1.16
+"matrix"            0.020     1.16      0.020      1.16
+"svd"               0.010     0.58      1.500     86.96
+"sweep"             0.010     0.58      0.190     11.01</code></pre>
 </div>
 </div>
 </section><section id="performance-profiling-tools-rprof-1" class="slide level2"><h2>Performance Profiling Tools: <code>Rprof()</code>
@@ -477,31 +476,31 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/summaryRprof.html">summaryRprof</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">by.self</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                self.time self.pct total.time total.pct
-"La.svd"            1.440    84.96      1.475     87.02
-"aperm.default"     0.145     8.55      0.145      8.55
-"is.finite"         0.030     1.77      0.030      1.77
-"array"             0.025     1.47      0.025      1.47
-"colMeans"          0.020     1.18      0.020      1.18</code></pre>
+"La.svd"            1.385    84.45      1.415     86.28
+"aperm.default"     0.150     9.15      0.150      9.15
+"array"             0.030     1.83      0.030      1.83
+"is.finite"         0.025     1.52      0.025      1.52
+"any"               0.015     0.91      0.015      0.91</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>                self.time self.pct total.time total.pct
-"La.svd"            1.385    84.45      1.425     86.89
-"aperm.default"     0.135     8.23      0.135      8.23
-"array"             0.025     1.52      0.025      1.52
-"matrix"            0.025     1.52      0.025      1.52
-"is.finite"         0.020     1.22      0.020      1.22</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                self.time self.pct total.time total.pct
-"La.svd"            1.385    83.94      1.435     86.97
+"La.svd"            1.370    83.03      1.420     86.06
 "aperm.default"     0.140     8.48      0.140      8.48
-"is.finite"         0.030     1.82      0.030      1.82
-"matrix"            0.025     1.52      0.025      1.52
-"any"               0.020     1.21      0.020      1.21</code></pre>
+"any"               0.025     1.52      0.025      1.52
+"array"             0.025     1.52      0.025      1.52
+"matrix"            0.025     1.52      0.025      1.52</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                self.time self.pct total.time total.pct
+"La.svd"            1.375    83.33      1.425     86.36
+"aperm.default"     0.150     9.09      0.150      9.09
+"array"             0.025     1.52      0.025      1.52
+"is.finite"         0.025     1.52      0.025      1.52
+"matrix"            0.025     1.52      0.025      1.52</code></pre>
 </div>
 </div>
 </section><section id="lazy-evaluation" class="slide level2 smaller"><h2>Lazy Evaluation</h2>
@@ -539,8 +538,8 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/rbenchmark/man/benchmark.html">benchmark</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">g</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  test replications elapsed relative user.self sys.self user.child sys.child
-1 f(x)          100   0.225    2.446     0.198    0.026          0         0
-2 g(x)          100   0.092    1.000     0.086    0.006          0         0</code></pre>
+1 f(x)          100   0.226    2.457     0.200    0.025          0         0
+2 g(x)          100   0.092    1.000     0.087    0.006          0         0</code></pre>
 </div>
 </div>
 </section><aside class="notes"><section id="test-replications-elapsed-relative" class="title-slide slide level1 center"><h1>test replications elapsed relative</h1>
@@ -583,7 +582,7 @@
 <span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.986   0.074   1.060 </code></pre>
+  1.022   0.071   1.095 </code></pre>
 </div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
@@ -591,7 +590,7 @@
 <span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.030   0.002   0.031 </code></pre>
+  0.032   0.001   0.034 </code></pre>
 </div>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">y1</span>, <span class="va">y2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -660,7 +659,7 @@
 <span><span class="op">}</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  6.893   1.827   8.740 </code></pre>
+  6.438   1.791   8.253 </code></pre>
 </div>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">result2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="va">n</span><span class="op">)</span></span>
@@ -669,7 +668,7 @@
 <span><span class="op">}</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.416   0.045   0.462 </code></pre>
+  0.407   0.044   0.452 </code></pre>
 </div>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">result1</span>, <span class="va">result2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -723,12 +722,12 @@ Python and C are <strong>row-major</strong></p>
 <span><span class="op">}</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.843   0.065   0.909 </code></pre>
+  0.850   0.071   0.922 </code></pre>
 </div>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">tmat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">}</span><span class="op">)</span> <span class="co"># transpose for columnar access</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.342   0.039   0.382 </code></pre>
+  0.343   0.040   0.382 </code></pre>
 </div>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">result2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="va">m</span><span class="op">)</span></span>
@@ -737,7 +736,7 @@ Python and C are <strong>row-major</strong></p>
 <span><span class="op">}</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.232   0.045   0.278 </code></pre>
+  0.237   0.062   0.299 </code></pre>
 </div>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">result1</span>, <span class="va">result2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -783,12 +782,12 @@ Python and C are <strong>row-major</strong></p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">cx2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/crossprod.html">crossprod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sweep.html">sweep</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.338   0.015   0.363 </code></pre>
+  0.327   0.018   0.352 </code></pre>
 </div>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span><span class="va">cx3</span> <span class="op">=</span> <span class="fu">Rfast</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rfast/man/cova.html">cova</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.066   0.004   0.071 </code></pre>
+  0.065   0.004   0.071 </code></pre>
 </div>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">cx2</span>, <span class="va">cx3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

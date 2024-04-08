@@ -489,22 +489,60 @@ drwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/
 drwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/
 drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/</code></pre>
 </div>
-</section><section id="reading-data-overview" class="slide level2"><h2>Reading Data Overview</h2>
+</section><section id="using-the-file-systems" class="slide level2 smaller"><h2>Using the File Systems</h2>
+<ul>
+<li>Code is typically maintained in <code>/u/&lt;username&gt;</code>
+</li>
+<li>Project data is usually kept in <code>/projects/bckj/</code> subdirectories
+<ul>
+<li>This is also a place for project team accessible code</li>
+</ul>
+</li>
+<li>Runtime temporary data can be written to <code>/scratch/bckj/</code>
+</li>
+</ul>
+<div class="cell-output-stdout">
+<pre><code>[gostrouc@dt-login04 data]$ ls -ld /projects/bckj/Team*
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team1/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team2/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team3/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team4/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team5/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team6/</code></pre>
+</div>
+</section><section id="bringing-output-back-to-laptop" class="slide level2 smaller"><h2>Bringing Output Back to Laptop</h2>
+<p>NCSA <a href="https://docs.ncsa.illinois.edu/systems/icc/en/latest/user_guide/storage_data.html#cli-transfer-method-scp">recommendations</a></p>
+<ul>
+<li>Windows users: <a href="https://winscp.net/eng/download.php">WinSCP</a> or <a href="https://cyberduck.io/download/">Cuberduck</a>
+</li>
+<li>Mac users: in laptop Terminal
+<ul>
+<li>
+<code>scp &lt;user&gt;@login.delta.ncsa.illinois.edu:&lt;file-path&gt; &lt;dest-path&gt;</code><br>
+</li>
+<li>
+<code>&lt;file-path&gt;</code> is relative to home directory on Delta or an absolute path (starts with <code>/</code>) on Delta<br>
+</li>
+<li>
+<code>&lt;dest-path&gt;</code> is on your laptop</li>
+</ul>
+</li>
+</ul></section><section id="reading-data-overview" class="slide level2"><h2>Reading Data Overview</h2>
 <ul>
 <li>Text files (.csv, .tsv, .txt, … ): variable length records<br>
 </li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># fastest reader</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># fast reader    </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># fastest reader</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># fast reader    </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Binary file formats faster for large data (&amp; smaller): fixed length records<br>
 </li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">arrow</span><span class="fu">::</span><span class="fu"><a href="https://arrow.apache.org/docs/r/reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># chunked column-oriented format (.parquet extension)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">arrow</span><span class="fu">::</span><span class="fu"><a href="https://arrow.apache.org/docs/r/reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># chunked column-oriented format (.parquet extension)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><a href="https://github.com/apache/arrow/blob/main/r/cheatsheet/arrow-cheatsheet.pdf">Arrow for R Cheatsheet</a></li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rhdf5</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rhdf5/man/h5_read.html">h5read</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># hierarchical array-oriented format (.h5 extension)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rhdf5</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rhdf5/man/h5_read.html">h5read</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># hierarchical array-oriented format (.h5 extension)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p><a href="https://bioconductor.org/packages/devel/bioc/vignettes/rhdf5/inst/doc/practical_tips.html"><code>rhdf5</code> Practical Tips</a> on Bioconductor</p></li>
 <li><p>Other formats (.xlsx, etc. )</p></li>
@@ -598,10 +636,14 @@ total 466M
 -rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet</code></pre>
 </div>
 </section><section id="compare-csv-to-parquet-reads-in-r" class="slide level2 smaller"><h2>Compare <code>csv</code> to <code>parquet</code> reads in R</h2>
-<p><strong>arrow</strong> (parquet 0.423GB)</p>
-<pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02 = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
+<p><strong>arrow</strong> (parquet 0.423GB, csv 1.7GB)</p>
+<pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02arr = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
    user  system elapsed 
-  3.363   1.981  12.236 </code></pre>
+  3.363   1.981  12.236 
+&gt; system.time({tlc2009.02arrcsv = arrow::read_csv_arrow("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+   user  system elapsed 
+ 20.513  32.494  33.163 
+</code></pre>
 <p><strong>readr</strong> (csv 1.7GB)</p>
 <pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02csv = readr::read_csv("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
 Rows: 14092413 Columns: 18                                                                                         
@@ -617,7 +659,7 @@ dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
    user  system elapsed 
  56.194  24.529  51.976 </code></pre>
 <p><strong>data.table</strong> (csv 1.7GB)</p>
-<pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02csv2 = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+<pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02dtcsv = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
 |--------------------------------------------------|
 |==================================================|
    user  system elapsed 

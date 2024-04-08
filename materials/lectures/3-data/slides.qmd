@@ -200,6 +200,12 @@ rhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)
    -  [`rhdf5` Practical Tips](https://bioconductor.org/packages/devel/bioc/vignettes/rhdf5/inst/doc/practical_tips.html) on Bioconductor   
 
 - Other formats (.xlsx, etc. )  
+
+## Downloading Data Overview
+
+**Unix:** `wget`, `curl`, `scp`
+
+**R:** `utils::download.file()`
   
 ## New York TLC Trip Record Data
 
@@ -216,7 +222,7 @@ rhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)
 
 - [High Volume FHV Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf)  
 
-## Yellow Trip Data 
+## Yellow Taxi Trip Data 
 
 Yellow taxi trip data is downloaded on Delta in `parquet` format with an `arrow`-friendly directory structure.
 
@@ -243,7 +249,7 @@ drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/
 ```
 :::
 
-## Yellow Trip Data `/projects/bckj/TLC_yellow`
+## Yellow Taxi Trip Data `/projects/bckj/TLC_yellow`
 
 ::: {.cell-output-stdout}
 ```
@@ -267,7 +273,7 @@ drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/
 ```
 :::
 
-## Yellow Trip Data `2009`
+## Yellow Taxi Trip Data `2009`
 
 ::: {.cell-output-stdout}
 ```
@@ -288,10 +294,9 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/
 ```
 :::
 
-## Yellow Trip Data `2009-01`
+## Yellow Taxi Trip Data `2009-01`
 
-::: {.cell-output-stdout}
-```
+::: {.cell-output-stdout}```
 [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1'
 total 458756
 -rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet
@@ -309,6 +314,84 @@ total 466M
 -rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet
 ```
 :::
+
+## Yellow Taxi Trip Data 
+
+```{r}
+#| eval: false
+#| echo: true
+
+#' tlc_get_ym: Gets one month of TLC yellow taxi data and writes it in Hive
+#' style directory names, such as `dest/year=2015/month=8/file_name.parquet`.
+#' 
+#' @param ymd
+#' A **lubridate** "YYYY-MM-01" giving the year and month to be retrieved.
+#' @param name
+#' Character file name base (such as 'yellow_tripdata') from the TLC 
+#' repository documentation.
+#' @param dest
+#' Character destination directory path.
+#' @param url
+#' Character URL of data source location.
+#' 
+#' @details
+#' Uses `method = wget` to get one month of TLC yellow taxi data into the
+#' `dest` directory. Since `download.file()` engages `wget`
+#' with a `system()` call, generating these calls to `tlcYM_get()` can be 
+#' completely parallel and the data never touches R. 
+#' 
+#' @returns 
+#' Invisibly, returns the character URL/file combination used in data retrieval.
+#' 
+tlc_get_ym = function(ymd, name = "yellow_tripdata", 
+                     dest = "/projects/bckj/TLC_yellow",
+                     url = "https://d37ci6vzurychx.cloudfront.net/trip-data") {
+  yr = lubridate::year(ymd)
+  month = lubridate::month(ymd)
+
+  ## Construct source url/file
+  file_name = paste0(name, "_", yr, '-', sprintf('%02d', month), '.parquet')
+  file_url = paste0(url, '/', file_name)
+  
+  ## Construct destination directory
+  dest_dir = paste0(dest, "/year=", yr)
+  if(!dir.exists(dest_dir)) dir.create(dest_dir)
+  dest_dir = paste0(dest_dir, "/month=", month)
+  if(!dir.exists(dest_dir)) dir.create(dest_dir)
+  
+  download.file(file_url, paste0(dest_dir, "/", file_name), method = "curl",
+                quiet = TRUE)
+  invisible(file_url)
+}
+
+#' tlc_get_range: A wrapper for `tlc_get_ym()` to get a range of months and do
+#' it in parallel.
+#' 
+#' @param first
+#' Character "YYYY-MM" first month. Uses `lubridate::ym()` to read
+#' @param last
+#' Character "YYYY-MM" last month
+#' @param cores
+#' Integer number of cores to use for running `wget` instances in parallel
+#' 
+#' @details
+#' Since the function does a system call to `wget`, its time does not include
+#' the core time used by `wget` and includes only the R function time. But
+#' the *real* or *elapsed* time is correct.
+#' 
+#' @returns
+#' Invisibly returns the full vector of months retrieved
+#' 
+tlc_get_range = function(first, last, cores = 1) {
+  ## construct vector of yr-month-day requests
+  dates = seq(lubridate::ym(first), lubridate::ym(last), "months")
+  parallel::mclapply(dates, tlc_get_ym, mc.cores = cores)
+  invisible(dates)
+}
+
+# tlc_get_range("2021-01", "2022-12", cores = 1)
+
+```
 
 ## Compare `csv` to `parquet` reads in R {.smaller}
 
@@ -349,7 +432,11 @@ dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
 
 ## Convert your `csv` data to `parquet`
 
-```
-> tlc = arrow::open_dataset("/projects/bckj/TLC_yellow")
-> tlc2009.02 = tlc %>% filter(year == 2009, month == 2) %>% collect()
+```{r}
+#| eval: false
+#| echo: true
+library(arrow)
+library(dplyr)
+tlc = open_dataset("/projects/bckj/TLC_yellow")
+tlc %>% filter(year == 2009, month == 2) %>% collect() %>% write_parquet(sink = "<dest_ditr>")
 ```

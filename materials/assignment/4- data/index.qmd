@@ -1,0 +1,16 @@
+---
+title: "Assignment 4: Project Data"
+editor: source
+---
+
+Each Team has chosen a data set for their project. This assignment is to jump start the projects so that each team has a working and fast-readable data set on Delta by the end of this week.
+
+There are team directories `Team1` through `Team6` on the Delta `/project/bckj` file system. 
+
+**Result1:** Download your data set to your `/projects/bckj/Team#` directory, into a subdirectory to keep things organized.
+
+**Result2:** Convert your data set into a `parquet` format, partitioned by a well chosen variable, using the **arrow** package and write it to another subdirectory under `/projects/bckj/Team#`. Good partition size is somewhere between 100 and 500 MB per 
+
+**Result3:** Get the sizes of each of the two directories with `du -hs <directory>` and submit the text result of these commands and their output.
+
+The only output to hand in to Canvas are the four lines of Result 3. Of course, the data directories on Delta need to contain the data reported by Result3.

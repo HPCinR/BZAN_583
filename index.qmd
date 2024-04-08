@@ -39,8 +39,7 @@ Assignment: [Project Proposal](materials/assignment/3-project)
 *Week 4, April 8 & 10*
 
 Lectures: [Shared Memory Parallel](materials/lectures/4-shared_mem)\
-Assignment: [Multicore](materials/assignment/4-mclapply) 
-<!-- mclapply examples -->
+Assignment: [Project Data](materials/assignment/4-data) 
 
 *Week 5, April 15 & 17*
 

@@ -19,3 +19,5 @@ UPDATE
   * flexiblas on macOS has issues with @rpath and LC_RPATH  
 * Hexagon for pbdMPI
   
+Delta accounting
+* ` jobcharge bckj-delta-cpu` shows per user use

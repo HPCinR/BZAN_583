@@ -12,27 +12,6 @@ editor: source
 engine: knitr
 ---
 
-## Today
-
-#### Assignment 1:  
-#### Assignment 2:  due Tuesday  
-#### Assignment 3:  Project proposals  
-#### Package installs on Delta:
-  - Login to Delta
-  - `module load r`
-  - `R` starts an interactive R session
-  - E.g. to install package `dplyr`:
-```{.r}
-install.packages("dplyr", repo = "https://cloud.r-project.org/")
-```
-<br>
-
-#### Delta File Systems
-#### Reading data and TLC Data
-#### Updated software slides
-#### `lapply()`, `mclapply()`
-
-
 ## File Systems on Delta {.incremental}
 
 - Our project name on Delta is `bckj`.
@@ -208,82 +187,136 @@ rhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)
 
 - [High Volume FHV Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf)  
 
-## Yellow Trip Data `/projects/bckj/TLC`
+## Yellow Trip Data 
 
-```{.r}
-cd /projects/bcjk/TLC
-ls -l
-```
+Yellow taxi trip data is downloaded on Delta in `parquet` format with an `arrow`-friendly directory structure.
 
 ::: {.cell-output-stdout}
 ```
+[gostrouc@dt-login03 ~]$ cd /projects/bckj/TLC_yellow
+[gostrouc@dt-login03 TLC_yellow]$ ls -l
 total 60
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 16:52 2009/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:25 2010/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:26 2011/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:26 2012/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:27 2013/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:27 2014/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:20 2015/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:20 2016/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:21 2017/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:13 2018/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:13 2019/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:06 2020/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:31 2021/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 17:32 2022/
-drwxrws---+ 2 gostrouc delta_bckj 4096 Mar 30 22:40 2023/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:06 'year=2009'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:07 'year=2010'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:08 'year=2011'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2012'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2013'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2014'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2015'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2016'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2017'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2018'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2019'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2020'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2021'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2022'/
+drwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/
 ```
 :::
 
-## Yellow Trip Data `/projects/bckj/TLC`
-
-```{.r}
-du -h
-```
+## Yellow Trip Data `/projects/bckj/TLC_yellow`
 
 ::: {.cell-output-stdout}
 ```
-[gostrouc@dt-login01 TLC]$ du -h .
-587M	./2022
-1.8G	./2016
-458M	./2021
-2.0G	./2013
-1.4G	./2018
-2.1G	./2011
-1.2G	./2019
-358M	./2020
-2.1G	./2012
-1.5G	./2017
-2.1G	./2014
-607M	./2023
-5.3G	./2010
-1.9G	./2015
-5.4G	./2009
+[gostrouc@dt-login03 TLC_yellow]$ du -hs ./*
+5.4G	./year=2009
+5.3G	./year=2010
+2.1G	./year=2011
+2.1G	./year=2012
+2.0G	./year=2013
+2.1G	./year=2014
+1.9G	./year=2015
+1.8G	./year=2016
+1.5G	./year=2017
+1.4G	./year=2018
+1.2G	./year=2019
+358M	./year=2020
+458M	./year=2021
+587M	./year=2022
+[gostrouc@dt-login03 TLC_yellow]$ du -hs .
 29G	.
 ```
 :::
 
 ## Yellow Trip Data `2009`
 
-```{.r}
-ls -l 2009
+::: {.cell-output-stdout}
 ```
+[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009'
+total 48
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=1'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=10'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=11'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=12'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=2'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=3'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=4'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=5'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=6'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=7'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=8'/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/
+```
+:::
+
+## Yellow Trip Data `2009-01`
 
 ::: {.cell-output-stdout}
 ```
-total 5583552
--rw-rw----+ 1 gostrouc delta_bckj 469759995 Mar 30 16:51 yellow_tripdata_2009-01.parquet
--rw-rw----+ 1 gostrouc delta_bckj 443434087 Mar 30 16:51 yellow_tripdata_2009-02.parquet
--rw-rw----+ 1 gostrouc delta_bckj 482592227 Mar 30 16:51 yellow_tripdata_2009-03.parquet
--rw-rw----+ 1 gostrouc delta_bckj 478134464 Mar 30 16:51 yellow_tripdata_2009-04.parquet
--rw-rw----+ 1 gostrouc delta_bckj 495321625 Mar 30 16:52 yellow_tripdata_2009-05.parquet
--rw-rw----+ 1 gostrouc delta_bckj 473587848 Mar 30 16:52 yellow_tripdata_2009-06.parquet
--rw-rw----+ 1 gostrouc delta_bckj 454608768 Mar 30 16:52 yellow_tripdata_2009-07.parquet
--rw-rw----+ 1 gostrouc delta_bckj 458271722 Mar 30 16:52 yellow_tripdata_2009-08.parquet
--rw-rw----+ 1 gostrouc delta_bckj 468346719 Mar 30 16:52 yellow_tripdata_2009-09.parquet
--rw-rw----+ 1 gostrouc delta_bckj 527529176 Mar 30 16:52 yellow_tripdata_2009-10.parquet
--rw-rw----+ 1 gostrouc delta_bckj 478304085 Mar 30 16:52 yellow_tripdata_2009-11.parquet
--rw-rw----+ 1 gostrouc delta_bckj 487584891 Mar 30 16:52 yellow_tripdata_2009-12.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1'
+total 458756
+-rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2'
+total 433048
+-rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3'
+total 471288
+-rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11'
+total 457M
+-rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12'
+total 466M
+-rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet
 ```
 :::
+
+## Compare `csv` to `parquet` reads in R {.smaller}
+
+**arrow** (parquet 0.423GB)
+```{.cell-output-stdout}
+> system.time({tlc2009.02 = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
+   user  system elapsed 
+  3.363   1.981  12.236 
+```
+**readr** (csv 1.7GB)
+```{.cell-output-stdout}
+> system.time({tlc2009.02csv = readr::read_csv("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+Rows: 14092413 Columns: 18                                                                                         
+── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: ","
+chr   (2): vendor_name, Payment_Type
+dbl  (11): Passenger_Count, Trip_Distance, Start_Lon, Start_Lat, End_Lon, En...
+lgl   (3): Rate_Code, store_and_forward, mta_tax
+dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+   user  system elapsed 
+ 56.194  24.529  51.976 
+```
+**data.table** (csv 1.7GB)
+```{.cell-output-stdout}
+> system.time({tlc2009.02csv2 = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+|--------------------------------------------------|
+|==================================================|
+   user  system elapsed 
+ 29.299  28.551  25.260 
+```
+
+## Convert your `csv` data to `parquet`
+
+```
+> tlc = arrow::open_dataset("/projects/bckj/TLC_yellow")
+> tlc2009.02 = tlc %>% filter(year == 2009, month == 2) %>% collect()
+```

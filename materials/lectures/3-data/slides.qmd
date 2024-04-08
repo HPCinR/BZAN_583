@@ -146,6 +146,35 @@ drwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/
 ```
 :::
 
+## Using the File Systems {.smaller}
+
+- Code is typically maintained in `/u/<username>`
+- Project data is usually kept in `/projects/bckj/` subdirectories  
+  - This is also a place for project team accessible code
+- Runtime temporary data can be written to `/scratch/bckj/`  
+
+::: {.cell-output-stdout}
+```
+[gostrouc@dt-login04 data]$ ls -ld /projects/bckj/Team*
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team1/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team2/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team3/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team4/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team5/
+drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team6/
+```
+:::
+
+## Bringing Output Back to Laptop {.smaller}
+
+NCSA [recommendations](https://docs.ncsa.illinois.edu/systems/icc/en/latest/user_guide/storage_data.html#cli-transfer-method-scp)   
+
+- Windows users: [WinSCP](https://winscp.net/eng/download.php) or [Cuberduck](https://cyberduck.io/download/)
+- Mac users: in laptop Terminal
+  - `scp <user>@login.delta.ncsa.illinois.edu:<file-path> <dest-path>`  
+  - `<file-path>` is relative to home directory on Delta or an absolute path (starts with `/`) on Delta  
+  - `<dest-path>` is on your laptop   
+
 ## Reading Data Overview
  
 - Text files (.csv, .tsv, .txt, ... ): variable length records  
@@ -283,11 +312,15 @@ total 466M
 
 ## Compare `csv` to `parquet` reads in R {.smaller}
 
-**arrow** (parquet 0.423GB)
+**arrow** (parquet 0.423GB, csv 1.7GB)
 ```{.cell-output-stdout}
-> system.time({tlc2009.02 = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
+> system.time({tlc2009.02arr = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
    user  system elapsed 
   3.363   1.981  12.236 
+> system.time({tlc2009.02arrcsv = arrow::read_csv_arrow("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+   user  system elapsed 
+ 20.513  32.494  33.163 
+
 ```
 **readr** (csv 1.7GB)
 ```{.cell-output-stdout}
@@ -307,7 +340,7 @@ dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
 ```
 **data.table** (csv 1.7GB)
 ```{.cell-output-stdout}
-> system.time({tlc2009.02csv2 = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+> system.time({tlc2009.02dtcsv = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
 |--------------------------------------------------|
 |==================================================|
    user  system elapsed 

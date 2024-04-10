@@ -7,7 +7,7 @@ This course is intended to provide an ability to use modern HPC systems for data
 
 It is the first time this course has been offered so there will be some rough edges and some material provided "just in time." Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material. 
 
-**Material below Week 1 is under construction!**
+**Please check back frequently for updates!**
 
 ::: {layout="[1,2]"}
 *Week 1, March 18 & 20*
@@ -32,13 +32,13 @@ Assignment: [Faster Code](materials/assignment/2-faster)
 *Week 3, April 1 & 3* \
 Project Proposals Due by Friday, April 5.
 
-Lectures: [File System and Data](materials/lectures/3-data), [HPC Software](materials/lectures/3-software), [The Unix fork](materials/lectures/3-fork), [BLAS Libraries](materials/lectures/3-blas)\
+Lectures: [HPC Software](materials/lectures/3-software), [The Unix fork](materials/lectures/3-fork)\
 Assignment: [Project Proposal](materials/assignment/3-project) 
 <!-- start library parallel FlexiBLAS & OpenBLAS -->
 
 *Week 4, April 8 & 10*
 
-Lectures: [Shared Memory Parallel](materials/lectures/4-shared_mem)\
+Lectures: [File System and Data](materials/lectures/4-data), [Shared Memory Parallel](materials/lectures/4-shared_mem), [BLAS Libraries](materials/lectures/4-blas)\
 Assignment: [Project Data](materials/assignment/4-data) 
 
 *Week 5, April 15 & 17*

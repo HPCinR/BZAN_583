@@ -1,0 +1,218 @@
+---
+title: "sampling.qmd"
+---
+
+## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/Slide8.png" background-size="80%" background-position="center"}
+
+::: notes
+* we begin with `paralel`'s multicore parts
+* continue with Foreign language via libraries (OpenBLAS, nvBLAS)
+* go to SPMD MPI with collectives
+
+* reverse of history - because we are used to a laptop 
+* Distributed - some things are recomputed rather than communicated
+:::
+
+
+## Bootstrap, Bagging, Boosting, and Crossvalidation
+
+* **Bootstrap**: a tool for uncertainty quantification  
+* **Bagging**: a tool for reducing variance
+* **Boosting**: a greedy method of growing a model  
+* **Crossvalidation**: model performance assessment  
+  * Estimates expected prediction error  
+  * Uses all data (no test set)  
+
+.footnote[
+$^*$Hastie, Tibshirani, and Friedman (2009) The Elements of Statistical Learning, Second Edition,  (2009). [link](https://link.springer.com/book/10.1007/978-0-387-84858-7)
+]
+
+## Bootstrap - uncertainty quantification {.smaller}
+
+Resampling data with replacement and repeating estimation  
+Results in a sample of estimates/predictions - can estimate its distribution
+
+* Data:  ${\mathbf Z} = (z_1,z_2,\ldots,z_N)$, where $z_i = (y_i,x_i)$  
+
+* Model: Let $S({\mathbf Z})$ be an estimated quantity from the data  
+
+* Sample with replacement $B$ sets of size $N$ from data  
+
+* Fit model to each of the reseampled $B$ sets $\{S({\mathbf Z^{*1}}), S({\mathbf Z^{*2}}),\ldots, S({\mathbf Z^{*B}})\}$  
+
+* Use as sample from the sampling distribution of the estimator   
+
+  * For example, $\widehat{\mbox{Var}[S({\mathbf Z})]} = \frac{1}{B−1} \sum_{b=1}^B[S({\mathbf Z^{*b}} )− \bar{S^*}]^2$  
+
+#### Parallelize over the $B$ sets  
+#### More parallelism may exist within $S(\cdot)$  
+
+## Bagging - variance reduction {.smaller}
+
+Stands for **b**ootstrap **agg**regation  
+Simple models (low bias and high variance models) on resampled data  
+Generalized by **random forest** to sampling subsets of predictors  
+
+* Let $\widehat{S({\mathbf Z})} = \frac{1}{B}\sum_{b=1}^B S({\mathbf Z^{*b}})$  (bootstrap sample mean)  
+
+* Majority vote if discrete   
+
+* Reduces variance of the estimate  
+
+#### Parallelize over $B$  
+#### More parallelism may exist within $S(\cdot)$  
+
+
+## Random Forest {.smaller}
+#### for Regression or Classification [^*]. 
+
+1. For b = 1 to B:    
+   1. Draw a bootstrap sample ${\mathbf Z^∗}$ of size $N$ from the training data   
+   1. Grow a random-forest tree $T_b$ on $\mathbf Z^*$ until $n_{min}$ nodes achieved:  
+        1. Select $m < p$ variables at random  
+        1. Pick the best variable/split-point among the $m$  
+        1. Split the node into two daughter nodes  
+1. Output the ensemble of trees $\{T_b\}^B_1$  
+
+To make a prediction at $x$:  
+Regression: $\widehat{f^B_{\rm rf}}(x) = \frac{1}{B}\sum_{b=1}^B T_b(x)$  
+Classification: Let $\widehat{C}_b(x)$ be the class prediction of the $b$th random-forest  
+tree. Then $\hat{C^B_{\rm rf}}(x)$ = majority vote $\{\widehat{C}_b(x)\}^B_1$  
+
+[^*]: Algorithm 15.1 in Hastie, Tibshirani, and Friedman (2009). The Elements of Statistical Learning, Second Edition. [Link](https://link.springer.com/book/10.1007/978-0-387-84858-7)  
+
+## Shared memory considerations {background-image="/pics/fork/Slide7.png" background-size="90%" background-position="center"}  
+
+$$\qquad$$  
+$$\qquad$$  
+
+#### Cores produce separate forests:  
+#### Combine forests for prediction or combine predictions?  
+
+## Boosting {.smaller}
+
+Increasing weights on misclassified observations (fits$^*$ additive model framework)  
+Sequential, so parallelization within a model  
+Discrete AdaBoost $^*$
+
+1. Initialize weights $w_i = \frac{1}{N}$, $i = 1,2,...,N$.
+2. For $m=1$ to $M$:
+   * Fit a classifier $G_m(x)$ to the training data using weights $w_i$.
+   * Compute $$err_m = \frac{\sum_{i=1}^N w_i I(y_i \neq G_m(x_i))}{\sum_{i=1}{N} w_i}$$
+   * Compute $\alpha_m = \log((1 − err_m)/err_m)$.
+   * Set $w_i \leftarrow w_i · \exp[\alpha_m \cdot I( y_i \neq G_m(x_i))]$, $i = 1, 2, \ldots, N$.
+3. Output $G(x) = sign \left[\sum^M_{m=1} \alpha_mG_m(x)\right]$.
+
+#### Sequential over M, parallelize within $G_m(\cdot)$
+
+.footnote[
+$^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
+]
+
+## K-fold Crossvalidation {background-image="/pics/fork/Slide8.png" background-size="100%" background-position="bottom" .smaller}
+
+* Let $y = f(x, \beta, \alpha)$ be a model and $\widehat{y} = f(x, \widehat{\beta}, \alpha)$ be a prediction of $y$
+  * data are $(y, x)$, parameters $\beta$, and hyperparameters $\alpha$
+  * Given $\alpha$, $\widehat{\beta}$ is determined by minimizing a loss function $L(y, \widehat{y} )$
+* Randomly divide $N$ training data points into $k$ roughly equal folds (shuffle and split)
+* Let $\widehat{f^{-k}}$ be the estimator when fold $k$ data is removed 
+* Let $f(x,\alpha)$ be an estimator with a tuning parameter $\alpha$
+* Then average loss for a choice of $\alpha$ is $\mbox{CV}(f,α) = \frac{1}{N}\sum_{i=1}^{N} L(y_i, \widehat{f^{-k_i}}(x_i,\alpha))$
+* Picking $\alpha$ with minimum average loss, mitigates overfitting
+
+## `KPMS-IT4I-EX/code/rf_serial.r`  
+```{.r include = "code/rf_serial.r"}
+```
+
+## `KPMS-IT4I-EX/code/rf_cv_serial.r`
+```{.r include = "code/rf_cv_serial.r" lines=c(3,4,11:32)}
+```
+
+## `KPMS-IT4I-EX/code/rf_cv_mc.r`
+```{.r include = "code/rf_cv_mc.r" lines=c(3,4,11:32)}
+```
+
+## Demo ...
+
+## Matrix Libraries ...
+
+## R-LAPACK-BLAS
+
+* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
+  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
+
+* LAPACK: matrix decompositions and more  
+
+<!--
+$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
+
+* Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,
+
+## R-LAPACK-BLAS
+![](/pics/01-intro/pbdRlib.jpg)
+* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
+  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
+
+* LAPACK: dense and banded matrix decompositions and more  
+  * $\quad LU$ $\quad LL^T$ $\quad QR$ $\quad UDV^T$ $\quad VD^2V^T$ $\quad\|\cdot\|_p$  
+
+* Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries  
+
+* **FlexiBLAS**: A BLAS and LAPACK wrapper library with runtime exchangable backends  
+
+## FlexiBLAS
+
+```{r eval=FALSE}
+library(flexiblas)
+
+# check whether FlexiBLAS is available
+flexiblas_avail()
+#> [1] TRUE
+
+# get the current backend
+flexiblas_current_backend()
+#> [1] "OPENBLAS-OPENMP"
+
+# list all available backends
+flexiblas_list()
+#> [1] "NETLIB"           "__FALLBACK__"     "BLIS-THREADS"     "OPENBLAS-OPENMP"
+#> [5] "BLIS-SERIAL"      "ATLAS"            "OPENBLAS-SERIAL"  "OPENBLAS-THREADS"
+#> [9] "BLIS-OPENMP"
+
+# get/set the number of threads
+flexiblas_set_num_threads(12)
+flexiblas_get_num_threads()
+#> [1] 12
+```
+
+.footnote[
+[https://github.com/Enchufa2/r-flexiblas](https://github.com/Enchufa2/r-flexiblas)  
+[https://cran.r-project.org/package=flexiblas](https://cran.r-project.org/package=flexiblas)
+]
+
+## Example Random forest Code {background-image="/pics/fork/ML_FreySlate1991.png" background-size="90%" background-position="center"}
+
+#### Letter recognition data ( $20\,000 \times 17$ )
+
+.footnote[*Parallel Statistical Computing with R: An Illustration on Two Architectures [ 	arXiv:1709.01195](https://arxiv.org/abs/1709.01195)]
+
+## Random Forest Classification
+
+### Build many decision trees from random subsets of variables
+
+### Use their majority votes to classify
+
+## Example Random Forest Classification Code {background-image="/pics/MC/benchmark_mc.png" background-size="90%" background-position="center"}  
+#### Letter recognition data ( $20\,000 \times 17$ )
+
+
+## Pseudo Random Number Generators (RNG) {background-image="/pics/fork/Slide6.png" background-size="90%" background-position="center"}
+
+::: {layout="[1,1]"}
+* Guaranteed reproducibility  
+
+* Possibly overlapping streams
+  
+* Reproducibility for same number of streams
+* Guaranteed independent streams 
+:::

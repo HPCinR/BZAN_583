@@ -214,9 +214,9 @@ rhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)
 
 - [Data overview](https://tlcpolicy.maps.arcgis.com/apps/instant/portfolio/index.html?appid=be00fce0963540628e37fd7c75a6d386)  
 
-- [Yellow Trip Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf)
+- [Yellow Taxi Trip Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf)
 
-- [Green Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf)  
+- [Green Taxi Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf)  
 
 - [FHV Trips Data Dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_fhv.pdf)  
 
@@ -296,7 +296,8 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/
 
 ## Yellow Taxi Trip Data `2009-01`
 
-::: {.cell-output-stdout}```
+::: {.cell-output-stdout}
+```
 [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1'
 total 458756
 -rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet
@@ -315,7 +316,7 @@ total 466M
 ```
 :::
 
-## Yellow Taxi Trip Data 
+## `curl` Yellow Taxi Trip Data 
 
 ```{r}
 #| eval: false
@@ -335,8 +336,8 @@ total 466M
 #' Character URL of data source location.
 #' 
 #' @details
-#' Uses `method = wget` to get one month of TLC yellow taxi data into the
-#' `dest` directory. Since `download.file()` engages `wget`
+#' Uses `method = curl` to get one month of TLC yellow taxi data into the
+#' `dest` directory. Since `download.file()` engages `curl`
 #' with a `system()` call, generating these calls to `tlcYM_get()` can be 
 #' completely parallel and the data never touches R. 
 #' 
@@ -372,11 +373,11 @@ tlc_get_ym = function(ymd, name = "yellow_tripdata",
 #' @param last
 #' Character "YYYY-MM" last month
 #' @param cores
-#' Integer number of cores to use for running `wget` instances in parallel
+#' Integer number of cores to use for running `curl` instances in parallel
 #' 
 #' @details
-#' Since the function does a system call to `wget`, its time does not include
-#' the core time used by `wget` and includes only the R function time. But
+#' Since the function does a system call to `curl`, its time does not include
+#' the core time used by `curl` and includes only the R function time. But
 #' the *real* or *elapsed* time is correct.
 #' 
 #' @returns
@@ -395,18 +396,23 @@ tlc_get_range = function(first, last, cores = 1) {
 
 ## Compare `csv` to `parquet` reads in R {.smaller}
 
-**arrow** (parquet 0.423GB, csv 1.7GB)
-```{.cell-output-stdout}
+**arrow** (parquet 0.423GB, csv 1.7GB)  
+
+::: {.cell-output-stdout}
+```
 > system.time({tlc2009.02arr = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
    user  system elapsed 
   3.363   1.981  12.236 
 > system.time({tlc2009.02arrcsv = arrow::read_csv_arrow("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
    user  system elapsed 
  20.513  32.494  33.163 
-
 ```
+:::
+
 **readr** (csv 1.7GB)
-```{.cell-output-stdout}
+
+::: {.cell-output-stdout}
+```
 > system.time({tlc2009.02csv = readr::read_csv("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
 Rows: 14092413 Columns: 18                                                                                         
 ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────
@@ -421,14 +427,19 @@ dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
    user  system elapsed 
  56.194  24.529  51.976 
 ```
-**data.table** (csv 1.7GB)
-```{.cell-output-stdout}
+:::
+
+**data.table** (csv 1.7GB)  
+
+::: {.cell-output-stdout}
+```
 > system.time({tlc2009.02dtcsv = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
 |--------------------------------------------------|
 |==================================================|
    user  system elapsed 
  29.299  28.551  25.260 
 ```
+:::
 
 ## Convert your `csv` data to `parquet`
 
@@ -437,6 +448,234 @@ dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
 #| echo: true
 library(arrow)
 library(dplyr)
-tlc = open_dataset("/projects/bckj/TLC_yellow")
-tlc %>% filter(year == 2009, month == 2) %>% collect() %>% write_parquet(sink = "<dest_ditr>")
+
+tlc = open_csv_dataset("/projects/bckj/TLC_yellow_csv/year=2009")
+
+write_parquet(tlc, sink = "/scratch/bckj/TLCtest")
 ```
+<br>
+
+Should work but currently fails on TLC_yellow_csv. Possibly due to second/partial conversion parquet to csv to part-parquet? 
+
+Consequently, this becomes an optional portion of Assignment 4.
+
+## Memory Use by R {.smaller}
+
+**memuse** package   
+
+- `memuse::mu()`: memory used by an object   
+   - Adding option `prefix = "SI"` uses SI units (`1e3` multiples, not `2^10` multiples)
+- `memuse::Sys.procmem()`: memory of the current R process  
+- `memuse::Sys.meminfo()`: total available memory, and free memory
+
+**pryr** package  
+
+- `pryr::object_size()`: memory used by an object   
+- `pryr::mem_used()`: memory of the current R process 
+
+The two packages can disagree with each other and with Unix. Try  
+- `system2("ps", paste("-o drs,rss -p", Sys.getpid()))`
+
+::: aside
+**pryr:** "The details of R’s memory management are not documented in a single place. Most of the information in this chapter was gleaned from a close reading of the documentation (particularly ?Memory and ?gc), the memory profiling section of R-exts, and the SEXPs section of R-ints. The rest I figured out by reading the C source code, performing small experiments, and asking questions on R-devel. Any mistakes are entirely mine." Hadley Wickham, [Advanced R](http://adv-r.had.co.nz/memory.html)   (Same comment could be made by the **memuse** package author, but I find it agrees with Unix more often)
+:::
+
+## A Note about Words
+
+"**batch processing**"  
+- HPC: running scripts non-interactively (whole) 
+- **arrow** package: reading data in chunks (by batches, not whole)  
+<br>
+
+"**fork**"  
+- HPC: Unix fork parallel process spawning  
+- GitHub: Creating a repository fork ( making a copy for concurrent development)   
+
+## Reading Data {.smaller}
+
+See examples in `BZAN_583_code/data`
+
+- `exploreTLC.R` and `exploreTLC.sh`
+- `fread_exploreTLC.R` and `fread_exploreTLC.sh`
+- `MPIexploreTLC.R` and `MPIexploreTLC.sh` (incomplete)
+
+## `exploreTLC.R`: 2 months
+
+::: {.cell-output-stdout}
+
+```
+[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  146.953 MiB 
+Peak:  146.953 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.427 GiB 
+58.7 MB
+  DRS   RSS
+765391 150796
+[1] "opening dataset"
+FileSystemDataset with 12 Parquet files
+vendor_name: string
+Trip_Pickup_DateTime: string
+Trip_Dropoff_DateTime: string
+Passenger_Count: int64
+Trip_Distance: double
+Start_Lon: double
+Start_Lat: double
+Rate_Code: double
+store_and_forward: double
+End_Lon: double
+End_Lat: double
+Payment_Type: string
+Fare_Amt: double
+surcharge: double
+mta_tax: double
+Tip_Amt: double
+Tolls_Amt: double
+Total_Amt: double
+month: int32
+
+See $metadata for additional Schema metadata
+[1] "into lapply"
+   user  system elapsed 
+ 59.396   2.090  54.976 
+[1] 10.35707
+[1] "into mclapply"
+   user  system elapsed 
+ 65.569   8.483  50.902 
+[1] 10.35707
+4.336 GiB
+Size:  4.524 GiB 
+Peak:  9.906 GiB 
+4.67 GB
+[1] 27472535       19
+```
+
+:::
+
+## `exploreTLC.R`: 4 months  
+
+:::{.cell-output-stdout}
+
+```
+[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  146.883 MiB 
+Peak:  146.883 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.428 GiB 
+58.7 MB
+  DRS   RSS
+765395 150660
+[1] "opening dataset"
+FileSystemDataset with 12 Parquet files
+vendor_name: string
+Trip_Pickup_DateTime: string
+Trip_Dropoff_DateTime: string
+Passenger_Count: int64
+Trip_Distance: double
+Start_Lon: double
+Start_Lat: double
+Rate_Code: double
+store_and_forward: double
+End_Lon: double
+End_Lat: double
+Payment_Type: string
+Fare_Amt: double
+surcharge: double
+mta_tax: double
+Tip_Amt: double
+Tolls_Amt: double
+Total_Amt: double
+month: int32
+
+See $metadata for additional Schema metadata
+[1] "into lapply"
+   user  system elapsed 
+127.074   5.567 121.475 
+[1] 10.54913
+[1] "into mclapply"
+   user  system elapsed 
+135.182  29.250 117.389 
+[1] 10.54913
+8.862 GiB
+Size:   9.553 GiB 
+Peak:  22.300 GiB 
+9.46 GB
+[1] 56154689       19
+```
+:::
+
+## `fread_exploreTLC.R`: 2 months
+
+::: {.cell-output-stdout}
+
+```
+[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  65.391 MiB 
+Peak:  65.391 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.182 GiB 
+37.3 MB
+  DRS   RSS
+540259 82336
+[1] "opening dataset"
+[1] "into lapply"
+   user  system elapsed 
+ 37.783   6.971 515.404 
+[1] 10.35707
+[1] "into mclapply"
+   user  system elapsed 
+ 24.401   6.467  18.516 
+[1] 10.35707
+3.275 GiB
+Size:  3.357 GiB 
+Peak:  7.337 GiB 
+3.56 GB
+[1] 27472535       18
+```
+:::
+
+
+## `fread_exploreTLC.R`: 4 months
+
+::: {.cell-output-stdout}
+```
+[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  65.430 MiB 
+Peak:  65.430 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.418 GiB 
+37.3 MB
+  DRS   RSS
+540263 82364
+[1] "opening dataset"
+[1] "into mclapply"
+   user  system elapsed 
+ 69.074  16.826 216.538 
+[1] 10.54913
+6.694 GiB
+Size:   6.774 GiB 
+Peak:  14.178 GiB 
+7.23 GB
+[1] 56154689       18
+[gostrouc@dt-login03 data]$ 
+```
+:::
+
+## Issues with Slow Data Reads on Delta
+
+- Compute nodes are shared if not all cores requested  
+  - Can compete for I/O channels with other jobs  
+  - Tends to be much less busy in AM  
+
+- Lustre file system optimized for large binary reads
+  - That's `/projects` and `/scratch` file systems
+  - Data sets with many files can have issues  
+

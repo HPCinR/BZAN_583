@@ -46,7 +46,7 @@
     "href": "index.html",
     "title": "HPC for Data Science in R - BZAN 583",
     "section": "",
-    "text": "This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.\nMaterial below Week 1 is under construction!\n\n\n\n\n\n\nWeek 1, March 18 & 20\n\n\nLectures: Welcome and Setup Workflow Introduction Setup and Demo\nAssignment: Installs and Workflow \n\n\n\n\nWeek 2, March 25 & 27\n\n\nLectures: Coding for Faster R, Memory Hierarchy and Hardware\nAssignment: Faster Code \n\n\n\n\nWeek 3, April 1 & 3\nProject Proposals Due by Friday, April 5.\n\n\nLectures: File System and Data, HPC Software, The Unix fork, BLAS Libraries\nAssignment: Project Proposal \n\n\n\n\nWeek 4, April 8 & 10\n\n\nLectures: Shared Memory Parallel\nAssignment: Project Data\n\n\n\n\nWeek 5, April 15 & 17\n\n\nLectures: LLM or Torch for R\nAssignment: A classification task \n\n\n\n\nWeek 6, April 22 & 24\n\n\nLectures: Distributed Computing\nAssignment: pbdMPI application \n\n\n\n\nWeek 7, April 29 & May 1\n\n\nLectures: TBD Your choice\n\n\n\n\n\nWeek 8, May 6\n\n\nProject: Presentations\n\n\n\nNotes: Programming Style"
+    "text": "This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.\nIt is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.\nPlease check back frequently for updates!\n\n\n\n\n\n\nWeek 1, March 18 & 20\n\n\nLectures: Welcome and Setup Workflow Introduction Setup and Demo\nAssignment: Installs and Workflow \n\n\n\n\nWeek 2, March 25 & 27\n\n\nLectures: Coding for Faster R, Memory Hierarchy and Hardware\nAssignment: Faster Code \n\n\n\n\nWeek 3, April 1 & 3\nProject Proposals Due by Friday, April 5.\n\n\nLectures: HPC Software, The Unix fork\nAssignment: Project Proposal \n\n\n\n\nWeek 4, April 8 & 10\n\n\nLectures: File System and Data, Parallel, BLAS Libraries\nAssignment: Project Data\n\n\n\n\nWeek 5, April 15 & 17\n\n\nLectures: LLM or Torch for R\nAssignment: A classification task \n\n\n\n\nWeek 6, April 22 & 24\n\n\nLectures: Distributed Computing\nAssignment: pbdMPI application \n\n\n\n\nWeek 7, April 29 & May 1\n\n\nLectures: TBD Your choice\n\n\n\n\n\nWeek 8, May 6\n\n\nProject: Presentations\n\n\n\nNotes: Programming Style"
   },
   {
     "objectID": "materials/lectures/6-distributed/slides.html#distributed-memory-computing",
@@ -245,118 +245,6 @@
     "text": "Hands on Session kazaam"
   },
   {
-    "objectID": "materials/lectures/3-data/slides.html#file-systems-on-delta",
-    "href": "materials/lectures/3-data/slides.html#file-systems-on-delta",
-    "title": "Data",
-    "section": "File Systems on Delta",
-    "text": "File Systems on Delta\n\nOur project name on Delta is bckj.\nEach user has access to three file systems /u/&lt;username&gt;, /projects/bckj/&lt;username&gt;, and /scratch/bcjk/&lt;username&gt;\nSee Delta: File Systems, andDelta: Data Management for more details.\nNone of the Delta file systems are backed up - another good reason to work via GitHub."
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#permissions-on-the-directories",
-    "href": "materials/lectures/3-data/slides.html#permissions-on-the-directories",
-    "title": "Data",
-    "section": "Permissions on the directories",
-    "text": "Permissions on the directories\n(gostrouc user view):\n\nls -ld $HOME\n\n\ndrwxrwx---+ 9 root root 4096 Mar 29 16:14 /u/gostrouc/\n\n\nls -ld /projects/bckj\n\n\ndrwxrws---+ 26 root delta_bckj 12288 Mar 26 04:55 /projects/bckj/\n\n\nls -ld /scratch/bckj\n\n\ndrwxrws---+ 26 root delta_bckj 8192 Mar 26 04:55 /scratch/bckj/\n\nd|uuu|ggg|ooo \\(\\quad\\)\ndir|user|group|others\nExec permissions (from man page):\n- x The execute/search bits\n- s The set-user-ID-on-execution and set-group-ID-on-execution bits"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#projectsbcjk",
-    "href": "materials/lectures/3-data/slides.html#projectsbcjk",
-    "title": "Data",
-    "section": "/projects/bcjk",
-    "text": "/projects/bcjk\n\nls -l /projects/bckj\n\n\ntotal 96\ndrwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/\ndrwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/\ndrwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/\ndrwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/\ndrwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/\ndrwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/\ndrwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/\ndrwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/\ndrwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/\ndrwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/\ndrwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/\ndrwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/\ndrwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/\ndrwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/\ndrwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/\ndrwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/\ndrwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/\ndrwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/\ndrwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/\ndrwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/\ndrwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/\ndrwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/\ndrwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/\ndrwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#scratchbcjk",
-    "href": "materials/lectures/3-data/slides.html#scratchbcjk",
-    "title": "Data",
-    "section": "/scratch/bcjk",
-    "text": "/scratch/bcjk\n\nls -l /scratch/bckj\n\n\ntotal 96\ndrwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/\ndrwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/\ndrwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/\ndrwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/\ndrwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/\ndrwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/\ndrwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/\ndrwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/\ndrwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/\ndrwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/\ndrwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/\ndrwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/\ndrwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/\ndrwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/\ndrwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/\ndrwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/\ndrwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/\ndrwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/\ndrwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/\ndrwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/\ndrwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/\ndrwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/\ndrwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/\ndrwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#using-the-file-systems",
-    "href": "materials/lectures/3-data/slides.html#using-the-file-systems",
-    "title": "Data",
-    "section": "Using the File Systems",
-    "text": "Using the File Systems\n\nCode is typically maintained in /u/&lt;username&gt;\n\nProject data is usually kept in /projects/bckj/ subdirectories\n\nThis is also a place for project team accessible code\n\n\nRuntime temporary data can be written to /scratch/bckj/\n\n\n\n[gostrouc@dt-login04 data]$ ls -ld /projects/bckj/Team*\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team1/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team2/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team3/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team4/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team5/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team6/"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#bringing-output-back-to-laptop",
-    "href": "materials/lectures/3-data/slides.html#bringing-output-back-to-laptop",
-    "title": "Data",
-    "section": "Bringing Output Back to Laptop",
-    "text": "Bringing Output Back to Laptop\nNCSA recommendations\n\nWindows users: WinSCP or Cuberduck\n\nMac users: in laptop Terminal\n\n\nscp &lt;user&gt;@login.delta.ncsa.illinois.edu:&lt;file-path&gt; &lt;dest-path&gt;\n\n\n&lt;file-path&gt; is relative to home directory on Delta or an absolute path (starts with /) on Delta\n\n\n&lt;dest-path&gt; is on your laptop"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#reading-data-overview",
-    "href": "materials/lectures/3-data/slides.html#reading-data-overview",
-    "title": "Data",
-    "section": "Reading Data Overview",
-    "text": "Reading Data Overview\n\nText files (.csv, .tsv, .txt, … ): variable length records\n\n\ndata.table::fread()  # fastest reader\nreadr::read_delim()  # fast reader    \n\nBinary file formats faster for large data (& smaller): fixed length records\n\n\narrow::read_parquet()  # chunked column-oriented format (.parquet extension)\n\nArrow for R Cheatsheet\n\nrhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)\n\nrhdf5 Practical Tips on Bioconductor\nOther formats (.xlsx, etc. )"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#downloading-data-overview",
-    "href": "materials/lectures/3-data/slides.html#downloading-data-overview",
-    "title": "Data",
-    "section": "Downloading Data Overview",
-    "text": "Downloading Data Overview\nUnix: wget, curl, scp\nR: utils::download.file()"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#new-york-tlc-trip-record-data",
-    "href": "materials/lectures/3-data/slides.html#new-york-tlc-trip-record-data",
-    "title": "Data",
-    "section": "New York TLC Trip Record Data",
-    "text": "New York TLC Trip Record Data\n\nTLC: Taxi and Limousine Commission\nIncludes: pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts\nData overview\nYellow Trip Data Dictionary\nGreen Trips Data Dictionary\nFHV Trips Data Dictionary\nHigh Volume FHV Trips Data Dictionary"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data",
-    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data",
-    "title": "Data",
-    "section": "Yellow Taxi Trip Data",
-    "text": "Yellow Taxi Trip Data\nYellow taxi trip data is downloaded on Delta in parquet format with an arrow-friendly directory structure.\n\n[gostrouc@dt-login03 ~]$ cd /projects/bckj/TLC_yellow\n[gostrouc@dt-login03 TLC_yellow]$ ls -l\ntotal 60\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:06 'year=2009'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:07 'year=2010'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:08 'year=2011'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2012'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2013'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2014'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2015'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2016'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2017'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2018'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2019'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2020'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2021'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2022'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-projectsbckjtlc_yellow",
-    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-projectsbckjtlc_yellow",
-    "title": "Data",
-    "section": "Yellow Taxi Trip Data /projects/bckj/TLC_yellow\n",
-    "text": "Yellow Taxi Trip Data /projects/bckj/TLC_yellow\n\n\n[gostrouc@dt-login03 TLC_yellow]$ du -hs ./*\n5.4G    ./year=2009\n5.3G    ./year=2010\n2.1G    ./year=2011\n2.1G    ./year=2012\n2.0G    ./year=2013\n2.1G    ./year=2014\n1.9G    ./year=2015\n1.8G    ./year=2016\n1.5G    ./year=2017\n1.4G    ./year=2018\n1.2G    ./year=2019\n358M    ./year=2020\n458M    ./year=2021\n587M    ./year=2022\n[gostrouc@dt-login03 TLC_yellow]$ du -hs .\n29G ."
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009",
-    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009",
-    "title": "Data",
-    "section": "Yellow Taxi Trip Data 2009\n",
-    "text": "Yellow Taxi Trip Data 2009\n\n\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009'\ntotal 48\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=1'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=10'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=11'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=12'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=2'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=3'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=4'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=5'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=6'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=7'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=8'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009-01",
-    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-2009-01",
-    "title": "Data",
-    "section": "Yellow Taxi Trip Data 2009-01\n",
-    "text": "Yellow Taxi Trip Data 2009-01\n\n::: {.cell-output-stdout}[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1' total 458756 -rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2' total 433048 -rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3' total 471288 -rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11' total 457M -rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12' total 466M -rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet :::"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-1",
-    "href": "materials/lectures/3-data/slides.html#yellow-taxi-trip-data-1",
-    "title": "Data",
-    "section": "Yellow Taxi Trip Data",
-    "text": "Yellow Taxi Trip Data\n\n#' tlc_get_ym: Gets one month of TLC yellow taxi data and writes it in Hive\n#' style directory names, such as `dest/year=2015/month=8/file_name.parquet`.\n#' \n#' @param ymd\n#' A **lubridate** \"YYYY-MM-01\" giving the year and month to be retrieved.\n#' @param name\n#' Character file name base (such as 'yellow_tripdata') from the TLC \n#' repository documentation.\n#' @param dest\n#' Character destination directory path.\n#' @param url\n#' Character URL of data source location.\n#' \n#' @details\n#' Uses `method = wget` to get one month of TLC yellow taxi data into the\n#' `dest` directory. Since `download.file()` engages `wget`\n#' with a `system()` call, generating these calls to `tlcYM_get()` can be \n#' completely parallel and the data never touches R. \n#' \n#' @returns \n#' Invisibly, returns the character URL/file combination used in data retrieval.\n#' \ntlc_get_ym = function(ymd, name = \"yellow_tripdata\", \n                     dest = \"/projects/bckj/TLC_yellow\",\n                     url = \"https://d37ci6vzurychx.cloudfront.net/trip-data\") {\n  yr = lubridate::year(ymd)\n  month = lubridate::month(ymd)\n\n  ## Construct source url/file\n  file_name = paste0(name, \"_\", yr, '-', sprintf('%02d', month), '.parquet')\n  file_url = paste0(url, '/', file_name)\n  \n  ## Construct destination directory\n  dest_dir = paste0(dest, \"/year=\", yr)\n  if(!dir.exists(dest_dir)) dir.create(dest_dir)\n  dest_dir = paste0(dest_dir, \"/month=\", month)\n  if(!dir.exists(dest_dir)) dir.create(dest_dir)\n  \n  download.file(file_url, paste0(dest_dir, \"/\", file_name), method = \"curl\",\n                quiet = TRUE)\n  invisible(file_url)\n}\n\n#' tlc_get_range: A wrapper for `tlc_get_ym()` to get a range of months and do\n#' it in parallel.\n#' \n#' @param first\n#' Character \"YYYY-MM\" first month. Uses `lubridate::ym()` to read\n#' @param last\n#' Character \"YYYY-MM\" last month\n#' @param cores\n#' Integer number of cores to use for running `wget` instances in parallel\n#' \n#' @details\n#' Since the function does a system call to `wget`, its time does not include\n#' the core time used by `wget` and includes only the R function time. But\n#' the *real* or *elapsed* time is correct.\n#' \n#' @returns\n#' Invisibly returns the full vector of months retrieved\n#' \ntlc_get_range = function(first, last, cores = 1) {\n  ## construct vector of yr-month-day requests\n  dates = seq(lubridate::ym(first), lubridate::ym(last), \"months\")\n  parallel::mclapply(dates, tlc_get_ym, mc.cores = cores)\n  invisible(dates)\n}\n\n# tlc_get_range(\"2021-01\", \"2022-12\", cores = 1)"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#compare-csv-to-parquet-reads-in-r",
-    "href": "materials/lectures/3-data/slides.html#compare-csv-to-parquet-reads-in-r",
-    "title": "Data",
-    "section": "Compare csv to parquet reads in R",
-    "text": "Compare csv to parquet reads in R\narrow (parquet 0.423GB, csv 1.7GB)\n&gt; system.time({tlc2009.02arr = arrow::read_parquet(\"/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet\")})\n   user  system elapsed \n  3.363   1.981  12.236 \n&gt; system.time({tlc2009.02arrcsv = arrow::read_csv_arrow(\"/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv\")})\n   user  system elapsed \n 20.513  32.494  33.163 \n\nreadr (csv 1.7GB)\n&gt; system.time({tlc2009.02csv = readr::read_csv(\"/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv\")})\nRows: 14092413 Columns: 18                                                                                         \n── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr   (2): vendor_name, Payment_Type\ndbl  (11): Passenger_Count, Trip_Distance, Start_Lon, Start_Lat, End_Lon, En...\nlgl   (3): Rate_Code, store_and_forward, mta_tax\ndttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n   user  system elapsed \n 56.194  24.529  51.976 \ndata.table (csv 1.7GB)\n&gt; system.time({tlc2009.02dtcsv = data.table::fread(\"/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv\")})\n|--------------------------------------------------|\n|==================================================|\n   user  system elapsed \n 29.299  28.551  25.260"
-  },
-  {
-    "objectID": "materials/lectures/3-data/slides.html#convert-your-csv-data-to-parquet",
-    "href": "materials/lectures/3-data/slides.html#convert-your-csv-data-to-parquet",
-    "title": "Data",
-    "section": "Convert your csv data to parquet\n",
-    "text": "Convert your csv data to parquet\n\n\nlibrary(arrow)\nlibrary(dplyr)\ntlc = open_dataset(\"/projects/bckj/TLC_yellow\")\ntlc %&gt;% filter(year == 2009, month == 2) %&gt;% collect() %&gt;% write_parquet(sink = \"&lt;dest_ditr&gt;\")"
-  },
-  {
     "objectID": "materials/lectures/5-nn/slides.html#a-short-excursion",
     "href": "materials/lectures/5-nn/slides.html#a-short-excursion",
     "title": "Untitled",
@@ -382,14 +270,14 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.370    83.03      1.415     85.76\n\"aperm.default\"     0.135     8.18      0.135      8.18\n\"array\"             0.035     2.12      0.035      2.12\n\"colMeans\"          0.030     1.82      0.030      1.82\n\"is.finite\"         0.030     1.82      0.030      1.82\n\"matrix\"            0.020     1.21      0.020      1.21\n\"any\"               0.015     0.91      0.015      0.91\n\"svd\"               0.010     0.61      1.445     87.58\n\"sweep\"             0.005     0.30      0.175     10.61"
+    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                  self.time self.pct total.time total.pct\n\"La.svd\"              1.400    82.60      1.445     85.25\n\"aperm.default\"       0.135     7.96      0.135      7.96\n\"array\"               0.035     2.06      0.035      2.06\n\"is.finite\"           0.035     2.06      0.035      2.06\n\"colMeans\"            0.030     1.77      0.030      1.77\n\"matrix\"              0.020     1.18      0.020      1.18\n\"svd\"                 0.015     0.88      1.485     87.61\n\"sweep\"               0.010     0.59      0.180     10.62\n\"any\"                 0.010     0.59      0.010      0.59\n\"lazyLoadDBfetch\"     0.005     0.29      0.005      0.29"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.415    84.23      1.455     86.61\n\"aperm.default\"     0.155     9.23      0.155      9.23\n\"is.finite\"         0.030     1.79      0.030      1.79\n\"any\"               0.025     1.49      0.025      1.49\n\"array\"             0.025     1.49      0.025      1.49\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.380    83.89      1.435     87.23\n\"aperm.default\"     0.135     8.21      0.135      8.21\n\"any\"               0.025     1.52      0.025      1.52\n\"array\"             0.025     1.52      0.025      1.52\n\"is.finite\"         0.025     1.52      0.025      1.52\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.445    85.00      1.495     87.94\n\"aperm.default\"     0.140     8.24      0.140      8.24\n\"is.finite\"         0.030     1.76      0.030      1.76\n\"matrix\"            0.030     1.76      0.030      1.76\n\"array\"             0.020     1.18      0.020      1.18"
+    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.420    85.29      1.450     87.09\n\"aperm.default\"     0.150     9.01      0.150      9.01\n\"is.finite\"         0.030     1.80      0.030      1.80\n\"array\"             0.025     1.50      0.025      1.50\n\"colMeans\"          0.015     0.90      0.015      0.90\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.375    83.84      1.420     86.59\n\"aperm.default\"     0.140     8.54      0.140      8.54\n\"is.finite\"         0.030     1.83      0.030      1.83\n\"matrix\"            0.025     1.52      0.025      1.52\n\"array\"             0.020     1.22      0.020      1.22\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.405    84.64      1.450     87.35\n\"aperm.default\"     0.140     8.43      0.140      8.43\n\"is.finite\"         0.030     1.81      0.030      1.81\n\"colMeans\"          0.025     1.51      0.025      1.51\n\"matrix\"            0.025     1.51      0.025      1.51"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#lazy-evaluation",
@@ -403,7 +291,7 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark\n",
-    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.242    2.689     0.200    0.039          0         0\n2 g(x)          100   0.090    1.000     0.084    0.006          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.235    2.582     0.201    0.032          0         0\n2 g(x)          100   0.091    1.000     0.085    0.006          0         0"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#profiling-summary",
@@ -417,7 +305,7 @@
     "href": "materials/lectures/2-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.952   0.069   1.022 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.030 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.953   0.074   1.030 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.031 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#compute-once-if-not-changing",
@@ -445,7 +333,7 @@
     "href": "materials/lectures/2-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Preallocate lists and vectors Instead of Growing Them",
-    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.338   1.872   8.228 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.406   0.045   0.451 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.407   1.971   8.431 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.407   0.044   0.451 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#specialize-more-general-functions",
@@ -466,7 +354,7 @@
     "href": "materials/lectures/2-faster/slides.html#contiguous-access-to-arrays-and-lists",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Contiguous access to arrays and lists",
-    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.896   0.065   0.962 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.378   0.044   0.422 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.231   0.050   0.282 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.826   0.076   0.905 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.369   0.044   0.413 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.238   0.061   0.301 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#programming-languages-hierarchy",
@@ -487,427 +375,371 @@
     "href": "materials/lectures/2-faster/slides.html#rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "\nRfast and RFast2 Packages: A collection of Rcpp-Implemented Functions",
-    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.325   0.024   0.349 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.065   0.004   0.071 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
+    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.330   0.019   0.360 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.068   0.006   0.128 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas",
-    "href": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas",
-    "title": "Shared Memory Parallel Computing",
-    "section": "R-LAPACK-BLAS",
-    "text": "R-LAPACK-BLAS\n\nBLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n\nvector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\nLAPACK: matrix decompositions and more\n\n\n\nImplementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,"
+    "objectID": "materials/lectures/4-shared_mem/sampling.html",
+    "href": "materials/lectures/4-shared_mem/sampling.html",
+    "title": "sampling.qmd",
+    "section": "",
+    "text": "we begin with paralel’s multicore parts\ncontinue with Foreign language via libraries (OpenBLAS, nvBLAS)\ngo to SPMD MPI with collectives\nreverse of history - because we are used to a laptop\nDistributed - some things are recomputed rather than communicated"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#measurement-and-terminology-of-parallel-speedup",
-    "href": "materials/lectures/4-shared_mem/slides.html#measurement-and-terminology-of-parallel-speedup",
-    "title": "Shared Memory Parallel Computing",
-    "section": "Measurement and terminology of parallel speedup",
-    "text": "Measurement and terminology of parallel speedup"
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/4-shared_mem/sampling.html#r-interfaces-to-low-level-native-tools",
+    "title": "sampling.qmd",
+    "section": "",
+    "text": "we begin with paralel’s multicore parts\ncontinue with Foreign language via libraries (OpenBLAS, nvBLAS)\ngo to SPMD MPI with collectives\nreverse of history - because we are used to a laptop\nDistributed - some things are recomputed rather than communicated"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#embarrassingly-pleasingly-parallel",
-    "href": "materials/lectures/4-shared_mem/slides.html#embarrassingly-pleasingly-parallel",
-    "title": "Shared Memory Parallel Computing",
-    "section": "Embarrassingly (Pleasingly) Parallel",
-    "text": "Embarrassingly (Pleasingly) Parallel\n\n\\[t_p = \\frac{t}{n} = t_n\\]\n\\[\\mbox{Speedup:}\\quad\\frac{t}{t_p} = n\\] \\(t\\) - Serial time\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - Single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time"
-  },
-  {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#serial-section-amdahls-law",
-    "href": "materials/lectures/4-shared_mem/slides.html#serial-section-amdahls-law",
-    "title": "Shared Memory Parallel Computing",
-    "section": "Serial Section (Amdahl’s Law)",
-    "text": "Serial Section (Amdahl’s Law)\n\\[\\qquad\\]\n\\[t_p = t_s + t_n &gt; t_s\\]\n\\[\\mbox{Max Speedup:}\\quad\\lim_{n \\to \\infty}\\frac{t}{t_p} = \\frac{t}{t_s}\\]\n\\(t\\) - Serial time (fixed)\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\nStrong Scaling: fixed work, increasing resources"
-  },
-  {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#serial-section-gustafsons-law",
-    "href": "materials/lectures/4-shared_mem/slides.html#serial-section-gustafsons-law",
-    "title": "Shared Memory Parallel Computing",
-    "section": "Serial Section (Gustafson’s Law)",
-    "text": "Serial Section (Gustafson’s Law)\n\\[\\qquad\\]\n\\[t_p = t_s + t_n\\]\n\\[\\mbox{Speedup:}\\quad\\frac{t}{t_p} = \\frac{t_s + nt_n}{t_s + t_n} = O(n)\\]\n\\(t\\) - Serial time (growing: \\(t_{2n} = 2t_n\\) )\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\nWeak Scaling: increasing work, increasing resources\n\nWeak: misnomer: the speedup is actually great"
-  },
-  {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#parallel-overhead",
-    "href": "materials/lectures/4-shared_mem/slides.html#parallel-overhead",
-    "title": "Shared Memory Parallel Computing",
-    "section": "Parallel Overhead",
-    "text": "Parallel Overhead\n\\[\\qquad\\] \\[\\qquad\\]\n\\[t_p = t_s + t_n + t_o(n)\\]\n\\(t\\) - Serial time\n\\(n\\) - Number of processes\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\n\\(t_o(n)\\) - Parallel overhead time"
-  },
-  {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#replication-of-serial-section",
-    "href": "materials/lectures/4-shared_mem/slides.html#replication-of-serial-section",
-    "title": "Shared Memory Parallel Computing",
-    "section": "Replication of Serial Section",
-    "text": "Replication of Serial Section\n\\[\\qquad\\] \\[\\qquad\\] \\[\\qquad\\] \\[\\qquad\\]\nSuppose the serial section is computed on one rank and sent to all ranks. Then overhead is a function of \\(n\\)!\n\\(t\\) - Serial time\n\\(n\\) - Number of processes\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\n\\(t_o(n)\\) - Parallel overhead time\nReplication can reduce communication overhead due to communication"
-  },
-  {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#r-interfaces-to-low-level-native-tools",
-    "href": "materials/lectures/4-shared_mem/slides.html#r-interfaces-to-low-level-native-tools",
-    "title": "Shared Memory Parallel Computing",
-    "section": "R Interfaces to Low-Level Native Tools",
-    "text": "R Interfaces to Low-Level Native Tools\n\n\nwe begin with paralel’s multicore parts\ncontinue with Foreign language via libraries (OpenBLAS, nvBLAS)\ngo to SPMD MPI with collectives\nreverse of history - because we are used to a laptop\nDistributed - some things are recomputed rather than communicated"
-  },
-  {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#bootstrap-bagging-boosting-and-crossvalidation",
-    "href": "materials/lectures/4-shared_mem/slides.html#bootstrap-bagging-boosting-and-crossvalidation",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#bootstrap-bagging-boosting-and-crossvalidation",
+    "href": "materials/lectures/4-shared_mem/sampling.html#bootstrap-bagging-boosting-and-crossvalidation",
+    "title": "sampling.qmd",
     "section": "Bootstrap, Bagging, Boosting, and Crossvalidation",
-    "text": "Bootstrap, Bagging, Boosting, and Crossvalidation\n\nBootstrap: a tool for uncertainty quantification\n\nBagging: a tool for reducing variance\nBoosting: a greedy method of growing a model\n\nCrossvalidation: model performance assessment\n\nEstimates expected prediction error\n\nUses all data (no test set)\n\n\n.footnote[ \\(^*\\)Hastie, Tibshirani, and Friedman (2009) The Elements of Statistical Learning, Second Edition, (2009). link]"
+    "text": "Bootstrap, Bagging, Boosting, and Crossvalidation\n\n\nBootstrap: a tool for uncertainty quantification\n\n\nBagging: a tool for reducing variance\n\nBoosting: a greedy method of growing a model\n\n\nCrossvalidation: model performance assessment\n\nEstimates expected prediction error\n\nUses all data (no test set)\n\n\n\n.footnote[ ^*Hastie, Tibshirani, and Friedman (2009) The Elements of Statistical Learning, Second Edition, (2009). link]"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#bootstrap---uncertainty-quantification",
-    "href": "materials/lectures/4-shared_mem/slides.html#bootstrap---uncertainty-quantification",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#bootstrap---uncertainty-quantification",
+    "href": "materials/lectures/4-shared_mem/sampling.html#bootstrap---uncertainty-quantification",
+    "title": "sampling.qmd",
     "section": "Bootstrap - uncertainty quantification",
-    "text": "Bootstrap - uncertainty quantification\nResampling data with replacement and repeating estimation\nResults in a sample of estimates/predictions - can estimate its distribution\n\nData: \\({\\mathbf Z} = (z_1,z_2,\\ldots,z_N)\\), where \\(z_i = (y_i,x_i)\\)\nModel: Let \\(S({\\mathbf Z})\\) be an estimated quantity from the data\nSample with replacement \\(B\\) sets of size \\(N\\) from data\nFit model to each of the reseampled \\(B\\) sets \\(\\{S({\\mathbf Z^{*1}}), S({\\mathbf Z^{*2}}),\\ldots, S({\\mathbf Z^{*B}})\\}\\)\nUse as sample from the sampling distribution of the estimator\n\nFor example, \\(\\widehat{\\mbox{Var}[S({\\mathbf Z})]} = \\frac{1}{B−1} \\sum_{b=1}^B[S({\\mathbf Z^{*b}} )− \\bar{S^*}]^2\\)\n\n\nParallelize over the \\(B\\) sets\nMore parallelism may exist within \\(S(\\cdot)\\)"
+    "text": "Bootstrap - uncertainty quantification\nResampling data with replacement and repeating estimation\nResults in a sample of estimates/predictions - can estimate its distribution\n\nData: {\\mathbf Z} = (z_1,z_2,\\ldots,z_N), where z_i = (y_i,x_i)\nModel: Let S({\\mathbf Z}) be an estimated quantity from the data\nSample with replacement B sets of size N from data\nFit model to each of the reseampled B sets \\{S({\\mathbf Z^{*1}}), S({\\mathbf Z^{*2}}),\\ldots, S({\\mathbf Z^{*B}})\\}\n\nUse as sample from the sampling distribution of the estimator\n\nFor example, \\widehat{\\mbox{Var}[S({\\mathbf Z})]} = \\frac{1}{B−1} \\sum_{b=1}^B[S({\\mathbf Z^{*b}} )− \\bar{S^*}]^2\n\n\n\n\nParallelize over the B sets\nMore parallelism may exist within S(\\cdot)"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#bagging---variance-reduction",
-    "href": "materials/lectures/4-shared_mem/slides.html#bagging---variance-reduction",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#bagging---variance-reduction",
+    "href": "materials/lectures/4-shared_mem/sampling.html#bagging---variance-reduction",
+    "title": "sampling.qmd",
     "section": "Bagging - variance reduction",
-    "text": "Bagging - variance reduction\nStands for bootstrap aggregation\nSimple models (low bias and high variance models) on resampled data\nGeneralized by random forest to sampling subsets of predictors\n\nLet \\(\\widehat{S({\\mathbf Z})} = \\frac{1}{B}\\sum_{b=1}^B S({\\mathbf Z^{*b}})\\) (bootstrap sample mean)\nMajority vote if discrete\nReduces variance of the estimate\n\nParallelize over \\(B\\)\nMore parallelism may exist within \\(S(\\cdot)\\)"
+    "text": "Bagging - variance reduction\nStands for bootstrap aggregation\nSimple models (low bias and high variance models) on resampled data\nGeneralized by random forest to sampling subsets of predictors\n\nLet \\widehat{S({\\mathbf Z})} = \\frac{1}{B}\\sum_{b=1}^B S({\\mathbf Z^{*b}}) (bootstrap sample mean)\nMajority vote if discrete\nReduces variance of the estimate\n\nParallelize over B\n\nMore parallelism may exist within S(\\cdot)"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#random-forest",
-    "href": "materials/lectures/4-shared_mem/slides.html#random-forest",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#random-forest",
+    "href": "materials/lectures/4-shared_mem/sampling.html#random-forest",
+    "title": "sampling.qmd",
     "section": "Random Forest",
-    "text": "Random Forest\nfor Regression or Classification 1.\n\nFor b = 1 to B:\n\nDraw a bootstrap sample \\({\\mathbf Z^∗}\\) of size \\(N\\) from the training data\n\nGrow a random-forest tree \\(T_b\\) on \\(\\mathbf Z^*\\) until \\(n_{min}\\) nodes achieved:\n\nSelect \\(m &lt; p\\) variables at random\n\nPick the best variable/split-point among the \\(m\\)\n\nSplit the node into two daughter nodes\n\n\n\nOutput the ensemble of trees \\(\\{T_b\\}^B_1\\)\n\nTo make a prediction at \\(x\\):\nRegression: \\(\\widehat{f^B_{\\rm rf}}(x) = \\frac{1}{B}\\sum_{b=1}^B T_b(x)\\)\nClassification: Let \\(\\widehat{C}_b(x)\\) be the class prediction of the \\(b\\)th random-forest\ntree. Then \\(\\hat{C^B_{\\rm rf}}(x)\\) = majority vote \\(\\{\\widehat{C}_b(x)\\}^B_1\\)\nAlgorithm 15.1 in Hastie, Tibshirani, and Friedman (2009). The Elements of Statistical Learning, Second Edition. Link"
+    "text": "Random Forest\nfor Regression or Classification 1.\n\nFor b = 1 to B:\n\nDraw a bootstrap sample {\\mathbf Z^∗} of size N from the training data\n\nGrow a random-forest tree T_b on \\mathbf Z^* until n_{min} nodes achieved:\n\nSelect m &lt; p variables at random\n\nPick the best variable/split-point among the m\n\nSplit the node into two daughter nodes\n\n\n\n\n\nOutput the ensemble of trees \\{T_b\\}^B_1\n\n\nTo make a prediction at x:\nRegression: \\widehat{f^B_{\\rm rf}}(x) = \\frac{1}{B}\\sum_{b=1}^B T_b(x)\nClassification: Let \\widehat{C}_b(x) be the class prediction of the bth random-forest\ntree. Then \\hat{C^B_{\\rm rf}}(x) = majority vote \\{\\widehat{C}_b(x)\\}^B_1"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#shared-memory-considerations",
-    "href": "materials/lectures/4-shared_mem/slides.html#shared-memory-considerations",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#shared-memory-considerations",
+    "href": "materials/lectures/4-shared_mem/sampling.html#shared-memory-considerations",
+    "title": "sampling.qmd",
     "section": "Shared memory considerations",
-    "text": "Shared memory considerations\n\\[\\qquad\\]\n\\[\\qquad\\]\nCores produce separate forests:\nCombine forests for prediction or combine predictions?"
+    "text": "Shared memory considerations\n\\qquad\\qquad\nCores produce separate forests:\nCombine forests for prediction or combine predictions?"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#boosting",
-    "href": "materials/lectures/4-shared_mem/slides.html#boosting",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#boosting",
+    "href": "materials/lectures/4-shared_mem/sampling.html#boosting",
+    "title": "sampling.qmd",
     "section": "Boosting",
-    "text": "Boosting\nIncreasing weights on misclassified observations (fits\\(^*\\) additive model framework)\nSequential, so parallelization within a model\nDiscrete AdaBoost \\(^*\\)\n\nInitialize weights \\(w_i = \\frac{1}{N}\\), \\(i = 1,2,...,N\\).\nFor \\(m=1\\) to \\(M\\):\n\nFit a classifier \\(G_m(x)\\) to the training data using weights \\(w_i\\).\nCompute \\[err_m = \\frac{\\sum_{i=1}^N w_i I(y_i \\neq G_m(x_i))}{\\sum_{i=1}{N} w_i}\\]\nCompute \\(\\alpha_m = \\log((1 − err_m)/err_m)\\).\nSet \\(w_i \\leftarrow w_i · \\exp[\\alpha_m \\cdot I( y_i \\neq G_m(x_i))]\\), \\(i = 1, 2, \\ldots, N\\).\n\nOutput \\(G(x) = sign \\left[\\sum^M_{m=1} \\alpha_mG_m(x)\\right]\\).\n\nSequential over M, parallelize within \\(G_m(\\cdot)\\)\n.footnote[ \\(^*\\) Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)]"
+    "text": "Boosting\nIncreasing weights on misclassified observations (fits^* additive model framework)\nSequential, so parallelization within a model\nDiscrete AdaBoost ^*\n\nInitialize weights w_i = \\frac{1}{N}, i = 1,2,...,N.\nFor m=1 to M:\n\nFit a classifier G_m(x) to the training data using weights w_i.\nCompute err_m = \\frac{\\sum_{i=1}^N w_i I(y_i \\neq G_m(x_i))}{\\sum_{i=1}{N} w_i}\n\nCompute \\alpha_m = \\log((1 − err_m)/err_m).\nSet w_i \\leftarrow w_i · \\exp[\\alpha_m \\cdot I( y_i \\neq G_m(x_i))], i = 1, 2, \\ldots, N.\n\n\nOutput G(x) = sign \\left[\\sum^M_{m=1} \\alpha_mG_m(x)\\right].\n\nSequential over M, parallelize within G_m(\\cdot)\n\n.footnote[ ^* Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)]"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#k-fold-crossvalidation",
-    "href": "materials/lectures/4-shared_mem/slides.html#k-fold-crossvalidation",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#k-fold-crossvalidation",
+    "href": "materials/lectures/4-shared_mem/sampling.html#k-fold-crossvalidation",
+    "title": "sampling.qmd",
     "section": "K-fold Crossvalidation",
-    "text": "K-fold Crossvalidation\n\nLet \\(y = f(x, \\beta, \\alpha)\\) be a model and \\(\\widehat{y} = f(x, \\widehat{\\beta}, \\alpha)\\) be a prediction of \\(y\\)\n\ndata are \\((y, x)\\), parameters \\(\\beta\\), and hyperparameters \\(\\alpha\\)\nGiven \\(\\alpha\\), \\(\\widehat{\\beta}\\) is determined by minimizing a loss function \\(L(y, \\widehat{y} )\\)\n\nRandomly divide \\(N\\) training data points into \\(k\\) roughly equal folds (shuffle and split)\nLet \\(\\widehat{f^{-k}}\\) be the estimator when fold \\(k\\) data is removed\nLet \\(f(x,\\alpha)\\) be an estimator with a tuning parameter \\(\\alpha\\)\nThen average loss for a choice of \\(\\alpha\\) is \\(\\mbox{CV}(f,α) = \\frac{1}{N}\\sum_{i=1}^{N} L(y_i, \\widehat{f^{-k_i}}(x_i,\\alpha))\\)\nPicking \\(\\alpha\\) with minimum average loss, mitigates overfitting"
+    "text": "K-fold Crossvalidation\n\nLet y = f(x, \\beta, \\alpha) be a model and \\widehat{y} = f(x, \\widehat{\\beta}, \\alpha) be a prediction of y\n\ndata are (y, x), parameters \\beta, and hyperparameters \\alpha\n\nGiven \\alpha, \\widehat{\\beta} is determined by minimizing a loss function L(y, \\widehat{y} )\n\n\n\nRandomly divide N training data points into k roughly equal folds (shuffle and split)\nLet \\widehat{f^{-k}} be the estimator when fold k data is removed\nLet f(x,\\alpha) be an estimator with a tuning parameter \\alpha\n\nThen average loss for a choice of \\alpha is \\mbox{CV}(f,α) = \\frac{1}{N}\\sum_{i=1}^{N} L(y_i, \\widehat{f^{-k_i}}(x_i,\\alpha))\n\nPicking \\alpha with minimum average loss, mitigates overfitting"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_serial.r",
-    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_serial.r",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#kpms-it4i-excoderf_serial.r",
+    "href": "materials/lectures/4-shared_mem/sampling.html#kpms-it4i-excoderf_serial.r",
+    "title": "sampling.qmd",
     "section": "KPMS-IT4I-EX/code/rf_serial.r",
     "text": "KPMS-IT4I-EX/code/rf_serial.r\n{.r include = \"code/rf_serial.r\"}"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_serial.r",
-    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_serial.r",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#kpms-it4i-excoderf_cv_serial.r",
+    "href": "materials/lectures/4-shared_mem/sampling.html#kpms-it4i-excoderf_cv_serial.r",
+    "title": "sampling.qmd",
     "section": "KPMS-IT4I-EX/code/rf_cv_serial.r",
     "text": "KPMS-IT4I-EX/code/rf_cv_serial.r\n{.r include = \"code/rf_cv_serial.r\" lines=c(3,4,11:32)}"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_mc.r",
-    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_cv_mc.r",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#kpms-it4i-excoderf_cv_mc.r",
+    "href": "materials/lectures/4-shared_mem/sampling.html#kpms-it4i-excoderf_cv_mc.r",
+    "title": "sampling.qmd",
     "section": "KPMS-IT4I-EX/code/rf_cv_mc.r",
     "text": "KPMS-IT4I-EX/code/rf_cv_mc.r\n{.r include = \"code/rf_cv_mc.r\" lines=c(3,4,11:32)}"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#demo",
-    "href": "materials/lectures/4-shared_mem/slides.html#demo",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#demo",
+    "href": "materials/lectures/4-shared_mem/sampling.html#demo",
+    "title": "sampling.qmd",
     "section": "Demo …",
     "text": "Demo …"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#matrix-libraries",
-    "href": "materials/lectures/4-shared_mem/slides.html#matrix-libraries",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#matrix-libraries",
+    "href": "materials/lectures/4-shared_mem/sampling.html#matrix-libraries",
+    "title": "sampling.qmd",
     "section": "Matrix Libraries …",
     "text": "Matrix Libraries …"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas-1",
-    "href": "materials/lectures/4-shared_mem/slides.html#r-lapack-blas-1",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#r-lapack-blas",
+    "href": "materials/lectures/4-shared_mem/sampling.html#r-lapack-blas",
+    "title": "sampling.qmd",
     "section": "R-LAPACK-BLAS",
-    "text": "R-LAPACK-BLAS\n * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\nLAPACK: dense and banded matrix decompositions and more\n\n\\(\\quad LU\\) \\(\\quad LL^T\\) \\(\\quad QR\\) \\(\\quad UDV^T\\) \\(\\quad VD^2V^T\\) \\(\\quad\\|\\cdot\\|_p\\)\n\nImplementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries\nFlexiBLAS: A BLAS and LAPACK wrapper library with runtime exchangable backends"
+    "text": "R-LAPACK-BLAS\n\nBLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n\nvector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\n\nLAPACK: matrix decompositions and more\n\n\nImplementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#flexiblas",
-    "href": "materials/lectures/4-shared_mem/slides.html#flexiblas",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#r-lapack-blas-1",
+    "href": "materials/lectures/4-shared_mem/sampling.html#r-lapack-blas-1",
+    "title": "sampling.qmd",
+    "section": "R-LAPACK-BLAS",
+    "text": "R-LAPACK-BLAS\n * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\n\nLAPACK: dense and banded matrix decompositions and more\n\n\n\\quad LU \\quad LL^T \\quad QR \\quad UDV^T \\quad VD^2V^T \\quad\\|\\cdot\\|_p\n\n\n\nImplementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries\nFlexiBLAS: A BLAS and LAPACK wrapper library with runtime exchangable backends"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#flexiblas",
+    "href": "materials/lectures/4-shared_mem/sampling.html#flexiblas",
+    "title": "sampling.qmd",
     "section": "FlexiBLAS",
-    "text": "FlexiBLAS\n.footnote[ https://github.com/Enchufa2/r-flexiblas\nhttps://cran.r-project.org/package=flexiblas]"
+    "text": "FlexiBLAS\n\nlibrary(flexiblas)\n\n# check whether FlexiBLAS is available\nflexiblas_avail()\n#&gt; [1] TRUE\n\n# get the current backend\nflexiblas_current_backend()\n#&gt; [1] \"OPENBLAS-OPENMP\"\n\n# list all available backends\nflexiblas_list()\n#&gt; [1] \"NETLIB\"           \"__FALLBACK__\"     \"BLIS-THREADS\"     \"OPENBLAS-OPENMP\"\n#&gt; [5] \"BLIS-SERIAL\"      \"ATLAS\"            \"OPENBLAS-SERIAL\"  \"OPENBLAS-THREADS\"\n#&gt; [9] \"BLIS-OPENMP\"\n\n# get/set the number of threads\nflexiblas_set_num_threads(12)\nflexiblas_get_num_threads()\n#&gt; [1] 12\n\n.footnote[ https://github.com/Enchufa2/r-flexiblashttps://cran.r-project.org/package=flexiblas]"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#example-random-forest-code",
-    "href": "materials/lectures/4-shared_mem/slides.html#example-random-forest-code",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#example-random-forest-code",
+    "href": "materials/lectures/4-shared_mem/sampling.html#example-random-forest-code",
+    "title": "sampling.qmd",
     "section": "Example Random forest Code",
-    "text": "Example Random forest Code\nLetter recognition data ( \\(20\\,000 \\times 17\\) )\n.footnote[*Parallel Statistical Computing with R: An Illustration on Two Architectures arXiv:1709.01195]"
+    "text": "Example Random forest Code\nLetter recognition data ( 20\\,000 \\times 17 )\n.footnote[*Parallel Statistical Computing with R: An Illustration on Two Architectures arXiv:1709.01195]"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#random-forest-classification",
-    "href": "materials/lectures/4-shared_mem/slides.html#random-forest-classification",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#random-forest-classification",
+    "href": "materials/lectures/4-shared_mem/sampling.html#random-forest-classification",
+    "title": "sampling.qmd",
     "section": "Random Forest Classification",
     "text": "Random Forest Classification\nBuild many decision trees from random subsets of variables\nUse their majority votes to classify"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#example-random-forest-classification-code",
-    "href": "materials/lectures/4-shared_mem/slides.html#example-random-forest-classification-code",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#example-random-forest-classification-code",
+    "href": "materials/lectures/4-shared_mem/sampling.html#example-random-forest-classification-code",
+    "title": "sampling.qmd",
     "section": "Example Random Forest Classification Code",
-    "text": "Example Random Forest Classification Code\nLetter recognition data ( \\(20\\,000 \\times 17\\) )"
+    "text": "Example Random Forest Classification Code\nLetter recognition data ( 20\\,000 \\times 17 )"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#pseudo-random-number-generators-rng",
-    "href": "materials/lectures/4-shared_mem/slides.html#pseudo-random-number-generators-rng",
-    "title": "Shared Memory Parallel Computing",
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#pseudo-random-number-generators-rng",
+    "href": "materials/lectures/4-shared_mem/sampling.html#pseudo-random-number-generators-rng",
+    "title": "sampling.qmd",
     "section": "Pseudo Random Number Generators (RNG)",
-    "text": "Pseudo Random Number Generators (RNG)\n\n\n\n\nGuaranteed reproducibility\nPossibly overlapping streams\nReproducibility for same number of streams\nGuaranteed independent streams"
+    "text": "Pseudo Random Number Generators (RNG)\n\n\n\n\n\n\n\nGuaranteed reproducibility\nPossibly overlapping streams\nReproducibility for same number of streams\nGuaranteed independent streams"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_mc.r",
-    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_mc.r",
-    "title": "Shared Memory Parallel Computing",
-    "section": "KPMS-IT4I-EX/code/rf_mc.r",
-    "text": "KPMS-IT4I-EX/code/rf_mc.r\n{.r include = \"code/rf_mc.r\"}"
+    "objectID": "materials/lectures/4-shared_mem/sampling.html#footnotes",
+    "href": "materials/lectures/4-shared_mem/sampling.html#footnotes",
+    "title": "sampling.qmd",
+    "section": "Footnotes",
+    "text": "Footnotes\n\nAlgorithm 15.1 in Hastie, Tibshirani, and Friedman (2009). The Elements of Statistical Learning, Second Edition. Link↩︎"
   },
   {
-    "objectID": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_karolina_pbs.sh",
-    "href": "materials/lectures/4-shared_mem/slides.html#kpms-it4i-excoderf_karolina_pbs.sh",
-    "title": "Shared Memory Parallel Computing",
-    "section": "KPMS-IT4I-EX/code/rf_karolina_pbs.sh",
-    "text": "KPMS-IT4I-EX/code/rf_karolina_pbs.sh\n{.sh include = \"code/rf_karolina_pbs.sh\"}"
+    "objectID": "materials/lectures/7-projects/index.html",
+    "href": "materials/lectures/7-projects/index.html",
+    "title": "Selected Topics for Project Completion",
+    "section": "",
+    "text": "Various topics to discuss for requested topics and projects.\nFull Screen"
   },
   {
-    "objectID": "materials/lectures/7-projects/slides.html#selected-topics",
-    "href": "materials/lectures/7-projects/slides.html#selected-topics",
-    "title": "Untitled",
-    "section": "Selected Topics",
-    "text": "Selected Topics"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#today",
-    "href": "materials/lectures/1b-setupdemo/slides.html#today",
-    "title": "Setup Continued and Demo",
-    "section": "Today",
-    "text": "Today\n\nDelta logins\n\nOffice hours\n\nSummary of survey\n\nHPCinR organization and Quarto course materials\n\nCode repository copy and workflow demo"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#delta-logins",
-    "href": "materials/lectures/1b-setupdemo/slides.html#delta-logins",
-    "title": "Setup Continued and Demo",
-    "section": "Delta logins",
-    "text": "Delta logins\nACCESS is a project, funded by the National Science Foundation, that helps researchers and educators utilize NSF-funded HPC centers.\n\nThe forgot the students\n\n\nNCSA is one of these HPC centers at University of Illinois\n\nDelta is NCSA’s (and NSF’s) largest cluster\nDelta allocates mostly via ACCESS but also locally\nBoth ACCESS and NCSA/Delta have an “add user” function"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#office-hours",
-    "href": "materials/lectures/1b-setupdemo/slides.html#office-hours",
-    "title": "Setup Continued and Demo",
-    "section": "Office hours",
-    "text": "Office hours\nYour class schedule\n\nM\nT\nW\nR"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#survey",
-    "href": "materials/lectures/1b-setupdemo/slides.html#survey",
-    "title": "Setup Continued and Demo",
-    "section": "Survey",
-    "text": "Survey\n\nSummary\n\nDo you use a text editor?\n\nWhich one? vim, emacs, nano, …\n\nRstudio is a text editor with extras"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#workflow-review",
-    "href": "materials/lectures/1b-setupdemo/slides.html#workflow-review",
-    "title": "Setup Continued and Demo",
-    "section": "Workflow review",
-    "text": "Workflow review\n\nThree git repositories\n\nOn laptop - GitHub is set as remote\nOn GitHub\nOn login.delta.ncsa.illinois.edu - GitHub is set as remote"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#quarto-course-materials",
-    "href": "materials/lectures/1b-setupdemo/slides.html#quarto-course-materials",
-    "title": "Setup Continued and Demo",
-    "section": "Quarto Course Materials",
-    "text": "Quarto Course Materials\n\nCourse materials are on GitHub/HPCinR/BZAN_583\n\nQuarto website with embedded presentations\nA template repository\n\n\n\nUsed .Rmd and xaringan combination before Quarto combines them and embraces other lanuages"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#code-repository-template",
-    "href": "materials/lectures/1b-setupdemo/slides.html#code-repository-template",
-    "title": "Setup Continued and Demo",
-    "section": "Code Repository Template",
-    "text": "Code Repository Template\nHPCinR/BZAN_583_code\n- On GitHub: Copy template to your account\n- Clone to your laptop\n- Make edits\n- Add, commit, and push edits to GitHub\n- Get clone link from GitHub - Login to Delta\n- Clone to your Delta files\n- Run script (is it executable? chmod +x)"
-  },
-  {
-    "objectID": "materials/lectures/1b-setupdemo/slides.html#ready-for-workflow-demo",
-    "href": "materials/lectures/1b-setupdemo/slides.html#ready-for-workflow-demo",
-    "title": "Setup Continued and Demo",
-    "section": "Ready for Workflow Demo",
-    "text": "Ready for Workflow Demo\nNeed:\n- Laptop RStudio open on repo project\n- ssh terminal in repo directory on Delta\nWorkflow:\n- Edit code in RStudio on laptop\n- Add, commit, and push edits to GitHub\n- Pull code on Delta\n- Run code and repeat workflow"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
-    "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
+    "objectID": "materials/lectures/1b-setupdemo/index.html",
+    "href": "materials/lectures/1b-setupdemo/index.html",
     "title": "Workflow for Remote Computing with R",
+    "section": "",
+    "text": "Full Screen"
+  },
+  {
+    "objectID": "materials/lectures/4-data/index.html",
+    "href": "materials/lectures/4-data/index.html",
+    "title": "Data",
+    "section": "",
+    "text": "Getting and processing data\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/index.html",
+    "href": "materials/lectures/1a-workflow/index.html",
+    "title": "Workflow for Remote Computing with R",
+    "section": "",
+    "text": "Full Screen"
+  },
+  {
+    "objectID": "materials/lectures/3-software/index.html",
+    "href": "materials/lectures/3-software/index.html",
+    "title": "Welcome to HPC for Data Science",
+    "section": "",
+    "text": "Parallel software to make your R code faster. How to parallelize in Unix flavors.\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/8-presentations/index.html",
+    "href": "materials/lectures/8-presentations/index.html",
+    "title": "Presentations",
+    "section": "",
+    "text": "Lightning talks about projects\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/4-blas/index.html",
+    "href": "materials/lectures/4-blas/index.html",
+    "title": "BLAS Libraries",
+    "section": "",
+    "text": "Basic Linear Algebra Software (BLAS) Libraries\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/2-hardware/index.html",
+    "href": "materials/lectures/2-hardware/index.html",
+    "title": "Hardware and Memory Hierarchies",
+    "section": "",
+    "text": "Full Screen"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/index.html",
+    "href": "materials/lectures/3-fork/index.html",
+    "title": "Th Unix fork",
+    "section": "",
+    "text": "Using the Unix fork from R via the parallel package\nFull Screen"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/index.html",
+    "href": "materials/lectures/1-welcome/index.html",
+    "title": "Welcome to HPC for Data Science",
+    "section": "",
+    "text": "Welcome to HPC for Data Science in R. This class …\nFull Screen"
+  },
+  {
+    "objectID": "materials/assignment/3-project/index.html",
+    "href": "materials/assignment/3-project/index.html",
+    "title": "Assignment 3: Project Proposals",
+    "section": "",
+    "text": "This assignment is the first to be completed, turned in, and graded by groups.\nThe proposal should include (1) a large data set (2) a description of what will be studied, tested, or predicted, (3) a description of the ML methodologies expected to be used.\nGroups are encouraged to meet on their own one or more times before discussing the proposal with the instructor.\nEach group will set up a 30 minute meeting time with the Instructor during this week to discuss their proposed project.\nVarious times to meet are available on Tuesday, Wednesday, Thursday, and Friday of this week. Please email go@tennessee.edu and suggest two possible time slots.\nAn approved proposal gets the full 12 points for each group member."
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "HPC for Data Science in R - BZAN 583",
+    "section": "",
+    "text": "These “HPCinR Course Materials” by George Ostrouchov are licensed under CC-BY-4.0"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html",
+    "href": "materials/assignment/1-workflow/index.html",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "",
+    "text": "Current version of R from CRAN\n\nCurrent version of RStudio Desktop from posit\n\nCurrent git version as described in happywithgit.com"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html#install-on-your-laptop",
+    "href": "materials/assignment/1-workflow/index.html#install-on-your-laptop",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "",
+    "text": "Current version of R from CRAN\n\nCurrent version of RStudio Desktop from posit\n\nCurrent git version as described in happywithgit.com"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html#create-a-personal-account-on-github.com",
+    "href": "materials/assignment/1-workflow/index.html#create-a-personal-account-on-github.com",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "Create a personal account on github.com\n",
+    "text": "Create a personal account on github.com\n\n\nGo to github.com and Sign up for a GitHub free personal account\n\nIf you already have one, you can continue to use it for this class"
+  },
+  {
+    "objectID": "materials/assignment/1-workflow/index.html#setup-your-ncsa-delta-account",
+    "href": "materials/assignment/1-workflow/index.html#setup-your-ncsa-delta-account",
+    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
+    "section": "Setup your NCSA Delta Account",
+    "text": "Setup your NCSA Delta Account\n\n\nTo set up an account on Delta, first register at the ACCESS link. Then email the instructor your user id from the registration. The instructor can add you the the Delta resource allocation at this point.\nIt takes a day or two to receive access to login.delta.ncsa.illinois.edu. Until then, you may see the message “too many authentication failures.” When you have access, login via ssh to &lt;your-delta-username&gt;@login.delta.ncsa.illinois.edu. This will request your password and ask whether to do a DUO-push to your mobile phone. Below is an example with your instructor’s username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt). \n\nost@GO ~ % ssh gostrouc@login.delta.ncsa.illinois.edu\n\nNCSA Delta System\n\nLogin with NCSA Kerberos + NCSA Duo multi-factor.\n\nDUO Documentation:  https://go.ncsa.illinois.edu/2fa\n\ngostrouc@login.delta.ncsa.illinois.edu's password: \n(gostrouc@login.delta.ncsa.illinois.edu) Duo two-factor login for gostrouc\n\nEnter a passcode or select one of the following options:\n\n 1. Duo Push to XXX-XXX-1037\n\nPasscode or option (1-1): 1\nSuccess. Logging you in...\ndt-login02.delta.ncsa.illinois.edu (141.142.140.195)\n  OS: RedHat 8.8   HW: HPE   CPU: 128x    RAM: 252 GB\n\n      ΔΔΔΔΔ    ΔΔΔΔΔΔ   ΔΔ     ΔΔΔΔΔΔ   ΔΔ\n      ΔΔ  ΔΔ   ΔΔ       ΔΔ       ΔΔ    ΔΔΔΔ\n      ΔΔ  ΔΔ   ΔΔΔΔ     ΔΔ       ΔΔ   ΔΔ  ΔΔ\n      ΔΔ  ΔΔ   ΔΔ       ΔΔ       ΔΔ   ΔΔΔΔΔΔ\n      ΔΔΔΔΔ    ΔΔΔΔΔΔ   ΔΔΔΔΔΔ   ΔΔ   ΔΔ  ΔΔ\n\n  User Guide:  https://go.ncsa.illinois.edu/deltauserdoc\n\n\nLast failed login: Mon Mar 18 18:54:12 CDT 2024 from 73.121.22.186 on ssh:notty\nThere was 1 failed login attempt since the last successful login.\n[gostrouc@dt-login02 ~]$ \n\nDelta user assistance tells me to ignore the “1 failed login” message. If you still need login help, email help@ncsa.illinois.edu.\nTo log out, exit at the $ prompt.\nResult 1: Turn in a copy of your session running the following shell commands in the sequence given on a Delta login node. The intent here is to verify that you can successfully connect to a Delta login node and run a few basic Unix commands.\n\nhostname\ndate\nw\nwhoami\nls\npwd\nmkdir R\nls\nls -a\nls -la\nls -laF --color\ncd R\npwd\ncd\npwd\nmodule load r\nmodule list\nRscript -e \"sessionInfo()\"\n\nResult 2: Use the man command to get a description of what each command does. Use man man to get an explanation of the man command. Turn in a short one-sentence description for each unique command.\nResult 3: From GitHub … your GitHub user id. So I can invite you to the BZAN-583 team in the HPCinR organization."
+  },
+  {
+    "objectID": "materials/assignment/4-data/index.html",
+    "href": "materials/assignment/4-data/index.html",
+    "title": "Assignment 4: Project Data",
+    "section": "",
+    "text": "Each Team has chosen a data set for their project. This assignment is to jump start the projects so that each team has a working and fast-readable data set on Delta by the end of this week.\nThere are team directories Team1 through Team6 on the Delta /project/bckj file system.\nResult1: Download your data set to your /projects/bckj/Team# directory, into a subdirectory to keep things organized.\nResult2: Convert your data set into a parquet format, partitioned by a well chosen variable, using the arrow package and write it to another subdirectory under /projects/bckj/Team#. Good partition size is somewhere between 100 and 500 MB per\nResult3: Get the sizes of each of the two directories with du -hs &lt;directory&gt; and submit the text result of these commands and their output.\nThe only output to hand in to Canvas are the four lines of Result 3. Of course, the data directories on Delta need to contain the data reported by Result3."
+  },
+  {
+    "objectID": "materials/assignment/2-faster/index.html",
+    "href": "materials/assignment/2-faster/index.html",
+    "title": "Week 2 Assignment: Faster",
+    "section": "",
+    "text": "Find some R code that YOU put together for a prior assignment or project in another class over the last year or two, profile it, and make changes that make it at least 2x faster. This can be a single function from a larger code but it should not be just trivial. Roughly 10 to 20 lines of your R code that originally takes more than, say, 30 seconds to run.\nThis is your video game! When you get things 2x faster, you just beat the game and you move up a level!\nTwo files profile.sh and profile.R have been added to the Template GitHub repository HPCinR/BZAN_583_code. You will need to have a copy of this repository in your GitHub account and clone the copy to your laptop and to login.delta.ncsa.illinois.edu. How you proceed, depends on whether you already have the ealier copy of the Template in your GitHub account.\nNo earlier copy: (1) Copy HPCinR/BZAN_583_code to your GitHub account with “Use this template” green button. (2) Clone your copy to your laptop RStudio as New Project. (3) Clone the same to your login.delta.ncsa.illinois.edu account with git clone ....\nHave earlier copy: Easiest (and recommended) is to just copy and paste the two new files into your RStudio project of the earlier copy. Then commit and push to GitHub. At this point you are ready to git pull them on Delta. An alternative is to do a proper git update with these Updating Templates instructions.\nOnce you have the two files profile.sh and profile.R on Delta, you can submit the batch job to run the code with\n\nsbatch profile.sh\n\nReplace the prcomp() function entire line in profile.R with your code to profile. You do this in your laptop RStudio session, commit and push to GitHub and pull on Delta. Then you submit it again as above. Your output will be in utk.e and utk.o. Rinse and repeat until you have faster code.\nSubmit the following four text files to Canvas as your solution:\nResult 1: Two or three sentences that describe where the code was used originally and its purpose. The intent is documentation that this is YOUR R code and to give me some understanding of the code.\nResult 2: The code, its summary profile with top components, and the system.time() of the code “before”.\nResult 3: The code, its summary profile with top components, and the system.time() of the code “after”.\nResult 4: Two or three sentences that explain your changes and why things got faster.\nInstalling Packages on Delta: You will need to install any packages that your code uses on Delta. Packages can be installed on a Delta login node from an interactive R session. Login to Delta, then start an interactive R session at the $ shell prompt:\n\nmodule load r\nR\n\nAt this point you are in an R session. For example, to install dplyr\n\ninstall.packages(\"dplyr\", repo = \"https://cloud.r-project.org/\")\n\nand similarly for other packages. To exit R, use q()."
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#today",
+    "href": "materials/lectures/1-welcome/slides.html#today",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Today:",
+    "text": "Today:\n\n\nWelcome!!\nthx for signing up for the class!\n\n\n\nWelcome!! Overview & Syllabus\nAssign groups of 3-4\n\nSurvey and expectations\n\nStart setting up accounts (GitHub, Delta cluster) -Assignment\n\nIntroduction to workflow: RStudio to remote cluster via GitHub"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#random-group-assignment",
+    "href": "materials/lectures/1-welcome/slides.html#random-group-assignment",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Random Group Assignment",
+    "text": "Random Group Assignment\nClass divided into groups of 3 to 4\n\nAssigned randomly via Canvas\n\nSwapping is allowed (after class today) if all members of concerned groups agree\n\nHandout\n\nGroup assignments on the front\n\nSurvey on the back\n\nFill out now\n\nWill collect at end of class today"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#survey",
+    "href": "materials/lectures/1-welcome/slides.html#survey",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Survey",
+    "text": "Survey\n\n\nYour laptop: Unix, Mac, Windows\n\nR experience: used in a class, used in two classes, x years, wrote an R package, live and breathe R\n\nUse RStudio? usually, all the time, reluctantly, prefer Jupyter, prefer Visual Studio\nOther programming languages: Python, C, C++, Go, …\n\nUse git? what’s that?, heard of it, tried it once, use it often, I live on it\nR parallel package? what’s that?, heard of it, tried it once, didn’t help me, got great results, keeps all the cores busy on my laptop"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#survey-continued",
+    "href": "materials/lectures/1-welcome/slides.html#survey-continued",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Survey … continued",
+    "text": "Survey … continued\n\n\nUnix experince (Linux, MacOS terminal): never used it, tried it once, know a few commands, I write shell scripts\nHPC Cluster? I know they exist, saw one, logged in once, used one for a project, keep one in my basement\nCloud computing? is it real?, heard about it, MS Azure, AWS, UTK cluster VM, Other\nMPI? what’s that?, heard of it, used a code that used it, wrote some code\nTorch or LLM experience? a few words\nYour expectations for this class: play with HPC, Build an HPC Analytics Startup Co\n\n\n\n\nWorkload: How many classes are you taking at the moment?\n\nShow of hands: zero, one, two, three, …\n\nLanguages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, unix shell, S, R\n\nDocument preparation: nroff, ps, pdf, LaTeX, Markdown, .Rmd, Quarto .qmd\nSystems: IBM, DEC, Honeywell, VAX, PC, Intel, Mac, HPE (formerly Cray),"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#setting-up-accounts-on-github-on-delta",
+    "href": "materials/lectures/1-welcome/slides.html#setting-up-accounts-on-github-on-delta",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "section": "Setting up Accounts on GitHub, on Delta",
+    "text": "Setting up Accounts on GitHub, on Delta\nAssignment 1"
+  },
+  {
+    "objectID": "materials/lectures/1-welcome/slides.html#workflow-for-remote-computing-in-r",
+    "href": "materials/lectures/1-welcome/slides.html#workflow-for-remote-computing-in-r",
+    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
     "section": "Workflow for Remote Computing in R",
     "text": "Workflow for Remote Computing in R"
   },
   {
-    "objectID": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r-1",
-    "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r-1",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Workflow for Remote Computing in R",
-    "text": "Workflow for Remote Computing in R\nLaptop RStudio\n\nFamiliar custom editing environment (Windows, Mac, Unix)\nInteractive Syntax checking\n\ngit, GitHub (or GitLab and Bitbucket)\n\nPortability to remote computing\nVersion control\nCollaboration\n\nCluster unix\n\nSame environment for all\nBatch job submission\n\n\nPortability - in your basement or on another continent\nRStudio installs difficult - legacy OS on HPC\nBandwidth"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
-    "href": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Cooperating R Sessions on a Modern Cluster",
-    "text": "Cooperating R Sessions on a Modern Cluster\n8 Nodes (124 + 4 cores each)\n- 32 R sessions\n- each using 31 cores\n- 992 cores total\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
-    "href": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Software Needed on Laptop",
-    "text": "Software Needed on Laptop\n\nMac\n\nR, RStudio\nterminal, git (in Xcode)\n\n\nWindows\n\nR, RStudio\nputty\ngit\nWinSCP"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
-    "href": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Software on Cluster",
-    "text": "Software on Cluster\n\nFlexiBLAS, OpenBLAS\nOpenMPI\nArrow or HDF5 (for parallel I/O)\nR (&gt;= 4.0)\n\nAbove managed by center, below by you\n\nAnd various packages, including pbdMPI\n\n\nR vs conda-R Deployment:\n\nDifferent package management philosophy\nCan create conflicts if mixing, a layer of complexity\n\n\nSolves some dependency issues but creates others"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
-    "href": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
-    "title": "Workflow for Remote Computing with R",
-    "section": "GitHub + git (laptop to cluster)",
-    "text": "GitHub + git (laptop to cluster)\n\n\n\n\n\n\n\n\n\n\\[\\qquad\\] \n\n\n\n\n\nRStudio demo and checkbox add\n\nnames for head, remote,\n\nGit diagram by Daniel Kinzler - CC BY 3.0"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#making-git-easy",
-    "href": "materials/lectures/1a-workflow/slides.html#making-git-easy",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Making git easy",
-    "text": "Making git easy\n\n\nPrivate and Public key pairs for Client and Server\n\nGit repository (GitHub, GitLab) is the server\n\nYour laptop and remote cluster are clients\n\n\n\n\nEach client has own key-pair\n\n\nPrivate key stays on the client\n\n\nPublic key is copied to the server\n\n\n\n\nWorks like a single-use password generator and authentication\n\nClient contacts server, server responds with a random string encrypted by client’s public key\nClient decrypts with own private key and sends to server\nServer verifies agreement and opens secure connection"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
-    "href": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Clusters are Linux systems",
-    "text": "Clusters are Linux systems\n\n\nLinux is one of many descendants of original Unix. MacOS is another.\n\nEverything in Linux is a file (some are directory files)\nLinux files are organized as a tree\nEvery file has permissions: d r w x | r w x | r w x\n\nthe first is a directory bit\nthe triples are read, write, execute\nthe grouping is owner, group, all\n\n\nEvery file has owner, group, and a few other attributes\nAvailable commands are executable files in your PATH directories\nPATH value can be seen with echo $PATH\n\n\n\n\nUnix (Bell Labs) was a play on an earlier Multics operating system (designed at MIT)"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#linux-commands",
-    "href": "materials/lectures/1a-workflow/slides.html#linux-commands",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Linux Commands",
-    "text": "Linux Commands\nIn a terminal, you talk to a shell program (bash is most common)\n\nCommands (executable files) can have options and arguments\n\n\nStandard input and standard output of a command is the terminal but can be redirected\n\n\n&lt;, &lt;&lt;, &gt;, &gt;&gt; redirect standard input and output\n\ncommand1 | command2 pipes standard output1 to standard input2\n\nCommands are files in directories listed in your PATH variable (try “echo $PATH”)\n\n$ means substitute variable value\n\nexport lists (or sets) variables and their values\n\nThere are many resources on the web to learn Linux basics"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
-    "href": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Use of Login Nodes and Compute Nodes",
-    "text": "Use of Login Nodes and Compute Nodes\nLogin nodes:\n\nCode downloads, GitHub or other\nData downloads from Internet\nNo RStudio\n\nInteractive R or Rscript sessions:\n\nPackage installs\n\nInteractive debugging\n\nRscript debugging\n\n\n\nCompute nodes:\n- No Internet access\n- No RStudio\n- Batch Rscript submission via Slurm\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#on-a-cluster-login-node",
-    "href": "materials/lectures/1a-workflow/slides.html#on-a-cluster-login-node",
-    "title": "Workflow for Remote Computing with R",
-    "section": "On a Cluster Login Node",
-    "text": "On a Cluster Login Node\nYou are interacting with a bash shell ($ prompt)\nSubmit batch scripts to the compute nodes (next slide)\nTp run R on the login node, load its module\n\n$ module load r\n\nThen you can run of your script.R file with\n\n$ Rscript script.R\n\nOutput goes to the terminal but you can also redirect it to a file\n\n$ Rscript script.R &gt; outfile_name\n\nOr start an interactive R session with\n\n$ R\n\nwhich will give you a &gt; prompt. You quit the R session with\n&gt; q()\nand logout with\n\n$ exit\n\n\n\nPrompts $ and &gt; are not part of the shown commands"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#submit-scripts-to-the-compute-nodes",
-    "href": "materials/lectures/1a-workflow/slides.html#submit-scripts-to-the-compute-nodes",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Submit scripts to the compute nodes",
-    "text": "Submit scripts to the compute nodes\nTo run your R script on one or more compute nodes, you need two files\n\nThe R script, say script.R\n\nA bash shell script that requests the nodes, cores, etc. and specifies how to run your script.R, whis is usually Rscript script.R.\n\nHere is an example shell script to run script.R\n\n#!/bin/bash\n#SBATCH --job-name utk\n#SBATCH --account=bckj-delta-cpu\n#SBATCH --partition=cpu\n#SBATCH --nodes=1\n#SBATCH --mem=16g\n#SBATCH --cpus-per-task=1\n#SBATCH --time 00:00:30\n#SBATCH -e ./utk.e\n#SBATCH -o ./utk.o\n\nmodule load r\nRscript script.R\n\nrequesting one core on one node, limit of 30 seconds. If this file is saved as script.sh\n\nsbatch script.sh\n\nsubmits the job. Check on its status with\n\nsqueue -u &lt;your-user-name&gt;"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/slides.html#package-installation-on-cluster",
-    "href": "materials/lectures/1a-workflow/slides.html#package-installation-on-cluster",
-    "title": "Workflow for Remote Computing with R",
-    "section": "Package Installation on Cluster",
-    "text": "Package Installation on Cluster\nInstall packages in an interactive R session on a login node\nLogin to the cluster, then at the shell prompt:\n\nmodule load r\nR\n\nstarts an interactive R session. Now, for example, to install package dplyr:\ninstall.packages(\"dplyr\", repo = \"https://cloud.r-project.org/\")\nThe repo parameter can be skipped if it is set in options(). R may also ask to choose a repository location.\nYou may need to load other modules if a package has external to R dependencies.\n\nmodule avail\n\nwill list available software modules. If you don’t see the software, ask help@ncsa.illinois.edu to have it installed. Note that this is for external to R software (not R packages)."
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#two-three-basic-concepts-in-hardware",
-    "href": "materials/lectures/3-software/slides.html#two-three-basic-concepts-in-hardware",
-    "title": "HPC Software",
-    "section": "Two (Three) Basic Concepts in Hardware",
-    "text": "Two (Three) Basic Concepts in Hardware"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#two-three-basic-concepts-from-software-viewpoint",
-    "href": "materials/lectures/3-software/slides.html#two-three-basic-concepts-from-software-viewpoint",
-    "title": "HPC Software",
-    "section": "(Two) Three Basic Concepts from Software Viewpoint",
-    "text": "(Two) Three Basic Concepts from Software Viewpoint"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#native-programming-mindset",
-    "href": "materials/lectures/3-software/slides.html#native-programming-mindset",
-    "title": "HPC Software",
-    "section": "Native Programming Mindset",
-    "text": "Native Programming Mindset"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#native-programming-models-and-tools",
-    "href": "materials/lectures/3-software/slides.html#native-programming-models-and-tools",
-    "title": "HPC Software",
-    "section": "Native Programming Models and Tools",
-    "text": "Native Programming Models and Tools"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#years-of-parallel-computing",
-    "href": "materials/lectures/3-software/slides.html#years-of-parallel-computing",
-    "title": "HPC Software",
-    "section": "40 Years of Parallel Computing",
-    "text": "40 Years of Parallel Computing"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#last-20-years-of-advances",
-    "href": "materials/lectures/3-software/slides.html#last-20-years-of-advances",
-    "title": "HPC Software",
-    "section": "Last 20 years of Advances",
-    "text": "Last 20 years of Advances"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#distributed-programming-works-in-shared-memory",
-    "href": "materials/lectures/3-software/slides.html#distributed-programming-works-in-shared-memory",
-    "title": "HPC Software",
-    "section": "Distributed Programming Works in Shared Memory",
-    "text": "Distributed Programming Works in Shared Memory"
-  },
-  {
-    "objectID": "materials/lectures/3-software/slides.html#r-interfaces-to-low-level-native-tools",
-    "href": "materials/lectures/3-software/slides.html#r-interfaces-to-low-level-native-tools",
-    "title": "HPC Software",
+    "objectID": "materials/lectures/3-fork/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/3-fork/slides.html#r-interfaces-to-low-level-native-tools",
+    "title": "Parallel via the Unix fork",
     "section": "R Interfaces to Low-Level Native Tools",
     "text": "R Interfaces to Low-Level Native Tools"
   },
   {
-    "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
-    "href": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
-    "title": "Untitled",
-    "section": "Lightning Talk 1",
-    "text": "Lightning Talk 1"
+    "objectID": "materials/lectures/3-fork/slides.html#parallelmclapply",
+    "href": "materials/lectures/3-fork/slides.html#parallelmclapply",
+    "title": "Parallel via the Unix fork",
+    "section": "parallel::mclapply()",
+    "text": "parallel::mclapply()"
   },
   {
-    "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-2",
-    "href": "materials/lectures/8-presentations/slides.html#lightning-talk-2",
-    "title": "Untitled",
-    "section": "Lightning Talk 2",
-    "text": "Lightning Talk 2"
+    "objectID": "materials/lectures/3-fork/slides.html#unix-fork",
+    "href": "materials/lectures/3-fork/slides.html#unix-fork",
+    "title": "Parallel via the Unix fork",
+    "section": "Unix fork\n",
+    "text": "Unix fork\n\nOperating system forks a new process with pointers to same memory: A memory-efficient parallelism on shared memory devices running Unix-like OS\n\nCopy-on-write: memory copied only if modified\n\nparallel package function mclapply() and friends\n\nUse for numerical sections only:\n\nAvoid GUI, I/O, and graphics sections (common device handles)\n\nGreat in a batch Rscript on Unix-like OS\n\n\nConvenient for data (read, not modified)\n\nConvenient for functional languages like R (parameters by value)\n\nManage or avoid nested parallelism:\n\nSet OpenBLAS cores\n\n\ndata.table automatically switches to single threaded mode upon fork\n\n\n\n\nA deeper discussion of fork memory (if you have interest) on YouTube by Chris Kanich (UIC)"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#copy-on-write",
+    "href": "materials/lectures/3-fork/slides.html#copy-on-write",
+    "title": "Parallel via the Unix fork",
+    "section": "Copy-on-write",
+    "text": "Copy-on-write\n\nAll done with pointers\nMemory is in pages\nProcesses not aware of each other or other’s memory use\nOS is aware of memory use\n16 forks write = 16 copies of memory"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#os-manages-core-affinity",
+    "href": "materials/lectures/3-fork/slides.html#os-manages-core-affinity",
+    "title": "Parallel via the Unix fork",
+    "section": "OS manages core affinity",
+    "text": "OS manages core affinity\n\n\n\\(\\qquad\\) OS tasks compete \\(\\qquad\\) Core switching occurs frequently"
+  },
+  {
+    "objectID": "materials/lectures/3-fork/slides.html#code-first-with-lapply-then-switch-to-mclapply",
+    "href": "materials/lectures/3-fork/slides.html#code-first-with-lapply-then-switch-to-mclapply",
+    "title": "Parallel via the Unix fork",
+    "section": "Code first with lapply(), then switch to mclapply()\n",
+    "text": "Code first with lapply(), then switch to mclapply()\n\nDrop-in replacements (almost) for lapply(), mapply(), and Map()\n\nmclapply(X, FUN, ...,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)\n\nmcmapply(FUN, ...,\n         MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, affinity.list = NULL) \n\nmcMap(f, ...)\n\nDebugging easier with lapply()"
   },
   {
     "objectID": "materials/lectures/2-hardware/slides.html#memory-hierarchy",
@@ -1015,235 +847,466 @@
     "text": "Two (Three) Basic Concepts in Hardware"
   },
   {
-    "objectID": "materials/lectures/3-fork/slides.html#r-interfaces-to-low-level-native-tools",
-    "href": "materials/lectures/3-fork/slides.html#r-interfaces-to-low-level-native-tools",
-    "title": "Parallel via the Unix fork",
-    "section": "R Interfaces to Low-Level Native Tools",
-    "text": "R Interfaces to Low-Level Native Tools"
-  },
-  {
-    "objectID": "materials/lectures/3-fork/slides.html#parallelmclapply",
-    "href": "materials/lectures/3-fork/slides.html#parallelmclapply",
-    "title": "Parallel via the Unix fork",
-    "section": "parallel::mclapply()",
-    "text": "parallel::mclapply()"
-  },
-  {
-    "objectID": "materials/lectures/3-fork/slides.html#unix-fork",
-    "href": "materials/lectures/3-fork/slides.html#unix-fork",
-    "title": "Parallel via the Unix fork",
-    "section": "Unix fork\n",
-    "text": "Unix fork\n\nOperating system forks a new process with pointers to same memory: A memory-efficient parallelism on shared memory devices running Unix-like OS\n\nCopy-on-write: memory copied only if modified\n\nparallel package function mclapply() and friends\n\nUse for numerical sections only:\n\nAvoid GUI, I/O, and graphics sections (common device handles)\n\nGreat in a batch Rscript on Unix-like OS\n\n\nConvenient for data (read, not modified)\n\nConvenient for functional languages like R (parameters by value)\n\nManage or avoid nested parallelism:\n\nSet OpenBLAS cores\n\n\ndata.table automatically switches to single threaded mode upon fork\n\n\n\n\nA deeper discussion of fork memory (if you have interest) on YouTube by Chris Kanich (UIC)"
-  },
-  {
-    "objectID": "materials/lectures/3-fork/slides.html#copy-on-write",
-    "href": "materials/lectures/3-fork/slides.html#copy-on-write",
-    "title": "Parallel via the Unix fork",
-    "section": "Copy-on-write",
-    "text": "Copy-on-write\n\nAll done with pointers\nMemory is in pages\nProcesses not aware of each other or other’s memory use\nOS is aware of memory use\n16 forks write = 16 copies of memory"
-  },
-  {
-    "objectID": "materials/lectures/3-fork/slides.html#os-manages-core-affinity",
-    "href": "materials/lectures/3-fork/slides.html#os-manages-core-affinity",
-    "title": "Parallel via the Unix fork",
-    "section": "OS manages core affinity",
-    "text": "OS manages core affinity\n\n\n\\(\\qquad\\) OS tasks compete \\(\\qquad\\) Core switching occurs frequently"
-  },
-  {
-    "objectID": "materials/lectures/3-fork/slides.html#code-first-with-lapply-then-switch-to-mclapply",
-    "href": "materials/lectures/3-fork/slides.html#code-first-with-lapply-then-switch-to-mclapply",
-    "title": "Parallel via the Unix fork",
-    "section": "Code first with lapply(), then switch to mclapply()\n",
-    "text": "Code first with lapply(), then switch to mclapply()\n\nDrop-in replacements (almost) for lapply(), mapply(), and Map()\n\nmclapply(X, FUN, ...,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)\n\nmcmapply(FUN, ...,\n         MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,\n         mc.preschedule = TRUE, mc.set.seed = TRUE,\n         mc.silent = FALSE, mc.cores = getOption(\"mc.cores\", 2L),\n         mc.cleanup = TRUE, affinity.list = NULL) \n\nmcMap(f, ...)\n\nDebugging easier with lapply()"
-  },
-  {
-    "objectID": "materials/lectures/3-blas/slides.html#r-interfaces-to-low-level-native-tools",
-    "href": "materials/lectures/3-blas/slides.html#r-interfaces-to-low-level-native-tools",
+    "objectID": "materials/lectures/4-blas/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/4-blas/slides.html#r-interfaces-to-low-level-native-tools",
     "title": "BLAS Libraries",
     "section": "R Interfaces to Low-Level Native Tools",
     "text": "R Interfaces to Low-Level Native Tools"
   },
   {
-    "objectID": "materials/lectures/3-blas/slides.html#parallelmclapply",
-    "href": "materials/lectures/3-blas/slides.html#parallelmclapply",
+    "objectID": "materials/lectures/4-blas/slides.html#parallelmclapply",
+    "href": "materials/lectures/4-blas/slides.html#parallelmclapply",
     "title": "BLAS Libraries",
     "section": "parallel::mclapply()",
     "text": "parallel::mclapply()"
   },
   {
-    "objectID": "materials/lectures/3-blas/slides.html#blas-libraries",
-    "href": "materials/lectures/3-blas/slides.html#blas-libraries",
+    "objectID": "materials/lectures/4-blas/slides.html#blas-libraries",
+    "href": "materials/lectures/4-blas/slides.html#blas-libraries",
     "title": "BLAS Libraries",
     "section": "BLAS Libraries",
     "text": "BLAS Libraries"
   },
   {
-    "objectID": "materials/lectures/3-blas/slides.html#blas-libraries-1",
-    "href": "materials/lectures/3-blas/slides.html#blas-libraries-1",
+    "objectID": "materials/lectures/4-blas/slides.html#blas-libraries-1",
+    "href": "materials/lectures/4-blas/slides.html#blas-libraries-1",
     "title": "BLAS Libraries",
     "section": "BLAS Libraries",
     "text": "BLAS Libraries\nFedora -&gt; CentOS Stream -&gt; Red Hat Enterprise Linux\nR - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)\ncuBLAS ?"
   },
   {
-    "objectID": "materials/lectures/1-welcome/slides.html#today",
-    "href": "materials/lectures/1-welcome/slides.html#today",
-    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
-    "section": "Today:",
-    "text": "Today:\n\n\nWelcome!!\nthx for signing up for the class!\n\n\n\nWelcome!! Overview & Syllabus\nAssign groups of 3-4\n\nSurvey and expectations\n\nStart setting up accounts (GitHub, Delta cluster) -Assignment\n\nIntroduction to workflow: RStudio to remote cluster via GitHub"
+    "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
+    "href": "materials/lectures/8-presentations/slides.html#lightning-talk-1",
+    "title": "Untitled",
+    "section": "Lightning Talk 1",
+    "text": "Lightning Talk 1"
   },
   {
-    "objectID": "materials/lectures/1-welcome/slides.html#random-group-assignment",
-    "href": "materials/lectures/1-welcome/slides.html#random-group-assignment",
-    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
-    "section": "Random Group Assignment",
-    "text": "Random Group Assignment\nClass divided into groups of 3 to 4\n\nAssigned randomly via Canvas\n\nSwapping is allowed (after class today) if all members of concerned groups agree\n\nHandout\n\nGroup assignments on the front\n\nSurvey on the back\n\nFill out now\n\nWill collect at end of class today"
+    "objectID": "materials/lectures/8-presentations/slides.html#lightning-talk-2",
+    "href": "materials/lectures/8-presentations/slides.html#lightning-talk-2",
+    "title": "Untitled",
+    "section": "Lightning Talk 2",
+    "text": "Lightning Talk 2"
   },
   {
-    "objectID": "materials/lectures/1-welcome/slides.html#survey",
-    "href": "materials/lectures/1-welcome/slides.html#survey",
-    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
-    "section": "Survey",
-    "text": "Survey\n\n\nYour laptop: Unix, Mac, Windows\n\nR experience: used in a class, used in two classes, x years, wrote an R package, live and breathe R\n\nUse RStudio? usually, all the time, reluctantly, prefer Jupyter, prefer Visual Studio\nOther programming languages: Python, C, C++, Go, …\n\nUse git? what’s that?, heard of it, tried it once, use it often, I live on it\nR parallel package? what’s that?, heard of it, tried it once, didn’t help me, got great results, keeps all the cores busy on my laptop"
+    "objectID": "materials/lectures/3-software/slides.html#two-three-basic-concepts-in-hardware",
+    "href": "materials/lectures/3-software/slides.html#two-three-basic-concepts-in-hardware",
+    "title": "HPC Software",
+    "section": "Two (Three) Basic Concepts in Hardware",
+    "text": "Two (Three) Basic Concepts in Hardware"
   },
   {
-    "objectID": "materials/lectures/1-welcome/slides.html#survey-continued",
-    "href": "materials/lectures/1-welcome/slides.html#survey-continued",
-    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
-    "section": "Survey … continued",
-    "text": "Survey … continued\n\n\nUnix experince (Linux, MacOS terminal): never used it, tried it once, know a few commands, I write shell scripts\nHPC Cluster? I know they exist, saw one, logged in once, used one for a project, keep one in my basement\nCloud computing? is it real?, heard about it, MS Azure, AWS, UTK cluster VM, Other\nMPI? what’s that?, heard of it, used a code that used it, wrote some code\nTorch or LLM experience? a few words\nYour expectations for this class: play with HPC, Build an HPC Analytics Startup Co\n\n\n\n\nWorkload: How many classes are you taking at the moment?\n\nShow of hands: zero, one, two, three, …\n\nLanguages: FORTRAN, Cobol, machine code, assembler code, APL, Snobol, JCL, SAS, C, unix shell, S, R\n\nDocument preparation: nroff, ps, pdf, LaTeX, Markdown, .Rmd, Quarto .qmd\nSystems: IBM, DEC, Honeywell, VAX, PC, Intel, Mac, HPE (formerly Cray),"
+    "objectID": "materials/lectures/3-software/slides.html#two-three-basic-concepts-from-software-viewpoint",
+    "href": "materials/lectures/3-software/slides.html#two-three-basic-concepts-from-software-viewpoint",
+    "title": "HPC Software",
+    "section": "(Two) Three Basic Concepts from Software Viewpoint",
+    "text": "(Two) Three Basic Concepts from Software Viewpoint"
   },
   {
-    "objectID": "materials/lectures/1-welcome/slides.html#setting-up-accounts-on-github-on-delta",
-    "href": "materials/lectures/1-welcome/slides.html#setting-up-accounts-on-github-on-delta",
-    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
-    "section": "Setting up Accounts on GitHub, on Delta",
-    "text": "Setting up Accounts on GitHub, on Delta\nAssignment 1"
+    "objectID": "materials/lectures/3-software/slides.html#native-programming-mindset",
+    "href": "materials/lectures/3-software/slides.html#native-programming-mindset",
+    "title": "HPC Software",
+    "section": "Native Programming Mindset",
+    "text": "Native Programming Mindset"
   },
   {
-    "objectID": "materials/lectures/1-welcome/slides.html#workflow-for-remote-computing-in-r",
-    "href": "materials/lectures/1-welcome/slides.html#workflow-for-remote-computing-in-r",
-    "title": "Welcome to HPC for Data Science in R!  BZAN 583",
+    "objectID": "materials/lectures/3-software/slides.html#native-programming-models-and-tools",
+    "href": "materials/lectures/3-software/slides.html#native-programming-models-and-tools",
+    "title": "HPC Software",
+    "section": "Native Programming Models and Tools",
+    "text": "Native Programming Models and Tools"
+  },
+  {
+    "objectID": "materials/lectures/3-software/slides.html#years-of-parallel-computing",
+    "href": "materials/lectures/3-software/slides.html#years-of-parallel-computing",
+    "title": "HPC Software",
+    "section": "40 Years of Parallel Computing",
+    "text": "40 Years of Parallel Computing"
+  },
+  {
+    "objectID": "materials/lectures/3-software/slides.html#last-20-years-of-advances",
+    "href": "materials/lectures/3-software/slides.html#last-20-years-of-advances",
+    "title": "HPC Software",
+    "section": "Last 20 years of Advances",
+    "text": "Last 20 years of Advances"
+  },
+  {
+    "objectID": "materials/lectures/3-software/slides.html#distributed-programming-works-in-shared-memory",
+    "href": "materials/lectures/3-software/slides.html#distributed-programming-works-in-shared-memory",
+    "title": "HPC Software",
+    "section": "Distributed Programming Works in Shared Memory",
+    "text": "Distributed Programming Works in Shared Memory"
+  },
+  {
+    "objectID": "materials/lectures/3-software/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/3-software/slides.html#r-interfaces-to-low-level-native-tools",
+    "title": "HPC Software",
+    "section": "R Interfaces to Low-Level Native Tools",
+    "text": "R Interfaces to Low-Level Native Tools"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
+    "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
+    "title": "Workflow for Remote Computing with R",
     "section": "Workflow for Remote Computing in R",
     "text": "Workflow for Remote Computing in R"
   },
   {
-    "objectID": "materials/assignment/2-faster/index.html",
-    "href": "materials/assignment/2-faster/index.html",
-    "title": "Week 2 Assignment: Faster",
-    "section": "",
-    "text": "Find some R code that YOU put together for a prior assignment or project in another class over the last year or two, profile it, and make changes that make it at least 2x faster. This can be a single function from a larger code but it should not be just trivial. Roughly 10 to 20 lines of your R code that originally takes more than, say, 30 seconds to run.\nThis is your video game! When you get things 2x faster, you just beat the game and you move up a level!\nTwo files profile.sh and profile.R have been added to the Template GitHub repository HPCinR/BZAN_583_code. You will need to have a copy of this repository in your GitHub account and clone the copy to your laptop and to login.delta.ncsa.illinois.edu. How you proceed, depends on whether you already have the ealier copy of the Template in your GitHub account.\nNo earlier copy: (1) Copy HPCinR/BZAN_583_code to your GitHub account with “Use this template” green button. (2) Clone your copy to your laptop RStudio as New Project. (3) Clone the same to your login.delta.ncsa.illinois.edu account with git clone ....\nHave earlier copy: Easiest (and recommended) is to just copy and paste the two new files into your RStudio project of the earlier copy. Then commit and push to GitHub. At this point you are ready to git pull them on Delta. An alternative is to do a proper git update with these Updating Templates instructions.\nOnce you have the two files profile.sh and profile.R on Delta, you can submit the batch job to run the code with\n\nsbatch profile.sh\n\nReplace the prcomp() function entire line in profile.R with your code to profile. You do this in your laptop RStudio session, commit and push to GitHub and pull on Delta. Then you submit it again as above. Your output will be in utk.e and utk.o. Rinse and repeat until you have faster code.\nSubmit the following four text files to Canvas as your solution:\nResult 1: Two or three sentences that describe where the code was used originally and its purpose. The intent is documentation that this is YOUR R code and to give me some understanding of the code.\nResult 2: The code, its summary profile with top components, and the system.time() of the code “before”.\nResult 3: The code, its summary profile with top components, and the system.time() of the code “after”.\nResult 4: Two or three sentences that explain your changes and why things got faster.\nInstalling Packages on Delta: You will need to install any packages that your code uses on Delta. Packages can be installed on a Delta login node from an interactive R session. Login to Delta, then start an interactive R session at the $ shell prompt:\n\nmodule load r\nR\n\nAt this point you are in an R session. For example, to install dplyr\n\ninstall.packages(\"dplyr\", repo = \"https://cloud.r-project.org/\")\n\nand similarly for other packages. To exit R, use q()."
-  },
-  {
-    "objectID": "materials/assignment/4-data/index.html",
-    "href": "materials/assignment/4-data/index.html",
-    "title": "Assignment 4: Project Data",
-    "section": "",
-    "text": "Each Team has chosen a data set for their project. This assignment is to jump start the projects so that each team has a working and fast-readable data set on Delta by the end of this week.\nThere are team directories Team1 through Team6 on the Delta /project/bckj file system.\nResult1: Download your data set to your /projects/bckj/Team# directory, into a subdirectory to keep things organized.\nResult2: Convert your data set into a parquet format, partitioned by a well chosen variable, using the arrow package and write it to another subdirectory under /projects/bckj/Team#. Good partition size is somewhere between 100 and 500 MB per\nResult3: Get the sizes of each of the two directories with du -hs &lt;directory&gt; and submit the text result of these commands and their output.\nThe only output to hand in to Canvas are the four lines of Result 3. Of course, the data directories on Delta need to contain the data reported by Result3."
-  },
-  {
-    "objectID": "materials/assignment/1-workflow/index.html",
-    "href": "materials/assignment/1-workflow/index.html",
-    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
-    "section": "",
-    "text": "Current version of R from CRAN\n\nCurrent version of RStudio Desktop from posit\n\nCurrent git version as described in happywithgit.com"
-  },
-  {
-    "objectID": "materials/assignment/1-workflow/index.html#install-on-your-laptop",
-    "href": "materials/assignment/1-workflow/index.html#install-on-your-laptop",
-    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
-    "section": "",
-    "text": "Current version of R from CRAN\n\nCurrent version of RStudio Desktop from posit\n\nCurrent git version as described in happywithgit.com"
-  },
-  {
-    "objectID": "materials/assignment/1-workflow/index.html#create-a-personal-account-on-github.com",
-    "href": "materials/assignment/1-workflow/index.html#create-a-personal-account-on-github.com",
-    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
-    "section": "Create a personal account on github.com\n",
-    "text": "Create a personal account on github.com\n\n\nGo to github.com and Sign up for a GitHub free personal account\n\nIf you already have one, you can continue to use it for this class"
-  },
-  {
-    "objectID": "materials/assignment/1-workflow/index.html#setup-your-ncsa-delta-account",
-    "href": "materials/assignment/1-workflow/index.html#setup-your-ncsa-delta-account",
-    "title": "Week 1 Assignment: Setup, Installations, and first Unix Steps",
-    "section": "Setup your NCSA Delta Account",
-    "text": "Setup your NCSA Delta Account\n\n\nTo set up an account on Delta, first register at the ACCESS link. Then email the instructor your user id from the registration. The instructor can add you the the Delta resource allocation at this point.\nIt takes a day or two to receive access to login.delta.ncsa.illinois.edu. Until then, you may see the message “too many authentication failures.” When you have access, login via ssh to &lt;your-delta-username&gt;@login.delta.ncsa.illinois.edu. This will request your password and ask whether to do a DUO-push to your mobile phone. Below is an example with your instructor’s username login from a Mac Terminal shell. Only the first line is an interaction with the Mac shell (% prompt) and the rest is coming from the Delta login node ($ prompt). \n\nost@GO ~ % ssh gostrouc@login.delta.ncsa.illinois.edu\n\nNCSA Delta System\n\nLogin with NCSA Kerberos + NCSA Duo multi-factor.\n\nDUO Documentation:  https://go.ncsa.illinois.edu/2fa\n\ngostrouc@login.delta.ncsa.illinois.edu's password: \n(gostrouc@login.delta.ncsa.illinois.edu) Duo two-factor login for gostrouc\n\nEnter a passcode or select one of the following options:\n\n 1. Duo Push to XXX-XXX-1037\n\nPasscode or option (1-1): 1\nSuccess. Logging you in...\ndt-login02.delta.ncsa.illinois.edu (141.142.140.195)\n  OS: RedHat 8.8   HW: HPE   CPU: 128x    RAM: 252 GB\n\n      ΔΔΔΔΔ    ΔΔΔΔΔΔ   ΔΔ     ΔΔΔΔΔΔ   ΔΔ\n      ΔΔ  ΔΔ   ΔΔ       ΔΔ       ΔΔ    ΔΔΔΔ\n      ΔΔ  ΔΔ   ΔΔΔΔ     ΔΔ       ΔΔ   ΔΔ  ΔΔ\n      ΔΔ  ΔΔ   ΔΔ       ΔΔ       ΔΔ   ΔΔΔΔΔΔ\n      ΔΔΔΔΔ    ΔΔΔΔΔΔ   ΔΔΔΔΔΔ   ΔΔ   ΔΔ  ΔΔ\n\n  User Guide:  https://go.ncsa.illinois.edu/deltauserdoc\n\n\nLast failed login: Mon Mar 18 18:54:12 CDT 2024 from 73.121.22.186 on ssh:notty\nThere was 1 failed login attempt since the last successful login.\n[gostrouc@dt-login02 ~]$ \n\nDelta user assistance tells me to ignore the “1 failed login” message. If you still need login help, email help@ncsa.illinois.edu.\nTo log out, exit at the $ prompt.\nResult 1: Turn in a copy of your session running the following shell commands in the sequence given on a Delta login node. The intent here is to verify that you can successfully connect to a Delta login node and run a few basic Unix commands.\n\nhostname\ndate\nw\nwhoami\nls\npwd\nmkdir R\nls\nls -a\nls -la\nls -laF --color\ncd R\npwd\ncd\npwd\nmodule load r\nmodule list\nRscript -e \"sessionInfo()\"\n\nResult 2: Use the man command to get a description of what each command does. Use man man to get an explanation of the man command. Turn in a short one-sentence description for each unique command.\nResult 3: From GitHub … your GitHub user id. So I can invite you to the BZAN-583 team in the HPCinR organization."
-  },
-  {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "HPC for Data Science in R - BZAN 583",
-    "section": "",
-    "text": "These “HPCinR Course Materials” by George Ostrouchov are licensed under CC-BY-4.0"
-  },
-  {
-    "objectID": "materials/assignment/3-project/index.html",
-    "href": "materials/assignment/3-project/index.html",
-    "title": "Assignment 3: Project Proposals",
-    "section": "",
-    "text": "This assignment is the first to be completed, turned in, and graded by groups.\nThe proposal should include (1) a large data set (2) a description of what will be studied, tested, or predicted, (3) a description of the ML methodologies expected to be used.\nGroups are encouraged to meet on their own one or more times before discussing the proposal with the instructor.\nEach group will set up a 30 minute meeting time with the Instructor during this week to discuss their proposed project.\nVarious times to meet are available on Tuesday, Wednesday, Thursday, and Friday of this week. Please email go@tennessee.edu and suggest two possible time slots.\nAn approved proposal gets the full 12 points for each group member."
-  },
-  {
-    "objectID": "materials/lectures/1-welcome/index.html",
-    "href": "materials/lectures/1-welcome/index.html",
-    "title": "Welcome to HPC for Data Science",
-    "section": "",
-    "text": "Welcome to HPC for Data Science in R. This class …\nFull Screen"
-  },
-  {
-    "objectID": "materials/lectures/3-blas/index.html",
-    "href": "materials/lectures/3-blas/index.html",
-    "title": "BLAS Libraries",
-    "section": "",
-    "text": "Basic Linear Algebra Software (BLAS) Libraries\nFull Screen"
-  },
-  {
-    "objectID": "materials/lectures/3-fork/index.html",
-    "href": "materials/lectures/3-fork/index.html",
-    "title": "Th Unix fork",
-    "section": "",
-    "text": "Using the Unix fork from R via the parallel package\nFull Screen"
-  },
-  {
-    "objectID": "materials/lectures/2-hardware/index.html",
-    "href": "materials/lectures/2-hardware/index.html",
-    "title": "Hardware and Memory Hierarchies",
-    "section": "",
-    "text": "Full Screen"
-  },
-  {
-    "objectID": "materials/lectures/8-presentations/index.html",
-    "href": "materials/lectures/8-presentations/index.html",
-    "title": "Presentations",
-    "section": "",
-    "text": "Lightning talks about projects\nFull Screen"
-  },
-  {
-    "objectID": "materials/lectures/3-software/index.html",
-    "href": "materials/lectures/3-software/index.html",
-    "title": "Welcome to HPC for Data Science",
-    "section": "",
-    "text": "Parallel software to make your R code faster. How to parallelize in Unix flavors.\nFull Screen"
-  },
-  {
-    "objectID": "materials/lectures/1a-workflow/index.html",
-    "href": "materials/lectures/1a-workflow/index.html",
+    "objectID": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r-1",
+    "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r-1",
     "title": "Workflow for Remote Computing with R",
-    "section": "",
-    "text": "Full Screen"
+    "section": "Workflow for Remote Computing in R",
+    "text": "Workflow for Remote Computing in R\nLaptop RStudio\n\nFamiliar custom editing environment (Windows, Mac, Unix)\nInteractive Syntax checking\n\ngit, GitHub (or GitLab and Bitbucket)\n\nPortability to remote computing\nVersion control\nCollaboration\n\nCluster unix\n\nSame environment for all\nBatch job submission\n\n\nPortability - in your basement or on another continent\nRStudio installs difficult - legacy OS on HPC\nBandwidth"
   },
   {
-    "objectID": "materials/lectures/1b-setupdemo/index.html",
-    "href": "materials/lectures/1b-setupdemo/index.html",
+    "objectID": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#cooperating-r-sessions-on-a-modern-cluster",
     "title": "Workflow for Remote Computing with R",
-    "section": "",
-    "text": "Full Screen"
+    "section": "Cooperating R Sessions on a Modern Cluster",
+    "text": "Cooperating R Sessions on a Modern Cluster\n8 Nodes (124 + 4 cores each)\n- 32 R sessions\n- each using 31 cores\n- 992 cores total\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
   },
   {
-    "objectID": "materials/lectures/7-projects/index.html",
-    "href": "materials/lectures/7-projects/index.html",
-    "title": "Selected Topics for Project Completion",
-    "section": "",
-    "text": "Various topics to discuss for requested topics and projects.\nFull Screen"
+    "objectID": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
+    "href": "materials/lectures/1a-workflow/slides.html#software-needed-on-laptop",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Software Needed on Laptop",
+    "text": "Software Needed on Laptop\n\nMac\n\nR, RStudio\nterminal, git (in Xcode)\n\n\nWindows\n\nR, RStudio\nputty\ngit\nWinSCP"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#software-on-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Software on Cluster",
+    "text": "Software on Cluster\n\nFlexiBLAS, OpenBLAS\nOpenMPI\nArrow or HDF5 (for parallel I/O)\nR (&gt;= 4.0)\n\nAbove managed by center, below by you\n\nAnd various packages, including pbdMPI\n\n\nR vs conda-R Deployment:\n\nDifferent package management philosophy\nCan create conflicts if mixing, a layer of complexity\n\n\nSolves some dependency issues but creates others"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#github-git-laptop-to-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "GitHub + git (laptop to cluster)",
+    "text": "GitHub + git (laptop to cluster)\n\n\n\n\n\n\n\n\n\n\\[\\qquad\\] \n\n\n\n\n\nRStudio demo and checkbox add\n\nnames for head, remote,\n\nGit diagram by Daniel Kinzler - CC BY 3.0"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#making-git-easy",
+    "href": "materials/lectures/1a-workflow/slides.html#making-git-easy",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Making git easy",
+    "text": "Making git easy\n\n\nPrivate and Public key pairs for Client and Server\n\nGit repository (GitHub, GitLab) is the server\n\nYour laptop and remote cluster are clients\n\n\n\n\nEach client has own key-pair\n\n\nPrivate key stays on the client\n\n\nPublic key is copied to the server\n\n\n\n\nWorks like a single-use password generator and authentication\n\nClient contacts server, server responds with a random string encrypted by client’s public key\nClient decrypts with own private key and sends to server\nServer verifies agreement and opens secure connection"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
+    "href": "materials/lectures/1a-workflow/slides.html#clusters-are-linux-systems",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Clusters are Linux systems",
+    "text": "Clusters are Linux systems\n\n\nLinux is one of many descendants of original Unix. MacOS is another.\n\nEverything in Linux is a file (some are directory files)\nLinux files are organized as a tree\nEvery file has permissions: d r w x | r w x | r w x\n\nthe first is a directory bit\nthe triples are read, write, execute\nthe grouping is owner, group, all\n\n\nEvery file has owner, group, and a few other attributes\nAvailable commands are executable files in your PATH directories\nPATH value can be seen with echo $PATH\n\n\n\n\nUnix (Bell Labs) was a play on an earlier Multics operating system (designed at MIT)"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#linux-commands",
+    "href": "materials/lectures/1a-workflow/slides.html#linux-commands",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Linux Commands",
+    "text": "Linux Commands\nIn a terminal, you talk to a shell program (bash is most common)\n\nCommands (executable files) can have options and arguments\n\n\nStandard input and standard output of a command is the terminal but can be redirected\n\n\n&lt;, &lt;&lt;, &gt;, &gt;&gt; redirect standard input and output\n\ncommand1 | command2 pipes standard output1 to standard input2\n\nCommands are files in directories listed in your PATH variable (try “echo $PATH”)\n\n$ means substitute variable value\n\nexport lists (or sets) variables and their values\n\nThere are many resources on the web to learn Linux basics"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
+    "href": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Use of Login Nodes and Compute Nodes",
+    "text": "Use of Login Nodes and Compute Nodes\nLogin nodes:\n\nCode downloads, GitHub or other\nData downloads from Internet\nNo RStudio\n\nInteractive R or Rscript sessions:\n\nPackage installs\n\nInteractive debugging\n\nRscript debugging\n\n\n\nCompute nodes:\n- No Internet access\n- No RStudio\n- Batch Rscript submission via Slurm\n\nBlue squares are nodes, circles are storage/disk\nInterconnect is communication between nodes\nLaptop - login node - resource script\n\nBIG data on parallel file system - not on laptop!\n\nCan monitor a longer run with logins to compute nodes\n\nBatch"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#on-a-cluster-login-node",
+    "href": "materials/lectures/1a-workflow/slides.html#on-a-cluster-login-node",
+    "title": "Workflow for Remote Computing with R",
+    "section": "On a Cluster Login Node",
+    "text": "On a Cluster Login Node\nYou are interacting with a bash shell ($ prompt)\nSubmit batch scripts to the compute nodes (next slide)\nTp run R on the login node, load its module\n\n$ module load r\n\nThen you can run of your script.R file with\n\n$ Rscript script.R\n\nOutput goes to the terminal but you can also redirect it to a file\n\n$ Rscript script.R &gt; outfile_name\n\nOr start an interactive R session with\n\n$ R\n\nwhich will give you a &gt; prompt. You quit the R session with\n&gt; q()\nand logout with\n\n$ exit\n\n\n\nPrompts $ and &gt; are not part of the shown commands"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#submit-scripts-to-the-compute-nodes",
+    "href": "materials/lectures/1a-workflow/slides.html#submit-scripts-to-the-compute-nodes",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Submit scripts to the compute nodes",
+    "text": "Submit scripts to the compute nodes\nTo run your R script on one or more compute nodes, you need two files\n\nThe R script, say script.R\n\nA bash shell script that requests the nodes, cores, etc. and specifies how to run your script.R, whis is usually Rscript script.R.\n\nHere is an example shell script to run script.R\n\n#!/bin/bash\n#SBATCH --job-name utk\n#SBATCH --account=bckj-delta-cpu\n#SBATCH --partition=cpu\n#SBATCH --nodes=1\n#SBATCH --mem=16g\n#SBATCH --cpus-per-task=1\n#SBATCH --time 00:00:30\n#SBATCH -e ./utk.e\n#SBATCH -o ./utk.o\n\nmodule load r\nRscript script.R\n\nrequesting one core on one node, limit of 30 seconds. If this file is saved as script.sh\n\nsbatch script.sh\n\nsubmits the job. Check on its status with\n\nsqueue -u &lt;your-user-name&gt;"
+  },
+  {
+    "objectID": "materials/lectures/1a-workflow/slides.html#package-installation-on-cluster",
+    "href": "materials/lectures/1a-workflow/slides.html#package-installation-on-cluster",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Package Installation on Cluster",
+    "text": "Package Installation on Cluster\nInstall packages in an interactive R session on a login node\nLogin to the cluster, then at the shell prompt:\n\nmodule load r\nR\n\nstarts an interactive R session. Now, for example, to install package dplyr:\ninstall.packages(\"dplyr\", repo = \"https://cloud.r-project.org/\")\nThe repo parameter can be skipped if it is set in options(). R may also ask to choose a repository location.\nYou may need to load other modules if a package has external to R dependencies.\n\nmodule avail\n\nwill list available software modules. If you don’t see the software, ask help@ncsa.illinois.edu to have it installed. Note that this is for external to R software (not R packages)."
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#file-systems-on-delta",
+    "href": "materials/lectures/4-data/slides.html#file-systems-on-delta",
+    "title": "Data",
+    "section": "File Systems on Delta",
+    "text": "File Systems on Delta\n\nOur project name on Delta is bckj.\nEach user has access to three file systems /u/&lt;username&gt;, /projects/bckj/&lt;username&gt;, and /scratch/bcjk/&lt;username&gt;\nSee Delta: File Systems, andDelta: Data Management for more details.\nNone of the Delta file systems are backed up - another good reason to work via GitHub."
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#permissions-on-the-directories",
+    "href": "materials/lectures/4-data/slides.html#permissions-on-the-directories",
+    "title": "Data",
+    "section": "Permissions on the directories",
+    "text": "Permissions on the directories\n(gostrouc user view):\n\nls -ld $HOME\n\n\ndrwxrwx---+ 9 root root 4096 Mar 29 16:14 /u/gostrouc/\n\n\nls -ld /projects/bckj\n\n\ndrwxrws---+ 26 root delta_bckj 12288 Mar 26 04:55 /projects/bckj/\n\n\nls -ld /scratch/bckj\n\n\ndrwxrws---+ 26 root delta_bckj 8192 Mar 26 04:55 /scratch/bckj/\n\nd|uuu|ggg|ooo \\(\\quad\\)\ndir|user|group|others\nExec permissions (from man page):\n- x The execute/search bits\n- s The set-user-ID-on-execution and set-group-ID-on-execution bits"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#projectsbcjk",
+    "href": "materials/lectures/4-data/slides.html#projectsbcjk",
+    "title": "Data",
+    "section": "/projects/bcjk",
+    "text": "/projects/bcjk\n\nls -l /projects/bckj\n\n\ntotal 96\ndrwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/\ndrwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/\ndrwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/\ndrwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/\ndrwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/\ndrwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/\ndrwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/\ndrwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/\ndrwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/\ndrwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/\ndrwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/\ndrwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/\ndrwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/\ndrwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/\ndrwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/\ndrwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/\ndrwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/\ndrwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/\ndrwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/\ndrwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/\ndrwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/\ndrwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/\ndrwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/\ndrwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#scratchbcjk",
+    "href": "materials/lectures/4-data/slides.html#scratchbcjk",
+    "title": "Data",
+    "section": "/scratch/bcjk",
+    "text": "/scratch/bcjk\n\nls -l /scratch/bckj\n\n\ntotal 96\ndrwxrws---+ 2 aholme27         delta_bckj 4096 Mar 19 14:55 aholme27/\ndrwxrws---+ 2 asajjad          delta_bckj 4096 Mar 21 11:55 asajjad/\ndrwxrws---+ 2 ballred          delta_bckj 4096 Mar 21 10:55 ballred/\ndrwxrws---+ 2 briddle          delta_bckj 4096 Mar 26 03:55 briddle/\ndrwxrws---+ 2 carolinetabeling delta_bckj 4096 Mar 21 10:56 carolinetabeling/\ndrwxrws---+ 2 cdeaton3         delta_bckj 4096 Mar 21 10:55 cdeaton3/\ndrwxrws---+ 2 cking134         delta_bckj 4096 Mar 19 14:55 cking134/\ndrwxrws---+ 2 gostrouc         delta_bckj 4096 Feb  3 03:55 gostrouc/\ndrwxrws---+ 2 hjohns61         delta_bckj 4096 Mar 25 16:55 hjohns61/\ndrwxrws---+ 2 ianleonard       delta_bckj 4096 Mar 21 10:56 ianleonard/\ndrwxrws---+ 2 jcamilleri       delta_bckj 4096 Mar 21 10:56 jcamilleri/\ndrwxrws---+ 2 jgary4           delta_bckj 4096 Mar 21 10:56 jgary4/\ndrwxrws---+ 2 jmillic4         delta_bckj 4096 Mar 19 14:55 jmillic4/\ndrwxrws---+ 2 jpeta            delta_bckj 4096 Mar 21 10:55 jpeta/\ndrwxrws---+ 2 kpatel8          delta_bckj 4096 Mar 21 12:55 kpatel8/\ndrwxrws---+ 2 lhu7             delta_bckj 4096 Mar 21 10:55 lhu7/\ndrwxrws---+ 2 lmcpherr         delta_bckj 4096 Mar 21 10:56 lmcpherr/\ndrwxrws---+ 2 lschwar4         delta_bckj 4096 Mar 19 14:55 lschwar4/\ndrwxrws---+ 2 mrobiso4         delta_bckj 4096 Mar 26 04:55 mrobiso4/\ndrwxrws---+ 2 sp28             delta_bckj 4096 Mar 26 03:55 sp28/\ndrwxrws---+ 2 sthompson2       delta_bckj 4096 Mar 26 04:55 sthompson2/\ndrwxrws---+ 2 tdykes2          delta_bckj 4096 Mar 21 10:55 tdykes2/\ndrwxrws---+ 2 wjeter           delta_bckj 4096 Mar 21 10:56 wjeter/\ndrwxrws---+ 2 ychang27         delta_bckj 4096 Mar 19 14:55 ychang27/"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#using-the-file-systems",
+    "href": "materials/lectures/4-data/slides.html#using-the-file-systems",
+    "title": "Data",
+    "section": "Using the File Systems",
+    "text": "Using the File Systems\n\nCode is typically maintained in /u/&lt;username&gt;\n\nProject data is usually kept in /projects/bckj/ subdirectories\n\nThis is also a place for project team accessible code\n\n\nRuntime temporary data can be written to /scratch/bckj/\n\n\n\n[gostrouc@dt-login04 data]$ ls -ld /projects/bckj/Team*\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team1/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team2/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team3/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team4/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team5/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team6/"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#bringing-output-back-to-laptop",
+    "href": "materials/lectures/4-data/slides.html#bringing-output-back-to-laptop",
+    "title": "Data",
+    "section": "Bringing Output Back to Laptop",
+    "text": "Bringing Output Back to Laptop\nNCSA recommendations\n\nWindows users: WinSCP or Cuberduck\n\nMac users: in laptop Terminal\n\n\nscp &lt;user&gt;@login.delta.ncsa.illinois.edu:&lt;file-path&gt; &lt;dest-path&gt;\n\n\n&lt;file-path&gt; is relative to home directory on Delta or an absolute path (starts with /) on Delta\n\n\n&lt;dest-path&gt; is on your laptop"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#reading-data-overview",
+    "href": "materials/lectures/4-data/slides.html#reading-data-overview",
+    "title": "Data",
+    "section": "Reading Data Overview",
+    "text": "Reading Data Overview\n\nText files (.csv, .tsv, .txt, … ): variable length records\n\n\ndata.table::fread()  # fastest reader\nreadr::read_delim()  # fast reader    \n\nBinary file formats faster for large data (& smaller): fixed length records\n\n\narrow::read_parquet()  # chunked column-oriented format (.parquet extension)\n\nArrow for R Cheatsheet\n\nrhdf5::h5read()  # hierarchical array-oriented format (.h5 extension)\n\nrhdf5 Practical Tips on Bioconductor\nOther formats (.xlsx, etc. )"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#downloading-data-overview",
+    "href": "materials/lectures/4-data/slides.html#downloading-data-overview",
+    "title": "Data",
+    "section": "Downloading Data Overview",
+    "text": "Downloading Data Overview\nUnix: wget, curl, scp\nR: utils::download.file()"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#new-york-tlc-trip-record-data",
+    "href": "materials/lectures/4-data/slides.html#new-york-tlc-trip-record-data",
+    "title": "Data",
+    "section": "New York TLC Trip Record Data",
+    "text": "New York TLC Trip Record Data\n\nTLC: Taxi and Limousine Commission\nIncludes: pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts\nData overview\nYellow Taxi Trip Data Dictionary\nGreen Taxi Trips Data Dictionary\nFHV Trips Data Dictionary\nHigh Volume FHV Trips Data Dictionary"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data",
+    "href": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data",
+    "title": "Data",
+    "section": "Yellow Taxi Trip Data",
+    "text": "Yellow Taxi Trip Data\nYellow taxi trip data is downloaded on Delta in parquet format with an arrow-friendly directory structure.\n\n[gostrouc@dt-login03 ~]$ cd /projects/bckj/TLC_yellow\n[gostrouc@dt-login03 TLC_yellow]$ ls -l\ntotal 60\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:06 'year=2009'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:07 'year=2010'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:08 'year=2011'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2012'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2013'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2014'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:09 'year=2015'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2016'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2017'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2018'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2019'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2020'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2021'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 21:10 'year=2022'/\ndrwxrws---+ 14 gostrouc delta_bckj 4096 Apr  7 22:43 'year=2023'/"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data-projectsbckjtlc_yellow",
+    "href": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data-projectsbckjtlc_yellow",
+    "title": "Data",
+    "section": "Yellow Taxi Trip Data /projects/bckj/TLC_yellow\n",
+    "text": "Yellow Taxi Trip Data /projects/bckj/TLC_yellow\n\n\n[gostrouc@dt-login03 TLC_yellow]$ du -hs ./*\n5.4G    ./year=2009\n5.3G    ./year=2010\n2.1G    ./year=2011\n2.1G    ./year=2012\n2.0G    ./year=2013\n2.1G    ./year=2014\n1.9G    ./year=2015\n1.8G    ./year=2016\n1.5G    ./year=2017\n1.4G    ./year=2018\n1.2G    ./year=2019\n358M    ./year=2020\n458M    ./year=2021\n587M    ./year=2022\n[gostrouc@dt-login03 TLC_yellow]$ du -hs .\n29G ."
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data-2009",
+    "href": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data-2009",
+    "title": "Data",
+    "section": "Yellow Taxi Trip Data 2009\n",
+    "text": "Yellow Taxi Trip Data 2009\n\n\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009'\ntotal 48\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=1'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=10'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=11'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=12'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=2'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=3'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=4'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=5'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:05 'month=6'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=7'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=8'/\ndrwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data-2009-01",
+    "href": "materials/lectures/4-data/slides.html#yellow-taxi-trip-data-2009-01",
+    "title": "Data",
+    "section": "Yellow Taxi Trip Data 2009-01\n",
+    "text": "Yellow Taxi Trip Data 2009-01\n\n\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1'\ntotal 458756\n-rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2'\ntotal 433048\n-rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3'\ntotal 471288\n-rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11'\ntotal 457M\n-rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet\n[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12'\ntotal 466M\n-rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#curl-yellow-taxi-trip-data",
+    "href": "materials/lectures/4-data/slides.html#curl-yellow-taxi-trip-data",
+    "title": "Data",
+    "section": "\ncurl Yellow Taxi Trip Data",
+    "text": "curl Yellow Taxi Trip Data\n\n#' tlc_get_ym: Gets one month of TLC yellow taxi data and writes it in Hive\n#' style directory names, such as `dest/year=2015/month=8/file_name.parquet`.\n#' \n#' @param ymd\n#' A **lubridate** \"YYYY-MM-01\" giving the year and month to be retrieved.\n#' @param name\n#' Character file name base (such as 'yellow_tripdata') from the TLC \n#' repository documentation.\n#' @param dest\n#' Character destination directory path.\n#' @param url\n#' Character URL of data source location.\n#' \n#' @details\n#' Uses `method = curl` to get one month of TLC yellow taxi data into the\n#' `dest` directory. Since `download.file()` engages `curl`\n#' with a `system()` call, generating these calls to `tlcYM_get()` can be \n#' completely parallel and the data never touches R. \n#' \n#' @returns \n#' Invisibly, returns the character URL/file combination used in data retrieval.\n#' \ntlc_get_ym = function(ymd, name = \"yellow_tripdata\", \n                     dest = \"/projects/bckj/TLC_yellow\",\n                     url = \"https://d37ci6vzurychx.cloudfront.net/trip-data\") {\n  yr = lubridate::year(ymd)\n  month = lubridate::month(ymd)\n\n  ## Construct source url/file\n  file_name = paste0(name, \"_\", yr, '-', sprintf('%02d', month), '.parquet')\n  file_url = paste0(url, '/', file_name)\n  \n  ## Construct destination directory\n  dest_dir = paste0(dest, \"/year=\", yr)\n  if(!dir.exists(dest_dir)) dir.create(dest_dir)\n  dest_dir = paste0(dest_dir, \"/month=\", month)\n  if(!dir.exists(dest_dir)) dir.create(dest_dir)\n  \n  download.file(file_url, paste0(dest_dir, \"/\", file_name), method = \"curl\",\n                quiet = TRUE)\n  invisible(file_url)\n}\n\n#' tlc_get_range: A wrapper for `tlc_get_ym()` to get a range of months and do\n#' it in parallel.\n#' \n#' @param first\n#' Character \"YYYY-MM\" first month. Uses `lubridate::ym()` to read\n#' @param last\n#' Character \"YYYY-MM\" last month\n#' @param cores\n#' Integer number of cores to use for running `curl` instances in parallel\n#' \n#' @details\n#' Since the function does a system call to `curl`, its time does not include\n#' the core time used by `curl` and includes only the R function time. But\n#' the *real* or *elapsed* time is correct.\n#' \n#' @returns\n#' Invisibly returns the full vector of months retrieved\n#' \ntlc_get_range = function(first, last, cores = 1) {\n  ## construct vector of yr-month-day requests\n  dates = seq(lubridate::ym(first), lubridate::ym(last), \"months\")\n  parallel::mclapply(dates, tlc_get_ym, mc.cores = cores)\n  invisible(dates)\n}\n\n# tlc_get_range(\"2021-01\", \"2022-12\", cores = 1)"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#compare-csv-to-parquet-reads-in-r",
+    "href": "materials/lectures/4-data/slides.html#compare-csv-to-parquet-reads-in-r",
+    "title": "Data",
+    "section": "Compare csv to parquet reads in R",
+    "text": "Compare csv to parquet reads in R\narrow (parquet 0.423GB, csv 1.7GB)\n\n&gt; system.time({tlc2009.02arr = arrow::read_parquet(\"/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet\")})\n   user  system elapsed \n  3.363   1.981  12.236 \n&gt; system.time({tlc2009.02arrcsv = arrow::read_csv_arrow(\"/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv\")})\n   user  system elapsed \n 20.513  32.494  33.163 \n\nreadr (csv 1.7GB)\n\n&gt; system.time({tlc2009.02csv = readr::read_csv(\"/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv\")})\nRows: 14092413 Columns: 18                                                                                         \n── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr   (2): vendor_name, Payment_Type\ndbl  (11): Passenger_Count, Trip_Distance, Start_Lon, Start_Lat, End_Lon, En...\nlgl   (3): Rate_Code, store_and_forward, mta_tax\ndttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n   user  system elapsed \n 56.194  24.529  51.976 \n\ndata.table (csv 1.7GB)\n\n&gt; system.time({tlc2009.02dtcsv = data.table::fread(\"/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv\")})\n|--------------------------------------------------|\n|==================================================|\n   user  system elapsed \n 29.299  28.551  25.260"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#convert-your-csv-data-to-parquet",
+    "href": "materials/lectures/4-data/slides.html#convert-your-csv-data-to-parquet",
+    "title": "Data",
+    "section": "Convert your csv data to parquet\n",
+    "text": "Convert your csv data to parquet\n\n\nlibrary(arrow)\nlibrary(dplyr)\n\ntlc = open_csv_dataset(\"/projects/bckj/TLC_yellow_csv/year=2009\")\n\nwrite_parquet(tlc, sink = \"/scratch/bckj/TLCtest\")\n\n\nShould work but currently fails on TLC_yellow_csv. Possibly due to second/partial conversion parquet to csv to part-parquet?\nConsequently, this becomes an optional portion of Assignment 4."
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#memory-use-by-r",
+    "href": "materials/lectures/4-data/slides.html#memory-use-by-r",
+    "title": "Data",
+    "section": "Memory Use by R",
+    "text": "Memory Use by R\nmemuse package\n\n\nmemuse::mu(): memory used by an object\n\nAdding option prefix = \"SI\" uses SI units (1e3 multiples, not 2^10 multiples)\n\n\n\nmemuse::Sys.procmem(): memory of the current R process\n\n\nmemuse::Sys.meminfo(): total available memory, and free memory\n\npryr package\n\n\npryr::object_size(): memory used by an object\n\n\npryr::mem_used(): memory of the current R process\n\nThe two packages can disagree with each other and with Unix. Try\n- system2(\"ps\", paste(\"-o drs,rss -p\", Sys.getpid()))\n\n\npryr: “The details of R’s memory management are not documented in a single place. Most of the information in this chapter was gleaned from a close reading of the documentation (particularly ?Memory and ?gc), the memory profiling section of R-exts, and the SEXPs section of R-ints. The rest I figured out by reading the C source code, performing small experiments, and asking questions on R-devel. Any mistakes are entirely mine.” Hadley Wickham, Advanced R (Same comment could be made by the memuse package author, but I find it agrees with Unix more often)"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#a-note-about-words",
+    "href": "materials/lectures/4-data/slides.html#a-note-about-words",
+    "title": "Data",
+    "section": "A Note about Words",
+    "text": "A Note about Words\n“batch processing”\n- HPC: running scripts non-interactively (whole) - arrow package: reading data in chunks (by batches, not whole)\n“fork”\n- HPC: Unix fork parallel process spawning\n- GitHub: Creating a repository fork ( making a copy for concurrent development)"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#reading-data",
+    "href": "materials/lectures/4-data/slides.html#reading-data",
+    "title": "Data",
+    "section": "Reading Data",
+    "text": "Reading Data\nSee examples in BZAN_583_code/data\n\n\nexploreTLC.R and exploreTLC.sh\n\n\nfread_exploreTLC.R and fread_exploreTLC.sh\n\n\nMPIexploreTLC.R and MPIexploreTLC.sh (incomplete)"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#exploretlc.r-2-months",
+    "href": "materials/lectures/4-data/slides.html#exploretlc.r-2-months",
+    "title": "Data",
+    "section": "\nexploreTLC.R: 2 months",
+    "text": "exploreTLC.R: 2 months\n\n[gostrouc@dt-login03 data]$ cat utk.o\n/u/gostrouc/BZAN_583_code/data\nloaded R\nSize:  146.953 MiB \nPeak:  146.953 MiB \nTotalram:  251.600 GiB \nFreeram:   229.427 GiB \n58.7 MB\n  DRS   RSS\n765391 150796\n[1] \"opening dataset\"\nFileSystemDataset with 12 Parquet files\nvendor_name: string\nTrip_Pickup_DateTime: string\nTrip_Dropoff_DateTime: string\nPassenger_Count: int64\nTrip_Distance: double\nStart_Lon: double\nStart_Lat: double\nRate_Code: double\nstore_and_forward: double\nEnd_Lon: double\nEnd_Lat: double\nPayment_Type: string\nFare_Amt: double\nsurcharge: double\nmta_tax: double\nTip_Amt: double\nTolls_Amt: double\nTotal_Amt: double\nmonth: int32\n\nSee $metadata for additional Schema metadata\n[1] \"into lapply\"\n   user  system elapsed \n 59.396   2.090  54.976 \n[1] 10.35707\n[1] \"into mclapply\"\n   user  system elapsed \n 65.569   8.483  50.902 \n[1] 10.35707\n4.336 GiB\nSize:  4.524 GiB \nPeak:  9.906 GiB \n4.67 GB\n[1] 27472535       19"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#exploretlc.r-4-months",
+    "href": "materials/lectures/4-data/slides.html#exploretlc.r-4-months",
+    "title": "Data",
+    "section": "\nexploreTLC.R: 4 months",
+    "text": "exploreTLC.R: 4 months\n\n[gostrouc@dt-login03 data]$ cat utk.o\n/u/gostrouc/BZAN_583_code/data\nloaded R\nSize:  146.883 MiB \nPeak:  146.883 MiB \nTotalram:  251.600 GiB \nFreeram:   229.428 GiB \n58.7 MB\n  DRS   RSS\n765395 150660\n[1] \"opening dataset\"\nFileSystemDataset with 12 Parquet files\nvendor_name: string\nTrip_Pickup_DateTime: string\nTrip_Dropoff_DateTime: string\nPassenger_Count: int64\nTrip_Distance: double\nStart_Lon: double\nStart_Lat: double\nRate_Code: double\nstore_and_forward: double\nEnd_Lon: double\nEnd_Lat: double\nPayment_Type: string\nFare_Amt: double\nsurcharge: double\nmta_tax: double\nTip_Amt: double\nTolls_Amt: double\nTotal_Amt: double\nmonth: int32\n\nSee $metadata for additional Schema metadata\n[1] \"into lapply\"\n   user  system elapsed \n127.074   5.567 121.475 \n[1] 10.54913\n[1] \"into mclapply\"\n   user  system elapsed \n135.182  29.250 117.389 \n[1] 10.54913\n8.862 GiB\nSize:   9.553 GiB \nPeak:  22.300 GiB \n9.46 GB\n[1] 56154689       19"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#fread_exploretlc.r-2-months",
+    "href": "materials/lectures/4-data/slides.html#fread_exploretlc.r-2-months",
+    "title": "Data",
+    "section": "\nfread_exploreTLC.R: 2 months",
+    "text": "fread_exploreTLC.R: 2 months\n\n[gostrouc@dt-login03 data]$ cat utk.o\n/u/gostrouc/BZAN_583_code/data\nloaded R\nSize:  65.391 MiB \nPeak:  65.391 MiB \nTotalram:  251.600 GiB \nFreeram:   229.182 GiB \n37.3 MB\n  DRS   RSS\n540259 82336\n[1] \"opening dataset\"\n[1] \"into lapply\"\n   user  system elapsed \n 37.783   6.971 515.404 \n[1] 10.35707\n[1] \"into mclapply\"\n   user  system elapsed \n 24.401   6.467  18.516 \n[1] 10.35707\n3.275 GiB\nSize:  3.357 GiB \nPeak:  7.337 GiB \n3.56 GB\n[1] 27472535       18"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#fread_exploretlc.r-4-months",
+    "href": "materials/lectures/4-data/slides.html#fread_exploretlc.r-4-months",
+    "title": "Data",
+    "section": "\nfread_exploreTLC.R: 4 months",
+    "text": "fread_exploreTLC.R: 4 months\n\n[gostrouc@dt-login03 data]$ cat utk.o\n/u/gostrouc/BZAN_583_code/data\nloaded R\nSize:  65.430 MiB \nPeak:  65.430 MiB \nTotalram:  251.600 GiB \nFreeram:   229.418 GiB \n37.3 MB\n  DRS   RSS\n540263 82364\n[1] \"opening dataset\"\n[1] \"into mclapply\"\n   user  system elapsed \n 69.074  16.826 216.538 \n[1] 10.54913\n6.694 GiB\nSize:   6.774 GiB \nPeak:  14.178 GiB \n7.23 GB\n[1] 56154689       18\n[gostrouc@dt-login03 data]$"
+  },
+  {
+    "objectID": "materials/lectures/4-data/slides.html#issues-with-slow-data-reads-on-delta",
+    "href": "materials/lectures/4-data/slides.html#issues-with-slow-data-reads-on-delta",
+    "title": "Data",
+    "section": "Issues with Slow Data Reads on Delta",
+    "text": "Issues with Slow Data Reads on Delta\n\nCompute nodes are shared if not all cores requested\n\nCan compete for I/O channels with other jobs\n\nTends to be much less busy in AM\n\n\nLustre file system optimized for large binary reads\n\nThat’s /projects and /scratch file systems\nData sets with many files can have issues"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#today",
+    "href": "materials/lectures/1b-setupdemo/slides.html#today",
+    "title": "Setup Continued and Demo",
+    "section": "Today",
+    "text": "Today\n\nDelta logins\n\nOffice hours\n\nSummary of survey\n\nHPCinR organization and Quarto course materials\n\nCode repository copy and workflow demo"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#delta-logins",
+    "href": "materials/lectures/1b-setupdemo/slides.html#delta-logins",
+    "title": "Setup Continued and Demo",
+    "section": "Delta logins",
+    "text": "Delta logins\nACCESS is a project, funded by the National Science Foundation, that helps researchers and educators utilize NSF-funded HPC centers.\n\nThe forgot the students\n\n\nNCSA is one of these HPC centers at University of Illinois\n\nDelta is NCSA’s (and NSF’s) largest cluster\nDelta allocates mostly via ACCESS but also locally\nBoth ACCESS and NCSA/Delta have an “add user” function"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#office-hours",
+    "href": "materials/lectures/1b-setupdemo/slides.html#office-hours",
+    "title": "Setup Continued and Demo",
+    "section": "Office hours",
+    "text": "Office hours\nYour class schedule\n\nM\nT\nW\nR"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#survey",
+    "href": "materials/lectures/1b-setupdemo/slides.html#survey",
+    "title": "Setup Continued and Demo",
+    "section": "Survey",
+    "text": "Survey\n\nSummary\n\nDo you use a text editor?\n\nWhich one? vim, emacs, nano, …\n\nRstudio is a text editor with extras"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#workflow-review",
+    "href": "materials/lectures/1b-setupdemo/slides.html#workflow-review",
+    "title": "Setup Continued and Demo",
+    "section": "Workflow review",
+    "text": "Workflow review\n\nThree git repositories\n\nOn laptop - GitHub is set as remote\nOn GitHub\nOn login.delta.ncsa.illinois.edu - GitHub is set as remote"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#quarto-course-materials",
+    "href": "materials/lectures/1b-setupdemo/slides.html#quarto-course-materials",
+    "title": "Setup Continued and Demo",
+    "section": "Quarto Course Materials",
+    "text": "Quarto Course Materials\n\nCourse materials are on GitHub/HPCinR/BZAN_583\n\nQuarto website with embedded presentations\nA template repository\n\n\n\nUsed .Rmd and xaringan combination before Quarto combines them and embraces other lanuages"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#code-repository-template",
+    "href": "materials/lectures/1b-setupdemo/slides.html#code-repository-template",
+    "title": "Setup Continued and Demo",
+    "section": "Code Repository Template",
+    "text": "Code Repository Template\nHPCinR/BZAN_583_code\n- On GitHub: Copy template to your account\n- Clone to your laptop\n- Make edits\n- Add, commit, and push edits to GitHub\n- Get clone link from GitHub - Login to Delta\n- Clone to your Delta files\n- Run script (is it executable? chmod +x)"
+  },
+  {
+    "objectID": "materials/lectures/1b-setupdemo/slides.html#ready-for-workflow-demo",
+    "href": "materials/lectures/1b-setupdemo/slides.html#ready-for-workflow-demo",
+    "title": "Setup Continued and Demo",
+    "section": "Ready for Workflow Demo",
+    "text": "Ready for Workflow Demo\nNeed:\n- Laptop RStudio open on repo project\n- ssh terminal in repo directory on Delta\nWorkflow:\n- Edit code in RStudio on laptop\n- Add, commit, and push edits to GitHub\n- Pull code on Delta\n- Run code and repeat workflow"
+  },
+  {
+    "objectID": "materials/lectures/7-projects/slides.html#selected-topics",
+    "href": "materials/lectures/7-projects/slides.html#selected-topics",
+    "title": "Untitled",
+    "section": "Selected Topics",
+    "text": "Selected Topics"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#measurement-and-terminology-of-parallel-speedup",
+    "href": "materials/lectures/4-shared_mem/slides.html#measurement-and-terminology-of-parallel-speedup",
+    "title": "Parallel Computing",
+    "section": "Measurement and terminology of parallel speedup",
+    "text": "Measurement and terminology of parallel speedup"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#embarrassingly-pleasingly-parallel",
+    "href": "materials/lectures/4-shared_mem/slides.html#embarrassingly-pleasingly-parallel",
+    "title": "Parallel Computing",
+    "section": "Embarrassingly (Pleasingly) Parallel",
+    "text": "Embarrassingly (Pleasingly) Parallel\n\n\\[t_p = \\frac{t}{n} = t_n\\]\n\\[\\mbox{Speedup:}\\quad\\frac{t}{t_p} = n\\] \\(t\\) - Serial time\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - Single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#serial-section-amdahls-law",
+    "href": "materials/lectures/4-shared_mem/slides.html#serial-section-amdahls-law",
+    "title": "Parallel Computing",
+    "section": "Serial Section (Amdahl’s Law)",
+    "text": "Serial Section (Amdahl’s Law)\n\\[\\qquad\\]\n\\[t_p = t_s + t_n &gt; t_s\\]\n\\[\\mbox{Max Speedup:}\\quad\\lim_{n \\to \\infty}\\frac{t}{t_p} = \\frac{t}{t_s}\\]\n\\(t\\) - Serial time (fixed)\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\nStrong Scaling: fixed work, increasing resources"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#serial-section-gustafsons-law",
+    "href": "materials/lectures/4-shared_mem/slides.html#serial-section-gustafsons-law",
+    "title": "Parallel Computing",
+    "section": "Serial Section (Gustafson’s Law)",
+    "text": "Serial Section (Gustafson’s Law)\n\\[\\qquad\\]\n\\[t_p = t_s + t_n\\]\n\\[\\mbox{Speedup:}\\quad\\frac{t}{t_p} = \\frac{t_s + nt_n}{t_s + t_n} = O(n)\\]\n\\(t\\) - Serial time (growing: \\(t_{2n} = 2t_n\\) )\n\\(n\\) - Number of chunks (or processes)\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\nWeak Scaling: increasing work, increasing resources\n\nWeak: misnomer: the speedup is actually great"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#parallel-overhead",
+    "href": "materials/lectures/4-shared_mem/slides.html#parallel-overhead",
+    "title": "Parallel Computing",
+    "section": "Parallel Overhead",
+    "text": "Parallel Overhead\n\\[\\qquad\\] \\[\\qquad\\]\n\\[t_p = t_s + t_n + t_o(n)\\]\n\\(t\\) - Serial time\n\\(n\\) - Number of processes\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\n\\(t_o(n)\\) - Parallel overhead time"
+  },
+  {
+    "objectID": "materials/lectures/4-shared_mem/slides.html#replication-of-serial-section-distirbuted",
+    "href": "materials/lectures/4-shared_mem/slides.html#replication-of-serial-section-distirbuted",
+    "title": "Parallel Computing",
+    "section": "Replication of Serial Section (Distirbuted)",
+    "text": "Replication of Serial Section (Distirbuted)\n\\[\\qquad\\] \\[\\qquad\\] \\[\\qquad\\] \\[\\qquad\\]\nSuppose the serial section is computed on one rank and sent to all ranks. Then overhead is a function of \\(n\\)!\n\\(t\\) - Serial time\n\\(n\\) - Number of processes\n\\(t_n\\) - single chunk time with \\(n\\) chunks\n\\(t_p\\) - Parallel time\n\\(t_s\\) - Serial section time\n\\(t_o(n)\\) - Parallel overhead time\nReplication can reduce communication overhead due to communication"
   },
   {
     "objectID": "materials/lectures/4-shared_mem/index.html",
@@ -1265,13 +1328,6 @@
     "title": "Welcome to HPC for Data Science",
     "section": "",
     "text": "A short excursion into neural net classification\nFull Screen"
-  },
-  {
-    "objectID": "materials/lectures/3-data/index.html",
-    "href": "materials/lectures/3-data/index.html",
-    "title": "Data",
-    "section": "",
-    "text": "Getting and processing data\nFull Screen"
   },
   {
     "objectID": "materials/lectures/6-distributed/index.html",

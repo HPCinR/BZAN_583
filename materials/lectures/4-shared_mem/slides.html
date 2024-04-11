@@ -10,7 +10,7 @@
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.549">
 
-  <title>HPC for Data Science in R - BZAN 583 - Shared Memory Parallel Computing</title>
+  <title>HPC for Data Science in R - BZAN 583 - Parallel Computing</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,32 +327,17 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Shared Memory Parallel Computing</h1>
+  <h1 class="title">Parallel Computing</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="r-lapack-blas" class="slide level2">
-<h2>R-LAPACK-BLAS</h2>
-<ul>
-<li>BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library
-<ul>
-<li>vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</li>
-</ul></li>
-<li>LAPACK: matrix decompositions and more</li>
-</ul>
-<!--
-$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
-<ul>
-<li>Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,</li>
-</ul>
-</section>
 <section id="measurement-and-terminology-of-parallel-speedup" class="slide level2">
 <h2>Measurement and terminology of parallel speedup</h2>
 
 <img data-src="../../../pics/fork/Slide2.png" class="r-stretch"></section>
-<section id="embarrassingly-pleasingly-parallel" class="slide level2">
+<section id="embarrassingly-pleasingly-parallel" class="slide level2 smaller">
 <h2>Embarrassingly (Pleasingly) Parallel</h2>
 <ul>
 <li><span class="math display">\[t_p = \frac{t}{n} = t_n\]</span></li>
@@ -410,8 +395,8 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
 <span class="math inline">\(t_s\)</span> - Serial section time<br>
 <span class="math inline">\(t_o(n)\)</span> - Parallel overhead time</p>
 </section>
-<section id="replication-of-serial-section" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide5.png" data-background-size="90%" data-background-position="center">
-<h2>Replication of Serial Section</h2>
+<section id="replication-of-serial-section-distirbuted" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide5.png" data-background-size="90%" data-background-position="center">
+<h2>Replication of Serial Section (Distirbuted)</h2>
 <p><span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span></p>
 <h4 id="suppose-the-serial-section-is-computed-on-one-rank-and-sent-to-all-ranks.-then-overhead-is-a-function-of-n">Suppose the serial section is computed on one rank and sent to all ranks. Then overhead is a function of <span class="math inline">\(n\)</span>!</h4>
 <p><span class="math inline">\(t\)</span> - Serial time<br>
@@ -421,214 +406,6 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
 <span class="math inline">\(t_s\)</span> - Serial section time<br>
 <span class="math inline">\(t_o(n)\)</span> - Parallel overhead time</p>
 <h4 id="replication-can-reduce-communication-overhead-due-to-communication">Replication can reduce communication overhead due to communication</h4>
-</section>
-<section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide8.png" data-background-size="80%" data-background-position="center">
-<h2>R Interfaces to Low-Level Native Tools</h2>
-<aside class="notes">
-<ul>
-<li><p>we begin with <code>paralel</code>’s multicore parts</p></li>
-<li><p>continue with Foreign language via libraries (OpenBLAS, nvBLAS)</p></li>
-<li><p>go to SPMD MPI with collectives</p></li>
-<li><p>reverse of history - because we are used to a laptop</p></li>
-<li><p>Distributed - some things are recomputed rather than communicated</p></li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="bootstrap-bagging-boosting-and-crossvalidation" class="slide level2">
-<h2>Bootstrap, Bagging, Boosting, and Crossvalidation</h2>
-<ul>
-<li><strong>Bootstrap</strong>: a tool for uncertainty quantification<br>
-</li>
-<li><strong>Bagging</strong>: a tool for reducing variance</li>
-<li><strong>Boosting</strong>: a greedy method of growing a model<br>
-</li>
-<li><strong>Crossvalidation</strong>: model performance assessment
-<ul>
-<li>Estimates expected prediction error<br>
-</li>
-<li>Uses all data (no test set)</li>
-</ul></li>
-</ul>
-<p>.footnote[ <span class="math inline">\(^*\)</span>Hastie, Tibshirani, and Friedman (2009) The Elements of Statistical Learning, Second Edition, (2009). <a href="https://link.springer.com/book/10.1007/978-0-387-84858-7">link</a>]</p>
-</section>
-<section id="bootstrap---uncertainty-quantification" class="slide level2 smaller">
-<h2>Bootstrap - uncertainty quantification</h2>
-<p>Resampling data with replacement and repeating estimation<br>
-Results in a sample of estimates/predictions - can estimate its distribution</p>
-<ul>
-<li><p>Data: <span class="math inline">\({\mathbf Z} = (z_1,z_2,\ldots,z_N)\)</span>, where <span class="math inline">\(z_i = (y_i,x_i)\)</span></p></li>
-<li><p>Model: Let <span class="math inline">\(S({\mathbf Z})\)</span> be an estimated quantity from the data</p></li>
-<li><p>Sample with replacement <span class="math inline">\(B\)</span> sets of size <span class="math inline">\(N\)</span> from data</p></li>
-<li><p>Fit model to each of the reseampled <span class="math inline">\(B\)</span> sets <span class="math inline">\(\{S({\mathbf Z^{*1}}), S({\mathbf Z^{*2}}),\ldots, S({\mathbf Z^{*B}})\}\)</span></p></li>
-<li><p>Use as sample from the sampling distribution of the estimator</p>
-<ul>
-<li>For example, <span class="math inline">\(\widehat{\mbox{Var}[S({\mathbf Z})]} = \frac{1}{B−1} \sum_{b=1}^B[S({\mathbf Z^{*b}} )− \bar{S^*}]^2\)</span></li>
-</ul></li>
-</ul>
-<h4 id="parallelize-over-the-b-sets">Parallelize over the <span class="math inline">\(B\)</span> sets</h4>
-<h4 id="more-parallelism-may-exist-within-scdot">More parallelism may exist within <span class="math inline">\(S(\cdot)\)</span></h4>
-</section>
-<section id="bagging---variance-reduction" class="slide level2 smaller">
-<h2>Bagging - variance reduction</h2>
-<p>Stands for <strong>b</strong>ootstrap <strong>agg</strong>regation<br>
-Simple models (low bias and high variance models) on resampled data<br>
-Generalized by <strong>random forest</strong> to sampling subsets of predictors</p>
-<ul>
-<li><p>Let <span class="math inline">\(\widehat{S({\mathbf Z})} = \frac{1}{B}\sum_{b=1}^B S({\mathbf Z^{*b}})\)</span> (bootstrap sample mean)</p></li>
-<li><p>Majority vote if discrete</p></li>
-<li><p>Reduces variance of the estimate</p></li>
-</ul>
-<h4 id="parallelize-over-b">Parallelize over <span class="math inline">\(B\)</span></h4>
-<h4 id="more-parallelism-may-exist-within-scdot-1">More parallelism may exist within <span class="math inline">\(S(\cdot)\)</span></h4>
-</section>
-<section id="random-forest" class="slide level2 smaller">
-<h2>Random Forest</h2>
-<h4 id="for-regression-or-classification-.">for Regression or Classification <sup>1</sup>.</h4>
-<ol type="1">
-<li>For b = 1 to B:
-<ol type="1">
-<li>Draw a bootstrap sample <span class="math inline">\({\mathbf Z^∗}\)</span> of size <span class="math inline">\(N\)</span> from the training data<br>
-</li>
-<li>Grow a random-forest tree <span class="math inline">\(T_b\)</span> on <span class="math inline">\(\mathbf Z^*\)</span> until <span class="math inline">\(n_{min}\)</span> nodes achieved:
-<ol type="1">
-<li>Select <span class="math inline">\(m &lt; p\)</span> variables at random<br>
-</li>
-<li>Pick the best variable/split-point among the <span class="math inline">\(m\)</span><br>
-</li>
-<li>Split the node into two daughter nodes<br>
-</li>
-</ol></li>
-</ol></li>
-<li>Output the ensemble of trees <span class="math inline">\(\{T_b\}^B_1\)</span></li>
-</ol>
-<p>To make a prediction at <span class="math inline">\(x\)</span>:<br>
-Regression: <span class="math inline">\(\widehat{f^B_{\rm rf}}(x) = \frac{1}{B}\sum_{b=1}^B T_b(x)\)</span><br>
-Classification: Let <span class="math inline">\(\widehat{C}_b(x)\)</span> be the class prediction of the <span class="math inline">\(b\)</span>th random-forest<br>
-tree. Then <span class="math inline">\(\hat{C^B_{\rm rf}}(x)\)</span> = majority vote <span class="math inline">\(\{\widehat{C}_b(x)\}^B_1\)</span></p>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Algorithm 15.1 in Hastie, Tibshirani, and Friedman (2009). The Elements of Statistical Learning, Second Edition. <a href="https://link.springer.com/book/10.1007/978-0-387-84858-7">Link</a></p></li></ol></aside></section>
-<section id="shared-memory-considerations" class="slide level2" data-background-image="../../../pics/fork/Slide7.png" data-background-size="90%" data-background-position="center">
-<h2>Shared memory considerations</h2>
-<p><span class="math display">\[\qquad\]</span><br>
-<span class="math display">\[\qquad\]</span></p>
-<h4 id="cores-produce-separate-forests">Cores produce separate forests:</h4>
-<h4 id="combine-forests-for-prediction-or-combine-predictions">Combine forests for prediction or combine predictions?</h4>
-</section>
-<section id="boosting" class="slide level2 smaller">
-<h2>Boosting</h2>
-<p>Increasing weights on misclassified observations (fits<span class="math inline">\(^*\)</span> additive model framework)<br>
-Sequential, so parallelization within a model<br>
-Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
-<ol type="1">
-<li>Initialize weights <span class="math inline">\(w_i = \frac{1}{N}\)</span>, <span class="math inline">\(i = 1,2,...,N\)</span>.</li>
-<li>For <span class="math inline">\(m=1\)</span> to <span class="math inline">\(M\)</span>:
-<ul>
-<li>Fit a classifier <span class="math inline">\(G_m(x)\)</span> to the training data using weights <span class="math inline">\(w_i\)</span>.</li>
-<li>Compute <span class="math display">\[err_m = \frac{\sum_{i=1}^N w_i I(y_i \neq G_m(x_i))}{\sum_{i=1}{N} w_i}\]</span></li>
-<li>Compute <span class="math inline">\(\alpha_m = \log((1 − err_m)/err_m)\)</span>.</li>
-<li>Set <span class="math inline">\(w_i \leftarrow w_i · \exp[\alpha_m \cdot I( y_i \neq G_m(x_i))]\)</span>, <span class="math inline">\(i = 1, 2, \ldots, N\)</span>.</li>
-</ul></li>
-<li>Output <span class="math inline">\(G(x) = sign \left[\sum^M_{m=1} \alpha_mG_m(x)\right]\)</span>.</li>
-</ol>
-<h4 id="sequential-over-m-parallelize-within-g_mcdot">Sequential over M, parallelize within <span class="math inline">\(G_m(\cdot)\)</span></h4>
-<p>.footnote[ <span class="math inline">\(^*\)</span> Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)]</p>
-</section>
-<section id="k-fold-crossvalidation" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide8.png" data-background-size="100%" data-background-position="bottom">
-<h2>K-fold Crossvalidation</h2>
-<ul>
-<li>Let <span class="math inline">\(y = f(x, \beta, \alpha)\)</span> be a model and <span class="math inline">\(\widehat{y} = f(x, \widehat{\beta}, \alpha)\)</span> be a prediction of <span class="math inline">\(y\)</span>
-<ul>
-<li>data are <span class="math inline">\((y, x)\)</span>, parameters <span class="math inline">\(\beta\)</span>, and hyperparameters <span class="math inline">\(\alpha\)</span></li>
-<li>Given <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\widehat{\beta}\)</span> is determined by minimizing a loss function <span class="math inline">\(L(y, \widehat{y} )\)</span></li>
-</ul></li>
-<li>Randomly divide <span class="math inline">\(N\)</span> training data points into <span class="math inline">\(k\)</span> roughly equal folds (shuffle and split)</li>
-<li>Let <span class="math inline">\(\widehat{f^{-k}}\)</span> be the estimator when fold <span class="math inline">\(k\)</span> data is removed</li>
-<li>Let <span class="math inline">\(f(x,\alpha)\)</span> be an estimator with a tuning parameter <span class="math inline">\(\alpha\)</span></li>
-<li>Then average loss for a choice of <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\mbox{CV}(f,α) = \frac{1}{N}\sum_{i=1}^{N} L(y_i, \widehat{f^{-k_i}}(x_i,\alpha))\)</span></li>
-<li>Picking <span class="math inline">\(\alpha\)</span> with minimum average loss, mitigates overfitting</li>
-</ul>
-</section>
-<section id="kpms-it4i-excoderf_serial.r" class="slide level2">
-<h2><code>KPMS-IT4I-EX/code/rf_serial.r</code></h2>
-<p><code>{.r include = "code/rf_serial.r"}</code></p>
-</section>
-<section id="kpms-it4i-excoderf_cv_serial.r" class="slide level2">
-<h2><code>KPMS-IT4I-EX/code/rf_cv_serial.r</code></h2>
-<p><code>{.r include = "code/rf_cv_serial.r" lines=c(3,4,11:32)}</code></p>
-</section>
-<section id="kpms-it4i-excoderf_cv_mc.r" class="slide level2">
-<h2><code>KPMS-IT4I-EX/code/rf_cv_mc.r</code></h2>
-<p><code>{.r include = "code/rf_cv_mc.r" lines=c(3,4,11:32)}</code></p>
-</section>
-<section id="demo" class="slide level2">
-<h2>Demo …</h2>
-</section>
-<section id="matrix-libraries" class="slide level2">
-<h2>Matrix Libraries …</h2>
-</section>
-<section id="r-lapack-blas-1" class="slide level2">
-<h2>R-LAPACK-BLAS</h2>
-<p><img data-src="../../../pics/01-intro/pbdRlib.jpg"> * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library<br>
-* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</p>
-<ul>
-<li><p>LAPACK: dense and banded matrix decompositions and more</p>
-<ul>
-<li><span class="math inline">\(\quad LU\)</span> <span class="math inline">\(\quad LL^T\)</span> <span class="math inline">\(\quad QR\)</span> <span class="math inline">\(\quad UDV^T\)</span> <span class="math inline">\(\quad VD^2V^T\)</span> <span class="math inline">\(\quad\|\cdot\|_p\)</span></li>
-</ul></li>
-<li><p>Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries</p></li>
-<li><p><strong>FlexiBLAS</strong>: A BLAS and LAPACK wrapper library with runtime exchangable backends</p></li>
-</ul>
-</section>
-<section id="flexiblas" class="slide level2">
-<h2>FlexiBLAS</h2>
-<p>.footnote[ <a href="https://github.com/Enchufa2/r-flexiblas">https://github.com/Enchufa2/r-flexiblas</a><br>
-<a href="https://cran.r-project.org/package=flexiblas">https://cran.r-project.org/package=flexiblas</a>]</p>
-</section>
-<section id="example-random-forest-code" class="slide level2" data-background-image="../../../pics/fork/ML_FreySlate1991.png" data-background-size="90%" data-background-position="center">
-<h2>Example Random forest Code</h2>
-<h4 id="letter-recognition-data-20000-times-17">Letter recognition data ( <span class="math inline">\(20\,000 \times 17\)</span> )</h4>
-<p>.footnote[*Parallel Statistical Computing with R: An Illustration on Two Architectures <a href="https://arxiv.org/abs/1709.01195">arXiv:1709.01195</a>]</p>
-</section>
-<section id="random-forest-classification" class="slide level2">
-<h2>Random Forest Classification</h2>
-<h3 id="build-many-decision-trees-from-random-subsets-of-variables">Build many decision trees from random subsets of variables</h3>
-<h3 id="use-their-majority-votes-to-classify">Use their majority votes to classify</h3>
-</section>
-<section id="example-random-forest-classification-code" class="slide level2" data-background-image="../../../pics/MC/benchmark_mc.png" data-background-size="90%" data-background-position="center">
-<h2>Example Random Forest Classification Code</h2>
-<h4 id="letter-recognition-data-20000-times-17-1">Letter recognition data ( <span class="math inline">\(20\,000 \times 17\)</span> )</h4>
-</section>
-<section id="pseudo-random-number-generators-rng" class="slide level2" data-background-image="../../../pics/fork/Slide6.png" data-background-size="90%" data-background-position="center">
-<h2>Pseudo Random Number Generators (RNG)</h2>
-<div class="quarto-layout-panel" data-layout="[1,1]">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<ul>
-<li><p>Guaranteed reproducibility</p></li>
-<li><p>Possibly overlapping streams</p></li>
-<li><p>Reproducibility for same number of streams</p></li>
-<li><p>Guaranteed independent streams</p></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="kpms-it4i-excoderf_mc.r" class="slide level2">
-<h2><code>KPMS-IT4I-EX/code/rf_mc.r</code></h2>
-<p><code>{.r include = "code/rf_mc.r"}</code></p>
-</section>
-<section id="kpms-it4i-excoderf_karolina_pbs.sh" class="slide level2">
-<h2><code>KPMS-IT4I-EX/code/rf_karolina_pbs.sh</code></h2>
-<p><code>{.sh include = "code/rf_karolina_pbs.sh"}</code></p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -636,7 +413,6 @@ Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
 </div>
 </div>
 </section>
-
     </div>
   </div>
 
@@ -849,44 +625,6 @@ Discrete AdaBoost <span class="math inline">\(^*\)</span></p>
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

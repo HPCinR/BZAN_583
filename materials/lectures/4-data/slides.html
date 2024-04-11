@@ -554,8 +554,8 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  8 09:32 /projects/bckj/Team6/</code>
 <li><p><a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">TLC: Taxi and Limousine Commission</a><br></p></li>
 <li><p>Includes: pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts</p></li>
 <li><p><a href="https://tlcpolicy.maps.arcgis.com/apps/instant/portfolio/index.html?appid=be00fce0963540628e37fd7c75a6d386">Data overview</a></p></li>
-<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf">Yellow Trip Data Dictionary</a></p></li>
-<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf">Green Trips Data Dictionary</a></p></li>
+<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf">Yellow Taxi Trip Data Dictionary</a></p></li>
+<li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf">Green Taxi Trips Data Dictionary</a></p></li>
 <li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_fhv.pdf">FHV Trips Data Dictionary</a></p></li>
 <li><p><a href="https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_hvfhs.pdf">High Volume FHV Trips Data Dictionary</a></p></li>
 </ul></section><section id="yellow-taxi-trip-data" class="slide level2"><h2>Yellow Taxi Trip Data</h2>
@@ -621,10 +621,27 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/</code></pre>
 </div>
 </section><section id="yellow-taxi-trip-data-2009-01" class="slide level2"><h2>Yellow Taxi Trip Data <code>2009-01</code>
 </h2>
-<p>::: {.cell-output-stdout}<code>[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1' total 458756 -rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2' total 433048 -rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3' total 471288 -rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11' total 457M -rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet [gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12' total 466M -rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet</code> :::</p>
-</section><section id="yellow-taxi-trip-data-1" class="slide level2"><h2>Yellow Taxi Trip Data</h2>
+<div class="cell-output-stdout">
+<pre><code>[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=1'
+total 458756
+-rw-rw----+ 1 gostrouc delta_bckj 469759995 Apr  7 21:05 yellow_tripdata_2009-01.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=2'
+total 433048
+-rw-rw----+ 1 gostrouc delta_bckj 443434087 Apr  7 21:05 yellow_tripdata_2009-02.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -l 'year=2009/month=3'
+total 471288
+-rw-rw----+ 1 gostrouc delta_bckj 482592227 Apr  7 21:05 yellow_tripdata_2009-03.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=11'
+total 457M
+-rw-rw----+ 1 gostrouc delta_bckj 457M Apr  7 21:06 yellow_tripdata_2009-11.parquet
+[gostrouc@dt-login03 TLC_yellow]$ ls -lh 'year=2009/month=12'
+total 466M
+-rw-rw----+ 1 gostrouc delta_bckj 465M Apr  7 21:06 yellow_tripdata_2009-12.parquet</code></pre>
+</div>
+</section><section id="curl-yellow-taxi-trip-data" class="slide level2"><h2>
+<code>curl</code> Yellow Taxi Trip Data</h2>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' tlc_get_ym: Gets one month of TLC yellow taxi data and writes it in Hive</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' tlc_get_ym: Gets one month of TLC yellow taxi data and writes it in Hive</span></span>
 <span><span class="co">#' style directory names, such as `dest/year=2015/month=8/file_name.parquet`.</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @param ymd</span></span>
@@ -638,8 +655,8 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/</code></pre>
 <span><span class="co">#' Character URL of data source location.</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @details</span></span>
-<span><span class="co">#' Uses `method = wget` to get one month of TLC yellow taxi data into the</span></span>
-<span><span class="co">#' `dest` directory. Since `download.file()` engages `wget`</span></span>
+<span><span class="co">#' Uses `method = curl` to get one month of TLC yellow taxi data into the</span></span>
+<span><span class="co">#' `dest` directory. Since `download.file()` engages `curl`</span></span>
 <span><span class="co">#' with a `system()` call, generating these calls to `tlcYM_get()` can be </span></span>
 <span><span class="co">#' completely parallel and the data never touches R. </span></span>
 <span><span class="co">#' </span></span>
@@ -675,11 +692,11 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/</code></pre>
 <span><span class="co">#' @param last</span></span>
 <span><span class="co">#' Character "YYYY-MM" last month</span></span>
 <span><span class="co">#' @param cores</span></span>
-<span><span class="co">#' Integer number of cores to use for running `wget` instances in parallel</span></span>
+<span><span class="co">#' Integer number of cores to use for running `curl` instances in parallel</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @details</span></span>
-<span><span class="co">#' Since the function does a system call to `wget`, its time does not include</span></span>
-<span><span class="co">#' the core time used by `wget` and includes only the R function time. But</span></span>
+<span><span class="co">#' Since the function does a system call to `curl`, its time does not include</span></span>
+<span><span class="co">#' the core time used by `curl` and includes only the R function time. But</span></span>
 <span><span class="co">#' the *real* or *elapsed* time is correct.</span></span>
 <span><span class="co">#' </span></span>
 <span><span class="co">#' @returns</span></span>
@@ -696,15 +713,17 @@ drwxrws---+ 2 gostrouc delta_bckj 4096 Apr  7 21:06 'month=9'/</code></pre>
 </div>
 </section><section id="compare-csv-to-parquet-reads-in-r" class="slide level2 smaller"><h2>Compare <code>csv</code> to <code>parquet</code> reads in R</h2>
 <p><strong>arrow</strong> (parquet 0.423GB, csv 1.7GB)</p>
-<pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02arr = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
+<div class="cell-output-stdout">
+<pre><code>&gt; system.time({tlc2009.02arr = arrow::read_parquet("/projects/bckj/TLC_yellow/year=2009/month=2/yellow_tripdata_2009-02.parquet")})
    user  system elapsed 
   3.363   1.981  12.236 
 &gt; system.time({tlc2009.02arrcsv = arrow::read_csv_arrow("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
    user  system elapsed 
- 20.513  32.494  33.163 
-</code></pre>
+ 20.513  32.494  33.163 </code></pre>
+</div>
 <p><strong>readr</strong> (csv 1.7GB)</p>
-<pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02csv = readr::read_csv("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+<div class="cell-output-stdout">
+<pre><code>&gt; system.time({tlc2009.02csv = readr::read_csv("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
 Rows: 14092413 Columns: 18                                                                                         
 ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: ","
@@ -717,20 +736,242 @@ dttm  (2): Trip_Pickup_DateTime, Trip_Dropoff_DateTime
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
    user  system elapsed 
  56.194  24.529  51.976 </code></pre>
+</div>
 <p><strong>data.table</strong> (csv 1.7GB)</p>
-<pre class="cell-output-stdout"><code>&gt; system.time({tlc2009.02dtcsv = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
+<div class="cell-output-stdout">
+<pre><code>&gt; system.time({tlc2009.02dtcsv = data.table::fread("/projects/bckj/TLC_yellow_csv/year=2009/month=2/part-0.csv")})
 |--------------------------------------------------|
 |==================================================|
    user  system elapsed 
  29.299  28.551  25.260 </code></pre>
+</div>
 </section><section id="convert-your-csv-data-to-parquet" class="slide level2"><h2>Convert your <code>csv</code> data to <code>parquet</code>
 </h2>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/">arrow</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/">arrow</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="va">tlc</span> <span class="op">=</span> <span class="fu"><a href="https://arrow.apache.org/docs/r/reference/open_dataset.html">open_dataset</a></span><span class="op">(</span><span class="st">"/projects/bckj/TLC_yellow"</span><span class="op">)</span></span>
-<span><span class="va">tlc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2009</span>, <span class="va">month</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://arrow.apache.org/docs/r/reference/write_parquet.html">write_parquet</a></span><span class="op">(</span>sink <span class="op">=</span> <span class="st">"&lt;dest_ditr&gt;"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span></span>
+<span><span class="va">tlc</span> <span class="op">=</span> <span class="fu"><a href="https://arrow.apache.org/docs/r/reference/open_delim_dataset.html">open_csv_dataset</a></span><span class="op">(</span><span class="st">"/projects/bckj/TLC_yellow_csv/year=2009"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://arrow.apache.org/docs/r/reference/write_parquet.html">write_parquet</a></span><span class="op">(</span><span class="va">tlc</span>, sink <span class="op">=</span> <span class="st">"/scratch/bckj/TLCtest"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br></p>
+<p>Should work but currently fails on TLC_yellow_csv. Possibly due to second/partial conversion parquet to csv to part-parquet?</p>
+<p>Consequently, this becomes an optional portion of Assignment 4.</p>
+</section><section id="memory-use-by-r" class="slide level2 smaller"><h2>Memory Use by R</h2>
+<p><strong>memuse</strong> package</p>
+<ul>
+<li>
+<code><a href="https://rdrr.io/pkg/memuse/man/constructor.html">memuse::mu()</a></code>: memory used by an object
+<ul>
+<li>Adding option <code>prefix = "SI"</code> uses SI units (<code>1e3</code> multiples, not <code>2^10</code> multiples)</li>
+</ul>
+</li>
+<li>
+<code><a href="https://rdrr.io/pkg/memuse/man/procmem.html">memuse::Sys.procmem()</a></code>: memory of the current R process<br>
+</li>
+<li>
+<code><a href="https://rdrr.io/pkg/memuse/man/meminfo.html">memuse::Sys.meminfo()</a></code>: total available memory, and free memory</li>
+</ul>
+<p><strong>pryr</strong> package</p>
+<ul>
+<li>
+<code><a href="https://rdrr.io/pkg/pryr/man/object_size.html">pryr::object_size()</a></code>: memory used by an object<br>
+</li>
+<li>
+<code><a href="https://rdrr.io/pkg/pryr/man/mem_used.html">pryr::mem_used()</a></code>: memory of the current R process</li>
+</ul>
+<p>The two packages can disagree with each other and with Unix. Try<br>
+- <code>system2("ps", paste("-o drs,rss -p", Sys.getpid()))</code></p>
+
+<aside><div>
+<p><strong>pryr:</strong> “The details of R’s memory management are not documented in a single place. Most of the information in this chapter was gleaned from a close reading of the documentation (particularly ?Memory and ?gc), the memory profiling section of R-exts, and the SEXPs section of R-ints. The rest I figured out by reading the C source code, performing small experiments, and asking questions on R-devel. Any mistakes are entirely mine.” Hadley Wickham, <a href="http://adv-r.had.co.nz/memory.html">Advanced R</a> (Same comment could be made by the <strong>memuse</strong> package author, but I find it agrees with Unix more often)</p>
+</div></aside></section><section id="a-note-about-words" class="slide level2"><h2>A Note about Words</h2>
+<p>“<strong>batch processing</strong>”<br>
+- HPC: running scripts non-interactively (whole) - <strong>arrow</strong> package: reading data in chunks (by batches, not whole)<br><br></p>
+<p>“<strong>fork</strong>”<br>
+- HPC: Unix fork parallel process spawning<br>
+- GitHub: Creating a repository fork ( making a copy for concurrent development)</p>
+</section><section id="reading-data" class="slide level2 smaller"><h2>Reading Data</h2>
+<p>See examples in <code>BZAN_583_code/data</code></p>
+<ul>
+<li>
+<code>exploreTLC.R</code> and <code>exploreTLC.sh</code>
+</li>
+<li>
+<code>fread_exploreTLC.R</code> and <code>fread_exploreTLC.sh</code>
+</li>
+<li>
+<code>MPIexploreTLC.R</code> and <code>MPIexploreTLC.sh</code> (incomplete)</li>
+</ul></section><section id="exploretlc.r-2-months" class="slide level2"><h2>
+<code>exploreTLC.R</code>: 2 months</h2>
+<div class="cell-output-stdout">
+<pre><code>[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  146.953 MiB 
+Peak:  146.953 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.427 GiB 
+58.7 MB
+  DRS   RSS
+765391 150796
+[1] "opening dataset"
+FileSystemDataset with 12 Parquet files
+vendor_name: string
+Trip_Pickup_DateTime: string
+Trip_Dropoff_DateTime: string
+Passenger_Count: int64
+Trip_Distance: double
+Start_Lon: double
+Start_Lat: double
+Rate_Code: double
+store_and_forward: double
+End_Lon: double
+End_Lat: double
+Payment_Type: string
+Fare_Amt: double
+surcharge: double
+mta_tax: double
+Tip_Amt: double
+Tolls_Amt: double
+Total_Amt: double
+month: int32
+
+See $metadata for additional Schema metadata
+[1] "into lapply"
+   user  system elapsed 
+ 59.396   2.090  54.976 
+[1] 10.35707
+[1] "into mclapply"
+   user  system elapsed 
+ 65.569   8.483  50.902 
+[1] 10.35707
+4.336 GiB
+Size:  4.524 GiB 
+Peak:  9.906 GiB 
+4.67 GB
+[1] 27472535       19</code></pre>
+</div>
+</section><section id="exploretlc.r-4-months" class="slide level2"><h2>
+<code>exploreTLC.R</code>: 4 months</h2>
+<div class="cell-output-stdout">
+<pre><code>[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  146.883 MiB 
+Peak:  146.883 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.428 GiB 
+58.7 MB
+  DRS   RSS
+765395 150660
+[1] "opening dataset"
+FileSystemDataset with 12 Parquet files
+vendor_name: string
+Trip_Pickup_DateTime: string
+Trip_Dropoff_DateTime: string
+Passenger_Count: int64
+Trip_Distance: double
+Start_Lon: double
+Start_Lat: double
+Rate_Code: double
+store_and_forward: double
+End_Lon: double
+End_Lat: double
+Payment_Type: string
+Fare_Amt: double
+surcharge: double
+mta_tax: double
+Tip_Amt: double
+Tolls_Amt: double
+Total_Amt: double
+month: int32
+
+See $metadata for additional Schema metadata
+[1] "into lapply"
+   user  system elapsed 
+127.074   5.567 121.475 
+[1] 10.54913
+[1] "into mclapply"
+   user  system elapsed 
+135.182  29.250 117.389 
+[1] 10.54913
+8.862 GiB
+Size:   9.553 GiB 
+Peak:  22.300 GiB 
+9.46 GB
+[1] 56154689       19</code></pre>
+</div>
+</section><section id="fread_exploretlc.r-2-months" class="slide level2"><h2>
+<code>fread_exploreTLC.R</code>: 2 months</h2>
+<div class="cell-output-stdout">
+<pre><code>[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  65.391 MiB 
+Peak:  65.391 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.182 GiB 
+37.3 MB
+  DRS   RSS
+540259 82336
+[1] "opening dataset"
+[1] "into lapply"
+   user  system elapsed 
+ 37.783   6.971 515.404 
+[1] 10.35707
+[1] "into mclapply"
+   user  system elapsed 
+ 24.401   6.467  18.516 
+[1] 10.35707
+3.275 GiB
+Size:  3.357 GiB 
+Peak:  7.337 GiB 
+3.56 GB
+[1] 27472535       18</code></pre>
+</div>
+</section><section id="fread_exploretlc.r-4-months" class="slide level2"><h2>
+<code>fread_exploreTLC.R</code>: 4 months</h2>
+<div class="cell-output-stdout">
+<pre><code>[gostrouc@dt-login03 data]$ cat utk.o
+/u/gostrouc/BZAN_583_code/data
+loaded R
+Size:  65.430 MiB 
+Peak:  65.430 MiB 
+Totalram:  251.600 GiB 
+Freeram:   229.418 GiB 
+37.3 MB
+  DRS   RSS
+540263 82364
+[1] "opening dataset"
+[1] "into mclapply"
+   user  system elapsed 
+ 69.074  16.826 216.538 
+[1] 10.54913
+6.694 GiB
+Size:   6.774 GiB 
+Peak:  14.178 GiB 
+7.23 GB
+[1] 56154689       18
+[gostrouc@dt-login03 data]$ </code></pre>
+</div>
+</section><section id="issues-with-slow-data-reads-on-delta" class="slide level2"><h2>Issues with Slow Data Reads on Delta</h2>
+<ul>
+<li>Compute nodes are shared if not all cores requested
+<ul>
+<li>Can compete for I/O channels with other jobs<br>
+</li>
+<li>Tends to be much less busy in AM</li>
+</ul>
+</li>
+<li>Lustre file system optimized for large binary reads
+<ul>
+<li>That’s <code>/projects</code> and <code>/scratch</code> file systems</li>
+<li>Data sets with many files can have issues</li>
+</ul>
+</li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

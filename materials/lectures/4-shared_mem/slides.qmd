@@ -1,5 +1,5 @@
 ---
-title: "Shared Memory Parallel Computing"
+title: "Parallel Computing"
 format: 
   revealjs:
     chalkboard: true
@@ -10,7 +10,7 @@ editor: source
 
 ![](/pics/fork/Slide2.png)
 
-## Embarrassingly (Pleasingly) Parallel  
+## Embarrassingly (Pleasingly) Parallel  {.smaller}
 
 - $$t_p = \frac{t}{n} = t_n$$
 - $$\mbox{Speedup:}\quad\frac{t}{t_p} = n$$

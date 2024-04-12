@@ -38,7 +38,7 @@ Assignment: [Project Proposal](materials/assignment/3-project)
 
 *Week 4, April 8 & 10*
 
-Lectures: [File System and Data](materials/lectures/4-data), [Shared Memory Parallel](materials/lectures/4-shared_mem), [BLAS Libraries](materials/lectures/4-blas)\
+Lectures: [File System and Data](materials/lectures/4-data), [Parallel](materials/lectures/4-shared_mem), [BLAS Libraries](materials/lectures/4-blas)\
 Assignment: [Project Data](materials/assignment/4-data) 
 
 *Week 5, April 15 & 17*

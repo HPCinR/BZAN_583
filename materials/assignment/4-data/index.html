@@ -138,9 +138,11 @@ ul.task-list li input[type="checkbox"] {
 <p>Each Team has chosen a data set for their project. This assignment is to jump start the projects so that each team has a working and fast-readable data set on Delta by the end of this week.</p>
 <p>There are team directories <code>Team1</code> through <code>Team6</code> on the Delta <code>/project/bckj</code> file system.</p>
 <p><strong>Result1:</strong> Download your data set to your <code>/projects/bckj/Team#</code> directory, into a subdirectory to keep things organized.</p>
-<p><strong>Result2:</strong> Convert your data set into a <code>parquet</code> format, partitioned by a well chosen variable, using the <strong>arrow</strong> package and write it to another subdirectory under <code>/projects/bckj/Team#</code>. Good partition size is somewhere between 100 and 500 MB per</p>
+<p><strong>Result2:</strong> Convert your data set into a <code>parquet</code> format, partitioned by a well chosen variable, using the <strong>arrow</strong> package and write it to another subdirectory under <code>/projects/bckj/Team#</code>. Good partition size is somewhere between 100 and 500 MB.</p>
 <p><strong>Result3:</strong> Get the sizes of each of the two directories with <code>du -hs &lt;directory&gt;</code> and submit the text result of these commands and their output.</p>
 <p>The only output to hand in to Canvas are the four lines of Result 3. Of course, the data directories on Delta need to contain the data reported by Result3.</p>
+<p><strong>New:</strong> Result2 is now optional and Result3 requirement is now only two lines.</p>
+<p>However for your project (not required for this assignment), you should consider how long it takes to read your data into R and strategies for reducing it. One option is to break up a CSV file into smaller pieces if too big. Timing a single file read versus parallel and smaller reads would decide which is better. Another option is to consider HDF5 format via the <a href="https://bioconductor.org/packages/release/bioc/html/rhdf5.html"><strong>rhdf5</strong> package</a>. If you have many image files, consider organizing them in several directories for parallel treatment across the directories.</p>
 
 
 

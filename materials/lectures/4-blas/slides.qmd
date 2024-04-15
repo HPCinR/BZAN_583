@@ -6,6 +6,7 @@ format:
     width: 1200
     height: 800
     chalkboard: true
+    code-link: true
     code-line-numbers: false
 editor: source
 engine: knitr
@@ -19,8 +20,84 @@ engine: knitr
 
 ## BLAS Libraries
 
-### Fedora -> CentOS Stream -> Red Hat Enterprise Linux
+### Linux OS development cascade:
 
-#### R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, ...)
+Fedora $\rightarrow$ CentOS Stream $\rightarrow$ Red Hat Enterprise Linux
 
-#### cuBLAS ?
+$$\qquad$$
+
+#### Optimal: BLAS control via FlexiBLAS
+
+- R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, ...)
+
+#### On delta, we have: 
+
+- R - OpenBLAS
+
+## Set Number of Threads for Operation
+
+- `RhpcBLASctl::omp_set_num_threads()` 
+
+Also get information on threads:
+
+- `RhpcBLASctl::omp_get_num_procs()`
+- `RhpcBLASctl::omp_get_max_threads()`
+
+## Examples
+
+## Matrix Libraries ...
+
+## R-LAPACK-BLAS
+
+* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
+  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
+
+* LAPACK: matrix decompositions and more  
+
+<!--
+$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
+
+* Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,
+
+## R-LAPACK-BLAS
+![](/pics/01-intro/pbdRlib.jpg)
+* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
+  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
+
+* LAPACK: dense and banded matrix decompositions and more  
+  * $\quad LU$ $\quad LL^T$ $\quad QR$ $\quad UDV^T$ $\quad VD^2V^T$ $\quad\|\cdot\|_p$  
+
+* Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries  
+
+* **FlexiBLAS**: A BLAS and LAPACK wrapper library with runtime exchangable backends  
+
+## FlexiBLAS
+
+```{r eval=FALSE}
+library(flexiblas)
+
+# check whether FlexiBLAS is available
+flexiblas_avail()
+#> [1] TRUE
+
+# get the current backend
+flexiblas_current_backend()
+#> [1] "OPENBLAS-OPENMP"
+
+# list all available backends
+flexiblas_list()
+#> [1] "NETLIB"           "__FALLBACK__"     "BLIS-THREADS"     "OPENBLAS-OPENMP"
+#> [5] "BLIS-SERIAL"      "ATLAS"            "OPENBLAS-SERIAL"  "OPENBLAS-THREADS"
+#> [9] "BLIS-OPENMP"
+
+# get/set the number of threads
+flexiblas_set_num_threads(12)
+flexiblas_get_num_threads()
+#> [1] 12
+```
+
+.footnote[
+[https://github.com/Enchufa2/r-flexiblas](https://github.com/Enchufa2/r-flexiblas)  
+[https://cran.r-project.org/package=flexiblas](https://cran.r-project.org/package=flexiblas)
+]
+

@@ -1,0 +1,271 @@
+---
+title: "Methods Relying on Sampling: case for parallel computing"
+format: 
+  revealjs:
+    slide-number: c/t
+    width: 1200
+    height: 800
+    chalkboard: true
+    code-link: true
+    code-line-numbers: false
+editor: source
+engine: knitr
+---
+
+## Four Levels of Difficulty in Data Science Modeling {.smaller}
+
+::: {.incremental}
+
+1. Prediction (easiest)
+2. Estimation (adds uncertainty: bias and variability)
+   - consider the bootstrap for uncertainty (resampling and repeated prediction)
+3. Attribution (discerns contributors to system variability)
+   - combinatorial difficutly: does adding a variable improve prediction and reduce uncertainty (order matters)
+4. Causality (adds control of system)
+   - conditional combinatorics or experiments (subsets matter)
+   
+:::
+   
+::: {.fragment}
+
+From a practical perspective, control or causality is usually the goal!
+
+:::
+   
+::: {.fragment}
+
+#### 2, 3, and 4 involve independent repetition of prediction, with opportunities for parallel computation!
+
+:::
+
+::: aside
+
+For a deeper understanding see [Efron, B. (2020). Prediction, Estimation, and Attribution. JASA](https://doi.org/10.1080/01621459.2020.1762613) and other recent literature.
+:::
+
+::: notes
+- Motivation: high-level, not in the weeds  
+  - try to put your methodologies in this context  
+  - ask if it does not fit  
+- took 10+ years to feel confident  
+- attribution to variability (not nec cause)  
+- sampling columns   
+:::
+
+## Attribution: why combinatorial?  {.smaller}
+
+::: {.incremental}
+- Suppose we have $n$ observations on $p$ predictors:
+
+  - $y = f(x_1, x_2, \ldots, x_p) + \epsilon \qquad$ [Model]{style="color:green;"}    
+ 
+  - $\widehat{y} = \widehat{f}(x_1, x_2, \ldots, x_p) \quad \qquad$ [Model fit]{style="color:green;"} 
+ 
+  - $\frac{1}{n} || y - \widehat{y} ||_2^2 = \frac{1}{n} || y - \widehat{f} ||_2^2 \qquad$  [MSE Loss]{style="color:green;"}  
+ 
+- Let $S$ be a subset of $\{1, 2, \ldots, p\}$.  
+ 
+- Let $\widehat{f}_S$ be a model fit using a subset $S$ of the predictors and $\mbox{MSE}_{S}$ its Loss.  
+ 
+- For two subsets of predictors, $S_1 \neq S_2$ where $k \notin S_1$, $k \notin S_2$,  
+ 
+  -  in general, [$\mbox{MSE}_{\{S_1\}} - \mbox{MSE}_{\{S_1, k\}} \neq \mbox{MSE}_{\{S_2\}} - \mbox{MSE}_{\{S_2, k\}}$.]{style="color:blue;"}  
+:::
+
+::: {.fragment}
+[The contribution of $x_k$ to reducing MSE Loss depends on what else is in the model!]{style="color:blue;"}  
+ 
+[Hence combinatorial complexity of attribution!]{style="color:green;"}  
+:::
+
+::: notes
+- Model: regression, lin or nonlin, nn, rand forest, boosting, bagging
+- Assumptions on $f$ and $x$ can make this easier, e.g. lasso and oracle methods
+:::
+
+## Methods that Use Repeated Prediction {.smaller}
+
+::: {.incremental}
+- **Bootstrap**: a tool for uncertainty quantification  
+  - Resample 
+- **Bagging**: a tool for reducing variance
+  - Average many simple models
+- **Boosting**: a greedy method of growing a model  
+  - Repeatedly model previous model error (**Sequential!**)
+- **Crossvalidation**: model performance assessment tool, hyperparameter optimization
+  - Estimate out-of-sample Loss
+:::  
+
+::: aside
+[Hastie, Tibshirani, and Friedman (2009) The Elements of Statistical Learning, Second Edition,  (2009)](https://link.springer.com/book/10.1007/978-0-387-84858-7)
+:::
+
+::: notes
+lasso aims at attribution (variable selection)
+assumptions on $f$ and crossvalidation
+:::
+
+## Bootstrap - uncertainty quantification {background-image="/pics/boot/bootstrap.png" background-size="70%" background-position="bottom".smaller}
+
+[Resample data with replacement and repeat estimation/prediction]{style="color:green;"}   
+
+- **Data:**  ${\mathbf Z} = (z_1,z_2,\ldots,z_N)$, where $z_i = (y_i,x_i)$  
+
+- **Model:** Let $\mu({\mathbf Z})$ be an estimated/predicted quantity from the data  
+
+- Sample with replacement $B$ sets of size $N$ from data  
+
+- Compute $\mu()$ from each of the reseampled sets $\{\widehat{\mu({\mathbf Z^{*1}})}, \widehat{\mu({\mathbf Z^{*2}})},\ldots, \widehat{\mu({\mathbf Z^{*B}})}\}$  
+
+- Produces a sample from the estimator/predictor distribution
+- [Many characterizations are now possible:]{style="color:green;"}  
+  - [mean, variance, median, quantiles, density estimate, etc.]{style="color:green;"} 
+
+#### Parallelize over the $B$ sets (more parallelism may exist within $\mu(\cdot)$)
+
+::: notes
+- a weight vector (0, 1, 2, ... )
+:::
+
+
+## Bagging - variance reduction {background-image="/pics/boot/bootstrap.png" background-size="70%" background-position="bottom".smaller}
+
+**b**ootstrap **agg**regation  
+<br>
+
+[Simple modelswith low bias and **high** variance on resampled data]{style="color:green;"}  
+Generalized by **random forest** to sampling subsets of predictors  
+
+- **Regression:** $\widehat{\mu({\mathbf Z})} = \frac{1}{B}\sum_{b=1}^B \widehat{\mu({\mathbf Z^{*b}})}$  (bootstrap sample mean)  
+
+- **Classification:** Majority vote  
+
+- Bagging reduces variance to give a [low bias and **low** variance]{style="color:green;"} estimate
+
+#### Parallelize over $B$ (more parallelism may exist within $\mu(\cdot)$)  
+
+
+## Random Forest {background-image="/pics/boot/randomforest.png" background-size="60%" background-position="bottom right".smaller}
+
+
+1. [For b = 1 to B:]{style="color:green;"}     
+   i. [Draw a bootstrap sample ${\mathbf Z^∗}$ from the training data]{style="color:green;"}    
+   ii. [Grow a random-forest tree $T_b$ on $\mathbf Z^*$ until $n_{min}$ nodes achieved:]{style="color:green;"}   
+        a. [Select $m < p$ variables at random]{style="color:green;"}   
+        b. [Pick the best variable/split-point among the $m$]{style="color:green;"}   
+        c. [Split the node into two daughter nodes]{style="color:green;"}   
+2. [Output the ensemble of trees $\{T_b\}^B_1$]{style="color:green;"}   
+
+
+**Regression at $x$:** average the predictions   
+of trees in the ensemble $\frac{1}{B}\sum_{b=1}^B \widehat{T}_b(x)$   
+
+**Classification of $x$:**   
+majority vote class prediction $\{\widehat{C}_b(x)\}^B_1$  
+
+::: aside
+[Algorithm 15.1 in Hastie, et al. (2009). The Elements of Statistical Learning,  
+Second Edition](https://link.springer.com/book/10.1007/978-0-387-84858-7)
+::: 
+
+::: notes
+- promotes diversity in trees  
+- a mathematical proof that diversity is an optimization strategy
+  - prevents dominance by few strong predictors
+:::
+
+<!-- not of interest to easy parallelization
+## Shared memory considerations {background-image="/pics/fork/Slide7.png" background-size="90%" background-position="center"}  
+
+$$\qquad$$  
+$$\qquad$$  
+
+#### Cores produce separate forests:  
+#### Combine forests for prediction or combine predictions?  
+
+## Boosting {.smaller}
+
+Increasing weights on misclassified observations (fits$^*$ additive model framework)  
+Sequential, so parallelization within a model  
+Discrete AdaBoost $^*$
+
+1. Initialize weights $w_i = \frac{1}{N}$, $i = 1,2,...,N$.
+2. For $m=1$ to $M$:
+   * Fit a classifier $G_m(x)$ to the training data using weights $w_i$.
+   * Compute $$err_m = \frac{\sum_{i=1}^N w_i I(y_i \neq G_m(x_i))}{\sum_{i=1}{N} w_i}$$
+   * Compute $\alpha_m = \log((1 − err_m)/err_m)$.
+   * Set $w_i \leftarrow w_i · \exp[\alpha_m \cdot I( y_i \neq G_m(x_i))]$, $i = 1, 2, \ldots, N$.
+3. Output $G(x) = sign \left[\sum^M_{m=1} \alpha_mG_m(x)\right]$.
+
+#### Sequential over M, parallelize within $G_m(\cdot)$
+
+.footnote[
+$^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
+]
+-->
+
+## K-fold Crossvalidation {background-image="/pics/fork/fork8.png" background-size="80%" background-position="bottom" .smaller}
+
+::: {.incremental}
+- Let $y = f(x, \beta, \alpha)$ be a model and $\widehat{y} = f(x, \widehat{\beta}, \alpha)$ be the model prediction of $y$
+  - $(y, x)$ are data, $\beta$ are model parameters, and $\alpha$ are model hyperparameters
+    - Example: Random forest $\beta$ are split-points, $\alpha = n_\min$ is minimum number of nodes in a tree
+  - For a fixed $\alpha$, $\widehat{\beta}$ minimizes a loss function $L(y, \widehat{y} )$
+- Randomly divide $N$ training data points into $k$ roughly equal folds (shuffle and split)
+- Let $\widehat{y_{-i}(\alpha)} = f(x_{-i}, \widehat{\beta}, \alpha)$ be the prediction when fold $i$ data is removed 
+- Then average loss for a choice of $\alpha$ is $\frac{1}{N}\sum_{i=1}^{N} L(y_i, \widehat{y_{-i}}(\alpha))$
+- Taking $\alpha$ with minimum average loss, gives best expected generalization
+:::
+
+## Example Random forest Code {background-image="/pics/fork/ML_FreySlate1991.png" background-size="90%" background-position="center"}
+
+#### Letter recognition data ( $20\,000 \times 17$ )
+
+::: aside
+Adapted from: Parallel Statistical Computing with R: An Illustration on Two Architectures [arXiv:1709.01195](https://arxiv.org/abs/1709.01195)
+:::
+
+## `rf_serial.r`  
+```{.r code-line-numbers="|5-9|11|12|14"}
+{{< include _code/rf_serial.R >}}
+```
+
+## `rf_mc.r`
+```{.r code-line-numbers="|1|4|6-10|12|13|14"}
+{{< include _code/rf_mc.R >}} 
+```
+
+## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="80%" background-position="center"}
+
+::: notes
+* we begin with `paralel`'s multicore parts
+* continue with Foreign language via libraries (OpenBLAS, nvBLAS)
+* go to SPMD MPI with collectives
+
+* reverse of history - because we are used to a laptop 
+* Distributed - some things are recomputed rather than communicated
+:::
+
+## Demo ...
+
+
+## Random Forest Classification
+
+### Build many decision trees from random subsets of variables
+
+### Use their majority votes to classify
+
+## Example Random Forest Classification Code {background-image="/pics/MC/benchmark_mc.png" background-size="90%" background-position="center"}  
+#### Letter recognition data ( $20\,000 \times 17$ )
+
+
+## Pseudo Random Number Generators (RNG) {background-image="/pics/fork/Slide6.png" background-size="90%" background-position="center"}
+
+::: {layout="[1,1]"}
+* Guaranteed reproducibility  
+
+* Possibly overlapping streams
+  
+* Reproducibility for same number of streams
+* Guaranteed independent streams 
+:::

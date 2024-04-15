@@ -1,17 +1,20 @@
 ---
-title: "Parallel Computing"
+title: "Measurement and terminology of parallel speedup"
 format: 
   revealjs:
+    slide-number: c/t
+    width: 1200
+    height: 800
     chalkboard: true
+    code-link: true
+    code-line-numbers: false
 editor: source
+engine: knitr
 ---
 
-## Measurement and terminology of parallel speedup  
+## Embarrassingly (Pleasingly) Parallel {background-image="/pics/fork/Slide2.png" background-size="100%" background-position="center" .smaller}  
 
-![](/pics/fork/Slide2.png)
-
-## Embarrassingly (Pleasingly) Parallel  {.smaller}
-
+$$\qquad$$  
 - $$t_p = \frac{t}{n} = t_n$$
 - $$\mbox{Speedup:}\quad\frac{t}{t_p} = n$$
 $t$ - Serial time  
@@ -19,11 +22,14 @@ $n$ - Number of chunks (or processes)
 $t_n$ - Single chunk time with $n$ chunks   
 $t_p$ - Parallel time  
 
-## Serial Section (Amdahl's Law) {background-image="/pics/fork/Slide3.png" background-size="90%" background-position="center" .smaller}  
+#### Best case scenario: no overhead, no communication  
 
+## Serial Section (Amdahl's Law) {background-image="/pics/fork/Slide3.png" background-size="100%" background-position="center" .smaller}  
+
+$$\qquad$$
 $$\qquad$$  
 $$t_p = t_s + t_n > t_s$$  
-$$\mbox{Max Speedup:}\quad\lim_{n \to \infty}\frac{t}{t_p} = \frac{t}{t_s}$$   
+$$\mbox{Maximum Speedup:}\quad\lim_{n \to \infty}\frac{t}{t_p} = \frac{t}{t_s}$$   
 
 $t$ - Serial time (**fixed**)  
 $n$ - Number of chunks (or processes)  
@@ -33,9 +39,10 @@ $t_s$ - Serial section time
 
 #### Strong Scaling: fixed work, increasing resources  
 
-## Serial Section (Gustafson's Law) {background-image="/pics/fork/Slide3.png" background-size="90%" background-position="center" .smaller}  
+## Serial Section (Gustafson's Law) {background-image="/pics/fork/Slide3.png" background-size="100%" background-position="center" .smaller}  
 
 $$\qquad$$  
+$$\qquad$$
 $$t_p = t_s + t_n$$  
 $$\mbox{Speedup:}\quad\frac{t}{t_p} = \frac{t_s + nt_n}{t_s + t_n} = O(n)$$   
 
@@ -51,9 +58,10 @@ $t_s$ - Serial section time
 Weak: misnomer: the speedup is actually great
 :::
 
-## Parallel Overhead {background-image="/pics/fork/Slide4.png" background-size="90%" background-position="center" .smaller}
+## Parallel Overhead {background-image="/pics/fork/Slide4.png" background-size="100%" background-position="center" .smaller}
 
-$$\qquad$$  $$\qquad$$  
+$$\qquad$$  
+$$\qquad$$  
 $$t_p = t_s + t_n + t_o(n)$$  
 $t$ - Serial time  
 $n$ - Number of processes  
@@ -62,11 +70,10 @@ $t_p$ - Parallel time
 $t_s$ - Serial section time  
 $t_o(n)$ - Parallel overhead time  
 
-## Replication of Serial Section (Distirbuted) {background-image="/pics/fork/Slide5.png" background-size="90%" background-position="center" .smaller}
+## Replication of Serial Section (Distirbuted) {background-image="/pics/fork/Slide5.png" background-size="100%" background-position="center" .smaller}
 
-$$\qquad$$  $$\qquad$$  $$\qquad$$  $$\qquad$$  
-
-#### Suppose the serial section is computed on one rank and sent to all ranks. Then overhead is a function of $n$!
+$$\qquad$$  
+$$\qquad$$  $$\qquad$$  $$\qquad$$  
 
 $t$ - Serial time  
 $n$ - Number of processes   

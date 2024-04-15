@@ -109,19 +109,24 @@ assumptions on $f$ and crossvalidation
 
 [Resample data with replacement and repeat estimation/prediction]{style="color:green;"}   
 
+::: {.incremental}
 - **Data:**  ${\mathbf Z} = (z_1,z_2,\ldots,z_N)$, where $z_i = (y_i,x_i)$  
 
 - **Model:** Let $\mu({\mathbf Z})$ be an estimated/predicted quantity from the data  
 
 - Sample with replacement $B$ sets of size $N$ from data  
 
-- Compute $\mu()$ from each of the reseampled sets $\{\widehat{\mu({\mathbf Z^{*1}})}, \widehat{\mu({\mathbf Z^{*2}})},\ldots, \widehat{\mu({\mathbf Z^{*B}})}\}$  
+- Compute $\mu()$ from each of the reseampled sets
+$\{\widehat{\mu({\mathbf Z^{*1}})}, \widehat{\mu({\mathbf Z^{*2}})},\ldots, \widehat{\mu({\mathbf Z^{*B}})}\}$  
 
 - Produces a sample from the estimator/predictor distribution
 - [Many characterizations are now possible:]{style="color:green;"}  
   - [mean, variance, median, quantiles, density estimate, etc.]{style="color:green;"} 
+:::
 
+::: fragment
 #### Parallelize over the $B$ sets (more parallelism may exist within $\mu(\cdot)$)
+:::
 
 ::: notes
 - a weight vector (0, 1, 2, ... )
@@ -136,18 +141,21 @@ assumptions on $f$ and crossvalidation
 [Simple modelswith low bias and **high** variance on resampled data]{style="color:green;"}  
 Generalized by **random forest** to sampling subsets of predictors  
 
+::: {.incremental}
 - **Regression:** $\widehat{\mu({\mathbf Z})} = \frac{1}{B}\sum_{b=1}^B \widehat{\mu({\mathbf Z^{*b}})}$  (bootstrap sample mean)  
 
 - **Classification:** Majority vote  
 
 - Bagging reduces variance to give a [low bias and **low** variance]{style="color:green;"} estimate
+:::
 
+::: fragment
 #### Parallelize over $B$ (more parallelism may exist within $\mu(\cdot)$)  
-
+:::
 
 ## Random Forest {background-image="/pics/boot/randomforest.png" background-size="60%" background-position="bottom right".smaller}
 
-
+::: fragment
 1. [For b = 1 to B:]{style="color:green;"}     
    i. [Draw a bootstrap sample ${\mathbf Z^∗}$ from the training data]{style="color:green;"}    
    ii. [Grow a random-forest tree $T_b$ on $\mathbf Z^*$ until $n_{min}$ nodes achieved:]{style="color:green;"}   
@@ -155,13 +163,15 @@ Generalized by **random forest** to sampling subsets of predictors
         b. [Pick the best variable/split-point among the $m$]{style="color:green;"}   
         c. [Split the node into two daughter nodes]{style="color:green;"}   
 2. [Output the ensemble of trees $\{T_b\}^B_1$]{style="color:green;"}   
+:::
 
-
+::: fragment
 **Regression at $x$:** average the predictions   
 of trees in the ensemble $\frac{1}{B}\sum_{b=1}^B \widehat{T}_b(x)$   
 
 **Classification of $x$:**   
 majority vote class prediction $\{\widehat{C}_b(x)\}^B_1$  
+:::
 
 ::: aside
 [Algorithm 15.1 in Hastie, et al. (2009). The Elements of Statistical Learning,  
@@ -271,19 +281,21 @@ Taken from: Parallel Statistical Computing with R: An Illustration on Two Archit
 ```
 
 ## `rf_mc.sh`
-```{.bash code-line-numbers="|1|4|6-10|12|13|14"}
+```{.bash}
 {{< include _code/rf_mc.sh >}} 
 ```
 
 ## Crossvalidation Example
 <br>
 
-### Random forest $m$, the number of predictors sampled
+### Random forest:
+
+$m$, the number of predictors sampled
 <br>
 
-### The defaults are:
+#### The defaults are:
 - $m = p/3$
-- 
+- $\ldots$
 
 ## `rf_cv_serial.R`  
 ```{.r}
@@ -291,7 +303,7 @@ Taken from: Parallel Statistical Computing with R: An Illustration on Two Archit
 ```
 
 ## `rf_cv_serial.R`  
-```{.r code-line-numbers="|5-9|11|12|14"}
+```{.r code-line-numbers="|"}
 {{< include _code/rf_cv_serial.R >}}
 ```
 
@@ -301,7 +313,7 @@ Taken from: Parallel Statistical Computing with R: An Illustration on Two Archit
 ```
 
 ## `rf_cv_mc.R`
-```{.r code-line-numbers="|1|4|6-10|12|13|14"}
+```{.r code-line-numbers="|"}
 {{< include _code/rf_cv_mc.R >}} 
 ```
 

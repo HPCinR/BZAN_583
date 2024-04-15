@@ -1,0 +1,18 @@
+---
+title: "Resampling"
+editor: source
+---
+
+Do a scaling study of one resampling method (bootstrap, bagging, random forest, crossvalidation) on your group's data. This can become part of your project, but if you prefer to use other data, use one month of the yellow taxi data from any year on Delta. If in doubt on what to choose or have other ideas, please consult the instructor.
+
+**Result1:** The serial code and a paragraph on what is your estimator/prediction and its resampling accomplishing.
+
+**Result2:** The parallel code.
+
+**Result3:** Delta compute node times for  
+- serial code  
+- 1-core mclapply  
+- 2-core mclapply  
+- 4-core mclapply  
+- 8-core mclapply  
+- 16-core mclapply  

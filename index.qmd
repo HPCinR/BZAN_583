@@ -49,13 +49,13 @@ Assignment: [Resampling Estimators](5-resampling)
 *Week 6, April 22 & 24*
 
 Lectures: [LLM or Torch for R](materials/lectures/6-nn)\
-Assignment: [A classification task](materials/assignment/6-nn) 
+Assignment: [Starter Code](materials/assignment/6-nn) 
 <!-- LLM coding or torch week? -->
 
 *Week 7, April 29 & May 1*
 
 Lectures: [Distributed Computing](materials/lectures/6-distributed)\
-Assignment: [pbdMPI application](materials/assignment/6-mpi) 
+Assignment?: [pbdMPI in Project](materials/assignment/6-mpi) 
 <!-- simple distributed (mapreduce & spmd MPI) and projects -->
 
 *Week 8, May 6*

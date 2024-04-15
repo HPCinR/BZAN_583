@@ -10,7 +10,7 @@
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.549">
-<title>HPC for Data Science in R - BZAN 583 - BLAS Libraries</title>
+<title>HPC for Data Science in R - BZAN 583 - Measurement and terminology of parallel speedup</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -326,63 +326,40 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center"><h1 class="title">BLAS Libraries</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Measurement and terminology of parallel speedup</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section><section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center"><h2>R Interfaces to Low-Level Native Tools</h2>
-</section><section id="parallelmclapply" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware9.png" data-background-size="80%" data-background-position="center"><h2><code>parallel::mclapply()</code></h2>
-</section><section id="blas-libraries" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware10.png" data-background-size="80%" data-background-position="center"><h2>BLAS Libraries</h2>
-</section><section id="blas-libraries-1" class="slide level2"><h2>BLAS Libraries</h2>
-<h3 id="linux-os-development-cascade">Linux OS development cascade:</h3>
-<p>Fedora <span class="math inline">\(\rightarrow\)</span> CentOS Stream <span class="math inline">\(\rightarrow\)</span> Red Hat Enterprise Linux</p>
-<p><span class="math display">\[\qquad\]</span></p>
-<h4 id="optimal-blas-control-via-flexiblas">Optimal: BLAS control via FlexiBLAS</h4>
-<ul>
-<li>R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)</li>
-</ul>
-<h4 id="on-delta-we-have">On delta, we have:</h4>
-<ul>
-<li>R - OpenBLAS</li>
-</ul></section><section id="set-number-of-threads-for-operation" class="slide level2"><h2>Set Number of Threads for Operation</h2>
-<ul>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_set_num_threads()</a></code></li>
-</ul>
-<p>Also get information on threads:</p>
-<ul>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_num_procs()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_max_threads()</a></code></li>
-</ul></section><section id="examples" class="slide level2"><h2>Examples</h2>
-</section><section id="matrix-libraries" class="slide level2"><h2>Matrix Libraries …</h2>
-</section><section id="r-lapack-blas" class="slide level2"><h2>R-LAPACK-BLAS</h2>
-<ul>
-<li>BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library
-<ul>
-<li>vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</li>
-</ul>
-</li>
-<li>LAPACK: matrix decompositions and more</li>
-</ul>
-<!--
-$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><ul>
-<li>Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,</li>
-</ul></section><section id="r-lapack-blas-1" class="slide level2"><h2>R-LAPACK-BLAS</h2>
-<p><img data-src="../../../pics/01-intro/pbdRlib.jpg"> * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library<br>
-* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</p>
-<ul>
-<li>
-<p>LAPACK: dense and banded matrix decompositions and more</p>
-<ul>
-<li>
-<span class="math inline">\(\quad LU\)</span> <span class="math inline">\(\quad LL^T\)</span> <span class="math inline">\(\quad QR\)</span> <span class="math inline">\(\quad UDV^T\)</span> <span class="math inline">\(\quad VD^2V^T\)</span> <span class="math inline">\(\quad\|\cdot\|_p\)</span>
-</li>
-</ul>
-</li>
-<li><p>Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries</p></li>
-<li><p><strong>FlexiBLAS</strong>: A BLAS and LAPACK wrapper library with runtime exchangable backends</p></li>
-</ul></section><section id="flexiblas" class="slide level2"><h2>FlexiBLAS</h2>
-<p>.footnote[ <a href="https://github.com/Enchufa2/r-flexiblas">https://github.com/Enchufa2/r-flexiblas</a><br><a href="https://cran.r-project.org/package=flexiblas">https://cran.r-project.org/package=flexiblas</a>]</p>
+</section><section id="embarrassingly-pleasingly-parallel" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide2.png" data-background-size="100%" data-background-position="center"><h2>Embarrassingly (Pleasingly) Parallel</h2>
+<p><span class="math display">\[\qquad\]</span><br>
+- <span class="math display">\[t_p = \frac{t}{n} = t_n\]</span> - <span class="math display">\[\mbox{Speedup:}\quad\frac{t}{t_p} = n\]</span> <span class="math inline">\(t\)</span> - Serial time<br><span class="math inline">\(n\)</span> - Number of chunks (or processes)<br><span class="math inline">\(t_n\)</span> - Single chunk time with <span class="math inline">\(n\)</span> chunks<br><span class="math inline">\(t_p\)</span> - Parallel time</p>
+<h4 id="best-case-scenario-no-overhead-no-communication">Best case scenario: no overhead, no communication</h4>
+</section><section id="serial-section-amdahls-law" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide3.png" data-background-size="100%" data-background-position="center"><h2>Serial Section (Amdahl’s Law)</h2>
+<p><span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span><br><span class="math display">\[t_p = t_s + t_n &gt; t_s\]</span><br><span class="math display">\[\mbox{Maximum Speedup:}\quad\lim_{n \to \infty}\frac{t}{t_p} = \frac{t}{t_s}\]</span></p>
+<p><span class="math inline">\(t\)</span> - Serial time (<strong>fixed</strong>)<br><span class="math inline">\(n\)</span> - Number of chunks (or processes)<br><span class="math inline">\(t_n\)</span> - single chunk time with <span class="math inline">\(n\)</span> chunks<br><span class="math inline">\(t_p\)</span> - Parallel time<br><span class="math inline">\(t_s\)</span> - Serial section time</p>
+<h4 id="strong-scaling-fixed-work-increasing-resources">Strong Scaling: fixed work, increasing resources</h4>
+</section><section id="serial-section-gustafsons-law" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide3.png" data-background-size="100%" data-background-position="center"><h2>Serial Section (Gustafson’s Law)</h2>
+<p><span class="math display">\[\qquad\]</span><br><span class="math display">\[\qquad\]</span> <span class="math display">\[t_p = t_s + t_n\]</span><br><span class="math display">\[\mbox{Speedup:}\quad\frac{t}{t_p} = \frac{t_s + nt_n}{t_s + t_n} = O(n)\]</span></p>
+<p><span class="math inline">\(t\)</span> - Serial time (<strong>growing</strong>: <span class="math inline">\(t_{2n} = 2t_n\)</span> )<br><span class="math inline">\(n\)</span> - Number of chunks (or processes)<br><span class="math inline">\(t_n\)</span> - single chunk time with <span class="math inline">\(n\)</span> chunks<br><span class="math inline">\(t_p\)</span> - Parallel time<br><span class="math inline">\(t_s\)</span> - Serial section time</p>
+<h4 id="weak-scaling-increasing-work-increasing-resources">Weak Scaling: increasing work, increasing resources</h4>
+<aside class="notes"><p>Weak: misnomer: the speedup is actually great</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="parallel-overhead" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide4.png" data-background-size="100%" data-background-position="center"><h2>Parallel Overhead</h2>
+<p><span class="math display">\[\qquad\]</span><br><span class="math display">\[\qquad\]</span><br><span class="math display">\[t_p = t_s + t_n + t_o(n)\]</span><br><span class="math inline">\(t\)</span> - Serial time<br><span class="math inline">\(n\)</span> - Number of processes<br><span class="math inline">\(t_n\)</span> - single chunk time with <span class="math inline">\(n\)</span> chunks<br><span class="math inline">\(t_p\)</span> - Parallel time<br><span class="math inline">\(t_s\)</span> - Serial section time<br><span class="math inline">\(t_o(n)\)</span> - Parallel overhead time</p>
+</section><section id="replication-of-serial-section-distirbuted" class="slide level2 smaller" data-background-image="../../../pics/fork/Slide5.png" data-background-size="100%" data-background-position="center"><h2>Replication of Serial Section (Distirbuted)</h2>
+<p><span class="math display">\[\qquad\]</span><br><span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span> <span class="math display">\[\qquad\]</span></p>
+<p><span class="math inline">\(t\)</span> - Serial time<br><span class="math inline">\(n\)</span> - Number of processes<br><span class="math inline">\(t_n\)</span> - single chunk time with <span class="math inline">\(n\)</span> chunks<br><span class="math inline">\(t_p\)</span> - Parallel time<br><span class="math inline">\(t_s\)</span> - Serial section time<br><span class="math inline">\(t_o(n)\)</span> - Parallel overhead time</p>
+<h4 id="replication-can-reduce-communication-overhead-due-to-communication">Replication can reduce communication overhead due to communication</h4>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

@@ -7,16 +7,16 @@
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
-<title>HPC for Data Science in R - BZAN 583 - BLAS Libraries</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
-<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
-<style>
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.549">
+
+  <title>HPC for Data Science in R - BZAN 583 - Untitled</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,14 +29,14 @@
       vertical-align: middle;
     }
   </style>
-<link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
-<link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-<link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-<link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-<link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-<style type="text/css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
 
   .callout {
     margin-top: 1em;
@@ -234,7 +234,7 @@
   }
 
   </style>
-<style type="text/css">
+  <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -326,63 +326,15 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center"><h1 class="title">BLAS Libraries</h1>
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Untitled</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section><section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center"><h2>R Interfaces to Low-Level Native Tools</h2>
-</section><section id="parallelmclapply" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware9.png" data-background-size="80%" data-background-position="center"><h2><code>parallel::mclapply()</code></h2>
-</section><section id="blas-libraries" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware10.png" data-background-size="80%" data-background-position="center"><h2>BLAS Libraries</h2>
-</section><section id="blas-libraries-1" class="slide level2"><h2>BLAS Libraries</h2>
-<h3 id="linux-os-development-cascade">Linux OS development cascade:</h3>
-<p>Fedora <span class="math inline">\(\rightarrow\)</span> CentOS Stream <span class="math inline">\(\rightarrow\)</span> Red Hat Enterprise Linux</p>
-<p><span class="math display">\[\qquad\]</span></p>
-<h4 id="optimal-blas-control-via-flexiblas">Optimal: BLAS control via FlexiBLAS</h4>
-<ul>
-<li>R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)</li>
-</ul>
-<h4 id="on-delta-we-have">On delta, we have:</h4>
-<ul>
-<li>R - OpenBLAS</li>
-</ul></section><section id="set-number-of-threads-for-operation" class="slide level2"><h2>Set Number of Threads for Operation</h2>
-<ul>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_set_num_threads()</a></code></li>
-</ul>
-<p>Also get information on threads:</p>
-<ul>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_num_procs()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_max_threads()</a></code></li>
-</ul></section><section id="examples" class="slide level2"><h2>Examples</h2>
-</section><section id="matrix-libraries" class="slide level2"><h2>Matrix Libraries …</h2>
-</section><section id="r-lapack-blas" class="slide level2"><h2>R-LAPACK-BLAS</h2>
-<ul>
-<li>BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library
-<ul>
-<li>vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</li>
-</ul>
-</li>
-<li>LAPACK: matrix decompositions and more</li>
-</ul>
-<!--
-$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><ul>
-<li>Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,</li>
-</ul></section><section id="r-lapack-blas-1" class="slide level2"><h2>R-LAPACK-BLAS</h2>
-<p><img data-src="../../../pics/01-intro/pbdRlib.jpg"> * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library<br>
-* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</p>
-<ul>
-<li>
-<p>LAPACK: dense and banded matrix decompositions and more</p>
-<ul>
-<li>
-<span class="math inline">\(\quad LU\)</span> <span class="math inline">\(\quad LL^T\)</span> <span class="math inline">\(\quad QR\)</span> <span class="math inline">\(\quad UDV^T\)</span> <span class="math inline">\(\quad VD^2V^T\)</span> <span class="math inline">\(\quad\|\cdot\|_p\)</span>
-</li>
-</ul>
-</li>
-<li><p>Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries</p></li>
-<li><p><strong>FlexiBLAS</strong>: A BLAS and LAPACK wrapper library with runtime exchangable backends</p></li>
-</ul></section><section id="flexiblas" class="slide level2"><h2>FlexiBLAS</h2>
-<p>.footnote[ <a href="https://github.com/Enchufa2/r-flexiblas">https://github.com/Enchufa2/r-flexiblas</a><br><a href="https://cran.r-project.org/package=flexiblas">https://cran.r-project.org/package=flexiblas</a>]</p>
+</section>
+<section id="a-short-excursion" class="slide level2">
+<h2>A short excursion</h2>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -390,10 +342,27 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><
 </div>
 </div>
 </section>
-</div>
+    </div>
   </div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -426,7 +395,7 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -551,9 +520,9 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1200,
+        width: 1050,
 
-        height: 800,
+        height: 700,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -584,42 +553,8 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><
           RevealZoom
         ]
       });
-    </script><script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script><script id="quarto-html-after-body" type="application/javascript">
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -773,6 +708,6 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><
       }
     });
     </script>
-
+    
 
 </body></html>

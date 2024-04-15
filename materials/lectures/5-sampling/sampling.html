@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<title>HPC for Data Science in R - BZAN 583 - ML/Stat Methods Relying on Sampling: case for parallel computing</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+<link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+<link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+<link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+<style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">ML/Stat Methods Relying on Sampling: case for parallel computing</h1>
+
+<div class="quarto-title-authors">
+</div>
+
+</section><section id="four-levels-of-difficulty-in-data-science-modeling" class="slide level2 smaller"><h2>Four Levels of Difficulty in Data Science Modeling</h2>
+<div>
+<ol type="1">
+<li class="fragment">Prediction (easiest)</li>
+<li class="fragment">Estimation (adds uncertainty: bias and variability)
+<ul>
+<li class="fragment">consider the bootstrap for uncertainty (resampling and repeated prediction)</li>
+</ul>
+</li>
+<li class="fragment">Attribution (discerns contributors to system variability)
+<ul>
+<li class="fragment">combinatorial difficutly: does adding a variable improve prediction and reduce uncertainty (order matters)</li>
+</ul>
+</li>
+<li class="fragment">Causality (adds control of system)
+<ul>
+<li class="fragment">conditional combinatorics or experiments (subsets matter)</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="fragment">
+<p>From a practical perspective, control or causality is usually the goal!</p>
+</div>
+<div class="fragment">
+<!-- -->
+<h4 id="and-4-involve-independent-repetition-of-prediction-with-opportunities-for-parallel-computation">2, 3, and 4 involve independent repetition of prediction, with opportunities for parallel computation!</h4>
+</div>
+
+<aside class="notes"><ul>
+<li>Motivation: high-level, not in the weeds
+<ul>
+<li>try to put your methodologies in this context<br>
+</li>
+<li>ask if it does not fit<br>
+</li>
+</ul>
+</li>
+<li>took 10+ years to feel confident<br>
+</li>
+<li>attribution to variability (not nec cause)<br>
+</li>
+<li>sampling columns<br>
+</li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside><aside><div>
+<p>For a deeper understanding see <a href="https://doi.org/10.1080/01621459.2020.1762613">Efron, B. (2020). Prediction, Estimation, and Attribution. JASA</a> and other recent literature.</p>
+</div></aside></section><section id="attribution-why-combinatorial" class="slide level2 smaller"><h2>Attribution: why combinatorial?</h2>
+<div>
+<ul>
+<li class="fragment">
+<p>Suppose we have <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> predictors:</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(y = f(x_1, x_2, \ldots, x_p) + \epsilon \qquad\)</span> <span style="color:green;">Model</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\widehat{y} = \widehat{f}(x_1, x_2, \ldots, x_p) \quad \qquad\)</span> <span style="color:green;">Model fit</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\frac{1}{n} || y - \widehat{y} ||_2^2 = \frac{1}{n} || y - \widehat{f} ||_2^2 \qquad\)</span> <span style="color:green;">MSE Loss</span></p></li>
+</ul>
+</li>
+<li class="fragment"><p>Let <span class="math inline">\(S\)</span> be a subset of <span class="math inline">\(\{1, 2, \ldots, p\}\)</span>.</p></li>
+<li class="fragment"><p>Let <span class="math inline">\(\widehat{f}_S\)</span> be a model fit using a subset <span class="math inline">\(S\)</span> of the predictors and <span class="math inline">\(\mbox{MSE}_{S}\)</span> its Loss.</p></li>
+<li class="fragment">
+<p>For two subsets of predictors, <span class="math inline">\(S_1 \neq S_2\)</span> where <span class="math inline">\(k \notin S_1\)</span>, <span class="math inline">\(k \notin S_2\)</span>,</p>
+<ul>
+<li class="fragment">in general, <span style="color:blue;"><span class="math inline">\(\mbox{MSE}_{\{S_1\}} - \mbox{MSE}_{\{S_1, k\}} \neq \mbox{MSE}_{\{S_2\}} - \mbox{MSE}_{\{S_2, k\}}\)</span>.</span><br>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span style="color:blue;">The contribution of <span class="math inline">\(x_k\)</span> to reducing MSE Loss depends on what else is in the model!</span></p>
+<p><span style="color:green;">Hence combinatorial complexity of attribution!</span></p>
+</div>
+<aside class="notes"><ul>
+<li>Model: regression, lin or nonlin, nn, rand forest, boosting, bagging</li>
+<li>Assumptions on <span class="math inline">\(f\)</span> and <span class="math inline">\(x\)</span> can make this easier, e.g.&nbsp;lasso and oracle methods</li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="methods-that-use-repeated-prediction" class="slide level2 smaller"><h2>Methods that Use Repeated Prediction</h2>
+<div>
+<ul>
+<li class="fragment">
+<strong>Bootstrap</strong>: a tool for uncertainty quantification
+<ul>
+<li class="fragment">Resample</li>
+</ul>
+</li>
+<li class="fragment">
+<strong>Bagging</strong>: a tool for reducing variance
+<ul>
+<li class="fragment">Average many simple models</li>
+</ul>
+</li>
+<li class="fragment">
+<strong>Boosting</strong>: a greedy method of growing a model
+<ul>
+<li class="fragment">Repeatedly model previous model error (<strong>Sequential!</strong>)</li>
+</ul>
+</li>
+<li class="fragment">
+<strong>Crossvalidation</strong>: model performance assessment tool, hyperparameter optimization
+<ul>
+<li class="fragment">Estimate out-of-sample Loss</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<aside class="notes"><p>lasso aims at attribution (variable selection) assumptions on <span class="math inline">\(f\)</span> and crossvalidation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside><aside><div>
+<p><a href="https://link.springer.com/book/10.1007/978-0-387-84858-7">Hastie, Tibshirani, and Friedman (2009) The Elements of Statistical Learning, Second Edition, (2009)</a></p>
+</div></aside></section><section id="bootstrap---uncertainty-quantification" class="slide level2 smaller" data-background-image="../../../pics/boot/bootstrap.png" data-background-size="70%" data-background-position="bottom"><h2>Bootstrap - uncertainty quantification</h2>
+<p><span style="color:green;">Resample data with replacement and repeat estimation/prediction</span></p>
+<div>
+<ul>
+<li class="fragment"><p><strong>Data:</strong> <span class="math inline">\({\mathbf Z} = (z_1,z_2,\ldots,z_N)\)</span>, where <span class="math inline">\(z_i = (y_i,x_i)\)</span></p></li>
+<li class="fragment"><p><strong>Model:</strong> Let <span class="math inline">\(\mu({\mathbf Z})\)</span> be an estimated/predicted quantity from the data</p></li>
+<li class="fragment"><p>Sample with replacement <span class="math inline">\(B\)</span> sets of size <span class="math inline">\(N\)</span> from data</p></li>
+<li class="fragment"><p>Compute <span class="math inline">\(\mu()\)</span> from each of the reseampled sets <span class="math inline">\(\{\widehat{\mu({\mathbf Z^{*1}})}, \widehat{\mu({\mathbf Z^{*2}})},\ldots, \widehat{\mu({\mathbf Z^{*B}})}\}\)</span></p></li>
+<li class="fragment"><p>Produces a sample from the estimator/predictor distribution</p></li>
+<li class="fragment">
+<p><span style="color:green;">Many characterizations are now possible:</span></p>
+<ul>
+<li class="fragment"><span style="color:green;">mean, variance, median, quantiles, density estimate, etc.</span></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="fragment">
+<!-- -->
+<h4 id="parallelize-over-the-b-sets-more-parallelism-may-exist-within-mucdot">Parallelize over the <span class="math inline">\(B\)</span> sets (more parallelism may exist within <span class="math inline">\(\mu(\cdot)\)</span>)</h4>
+</div>
+<aside class="notes"><ul>
+<li>a weight vector (0, 1, 2, … )</li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="bagging---variance-reduction" class="slide level2 smaller" data-background-image="../../../pics/boot/bootstrap.png" data-background-size="70%" data-background-position="bottom"><h2>Bagging - variance reduction</h2>
+<p><strong>b</strong>ootstrap <strong>agg</strong>regation<br><br></p>
+<p><span style="color:green;">Simple modelswith low bias and <strong>high</strong> variance on resampled data</span><br>
+Generalized by <strong>random forest</strong> to sampling subsets of predictors</p>
+<div>
+<ul>
+<li class="fragment"><p><strong>Regression:</strong> <span class="math inline">\(\widehat{\mu({\mathbf Z})} = \frac{1}{B}\sum_{b=1}^B \widehat{\mu({\mathbf Z^{*b}})}\)</span> (bootstrap sample mean)</p></li>
+<li class="fragment"><p><strong>Classification:</strong> Majority vote</p></li>
+<li class="fragment"><p>Bagging reduces variance to give a <span style="color:green;">low bias and <strong>low</strong> variance</span> estimate</p></li>
+</ul>
+</div>
+<div class="fragment">
+<!-- -->
+<h4 id="parallelize-over-b-more-parallelism-may-exist-within-mucdot">Parallelize over <span class="math inline">\(B\)</span> (more parallelism may exist within <span class="math inline">\(\mu(\cdot)\)</span>)</h4>
+</div>
+</section><section id="random-forest" class="slide level2 smaller" data-background-image="../../../pics/boot/randomforest.png" data-background-size="60%" data-background-position="bottom right"><h2>Random Forest</h2>
+<div class="fragment">
+<ol type="1">
+<li>
+<span style="color:green;">For b = 1 to B:</span>
+<ol type="i">
+<li>
+<span style="color:green;">Draw a bootstrap sample <span class="math inline">\({\mathbf Z^∗}\)</span> from the training data</span><br>
+</li>
+<li>
+<span style="color:green;">Grow a random-forest tree <span class="math inline">\(T_b\)</span> on <span class="math inline">\(\mathbf Z^*\)</span> until <span class="math inline">\(n_{min}\)</span> nodes achieved:</span>
+<ol type="a">
+<li>
+<span style="color:green;">Select <span class="math inline">\(m &lt; p\)</span> variables at random</span><br>
+</li>
+<li>
+<span style="color:green;">Pick the best variable/split-point among the <span class="math inline">\(m\)</span></span><br>
+</li>
+<li>
+<span style="color:green;">Split the node into two daughter nodes</span><br>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span style="color:green;">Output the ensemble of trees <span class="math inline">\(\{T_b\}^B_1\)</span></span><br>
+</li>
+</ol>
+</div>
+<div class="fragment">
+<p><strong>Regression at <span class="math inline">\(x\)</span>:</strong> average the predictions<br>
+of trees in the ensemble <span class="math inline">\(\frac{1}{B}\sum_{b=1}^B \widehat{T}_b(x)\)</span></p>
+<p><strong>Classification of <span class="math inline">\(x\)</span>:</strong><br>
+majority vote class prediction <span class="math inline">\(\{\widehat{C}_b(x)\}^B_1\)</span></p>
+</div>
+
+<aside class="notes"><ul>
+<li>promotes diversity in trees<br>
+</li>
+<li>a mathematical proof that diversity is an optimization strategy
+<ul>
+<li>prevents dominance by few strong predictors</li>
+</ul>
+</li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside><!-- not of interest to easy parallelization
+## Shared memory considerations {background-image="/pics/fork/Slide7.png" background-size="90%" background-position="center"}  
+
+$$\qquad$$  
+$$\qquad$$  
+
+#### Cores produce separate forests:  
+#### Combine forests for prediction or combine predictions?  
+
+## Boosting {.smaller}
+
+Increasing weights on misclassified observations (fits$^*$ additive model framework)  
+Sequential, so parallelization within a model  
+Discrete AdaBoost $^*$
+
+1. Initialize weights $w_i = \frac{1}{N}$, $i = 1,2,...,N$.
+2. For $m=1$ to $M$:
+   * Fit a classifier $G_m(x)$ to the training data using weights $w_i$.
+   * Compute $$err_m = \frac{\sum_{i=1}^N w_i I(y_i \neq G_m(x_i))}{\sum_{i=1}{N} w_i}$$
+   * Compute $\alpha_m = \log((1 − err_m)/err_m)$.
+   * Set $w_i \leftarrow w_i · \exp[\alpha_m \cdot I( y_i \neq G_m(x_i))]$, $i = 1, 2, \ldots, N$.
+3. Output $G(x) = sign \left[\sum^M_{m=1} \alpha_mG_m(x)\right]$.
+
+#### Sequential over M, parallelize within $G_m(\cdot)$
+
+.footnote[
+$^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
+]
+--><aside><div>
+<p><a href="https://link.springer.com/book/10.1007/978-0-387-84858-7">Algorithm 15.1 in Hastie, et al.&nbsp;(2009). The Elements of Statistical Learning,<br>
+Second Edition</a></p>
+</div></aside></section><section id="k-fold-crossvalidation" class="slide level2 smaller" data-background-image="../../../pics/fork/fork8.png" data-background-size="80%" data-background-position="bottom"><h2>K-fold Crossvalidation</h2>
+<div>
+<ul>
+<li class="fragment">Let <span class="math inline">\(y \approx f(x, \beta, \alpha)\)</span> be a model and <span class="math inline">\(\widehat{y} = f(x, \widehat{\beta}, \alpha)\)</span> be the model prediction of <span class="math inline">\(y\)</span>
+<ul>
+<li class="fragment">
+<span class="math inline">\((y, x)\)</span> are data, <span class="math inline">\(\beta\)</span> are model parameters, and <span class="math inline">\(\alpha\)</span> are model hyperparameters
+<ul>
+<li class="fragment">For random forest: <span class="math inline">\(\beta\)</span> are split-points, <span class="math inline">\(\alpha\)</span> are <span class="math inline">\(n_\min\)</span>, <span class="math inline">\(m\)</span>, nodesize, +</li>
+</ul>
+</li>
+<li class="fragment">For a fixed <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\widehat{\beta}\)</span> minimizes a loss function <span class="math inline">\(L(y, \widehat{y} )\)</span>
+</li>
+</ul>
+</li>
+<li class="fragment">Randomly divide <span class="math inline">\(N\)</span> training data points into <span class="math inline">\(k\)</span> roughly equal folds (shuffle and split)</li>
+<li class="fragment">Let <span class="math inline">\(\widehat{y_{-i}(\alpha)} = f(x_{-i}, \widehat{\beta}, \alpha)\)</span> be the prediction when fold <span class="math inline">\(i\)</span> data is removed</li>
+<li class="fragment">Then average loss for a choice of <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\frac{1}{N}\sum_{i=1}^{N} L(y_i, \widehat{y_{-i}}(\alpha))\)</span>
+</li>
+<li class="fragment">Taking <span class="math inline">\(\alpha\)</span> with minimum average loss, gives best expected generalization</li>
+</ul>
+</div>
+</section><section id="pseudo-random-number-generators-rng" class="slide level2 smaller" data-background-image="../../../pics/fork/Fork6.png" data-background-size="90%" data-background-position="bottom"><h2>Pseudo Random Number Generators (RNG)</h2>
+<div class="quarto-layout-panel" data-layout="[1,1]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><strong>Default RNG:</strong></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><strong>L’Ecuyer-CMRG:</strong></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><span style="color:green;"><strong>High probability</strong></span> of independent streams</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><span style="color:green;"><strong>Guaranteed</strong></span> independent streams</p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><span class="math inline">\(\qquad\)</span></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>L’Ecuyer-CMRG stream is about 2^191 long</p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><span class="math inline">\(\qquad\)</span></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>Substreams jump 2^127 (about 1.7e38) for up to 2^64 (about 1.8e19) independent streams</p>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p><span class="math inline">\(\qquad\qquad\qquad\)</span> Default RNG <span class="math inline">\(\qquad\qquad\qquad\qquad\qquad\qquad\qquad\)</span> L’Ecuyer-CMRG</p>
+</div></aside></section><section id="example-random-forest-code" class="slide level2" data-background-image="../../../pics/fork/ML_FreySlate1991.png" data-background-size="90%" data-background-position="center"><h2>Example Random forest Code</h2>
+<h4 id="letter-recognition-data-20000-times-17">Letter recognition data ( <span class="math inline">\(20\,000 \times 17\)</span> )</h4>
+
+<aside><div>
+<p>Taken from: Parallel Statistical Computing with R: An Illustration on Two Architectures <a href="https://arxiv.org/abs/1709.01195">arXiv:1709.01195</a></p>
+</div></aside></section><section id="rf_serial.r" class="slide level2"><h2><code>rf_serial.r</code></h2>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">LetterRecognition</span>, package <span class="op">=</span> <span class="st">"mlbench"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">LetterRecognition</span><span class="op">)</span></span>
+<span><span class="va">n_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fl">0.2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">i_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">n_test</span><span class="op">)</span></span>
+<span><span class="va">train</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="op">-</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span><span class="va">test</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span>, ntree <span class="op">=</span> <span class="fl">500</span>, norm.votes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">pred</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">test</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">correct</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred</span> <span class="op">==</span> <span class="va">test</span><span class="op">$</span><span class="va">lettr</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Proportion Correct:"</span>, <span class="va">correct</span><span class="op">/</span><span class="op">(</span><span class="va">n_test</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rf_serial.r-1" class="slide level2"><h2><code>rf_serial.r</code></h2>
+<div class="sourceCode" id="cb2" data-code-line-numbers="|5-9|11|12|14-15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(randomForest))</span>
+<span id="cb2-2"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
+<span id="cb2-3"><a></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(LetterRecognition)</span>
+<span id="cb2-6"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
+<span id="cb2-7"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
+<span id="cb2-8"><a></a>train <span class="ot">=</span> LetterRecognition[<span class="sc">-</span>i_test, ]</span>
+<span id="cb2-9"><a></a>test <span class="ot">=</span> LetterRecognition[i_test, ]</span>
+<span id="cb2-10"><a></a></span>
+<span id="cb2-11"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> <span class="dv">500</span>, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-12"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb2-13"><a></a></span>
+<span id="cb2-14"><a></a>correct <span class="ot">=</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb2-15"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct:"</span>, correct<span class="sc">/</span>(n_test), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rf_mc.r" class="slide level2"><h2><code>rf_mc.r</code></h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span>                                       <span class="co">#&lt;&lt;</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">LetterRecognition</span>, package <span class="op">=</span> <span class="st">"mlbench"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">123</span>, <span class="st">"L'Ecuyer-CMRG"</span><span class="op">)</span>                   <span class="co">#&lt;&lt;</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">LetterRecognition</span><span class="op">)</span></span>
+<span><span class="va">n_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fl">0.2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">i_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">n_test</span><span class="op">)</span></span>
+<span><span class="va">train</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="op">-</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span><span class="va">test</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/commandArgs.html">commandArgs</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>                    <span class="co">#&lt;&lt;</span></span>
+<span><span class="va">ntree</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/parallel/splitIndices.html">splitIndices</a></span><span class="op">(</span><span class="fl">500</span>, <span class="va">nc</span><span class="op">)</span>, <span class="va">length</span><span class="op">)</span>            <span class="co">#&lt;&lt;</span></span>
+<span><span class="va">rf</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">train</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span>, ntree<span class="op">=</span><span class="va">x</span>, norm.votes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#&lt;&lt;</span></span>
+<span><span class="va">rf.out</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span><span class="op">(</span><span class="va">ntree</span>, <span class="va">rf</span>, train <span class="op">=</span> <span class="va">train</span>, mc.cores <span class="op">=</span> <span class="va">nc</span><span class="op">)</span>      <span class="co">#&lt;&lt;</span></span>
+<span><span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">combine</span>, <span class="va">rf.out</span><span class="op">)</span>                        <span class="co">#&lt;&lt;</span></span>
+<span></span>
+<span><span class="va">crows</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/parallel/splitIndices.html">splitIndices</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span>, <span class="va">nc</span><span class="op">)</span>                     <span class="co">#&lt;&lt;</span></span>
+<span><span class="va">rfp</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">test</span><span class="op">[</span><span class="va">x</span>, <span class="op">]</span><span class="op">)</span><span class="op">)</span>  <span class="co">#&lt;&lt;</span></span>
+<span><span class="va">cpred</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span><span class="op">(</span><span class="va">crows</span>, <span class="va">rfp</span>, mc.cores <span class="op">=</span> <span class="va">nc</span><span class="op">)</span>              <span class="co">#&lt;&lt;</span></span>
+<span><span class="va">pred</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">c</span>, <span class="va">cpred</span><span class="op">)</span>                                 <span class="co">#&lt;&lt;</span></span>
+<span></span>
+<span><span class="va">correct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred</span> <span class="op">==</span> <span class="va">test</span><span class="op">$</span><span class="va">lettr</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Proportion Correct:"</span>, <span class="va">correct</span><span class="op">/</span><span class="op">(</span><span class="va">n_test</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rf_mc.r-1" class="slide level2"><h2><code>rf_mc.r</code></h2>
+<div class="sourceCode" id="cb4" data-code-line-numbers="|1|4|6-10|12|13|14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(parallel)                                       <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-2"><a></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb4-3"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
+<span id="cb4-4"><a></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">123</span>, <span class="st">"L'Ecuyer-CMRG"</span>)                   <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-5"><a></a></span>
+<span id="cb4-6"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(LetterRecognition)</span>
+<span id="cb4-7"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
+<span id="cb4-8"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
+<span id="cb4-9"><a></a>train <span class="ot">=</span> LetterRecognition[<span class="sc">-</span>i_test, ]</span>
+<span id="cb4-10"><a></a>test <span class="ot">=</span> LetterRecognition[i_test, ]</span>
+<span id="cb4-11"><a></a></span>
+<span id="cb4-12"><a></a>nc <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)[<span class="dv">2</span>])                    <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-13"><a></a>ntree <span class="ot">=</span> <span class="fu">lapply</span>(<span class="fu">splitIndices</span>(<span class="dv">500</span>, nc), length)            <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-14"><a></a>rf <span class="ot">=</span> <span class="cf">function</span>(x, train) <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree=</span>x, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>) <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-15"><a></a>rf.out <span class="ot">=</span> <span class="fu">mclapply</span>(ntree, rf, <span class="at">train =</span> train, <span class="at">mc.cores =</span> nc)      <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-16"><a></a>rf.all <span class="ot">=</span> <span class="fu">do.call</span>(combine, rf.out)                        <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-17"><a></a></span>
+<span id="cb4-18"><a></a>crows <span class="ot">=</span> <span class="fu">splitIndices</span>(<span class="fu">nrow</span>(test), nc)                     <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-19"><a></a>rfp <span class="ot">=</span> <span class="cf">function</span>(x) <span class="fu">as.vector</span>(<span class="fu">predict</span>(rf.all, test[x, ]))  <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-20"><a></a>cpred <span class="ot">=</span> <span class="fu">mclapply</span>(crows, rfp, <span class="at">mc.cores =</span> nc)              <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-21"><a></a>pred <span class="ot">=</span> <span class="fu">do.call</span>(c, cpred)                                 <span class="co">#&lt;&lt;</span></span>
+<span id="cb4-22"><a></a></span>
+<span id="cb4-23"><a></a>correct <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb4-24"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct:"</span>, correct<span class="sc">/</span>(n_test), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rf_mc.sh" class="slide level2"><h2><code>rf_mc.sh</code></h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name utk</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=bckj-delta-cpu</span></span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=cpu</span></span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=20g</span></span>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=16</span></span>
+<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 00:10:00</span></span>
+<span id="cb5-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -e ./utk.e</span></span>
+<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -o ./utk.o</span></span>
+<span id="cb5-11"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb5-13"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load r</span>
+<span id="cb5-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> list</span>
+<span id="cb5-16"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_serial.R</span>
+<span id="cb5-18"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 1</span>
+<span id="cb5-19"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 2</span>
+<span id="cb5-20"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 4</span>
+<span id="cb5-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 8</span>
+<span id="cb5-22"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="crossvalidation-example" class="slide level2"><h2>Crossvalidation Example</h2>
+<p><br></p>
+<h3 id="random-forest-1">Random forest:</h3>
+<p><span class="math inline">\(m\)</span>, the number of predictors sampled <br></p>
+<h4 id="the-defaults-are">The defaults are:</h4>
+<ul>
+<li><span class="math inline">\(m = p/3\)</span></li>
+<li><span class="math inline">\(\ldots\)</span></li>
+</ul></section><section id="rf_cv_serial.r" class="slide level2"><h2><code>rf_cv_serial.R</code></h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">LetterRecognition</span>, package <span class="op">=</span> <span class="st">"mlbench"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">LetterRecognition</span><span class="op">)</span></span>
+<span><span class="va">n_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fl">0.2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">i_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">n_test</span><span class="op">)</span></span>
+<span><span class="va">train</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="op">-</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span><span class="va">test</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">ntree</span> <span class="op">=</span> <span class="fl">300</span></span>
+<span><span class="va">nfolds</span> <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="va">mtry_val</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">folds</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">cv_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, incorrect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mtry_val</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cv_pars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, f <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span><span class="op">)</span></span>
+<span><span class="va">fold_err</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span>, <span class="va">cv_pars</span>, <span class="va">folds</span>, <span class="va">train</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">mtry</span> <span class="op">=</span> <span class="va">cv_pars</span><span class="op">[</span><span class="va">i</span>, <span class="st">"mtry"</span><span class="op">]</span></span>
+<span>  <span class="va">fold</span> <span class="op">=</span> <span class="op">(</span><span class="va">folds</span> <span class="op">==</span> <span class="va">cv_pars</span><span class="op">[</span><span class="va">i</span>, <span class="st">"f"</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span><span class="op">[</span><span class="op">!</span><span class="va">fold</span>, <span class="op">]</span>, ntree <span class="op">=</span> <span class="va">ntree</span>, mtry <span class="op">=</span> <span class="va">mtry</span>, norm.votes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="va">pred</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">train</span><span class="op">[</span><span class="va">fold</span>, <span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred</span> <span class="op">!=</span> <span class="va">train</span><span class="op">$</span><span class="va">lettr</span><span class="op">[</span><span class="va">fold</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">cv_err</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">cv_pars</span><span class="op">)</span>, <span class="va">fold_err</span>, <span class="va">cv_pars</span>, folds <span class="op">=</span> <span class="va">folds</span>, train <span class="op">=</span> <span class="va">train</span><span class="op">)</span></span>
+<span><span class="va">cv_err</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">cv_err</span><span class="op">)</span>, <span class="va">cv_pars</span><span class="op">[</span>, <span class="st">"mtry"</span><span class="op">]</span>, <span class="va">sum</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html">pdf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"rf_cv_mc0.pdf"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mtry_val</span>, <span class="va">cv_err</span><span class="op">/</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="va">n_test</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span>, ntree <span class="op">=</span> <span class="va">ntree</span><span class="op">)</span></span>
+<span><span class="va">pred</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">test</span><span class="op">)</span></span>
+<span><span class="va">correct</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred</span> <span class="op">==</span> <span class="va">test</span><span class="op">$</span><span class="va">lettr</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mtry</span> <span class="op">=</span> <span class="va">mtry_val</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">cv_err</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span>, ntree <span class="op">=</span> <span class="va">ntree</span>, mtry <span class="op">=</span> <span class="va">mtry</span><span class="op">)</span></span>
+<span><span class="va">pred_cv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">test</span><span class="op">)</span></span>
+<span><span class="va">correct_cv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred_cv</span> <span class="op">==</span> <span class="va">test</span><span class="op">$</span><span class="va">lettr</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Proportion Correct: "</span>, <span class="va">correct</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    <span class="st">") with cv:"</span>, <span class="va">correct_cv</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="va">mtry</span>, <span class="st">")\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rf_cv_serial.r-1" class="slide level2"><h2><code>rf_cv_serial.R</code></h2>
+<div class="sourceCode" id="cb7" data-code-line-numbers="|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb7-2"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
+<span id="cb7-3"><a></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb7-4"><a></a></span>
+<span id="cb7-5"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(LetterRecognition)</span>
+<span id="cb7-6"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
+<span id="cb7-7"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
+<span id="cb7-8"><a></a>train <span class="ot">=</span> LetterRecognition[<span class="sc">-</span>i_test, ]</span>
+<span id="cb7-9"><a></a>test <span class="ot">=</span> LetterRecognition[i_test, ]</span>
+<span id="cb7-10"><a></a></span>
+<span id="cb7-11"><a></a>ntree <span class="ot">=</span> <span class="dv">300</span></span>
+<span id="cb7-12"><a></a>nfolds <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb7-13"><a></a>mtry_val <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(train) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb7-14"><a></a>folds <span class="ot">=</span> <span class="fu">sample</span>( <span class="fu">rep_len</span>(<span class="dv">1</span><span class="sc">:</span>nfolds, <span class="fu">nrow</span>(train)), <span class="fu">nrow</span>(train) )</span>
+<span id="cb7-15"><a></a>cv_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">mtry =</span> mtry_val, <span class="at">incorrect =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(mtry_val)))</span>
+<span id="cb7-16"><a></a>cv_pars <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> mtry_val, <span class="at">f =</span> <span class="dv">1</span><span class="sc">:</span>nfolds)</span>
+<span id="cb7-17"><a></a>fold_err <span class="ot">=</span> <span class="cf">function</span>(i, cv_pars, folds, train) {</span>
+<span id="cb7-18"><a></a>  mtry <span class="ot">=</span> cv_pars[i, <span class="st">"mtry"</span>]</span>
+<span id="cb7-19"><a></a>  fold <span class="ot">=</span> (folds <span class="sc">==</span> cv_pars[i, <span class="st">"f"</span>])</span>
+<span id="cb7-20"><a></a>  rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train[<span class="sc">!</span>fold, ], <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-21"><a></a>  pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, train[fold, ])</span>
+<span id="cb7-22"><a></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> train<span class="sc">$</span>lettr[fold])</span>
+<span id="cb7-23"><a></a>}</span>
+<span id="cb7-24"><a></a></span>
+<span id="cb7-25"><a></a>cv_err <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cv_pars), fold_err, cv_pars, <span class="at">folds =</span> folds, <span class="at">train =</span> train)</span>
+<span id="cb7-26"><a></a>cv_err <span class="ot">=</span> <span class="fu">tapply</span>(<span class="fu">unlist</span>(cv_err), cv_pars[, <span class="st">"mtry"</span>], sum)</span>
+<span id="cb7-27"><a></a></span>
+<span id="cb7-28"><a></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(<span class="st">"rf_cv_mc0.pdf"</span>))</span>
+<span id="cb7-29"><a></a>  <span class="fu">plot</span>(mtry_val, cv_err<span class="sc">/</span>(n <span class="sc">-</span> n_test))</span>
+<span id="cb7-30"><a></a><span class="fu">dev.off</span>()</span>
+<span id="cb7-31"><a></a></span>
+<span id="cb7-32"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree)</span>
+<span id="cb7-33"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb7-34"><a></a>correct <span class="ot">=</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb7-35"><a></a></span>
+<span id="cb7-36"><a></a>mtry <span class="ot">=</span> mtry_val[<span class="fu">which.min</span>(cv_err)]</span>
+<span id="cb7-37"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry)</span>
+<span id="cb7-38"><a></a>pred_cv <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb7-39"><a></a>correct_cv <span class="ot">=</span> <span class="fu">sum</span>(pred_cv <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb7-40"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct: "</span>, correct<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, <span class="fu">floor</span>((<span class="fu">ncol</span>(test) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">3</span>),</span>
+<span id="cb7-41"><a></a>    <span class="st">") with cv:"</span>, correct_cv<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, mtry, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rf_cv_mc.r" class="slide level2"><h2><code>rf_cv_mc.R</code></h2>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">LetterRecognition</span>, package <span class="op">=</span> <span class="st">"mlbench"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">123</span>, <span class="st">"L'Ecuyer-CMRG"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">LetterRecognition</span><span class="op">)</span></span>
+<span><span class="va">n_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fl">0.2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">i_test</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample.int</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">n_test</span><span class="op">)</span></span>
+<span><span class="va">train</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="op">-</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span><span class="va">test</span> <span class="op">=</span> <span class="va">LetterRecognition</span><span class="op">[</span><span class="va">i_test</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">ntree</span> <span class="op">=</span> <span class="fl">200</span></span>
+<span><span class="va">nfolds</span> <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="va">mtry_val</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">folds</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">)</span></span>
+<span><span class="va">cv_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, incorrect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mtry_val</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cv_pars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, f <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span><span class="op">)</span></span>
+<span><span class="va">fold_err</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span>, <span class="va">cv_pars</span>, <span class="va">folds</span>, <span class="va">train</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">mtry</span> <span class="op">=</span> <span class="va">cv_pars</span><span class="op">[</span><span class="va">i</span>, <span class="st">"mtry"</span><span class="op">]</span></span>
+<span>  <span class="va">fold</span> <span class="op">=</span> <span class="op">(</span><span class="va">folds</span> <span class="op">==</span> <span class="va">cv_pars</span><span class="op">[</span><span class="va">i</span>, <span class="st">"f"</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span><span class="op">[</span><span class="op">!</span><span class="va">fold</span>, <span class="op">]</span>, ntree <span class="op">=</span> <span class="va">ntree</span>,</span>
+<span>                        mtry <span class="op">=</span> <span class="va">mtry</span>, norm.votes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="va">pred</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">train</span><span class="op">[</span><span class="va">fold</span>, <span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred</span> <span class="op">!=</span> <span class="va">train</span><span class="op">$</span><span class="va">lettr</span><span class="op">[</span><span class="va">fold</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/commandArgs.html">commandArgs</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">cv_err</span> <span class="op">=</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html">mclapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">cv_pars</span><span class="op">)</span>, <span class="va">fold_err</span>, <span class="va">cv_pars</span>, folds <span class="op">=</span> <span class="va">folds</span>, train <span class="op">=</span> <span class="va">train</span>, mc.cores <span class="op">=</span> <span class="va">nc</span><span class="op">)</span></span>
+<span><span class="va">err</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">cv_err</span><span class="op">)</span>, <span class="va">cv_pars</span><span class="op">[</span>, <span class="st">"mtry"</span><span class="op">]</span>, <span class="va">sum</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html">pdf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"rf_cv_mc"</span>, <span class="va">nc</span>, <span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mtry_val</span>, <span class="va">err</span><span class="op">/</span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="va">n_test</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span>, ntree <span class="op">=</span> <span class="va">ntree</span><span class="op">)</span></span>
+<span><span class="va">pred</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">test</span><span class="op">)</span></span>
+<span><span class="va">correct</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred</span> <span class="op">==</span> <span class="va">test</span><span class="op">$</span><span class="va">lettr</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mtry</span> <span class="op">=</span> <span class="va">mtry_val</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">err</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">rf.all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span><span class="va">lettr</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">train</span>, ntree <span class="op">=</span> <span class="va">ntree</span>, mtry <span class="op">=</span> <span class="va">mtry</span><span class="op">)</span></span>
+<span><span class="va">pred_cv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">rf.all</span>, <span class="va">test</span><span class="op">)</span></span>
+<span><span class="va">correct_cv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred_cv</span> <span class="op">==</span> <span class="va">test</span><span class="op">$</span><span class="va">lettr</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Proportion Correct: "</span>, <span class="va">correct</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    <span class="st">") with cv:"</span>, <span class="va">correct_cv</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="va">mtry</span>, <span class="st">")\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="rf_cv_mc.r-1" class="slide level2"><h2><code>rf_cv_mc.R</code></h2>
+<div class="sourceCode" id="cb9" data-code-line-numbers="|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb9-2"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
+<span id="cb9-3"><a></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">123</span>, <span class="st">"L'Ecuyer-CMRG"</span>)</span>
+<span id="cb9-4"><a></a></span>
+<span id="cb9-5"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(LetterRecognition)</span>
+<span id="cb9-6"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
+<span id="cb9-7"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
+<span id="cb9-8"><a></a>train <span class="ot">=</span> LetterRecognition[<span class="sc">-</span>i_test, ]</span>
+<span id="cb9-9"><a></a>test <span class="ot">=</span> LetterRecognition[i_test, ]</span>
+<span id="cb9-10"><a></a></span>
+<span id="cb9-11"><a></a>ntree <span class="ot">=</span> <span class="dv">200</span></span>
+<span id="cb9-12"><a></a>nfolds <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb9-13"><a></a>mtry_val <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(train) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb9-14"><a></a>folds <span class="ot">=</span> <span class="fu">sample</span>( <span class="fu">rep_len</span>(<span class="dv">1</span><span class="sc">:</span>nfolds, <span class="fu">nrow</span>(train)), <span class="fu">nrow</span>(train) )</span>
+<span id="cb9-15"><a></a>cv_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">mtry =</span> mtry_val, <span class="at">incorrect =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(mtry_val)))</span>
+<span id="cb9-16"><a></a>cv_pars <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> mtry_val, <span class="at">f =</span> <span class="dv">1</span><span class="sc">:</span>nfolds)</span>
+<span id="cb9-17"><a></a>fold_err <span class="ot">=</span> <span class="cf">function</span>(i, cv_pars, folds, train) {</span>
+<span id="cb9-18"><a></a>  mtry <span class="ot">=</span> cv_pars[i, <span class="st">"mtry"</span>]</span>
+<span id="cb9-19"><a></a>  fold <span class="ot">=</span> (folds <span class="sc">==</span> cv_pars[i, <span class="st">"f"</span>])</span>
+<span id="cb9-20"><a></a>  rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train[<span class="sc">!</span>fold, ], <span class="at">ntree =</span> ntree,</span>
+<span id="cb9-21"><a></a>                        <span class="at">mtry =</span> mtry, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-22"><a></a>  pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, train[fold, ])</span>
+<span id="cb9-23"><a></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> train<span class="sc">$</span>lettr[fold])</span>
+<span id="cb9-24"><a></a>}</span>
+<span id="cb9-25"><a></a></span>
+<span id="cb9-26"><a></a>nc <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)[<span class="dv">2</span>])</span>
+<span id="cb9-27"><a></a>cv_err <span class="ot">=</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cv_pars), fold_err, cv_pars, <span class="at">folds =</span> folds, <span class="at">train =</span> train, <span class="at">mc.cores =</span> nc)</span>
+<span id="cb9-28"><a></a>err <span class="ot">=</span> <span class="fu">tapply</span>(<span class="fu">unlist</span>(cv_err), cv_pars[, <span class="st">"mtry"</span>], sum)</span>
+<span id="cb9-29"><a></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(<span class="st">"rf_cv_mc"</span>, nc, <span class="st">".pdf"</span>))</span>
+<span id="cb9-30"><a></a>  <span class="fu">plot</span>(mtry_val, err<span class="sc">/</span>(n <span class="sc">-</span> n_test))</span>
+<span id="cb9-31"><a></a><span class="fu">dev.off</span>()</span>
+<span id="cb9-32"><a></a></span>
+<span id="cb9-33"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree)</span>
+<span id="cb9-34"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb9-35"><a></a>correct <span class="ot">=</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb9-36"><a></a></span>
+<span id="cb9-37"><a></a>mtry <span class="ot">=</span> mtry_val[<span class="fu">which.min</span>(err)]</span>
+<span id="cb9-38"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry)</span>
+<span id="cb9-39"><a></a>pred_cv <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb9-40"><a></a>correct_cv <span class="ot">=</span> <span class="fu">sum</span>(pred_cv <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb9-41"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct: "</span>, correct<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, <span class="fu">floor</span>((<span class="fu">ncol</span>(test) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">3</span>),</span>
+<span id="cb9-42"><a></a>    <span class="st">") with cv:"</span>, correct_cv<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, mtry, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center"><h2>R Interfaces to Low-Level Native Tools</h2>
+<aside class="notes"><ul>
+<li><p>we begin with <code>paralel</code>’s multicore parts</p></li>
+<li><p>continue with Foreign language via libraries (OpenBLAS, nvBLAS)</p></li>
+<li><p>go to SPMD MPI with collectives</p></li>
+<li><p>reverse of history - because we are used to a laptop</p></li>
+<li><p>Distributed - some things are recomputed rather than communicated</p></li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+</div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1200,
+
+        height: 800,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+
+
+</body></html>

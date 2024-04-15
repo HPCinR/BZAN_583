@@ -43,8 +43,8 @@ Assignment: [Project Data](materials/assignment/4-data)
 
 *Week 5, April 15 & 17*
 
-Lectures: [Methods that Rely on Sampling](materials/lectures/5-sampling) [BLAS Libraries](materials/lectures/5-blas)
-Assignment: [Resampling Estimators](5-resampling)
+Lectures: [Methods that Rely on Sampling](materials/lectures/5-sampling) [BLAS Libraries](materials/lectures/5-blas)\
+Assignment: [Resampling Estimators](materials/assignment/5-resampling)
 
 *Week 6, April 22 & 24*
 

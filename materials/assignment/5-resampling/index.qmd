@@ -1,5 +1,5 @@
 ---
-title: "Resampling"
+title: "Assignment 5: Resampling"
 editor: source
 ---
 

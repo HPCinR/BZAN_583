@@ -13,5 +13,3 @@ pred = predict(rf.all, test)
 
 correct = sum(pred == test$lettr)
 cat("Proportion Correct:", correct/(n_test), "\n")
-
-

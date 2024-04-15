@@ -1,5 +1,5 @@
 ---
-title: "Methods Relying on Sampling: case for parallel computing"
+title: "ML/Stat Methods Relying on Sampling: case for parallel computing"
 format: 
   revealjs:
     slide-number: c/t
@@ -207,9 +207,9 @@ $^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
 ## K-fold Crossvalidation {background-image="/pics/fork/fork8.png" background-size="80%" background-position="bottom" .smaller}
 
 ::: {.incremental}
-- Let $y = f(x, \beta, \alpha)$ be a model and $\widehat{y} = f(x, \widehat{\beta}, \alpha)$ be the model prediction of $y$
+- Let $y \approx f(x, \beta, \alpha)$ be a model and $\widehat{y} = f(x, \widehat{\beta}, \alpha)$ be the model prediction of $y$
   - $(y, x)$ are data, $\beta$ are model parameters, and $\alpha$ are model hyperparameters
-    - Example: Random forest $\beta$ are split-points, $\alpha = n_\min$ is minimum number of nodes in a tree
+    - For random forest: $\beta$ are split-points, $\alpha$ are $n_\min$, $m$, nodesize, +
   - For a fixed $\alpha$, $\widehat{\beta}$ minimizes a loss function $L(y, \widehat{y} )$
 - Randomly divide $N$ training data points into $k$ roughly equal folds (shuffle and split)
 - Let $\widehat{y_{-i}(\alpha)} = f(x_{-i}, \widehat{\beta}, \alpha)$ be the prediction when fold $i$ data is removed 
@@ -217,22 +217,92 @@ $^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
 - Taking $\alpha$ with minimum average loss, gives best expected generalization
 :::
 
+## Pseudo Random Number Generators (RNG) {background-image="/pics/fork/Fork6.png" background-size="90%" background-position="bottom" .smaller}
+
+::: {layout="[1,1]"}
+**Default RNG:**
+
+**L’Ecuyer-CMRG:**
+
+[**High probability**]{style="color:green;"} of independent streams
+
+[**Guaranteed**]{style="color:green;"} independent streams
+
+$\qquad$
+
+L’Ecuyer-CMRG stream is about 2^191 long
+
+$\qquad$
+
+Substreams jump 2^127 (about 1.7e38) for up to 2^64 (about 1.8e19) independent streams
+
+:::
+
+::: aside
+$\qquad\qquad\qquad$ Default RNG $\qquad\qquad\qquad\qquad\qquad\qquad\qquad$ L'Ecuyer-CMRG  
+:::
+
 ## Example Random forest Code {background-image="/pics/fork/ML_FreySlate1991.png" background-size="90%" background-position="center"}
 
 #### Letter recognition data ( $20\,000 \times 17$ )
 
 ::: aside
-Adapted from: Parallel Statistical Computing with R: An Illustration on Two Architectures [arXiv:1709.01195](https://arxiv.org/abs/1709.01195)
+Taken from: Parallel Statistical Computing with R: An Illustration on Two Architectures [arXiv:1709.01195](https://arxiv.org/abs/1709.01195)
 :::
 
 ## `rf_serial.r`  
-```{.r code-line-numbers="|5-9|11|12|14"}
+```{.r}
 {{< include _code/rf_serial.R >}}
+```
+
+## `rf_serial.r`  
+```{.r code-line-numbers="|5-9|11|12|14-15"}
+{{< include _code/rf_serial.R >}}
+```
+
+## `rf_mc.r`
+```{.r}
+{{< include _code/rf_mc.R >}} 
 ```
 
 ## `rf_mc.r`
 ```{.r code-line-numbers="|1|4|6-10|12|13|14"}
 {{< include _code/rf_mc.R >}} 
+```
+
+## `rf_mc.sh`
+```{.bash code-line-numbers="|1|4|6-10|12|13|14"}
+{{< include _code/rf_mc.sh >}} 
+```
+
+## Crossvalidation Example
+<br>
+
+### Random forest $m$, the number of predictors sampled
+<br>
+
+### The defaults are:
+- $m = p/3$
+- 
+
+## `rf_cv_serial.R`  
+```{.r}
+{{< include _code/rf_cv_serial.R >}}
+```
+
+## `rf_cv_serial.R`  
+```{.r code-line-numbers="|5-9|11|12|14"}
+{{< include _code/rf_cv_serial.R >}}
+```
+
+## `rf_cv_mc.R`
+```{.r}
+{{< include _code/rf_cv_mc.R >}} 
+```
+
+## `rf_cv_mc.R`
+```{.r code-line-numbers="|1|4|6-10|12|13|14"}
+{{< include _code/rf_cv_mc.R >}} 
 ```
 
 ## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="80%" background-position="center"}
@@ -246,26 +316,3 @@ Adapted from: Parallel Statistical Computing with R: An Illustration on Two Arch
 * Distributed - some things are recomputed rather than communicated
 :::
 
-## Demo ...
-
-
-## Random Forest Classification
-
-### Build many decision trees from random subsets of variables
-
-### Use their majority votes to classify
-
-## Example Random Forest Classification Code {background-image="/pics/MC/benchmark_mc.png" background-size="90%" background-position="center"}  
-#### Letter recognition data ( $20\,000 \times 17$ )
-
-
-## Pseudo Random Number Generators (RNG) {background-image="/pics/fork/Slide6.png" background-size="90%" background-position="center"}
-
-::: {layout="[1,1]"}
-* Guaranteed reproducibility  
-
-* Possibly overlapping streams
-  
-* Reproducibility for same number of streams
-* Guaranteed independent streams 
-:::

@@ -38,25 +38,25 @@ Assignment: [Project Proposal](materials/assignment/3-project)
 
 *Week 4, April 8 & 10*
 
-Lectures: [File System and Data](materials/lectures/4-data), [Parallel](materials/lectures/4-parallel), [BLAS Libraries](materials/lectures/4-blas)\
+Lectures: [File System and Data](materials/lectures/4-data), [Parallel](materials/lectures/4-parallel)\
 Assignment: [Project Data](materials/assignment/4-data) 
 
 *Week 5, April 15 & 17*
 
-Lectures: [LLM or Torch for R](materials/lectures/5-nn)\
-Assignment: [A classification task](materials/assignment/5-nn) 
-<!-- LLM coding or torch week? -->
+Lectures: [Methods that Rely on Sampling](materials/lectures/5-sampling) [BLAS Libraries](materials/lectures/5-blas)
+Assignment: [Resampling Estimators](5-resampling)
 
 *Week 6, April 22 & 24*
+
+Lectures: [LLM or Torch for R](materials/lectures/6-nn)\
+Assignment: [A classification task](materials/assignment/6-nn) 
+<!-- LLM coding or torch week? -->
+
+*Week 7, April 29 & May 1*
 
 Lectures: [Distributed Computing](materials/lectures/6-distributed)\
 Assignment: [pbdMPI application](materials/assignment/6-mpi) 
 <!-- simple distributed (mapreduce & spmd MPI) and projects -->
-
-*Week 7, April 29 & May 1*
-
-Lectures: [TBD Your choice](materials/lectures/7-projects)\
-<!-- concentrate on troubleshooting projects -->
 
 *Week 8, May 6*
 

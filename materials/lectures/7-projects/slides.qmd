@@ -1,9 +1,0 @@
----
-title: "Untitled"
-format: 
-  revealjs:
-    chalkboard: true
-editor: source
----
-
-## Selected Topics

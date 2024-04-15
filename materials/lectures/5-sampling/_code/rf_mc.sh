@@ -14,9 +14,9 @@ pwd
 module load r
 module list
 
-time Rscript rf_serial.r
-time Rscript rf_mc.r --args 1
-time Rscript rf_mc.r --args 2
-time Rscript rf_mc.r --args 4
-time Rscript rf_mc.r --args 8
-time Rscript rf_mc.r --args 16
+time Rscript rf_serial.R
+time Rscript rf_mc.R --args 1
+time Rscript rf_mc.R --args 2
+time Rscript rf_mc.R --args 4
+time Rscript rf_mc.R --args 8
+time Rscript rf_mc.R --args 16

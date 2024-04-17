@@ -12,7 +12,6 @@ ntree = 200
 nfolds = 10
 mtry_val = 1:(ncol(train) - 1)
 folds = sample( rep_len(1:nfolds, nrow(train)), nrow(train) )
-cv_df = data.frame(mtry = mtry_val, incorrect = rep(0, length(mtry_val)))
 cv_pars = expand.grid(mtry = mtry_val, f = 1:nfolds)
 fold_err = function(i, cv_pars, folds, train) {
   mtry = cv_pars[i, "mtry"]

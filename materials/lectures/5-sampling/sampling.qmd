@@ -276,12 +276,12 @@ Taken from: Parallel Statistical Computing with R: An Illustration on Two Archit
 ```
 
 ## `rf_mc.r`
-```{.r code-line-numbers="|1|4|6-10|12|13|14"}
+```{.r code-line-numbers="|1|4|6-10|12|13|14|15|16|18-21"}
 {{< include _code/rf_mc.R >}} 
 ```
 
 ## `rf_mc.sh`
-```{.bash}
+```{.bash code-line-numbers="|7"}
 {{< include _code/rf_mc.sh >}} 
 ```
 
@@ -298,7 +298,7 @@ $m$, the number of predictors sampled
 - $\ldots$
 
 ## `rf_cv_serial.R`  
-```{.r}
+```{.r code-line-numbers="|1-9|11-23|11-12|13|14|"}
 {{< include _code/rf_cv_serial.R >}}
 ```
 

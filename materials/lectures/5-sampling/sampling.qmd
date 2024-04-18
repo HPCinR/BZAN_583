@@ -298,12 +298,12 @@ $m$, the number of predictors sampled
 - $\ldots$
 
 ## `rf_cv_serial.R`  
-```{.r code-line-numbers="|1-9|11-23|11-12|13|14|"}
+```{.r}
 {{< include _code/rf_cv_serial.R >}}
 ```
 
 ## `rf_cv_serial.R`  
-```{.r code-line-numbers="|"}
+```{.r code-line-numbers="|1-9|11-23|11-12|13|14|15|16-22|19|24-25|27-29|31-33|35-40|35|36-38"}
 {{< include _code/rf_cv_serial.R >}}
 ```
 
@@ -313,7 +313,7 @@ $m$, the number of predictors sampled
 ```
 
 ## `rf_cv_mc.R`
-```{.r code-line-numbers="|"}
+```{.r code-line-numbers="|25-26"}
 {{< include _code/rf_cv_mc.R >}} 
 ```
 

@@ -18,6 +18,7 @@ UPDATE
   * `export CMAKE_PREFIX_PATH=$HOMEBREW_CELLAR/openblas:$CMAKE_PREFIX_PATH`  
   * flexiblas on macOS has issues with @rpath and LC_RPATH  
 * Hexagon for pbdMPI
+* `drop` argument for pbdDMAT pull request
   
 Delta accounting
 * ` jobcharge bckj-delta-cpu` shows per user use

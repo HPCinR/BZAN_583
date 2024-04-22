@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
 <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -331,29 +396,6 @@
 <div class="quarto-title-authors">
 </div>
 
-</section><section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center"><h2>R Interfaces to Low-Level Native Tools</h2>
-</section><section id="parallelmclapply" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware9.png" data-background-size="80%" data-background-position="center"><h2><code>parallel::mclapply()</code></h2>
-</section><section id="blas-libraries" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware10.png" data-background-size="80%" data-background-position="center"><h2>BLAS Libraries</h2>
-</section><section id="os-and-blas-libraries" class="slide level2"><h2>OS and BLAS Libraries</h2>
-<h3 id="linux-os-development-cascade">Linux OS development cascade:</h3>
-<p>Fedora <span class="math inline">\(\rightarrow\)</span> CentOS Stream <span class="math inline">\(\rightarrow\)</span> Red Hat Enterprise Linux</p>
-<p><span class="math display">\[\qquad\]</span></p>
-<h4 id="optimal-blas-control-via-flexiblas">Optimal: BLAS control via FlexiBLAS</h4>
-<ul>
-<li>R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)</li>
-</ul>
-<h4 id="on-delta-we-have-spack-installed">On Delta, we have <em>spack</em>-installed:</h4>
-<ul>
-<li>R - OpenBLAS</li>
-</ul></section><section id="set-number-of-threads-for-operation" class="slide level2"><h2>Set Number of Threads for Operation</h2>
-<ul>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_set_num_threads()</a></code></li>
-</ul>
-<p>Also get information on threads:</p>
-<ul>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_num_procs()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_max_threads()</a></code></li>
-</ul></section><section id="examples" class="slide level2"><h2>Examples</h2>
 </section><section id="matrix-libraries" class="slide level2"><h2>Matrix Libraries …</h2>
 </section><section id="r-lapack-blas" class="slide level2"><h2>R-LAPACK-BLAS</h2>
 <ul>
@@ -367,7 +409,7 @@
 <!--
 $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><ul>
 <li>Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,</li>
-</ul></section><section id="r-lapack-blas-1" class="slide level2"><h2>R-LAPACK-BLAS</h2>
+</ul></section><section id="r-lapack-blas-1" class="slide level2 smaller"><h2>R-LAPACK-BLAS</h2>
 <p><img data-src="../../../pics/01-intro/pbdRlib.jpg"> * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library<br>
 * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)</p>
 <ul>
@@ -381,15 +423,72 @@ $$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ --><
 </li>
 <li><p>Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries</p></li>
 <li><p><strong>FlexiBLAS</strong>: A BLAS and LAPACK wrapper library with runtime exchangable backends</p></li>
-</ul></section><section id="flexiblas" class="slide level2"><h2>FlexiBLAS</h2>
-<p>.footnote[ <a href="https://github.com/Enchufa2/r-flexiblas">https://github.com/Enchufa2/r-flexiblas</a><br><a href="https://cran.r-project.org/package=flexiblas">https://cran.r-project.org/package=flexiblas</a>]</p>
+</ul></section><section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center"><h2>R Interfaces to Low-Level Native Tools</h2>
+</section><section id="parallelmclapply" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware9.png" data-background-size="80%" data-background-position="center"><h2><code>parallel::mclapply()</code></h2>
+</section><section id="blas-libraries" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware10.png" data-background-size="80%" data-background-position="center"><h2>BLAS Libraries</h2>
+</section><section id="os-viewpoint-on-blas-libraries" class="slide level2 smaller"><h2>OS Viewpoint on BLAS Libraries</h2>
+<h4 id="fedora-linux-os-development-cascade">Fedora Linux OS development cascade:</h4>
+<p>Fedora <span class="math inline">\(\rightarrow\)</span> CentOS Stream <span class="math inline">\(\rightarrow\)</span> Red Hat Enterprise Linux (RHEL)</p>
+<p><span class="math display">\[\qquad\]</span></p>
+<h4 id="optimal-blas-control-via-flexiblas">Optimal: BLAS control via FlexiBLAS</h4>
+<ul>
+<li>R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)</li>
+</ul>
+<h4 id="on-delta-we-have-spack-installed">On Delta, we have <a href="https://spack.io/"><em>spack</em></a>-installed:</h4>
+<ul>
+<li>R - OpenBLAS</li>
+</ul>
+<h4 id="easybuild-is-currently-more-r-friendly-than-spack-for-the-hpc-blas-ecosystem">
+<a href="https://easybuild.io/"><em>EasyBuild</em></a> is currently more R-friendly than <em>spack</em> for the HPC BLAS ecosystem</h4>
+<ul>
+<li>EasyBuild <a href="https://docs.easybuild.io/common-toolchains/">Common toolchains</a>
+</li>
+</ul>
+
+<aside><div>
+<p>These may be relevant for making OS choices when configuring cloud resources</p>
+</div></aside></section><section id="set-number-of-threads-for-operation" class="slide level2"><h2>Set Number of Threads for Operation</h2>
+<ul>
+<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_set_num_threads()</a></code></li>
+</ul>
+<p>Also get information on threads:</p>
+<ul>
+<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_num_procs()</a></code></li>
+<li><code><a href="https://rdrr.io/pkg/RhpcBLASctl/man/RhpcBLASctl-package.html">RhpcBLASctl::omp_get_max_threads()</a></code></li>
+</ul></section><section id="examples" class="slide level2"><h2>Examples</h2>
+</section><section id="flexiblas" class="slide level2"><h2>FlexiBLAS</h2>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Enchufa2/r-flexiblas">flexiblas</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># check whether FlexiBLAS is available</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/flexiblas/man/flexiblas_avail.html">flexiblas_avail</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span></span>
+<span><span class="co"># get the current backend</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/flexiblas/man/flexiblas-backends.html">flexiblas_current_backend</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "OPENBLAS-OPENMP"</span></span>
+<span></span>
+<span><span class="co"># list all available backends</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/flexiblas/man/flexiblas-backends.html">flexiblas_list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "NETLIB"           "__FALLBACK__"     "BLIS-THREADS"     "OPENBLAS-OPENMP"</span></span>
+<span><span class="co">#&gt; [5] "BLIS-SERIAL"      "ATLAS"            "OPENBLAS-SERIAL"  "OPENBLAS-THREADS"</span></span>
+<span><span class="co">#&gt; [9] "BLIS-OPENMP"</span></span>
+<span></span>
+<span><span class="co"># get/set the number of threads</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/flexiblas/man/flexiblas-threads.html">flexiblas_set_num_threads</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/flexiblas/man/flexiblas-threads.html">flexiblas_get_num_threads</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+<aside><div>
+<p><a href="https://github.com/Enchufa2/r-flexiblas">https://github.com/Enchufa2/r-flexiblas</a><br><a href="https://cran.r-project.org/package=flexiblas">https://cran.r-project.org/package=flexiblas</a></p>
+</div></aside></section>
 </div>
   </div>
 

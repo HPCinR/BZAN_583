@@ -67,14 +67,14 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.410    83.68      1.450     86.05\n\"aperm.default\"     0.135     8.01      0.135      8.01\n\"array\"             0.030     1.78      0.030      1.78\n\"colMeans\"          0.030     1.78      0.030      1.78\n\"is.finite\"         0.030     1.78      0.030      1.78\n\"matrix\"            0.020     1.19      0.020      1.19\n\"any\"               0.015     0.89      0.015      0.89\n\"sweep\"             0.010     0.59      0.175     10.39\n\"svd\"               0.005     0.30      1.480     87.83"
+    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.445    83.77      1.490     86.38\n\"aperm.default\"     0.135     7.83      0.135      7.83\n\"array\"             0.035     2.03      0.035      2.03\n\"colMeans\"          0.030     1.74      0.030      1.74\n\"is.finite\"         0.030     1.74      0.030      1.74\n\"matrix\"            0.020     1.16      0.020      1.16\n\"any\"               0.015     0.87      0.015      0.87\n\"svd\"               0.010     0.58      1.520     88.12\n\"sweep\"             0.005     0.29      0.175     10.14"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.375    85.14      1.410     87.31\n\"aperm.default\"     0.145     8.98      0.145      8.98\n\"is.finite\"         0.025     1.55      0.025      1.55\n\"array\"             0.020     1.24      0.020      1.24\n\"any\"               0.015     0.93      0.015      0.93\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.395    83.53      1.445     86.53\n\"aperm.default\"     0.140     8.38      0.140      8.38\n\"is.finite\"         0.030     1.80      0.030      1.80\n\"array\"             0.025     1.50      0.025      1.50\n\"matrix\"            0.025     1.50      0.025      1.50\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.380    84.40      1.430     87.46\n\"aperm.default\"     0.140     8.56      0.140      8.56\n\"matrix\"            0.030     1.83      0.030      1.83\n\"array\"             0.025     1.53      0.025      1.53\n\"is.finite\"         0.025     1.53      0.025      1.53"
+    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.465    85.17      1.500     87.21\n\"aperm.default\"     0.150     8.72      0.150      8.72\n\"is.finite\"         0.030     1.74      0.030      1.74\n\"array\"             0.025     1.45      0.025      1.45\n\"any\"               0.015     0.87      0.015      0.87\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.515    85.11       1.56     87.64\n\"aperm.default\"     0.150     8.43       0.15      8.43\n\"is.finite\"         0.030     1.69       0.03      1.69\n\"any\"               0.020     1.12       0.02      1.12\n\"array\"             0.020     1.12       0.02      1.12\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.415    84.48      1.460     87.16\n\"aperm.default\"     0.145     8.66      0.145      8.66\n\"is.finite\"         0.030     1.79      0.030      1.79\n\"matrix\"            0.025     1.49      0.025      1.49\n\"array\"             0.020     1.19      0.020      1.19"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#lazy-evaluation",
@@ -88,7 +88,7 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark\n",
-    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.246    2.703     0.200    0.044          0         0\n2 g(x)          100   0.091    1.000     0.084    0.007          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.235    2.611     0.200    0.031          0         0\n2 g(x)          100   0.090    1.000     0.084    0.007          0         0"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#profiling-summary",
@@ -102,7 +102,7 @@
     "href": "materials/lectures/2-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.952   0.066   1.019 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.000   0.031 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.957   0.077   1.034 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.031 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#compute-once-if-not-changing",
@@ -130,7 +130,7 @@
     "href": "materials/lectures/2-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Preallocate lists and vectors Instead of Growing Them",
-    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.403   1.982   8.468 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.406   0.048   0.455 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.392   1.805   8.228 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.408   0.047   0.455 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#specialize-more-general-functions",
@@ -151,7 +151,7 @@
     "href": "materials/lectures/2-faster/slides.html#contiguous-access-to-arrays-and-lists",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Contiguous access to arrays and lists",
-    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.867   0.087   0.956 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.384   0.042   0.427 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.235   0.066   0.304 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.917   0.075   0.993 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.381   0.045   0.425 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.235   0.059   0.295 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#programming-languages-hierarchy",
@@ -172,7 +172,7 @@
     "href": "materials/lectures/2-faster/slides.html#rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "\nRfast and RFast2 Packages: A collection of Rcpp-Implemented Functions",
-    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.327   0.019   0.355 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.076   0.005   0.185 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
+    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.328   0.024   0.361 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.066   0.006   0.086 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
   },
   {
     "objectID": "materials/lectures/1b-setupdemo/slides.html#today",
@@ -490,48 +490,6 @@
     "text": "Package Installation on Cluster\nInstall packages in an interactive R session on a login node\nLogin to the cluster, then at the shell prompt:\n\nmodule load r\nR\n\nstarts an interactive R session. Now, for example, to install package dplyr:\ninstall.packages(\"dplyr\", repo = \"https://cloud.r-project.org/\")\nThe repo parameter can be skipped if it is set in options(). R may also ask to choose a repository location.\nYou may need to load other modules if a package has external to R dependencies.\n\nmodule avail\n\nwill list available software modules. If you don’t see the software, ask help@ncsa.illinois.edu to have it installed. Note that this is for external to R software (not R packages)."
   },
   {
-    "objectID": "materials/lectures/5-blas/slides.html#r-interfaces-to-low-level-native-tools",
-    "href": "materials/lectures/5-blas/slides.html#r-interfaces-to-low-level-native-tools",
-    "title": "BLAS Libraries",
-    "section": "R Interfaces to Low-Level Native Tools",
-    "text": "R Interfaces to Low-Level Native Tools"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#parallelmclapply",
-    "href": "materials/lectures/5-blas/slides.html#parallelmclapply",
-    "title": "BLAS Libraries",
-    "section": "parallel::mclapply()",
-    "text": "parallel::mclapply()"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#blas-libraries",
-    "href": "materials/lectures/5-blas/slides.html#blas-libraries",
-    "title": "BLAS Libraries",
-    "section": "BLAS Libraries",
-    "text": "BLAS Libraries"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#os-and-blas-libraries",
-    "href": "materials/lectures/5-blas/slides.html#os-and-blas-libraries",
-    "title": "BLAS Libraries",
-    "section": "OS and BLAS Libraries",
-    "text": "OS and BLAS Libraries\nLinux OS development cascade:\nFedora \\(\\rightarrow\\) CentOS Stream \\(\\rightarrow\\) Red Hat Enterprise Linux\n\\[\\qquad\\]\nOptimal: BLAS control via FlexiBLAS\n\nR - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)\n\nOn Delta, we have spack-installed:\n\nR - OpenBLAS"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#set-number-of-threads-for-operation",
-    "href": "materials/lectures/5-blas/slides.html#set-number-of-threads-for-operation",
-    "title": "BLAS Libraries",
-    "section": "Set Number of Threads for Operation",
-    "text": "Set Number of Threads for Operation\n\nRhpcBLASctl::omp_set_num_threads()\n\nAlso get information on threads:\n\nRhpcBLASctl::omp_get_num_procs()\nRhpcBLASctl::omp_get_max_threads()"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#examples",
-    "href": "materials/lectures/5-blas/slides.html#examples",
-    "title": "BLAS Libraries",
-    "section": "Examples",
-    "text": "Examples"
-  },
-  {
     "objectID": "materials/lectures/5-blas/slides.html#matrix-libraries",
     "href": "materials/lectures/5-blas/slides.html#matrix-libraries",
     "title": "BLAS Libraries",
@@ -553,11 +511,53 @@
     "text": "R-LAPACK-BLAS\n * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\n\nLAPACK: dense and banded matrix decompositions and more\n\n\n\\(\\quad LU\\) \\(\\quad LL^T\\) \\(\\quad QR\\) \\(\\quad UDV^T\\) \\(\\quad VD^2V^T\\) \\(\\quad\\|\\cdot\\|_p\\)\n\n\n\nImplementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries\nFlexiBLAS: A BLAS and LAPACK wrapper library with runtime exchangable backends"
   },
   {
+    "objectID": "materials/lectures/5-blas/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/5-blas/slides.html#r-interfaces-to-low-level-native-tools",
+    "title": "BLAS Libraries",
+    "section": "R Interfaces to Low-Level Native Tools",
+    "text": "R Interfaces to Low-Level Native Tools"
+  },
+  {
+    "objectID": "materials/lectures/5-blas/slides.html#parallelmclapply",
+    "href": "materials/lectures/5-blas/slides.html#parallelmclapply",
+    "title": "BLAS Libraries",
+    "section": "parallel::mclapply()",
+    "text": "parallel::mclapply()"
+  },
+  {
+    "objectID": "materials/lectures/5-blas/slides.html#blas-libraries",
+    "href": "materials/lectures/5-blas/slides.html#blas-libraries",
+    "title": "BLAS Libraries",
+    "section": "BLAS Libraries",
+    "text": "BLAS Libraries"
+  },
+  {
+    "objectID": "materials/lectures/5-blas/slides.html#os-viewpoint-on-blas-libraries",
+    "href": "materials/lectures/5-blas/slides.html#os-viewpoint-on-blas-libraries",
+    "title": "BLAS Libraries",
+    "section": "OS Viewpoint on BLAS Libraries",
+    "text": "OS Viewpoint on BLAS Libraries\nFedora Linux OS development cascade:\nFedora \\(\\rightarrow\\) CentOS Stream \\(\\rightarrow\\) Red Hat Enterprise Linux (RHEL)\n\\[\\qquad\\]\nOptimal: BLAS control via FlexiBLAS\n\nR - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)\n\nOn Delta, we have spack-installed:\n\nR - OpenBLAS\n\n\nEasyBuild is currently more R-friendly than spack for the HPC BLAS ecosystem\n\nEasyBuild Common toolchains\n\n\n\n\nThese may be relevant for making OS choices when configuring cloud resources"
+  },
+  {
+    "objectID": "materials/lectures/5-blas/slides.html#set-number-of-threads-for-operation",
+    "href": "materials/lectures/5-blas/slides.html#set-number-of-threads-for-operation",
+    "title": "BLAS Libraries",
+    "section": "Set Number of Threads for Operation",
+    "text": "Set Number of Threads for Operation\n\nRhpcBLASctl::omp_set_num_threads()\n\nAlso get information on threads:\n\nRhpcBLASctl::omp_get_num_procs()\nRhpcBLASctl::omp_get_max_threads()"
+  },
+  {
+    "objectID": "materials/lectures/5-blas/slides.html#examples",
+    "href": "materials/lectures/5-blas/slides.html#examples",
+    "title": "BLAS Libraries",
+    "section": "Examples",
+    "text": "Examples"
+  },
+  {
     "objectID": "materials/lectures/5-blas/slides.html#flexiblas",
     "href": "materials/lectures/5-blas/slides.html#flexiblas",
     "title": "BLAS Libraries",
     "section": "FlexiBLAS",
-    "text": "FlexiBLAS\n.footnote[ https://github.com/Enchufa2/r-flexiblashttps://cran.r-project.org/package=flexiblas]"
+    "text": "FlexiBLAS\n\nlibrary(flexiblas)\n\n# check whether FlexiBLAS is available\nflexiblas_avail()\n#&gt; [1] TRUE\n\n# get the current backend\nflexiblas_current_backend()\n#&gt; [1] \"OPENBLAS-OPENMP\"\n\n# list all available backends\nflexiblas_list()\n#&gt; [1] \"NETLIB\"           \"__FALLBACK__\"     \"BLIS-THREADS\"     \"OPENBLAS-OPENMP\"\n#&gt; [5] \"BLIS-SERIAL\"      \"ATLAS\"            \"OPENBLAS-SERIAL\"  \"OPENBLAS-THREADS\"\n#&gt; [9] \"BLIS-OPENMP\"\n\n# get/set the number of threads\nflexiblas_set_num_threads(12)\nflexiblas_get_num_threads()\n#&gt; [1] 12\n\n\n\n\n\n\n\n\n\nhttps://github.com/Enchufa2/r-flexiblashttps://cran.r-project.org/package=flexiblas"
   },
   {
     "objectID": "materials/lectures/3-software/slides.html#two-three-basic-concepts-in-hardware",

@@ -791,7 +791,7 @@ Second Edition</a></p>
 <span><span class="va">correct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pred</span> <span class="op">==</span> <span class="va">test</span><span class="op">$</span><span class="va">lettr</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Proportion Correct:"</span>, <span class="va">correct</span><span class="op">/</span><span class="op">(</span><span class="va">n_test</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="rf_mc.r-1" class="slide level2"><h2><code>rf_mc.r</code></h2>
-<div class="sourceCode" id="cb4" data-code-line-numbers="|1|4|6-10|12|13|14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(parallel)                                       <span class="co">#&lt;&lt;</span></span>
+<div class="sourceCode" id="cb4" data-code-line-numbers="|1|4|6-10|12|13|14|15|16|18-21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(parallel)                                       <span class="co">#&lt;&lt;</span></span>
 <span id="cb4-2"><a></a><span class="fu">library</span>(randomForest)</span>
 <span id="cb4-3"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
 <span id="cb4-4"><a></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">123</span>, <span class="st">"L'Ecuyer-CMRG"</span>)                   <span class="co">#&lt;&lt;</span></span>
@@ -816,28 +816,28 @@ Second Edition</a></p>
 <span id="cb4-23"><a></a>correct <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
 <span id="cb4-24"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct:"</span>, correct<span class="sc">/</span>(n_test), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="rf_mc.sh" class="slide level2"><h2><code>rf_mc.sh</code></h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name utk</span></span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --account=bckj-delta-cpu</span></span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=cpu</span></span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=20g</span></span>
-<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=16</span></span>
-<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 00:10:00</span></span>
-<span id="cb5-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -e ./utk.e</span></span>
-<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -o ./utk.o</span></span>
-<span id="cb5-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb5-13"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load r</span>
-<span id="cb5-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> list</span>
-<span id="cb5-16"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_serial.R</span>
-<span id="cb5-18"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 1</span>
-<span id="cb5-19"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 2</span>
-<span id="cb5-20"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 4</span>
-<span id="cb5-21"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 8</span>
-<span id="cb5-22"><a aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-code-line-numbers="|7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a></a><span class="co">#SBATCH --job-name utk</span></span>
+<span id="cb5-3"><a></a><span class="co">#SBATCH --account=bckj-delta-cpu</span></span>
+<span id="cb5-4"><a></a><span class="co">#SBATCH --partition=cpu</span></span>
+<span id="cb5-5"><a></a><span class="co">#SBATCH --mem=20g</span></span>
+<span id="cb5-6"><a></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb5-7"><a></a><span class="co">#SBATCH --cpus-per-task=16</span></span>
+<span id="cb5-8"><a></a><span class="co">#SBATCH --time 00:10:00</span></span>
+<span id="cb5-9"><a></a><span class="co">#SBATCH -e ./utk.e</span></span>
+<span id="cb5-10"><a></a><span class="co">#SBATCH -o ./utk.o</span></span>
+<span id="cb5-11"><a></a></span>
+<span id="cb5-12"><a></a><span class="bu">pwd</span></span>
+<span id="cb5-13"><a></a></span>
+<span id="cb5-14"><a></a><span class="ex">module</span> load r</span>
+<span id="cb5-15"><a></a><span class="ex">module</span> list</span>
+<span id="cb5-16"><a></a></span>
+<span id="cb5-17"><a></a><span class="bu">time</span> Rscript rf_serial.R</span>
+<span id="cb5-18"><a></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 1</span>
+<span id="cb5-19"><a></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 2</span>
+<span id="cb5-20"><a></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 4</span>
+<span id="cb5-21"><a></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 8</span>
+<span id="cb5-22"><a></a><span class="bu">time</span> Rscript rf_mc.R <span class="at">--args</span> 16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="crossvalidation-example" class="slide level2"><h2>Crossvalidation Example</h2>
 <p><br></p>
 <h3 id="random-forest-1">Random forest:</h3>
@@ -861,7 +861,6 @@ Second Edition</a></p>
 <span><span class="va">nfolds</span> <span class="op">=</span> <span class="fl">10</span></span>
 <span><span class="va">mtry_val</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">folds</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">)</span></span>
-<span><span class="va">cv_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, incorrect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mtry_val</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">cv_pars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, f <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span><span class="op">)</span></span>
 <span><span class="va">fold_err</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span>, <span class="va">cv_pars</span>, <span class="va">folds</span>, <span class="va">train</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">mtry</span> <span class="op">=</span> <span class="va">cv_pars</span><span class="op">[</span><span class="va">i</span>, <span class="st">"mtry"</span><span class="op">]</span></span>
@@ -889,7 +888,7 @@ Second Edition</a></p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Proportion Correct: "</span>, <span class="va">correct</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>    <span class="st">") with cv:"</span>, <span class="va">correct_cv</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="va">mtry</span>, <span class="st">")\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="rf_cv_serial.r-1" class="slide level2"><h2><code>rf_cv_serial.R</code></h2>
-<div class="sourceCode" id="cb7" data-code-line-numbers="|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(randomForest)</span>
+<div class="sourceCode" id="cb7" data-code-line-numbers="|1-9|11-23|11-12|13|14|15|16-22|19|24-25|27-29|31-33|35-40|35|36-38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(randomForest)</span>
 <span id="cb7-2"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
 <span id="cb7-3"><a></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">123</span>)</span>
 <span id="cb7-4"><a></a></span>
@@ -903,33 +902,32 @@ Second Edition</a></p>
 <span id="cb7-12"><a></a>nfolds <span class="ot">=</span> <span class="dv">10</span></span>
 <span id="cb7-13"><a></a>mtry_val <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(train) <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb7-14"><a></a>folds <span class="ot">=</span> <span class="fu">sample</span>( <span class="fu">rep_len</span>(<span class="dv">1</span><span class="sc">:</span>nfolds, <span class="fu">nrow</span>(train)), <span class="fu">nrow</span>(train) )</span>
-<span id="cb7-15"><a></a>cv_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">mtry =</span> mtry_val, <span class="at">incorrect =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(mtry_val)))</span>
-<span id="cb7-16"><a></a>cv_pars <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> mtry_val, <span class="at">f =</span> <span class="dv">1</span><span class="sc">:</span>nfolds)</span>
-<span id="cb7-17"><a></a>fold_err <span class="ot">=</span> <span class="cf">function</span>(i, cv_pars, folds, train) {</span>
-<span id="cb7-18"><a></a>  mtry <span class="ot">=</span> cv_pars[i, <span class="st">"mtry"</span>]</span>
-<span id="cb7-19"><a></a>  fold <span class="ot">=</span> (folds <span class="sc">==</span> cv_pars[i, <span class="st">"f"</span>])</span>
-<span id="cb7-20"><a></a>  rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train[<span class="sc">!</span>fold, ], <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-21"><a></a>  pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, train[fold, ])</span>
-<span id="cb7-22"><a></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> train<span class="sc">$</span>lettr[fold])</span>
-<span id="cb7-23"><a></a>}</span>
-<span id="cb7-24"><a></a></span>
-<span id="cb7-25"><a></a>cv_err <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cv_pars), fold_err, cv_pars, <span class="at">folds =</span> folds, <span class="at">train =</span> train)</span>
-<span id="cb7-26"><a></a>cv_err <span class="ot">=</span> <span class="fu">tapply</span>(<span class="fu">unlist</span>(cv_err), cv_pars[, <span class="st">"mtry"</span>], sum)</span>
-<span id="cb7-27"><a></a></span>
-<span id="cb7-28"><a></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(<span class="st">"rf_cv_mc0.pdf"</span>))</span>
-<span id="cb7-29"><a></a>  <span class="fu">plot</span>(mtry_val, cv_err<span class="sc">/</span>(n <span class="sc">-</span> n_test))</span>
-<span id="cb7-30"><a></a><span class="fu">dev.off</span>()</span>
-<span id="cb7-31"><a></a></span>
-<span id="cb7-32"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree)</span>
-<span id="cb7-33"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
-<span id="cb7-34"><a></a>correct <span class="ot">=</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
-<span id="cb7-35"><a></a></span>
-<span id="cb7-36"><a></a>mtry <span class="ot">=</span> mtry_val[<span class="fu">which.min</span>(cv_err)]</span>
-<span id="cb7-37"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry)</span>
-<span id="cb7-38"><a></a>pred_cv <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
-<span id="cb7-39"><a></a>correct_cv <span class="ot">=</span> <span class="fu">sum</span>(pred_cv <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
-<span id="cb7-40"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct: "</span>, correct<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, <span class="fu">floor</span>((<span class="fu">ncol</span>(test) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">3</span>),</span>
-<span id="cb7-41"><a></a>    <span class="st">") with cv:"</span>, correct_cv<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, mtry, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-15"><a></a>cv_pars <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> mtry_val, <span class="at">f =</span> <span class="dv">1</span><span class="sc">:</span>nfolds)</span>
+<span id="cb7-16"><a></a>fold_err <span class="ot">=</span> <span class="cf">function</span>(i, cv_pars, folds, train) {</span>
+<span id="cb7-17"><a></a>  mtry <span class="ot">=</span> cv_pars[i, <span class="st">"mtry"</span>]</span>
+<span id="cb7-18"><a></a>  fold <span class="ot">=</span> (folds <span class="sc">==</span> cv_pars[i, <span class="st">"f"</span>])</span>
+<span id="cb7-19"><a></a>  rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train[<span class="sc">!</span>fold, ], <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-20"><a></a>  pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, train[fold, ])</span>
+<span id="cb7-21"><a></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> train<span class="sc">$</span>lettr[fold])</span>
+<span id="cb7-22"><a></a>}</span>
+<span id="cb7-23"><a></a></span>
+<span id="cb7-24"><a></a>cv_err <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cv_pars), fold_err, cv_pars, <span class="at">folds =</span> folds, <span class="at">train =</span> train)</span>
+<span id="cb7-25"><a></a>cv_err <span class="ot">=</span> <span class="fu">tapply</span>(<span class="fu">unlist</span>(cv_err), cv_pars[, <span class="st">"mtry"</span>], sum)</span>
+<span id="cb7-26"><a></a></span>
+<span id="cb7-27"><a></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(<span class="st">"rf_cv_mc0.pdf"</span>))</span>
+<span id="cb7-28"><a></a>  <span class="fu">plot</span>(mtry_val, cv_err<span class="sc">/</span>(n <span class="sc">-</span> n_test))</span>
+<span id="cb7-29"><a></a><span class="fu">dev.off</span>()</span>
+<span id="cb7-30"><a></a></span>
+<span id="cb7-31"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree)</span>
+<span id="cb7-32"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb7-33"><a></a>correct <span class="ot">=</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb7-34"><a></a></span>
+<span id="cb7-35"><a></a>mtry <span class="ot">=</span> mtry_val[<span class="fu">which.min</span>(cv_err)]</span>
+<span id="cb7-36"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry)</span>
+<span id="cb7-37"><a></a>pred_cv <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb7-38"><a></a>correct_cv <span class="ot">=</span> <span class="fu">sum</span>(pred_cv <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb7-39"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct: "</span>, correct<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, <span class="fu">floor</span>((<span class="fu">ncol</span>(test) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">3</span>),</span>
+<span id="cb7-40"><a></a>    <span class="st">") with cv:"</span>, correct_cv<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, mtry, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="rf_cv_mc.r" class="slide level2"><h2><code>rf_cv_mc.R</code></h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/">randomForest</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">LetterRecognition</span>, package <span class="op">=</span> <span class="st">"mlbench"</span><span class="op">)</span></span>
@@ -945,7 +943,6 @@ Second Edition</a></p>
 <span><span class="va">nfolds</span> <span class="op">=</span> <span class="fl">10</span></span>
 <span><span class="va">mtry_val</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">folds</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">train</span><span class="op">)</span> <span class="op">)</span></span>
-<span><span class="va">cv_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, incorrect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mtry_val</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">cv_pars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>mtry <span class="op">=</span> <span class="va">mtry_val</span>, f <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nfolds</span><span class="op">)</span></span>
 <span><span class="va">fold_err</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span>, <span class="va">cv_pars</span>, <span class="va">folds</span>, <span class="va">train</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">mtry</span> <span class="op">=</span> <span class="va">cv_pars</span><span class="op">[</span><span class="va">i</span>, <span class="st">"mtry"</span><span class="op">]</span></span>
@@ -974,7 +971,7 @@ Second Edition</a></p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Proportion Correct: "</span>, <span class="va">correct</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>    <span class="st">") with cv:"</span>, <span class="va">correct_cv</span><span class="op">/</span><span class="va">n_test</span>, <span class="st">"(mtry = "</span>, <span class="va">mtry</span>, <span class="st">")\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="rf_cv_mc.r-1" class="slide level2"><h2><code>rf_cv_mc.R</code></h2>
-<div class="sourceCode" id="cb9" data-code-line-numbers="|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(randomForest)</span>
+<div class="sourceCode" id="cb9" data-code-line-numbers="|25-26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(randomForest)</span>
 <span id="cb9-2"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
 <span id="cb9-3"><a></a><span class="fu">set.seed</span>(<span class="at">seed =</span> <span class="dv">123</span>, <span class="st">"L'Ecuyer-CMRG"</span>)</span>
 <span id="cb9-4"><a></a></span>
@@ -988,34 +985,33 @@ Second Edition</a></p>
 <span id="cb9-12"><a></a>nfolds <span class="ot">=</span> <span class="dv">10</span></span>
 <span id="cb9-13"><a></a>mtry_val <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(train) <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb9-14"><a></a>folds <span class="ot">=</span> <span class="fu">sample</span>( <span class="fu">rep_len</span>(<span class="dv">1</span><span class="sc">:</span>nfolds, <span class="fu">nrow</span>(train)), <span class="fu">nrow</span>(train) )</span>
-<span id="cb9-15"><a></a>cv_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">mtry =</span> mtry_val, <span class="at">incorrect =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(mtry_val)))</span>
-<span id="cb9-16"><a></a>cv_pars <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> mtry_val, <span class="at">f =</span> <span class="dv">1</span><span class="sc">:</span>nfolds)</span>
-<span id="cb9-17"><a></a>fold_err <span class="ot">=</span> <span class="cf">function</span>(i, cv_pars, folds, train) {</span>
-<span id="cb9-18"><a></a>  mtry <span class="ot">=</span> cv_pars[i, <span class="st">"mtry"</span>]</span>
-<span id="cb9-19"><a></a>  fold <span class="ot">=</span> (folds <span class="sc">==</span> cv_pars[i, <span class="st">"f"</span>])</span>
-<span id="cb9-20"><a></a>  rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train[<span class="sc">!</span>fold, ], <span class="at">ntree =</span> ntree,</span>
-<span id="cb9-21"><a></a>                        <span class="at">mtry =</span> mtry, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb9-22"><a></a>  pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, train[fold, ])</span>
-<span id="cb9-23"><a></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> train<span class="sc">$</span>lettr[fold])</span>
-<span id="cb9-24"><a></a>}</span>
-<span id="cb9-25"><a></a></span>
-<span id="cb9-26"><a></a>nc <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)[<span class="dv">2</span>])</span>
-<span id="cb9-27"><a></a>cv_err <span class="ot">=</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cv_pars), fold_err, cv_pars, <span class="at">folds =</span> folds, <span class="at">train =</span> train, <span class="at">mc.cores =</span> nc)</span>
-<span id="cb9-28"><a></a>err <span class="ot">=</span> <span class="fu">tapply</span>(<span class="fu">unlist</span>(cv_err), cv_pars[, <span class="st">"mtry"</span>], sum)</span>
-<span id="cb9-29"><a></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(<span class="st">"rf_cv_mc"</span>, nc, <span class="st">".pdf"</span>))</span>
-<span id="cb9-30"><a></a>  <span class="fu">plot</span>(mtry_val, err<span class="sc">/</span>(n <span class="sc">-</span> n_test))</span>
-<span id="cb9-31"><a></a><span class="fu">dev.off</span>()</span>
-<span id="cb9-32"><a></a></span>
-<span id="cb9-33"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree)</span>
-<span id="cb9-34"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
-<span id="cb9-35"><a></a>correct <span class="ot">=</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
-<span id="cb9-36"><a></a></span>
-<span id="cb9-37"><a></a>mtry <span class="ot">=</span> mtry_val[<span class="fu">which.min</span>(err)]</span>
-<span id="cb9-38"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry)</span>
-<span id="cb9-39"><a></a>pred_cv <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
-<span id="cb9-40"><a></a>correct_cv <span class="ot">=</span> <span class="fu">sum</span>(pred_cv <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
-<span id="cb9-41"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct: "</span>, correct<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, <span class="fu">floor</span>((<span class="fu">ncol</span>(test) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">3</span>),</span>
-<span id="cb9-42"><a></a>    <span class="st">") with cv:"</span>, correct_cv<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, mtry, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-15"><a></a>cv_pars <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> mtry_val, <span class="at">f =</span> <span class="dv">1</span><span class="sc">:</span>nfolds)</span>
+<span id="cb9-16"><a></a>fold_err <span class="ot">=</span> <span class="cf">function</span>(i, cv_pars, folds, train) {</span>
+<span id="cb9-17"><a></a>  mtry <span class="ot">=</span> cv_pars[i, <span class="st">"mtry"</span>]</span>
+<span id="cb9-18"><a></a>  fold <span class="ot">=</span> (folds <span class="sc">==</span> cv_pars[i, <span class="st">"f"</span>])</span>
+<span id="cb9-19"><a></a>  rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train[<span class="sc">!</span>fold, ], <span class="at">ntree =</span> ntree,</span>
+<span id="cb9-20"><a></a>                        <span class="at">mtry =</span> mtry, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-21"><a></a>  pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, train[fold, ])</span>
+<span id="cb9-22"><a></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> train<span class="sc">$</span>lettr[fold])</span>
+<span id="cb9-23"><a></a>}</span>
+<span id="cb9-24"><a></a></span>
+<span id="cb9-25"><a></a>nc <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)[<span class="dv">2</span>])</span>
+<span id="cb9-26"><a></a>cv_err <span class="ot">=</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(cv_pars), fold_err, cv_pars, <span class="at">folds =</span> folds, <span class="at">train =</span> train, <span class="at">mc.cores =</span> nc)</span>
+<span id="cb9-27"><a></a>err <span class="ot">=</span> <span class="fu">tapply</span>(<span class="fu">unlist</span>(cv_err), cv_pars[, <span class="st">"mtry"</span>], sum)</span>
+<span id="cb9-28"><a></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(<span class="st">"rf_cv_mc"</span>, nc, <span class="st">".pdf"</span>))</span>
+<span id="cb9-29"><a></a>  <span class="fu">plot</span>(mtry_val, err<span class="sc">/</span>(n <span class="sc">-</span> n_test))</span>
+<span id="cb9-30"><a></a><span class="fu">dev.off</span>()</span>
+<span id="cb9-31"><a></a></span>
+<span id="cb9-32"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree)</span>
+<span id="cb9-33"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb9-34"><a></a>correct <span class="ot">=</span> <span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb9-35"><a></a></span>
+<span id="cb9-36"><a></a>mtry <span class="ot">=</span> mtry_val[<span class="fu">which.min</span>(err)]</span>
+<span id="cb9-37"><a></a>rf.all <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> ntree, <span class="at">mtry =</span> mtry)</span>
+<span id="cb9-38"><a></a>pred_cv <span class="ot">=</span> <span class="fu">predict</span>(rf.all, test)</span>
+<span id="cb9-39"><a></a>correct_cv <span class="ot">=</span> <span class="fu">sum</span>(pred_cv <span class="sc">==</span> test<span class="sc">$</span>lettr)</span>
+<span id="cb9-40"><a></a><span class="fu">cat</span>(<span class="st">"Proportion Correct: "</span>, correct<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, <span class="fu">floor</span>((<span class="fu">ncol</span>(test) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">3</span>),</span>
+<span id="cb9-41"><a></a>    <span class="st">") with cv:"</span>, correct_cv<span class="sc">/</span>n_test, <span class="st">"(mtry = "</span>, mtry, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="r-interfaces-to-low-level-native-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="80%" data-background-position="center"><h2>R Interfaces to Low-Level Native Tools</h2>
 <aside class="notes"><ul>
 <li><p>we begin with <code>paralel</code>’s multicore parts</p></li>

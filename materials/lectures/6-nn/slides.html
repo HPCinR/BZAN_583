@@ -10,7 +10,7 @@
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.549">
 
-  <title>HPC for Data Science in R - BZAN 583 - Untitled</title>
+  <title>HPC for Data Science in R - BZAN 583 - LLMs and torch</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,14 +327,75 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Untitled</h1>
+  <h1 class="title">LLMs and torch</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="a-short-excursion" class="slide level2">
-<h2>A short excursion</h2>
+<section id="github-copilot" class="slide level2 smaller">
+<h2>GitHub Copilot</h2>
+<p>RStudio now has a <a href="https://docs.posit.co/ide/user/ide/guide/tools/copilot.html">Copilot option</a></p>
+<p>Free to students and academics ($20/month otherwise - says Copilot, but I think it’s $10)</p>
+<div>
+<ul>
+<li class="fragment">This slide is being written with Copilot on</li>
+<li class="fragment">It’s a bit like a smart autocomplete</li>
+<li class="fragment">Above, it suggested a non-existent link for the Copilot option</li>
+<li class="fragment">It’s better than autocomplete in RStudio</li>
+<li class="fragment">But I find it unhelpful for HPC facing R code</li>
+<li class="fragment">It does a little better with shell scripts</li>
+</ul>
+</div>
+<p><a href="https://www.youtube.com/watch?v=t7NrkAeosog">A video</a> and <a href="https://www.youtube.com/watch?v=TlzMKSE97MQ&amp;t=25s">conference talk</a></p>
+<aside class="notes">
+<ul>
+<li>Experiments with GPT 3.5</li>
+<li>R is mostly laptop
+<ul>
+<li>parallel suggestions are mostly laptop oriented</li>
+</ul></li>
+<li>Planned demo with rf-serial into rf_mc
+<ul>
+<li>failed to get it to work</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="torch-pytorch-and-torch" class="slide level2 smaller">
+<h2>Torch, Pytorch, and <strong>torch</strong></h2>
+<ul>
+<li>Torch is a C++ library that provides neural network and optimization routines that work with tensors (multi-dimensional arrays)</li>
+</ul>
+<div>
+<ul>
+<li class="fragment">Pytorch is a deep learning library for Python that is based on the Torch library</li>
+<li class="fragment"><strong>torch</strong> is a package for R that provides an interface to the Torch library
+<ul>
+<li class="fragment">Takes about 15 minutes to install on Delta
+<ul>
+<li class="fragment">Still working out what modules are needed on Delta</li>
+</ul></li>
+<li class="fragment">Copilot: I have a <a href="https://www.youtube.com/watch?v=3Q1JZQ1J0Zo">video</a> on how to install it</li>
+<li class="fragment">Copilot: Copilot is wrong, but I do have a video on how to install it (Not)</li>
+<li class="fragment">A book: <a href="https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/">Deep Learning and Scientific Computing with R torch</a></li>
+<li class="fragment">Accompanying <a href="https://github.com/skeydan/Deep-Learning-and-Scientific-Computing-with-R-torch">GitHub repo</a>, more recent from <a href="https://github.com/mlverse/torch">mlverse</a></li>
+<li class="fragment">A <a href="https://blogs.rstudio.com/ai/posts/2020-09-29-introducing-torch-for-r/">blog</a>, another <a href="https://willhipson.netlify.app/post/torch-for-r/torch_stars/">blog</a></li>
+<li class="fragment">Torch <a href="https://blogs.rstudio.com/ai/posts/2023-07-12-hugging-face-integrations/">Hugging Face Integrations</a> and <a href="https://github.com/mlverse">mlverse</a></li>
+</ul></li>
+<li class="fragment"><a href="https://blogs.rstudio.com/ai/">Posit AI blogs</a></li>
+</ul>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

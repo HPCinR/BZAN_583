@@ -40,13 +40,13 @@ Free to students and academics ($20/month otherwise - says Copilot, but I think 
 - Pytorch is a deep learning library for Python that is based on the Torch library
 - **torch** is a package for R that provides an interface to the Torch library
   - Takes about 15 minutes to install on Delta
-    - Still working out what modules are needed
+    - Still working out what modules are needed on Delta
   - Copilot: I have a [video](https://www.youtube.com/watch?v=3Q1JZQ1J0Zo) on how to install it
   - Copilot: Copilot is wrong, but I do have a video on how to install it (Not)
-  - A book: [Deep Learning and Scientific Computing with R torch](https://skeydan.github.io/deep-learning-and-scientific-computing-with-r-torch/)
-  - Accompanying [GitHub repo](https://github.com/skeydan/Deep-Learning-and-Scientific-Computing-with-R-torch)
+  - A book: [Deep Learning and Scientific Computing with R torch](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
+  - Accompanying [GitHub repo](https://github.com/skeydan/Deep-Learning-and-Scientific-Computing-with-R-torch), more recent from [mlverse](https://github.com/mlverse/torch)
   - A [blog](https://blogs.rstudio.com/ai/posts/2020-09-29-introducing-torch-for-r/), another [blog](https://willhipson.netlify.app/post/torch-for-r/torch_stars/)
-  - Torch [Hugging Face Integrations](https://blogs.rstudio.com/ai/posts/2023-07-12-hugging-face-integrations/)
+  - Torch [Hugging Face Integrations](https://blogs.rstudio.com/ai/posts/2023-07-12-hugging-face-integrations/) and [mlverse](https://github.com/mlverse)
 - [Posit AI blogs](https://blogs.rstudio.com/ai/)
 :::
   

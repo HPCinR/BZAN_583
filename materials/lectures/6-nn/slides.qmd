@@ -1,9 +1,52 @@
 ---
-title: "Untitled"
+title: "LLMs and torch"
 format: 
   revealjs:
     chalkboard: true
 editor: source
 ---
 
-## A short excursion
+## GitHub Copilot {.smaller}
+
+RStudio now has a [Copilot option](https://docs.posit.co/ide/user/ide/guide/tools/copilot.html)
+
+Free to students and academics ($20/month otherwise - says Copilot, but I think it's $10)
+
+::: {.incremental}
+- This slide is being written with Copilot on
+- It's a bit like a smart autocomplete
+- Above, it suggested a non-existent link for the Copilot option
+- It's better than autocomplete in RStudio
+- But I find it unhelpful for HPC facing R code
+- It does a little better with shell scripts
+:::
+
+[A video](https://www.youtube.com/watch?v=t7NrkAeosog) and [conference talk](https://www.youtube.com/watch?v=TlzMKSE97MQ&t=25s)
+
+
+::: notes
+- Experiments with GPT 3.5 
+- R is mostly laptop
+  - parallel suggestions are mostly laptop oriented
+- Planned demo with rf-serial into rf_mc
+  - failed to get it to work
+:::
+
+## Torch, Pytorch, and **torch** {.smaller}
+
+- Torch is a C++ library that provides neural network and optimization routines that work with tensors (multi-dimensional arrays)
+
+::: {.incremental}
+- Pytorch is a deep learning library for Python that is based on the Torch library
+- **torch** is a package for R that provides an interface to the Torch library
+  - Takes about 15 minutes to install on Delta
+    - Still working out what modules are needed
+  - Copilot: I have a [video](https://www.youtube.com/watch?v=3Q1JZQ1J0Zo) on how to install it
+  - Copilot: Copilot is wrong, but I do have a video on how to install it (Not)
+  - A book: [Deep Learning and Scientific Computing with R torch](https://skeydan.github.io/deep-learning-and-scientific-computing-with-r-torch/)
+  - Accompanying [GitHub repo](https://github.com/skeydan/Deep-Learning-and-Scientific-Computing-with-R-torch)
+  - A [blog](https://blogs.rstudio.com/ai/posts/2020-09-29-introducing-torch-for-r/), another [blog](https://willhipson.netlify.app/post/torch-for-r/torch_stars/)
+  - Torch [Hugging Face Integrations](https://blogs.rstudio.com/ai/posts/2023-07-12-hugging-face-integrations/)
+- [Posit AI blogs](https://blogs.rstudio.com/ai/)
+:::
+  

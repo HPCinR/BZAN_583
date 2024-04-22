@@ -1,9 +1,9 @@
 ---
-title: "Welcome to HPC for Data Science"
+title: "LLMs and NNs"
 editor: source
 ---
 
-A short excursion into neural net classification
+LLMs and torch
 
 [Full Screen](slides.qmd)
 

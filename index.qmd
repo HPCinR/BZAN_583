@@ -49,7 +49,7 @@ Assignment: [Resampling Estimators](materials/assignment/5-resampling)
 
 *Week 6, April 22 & 24*
 
-Lectures: [LLM or Torch for R](materials/lectures/6-nn) [BLAS Libraries](materials/lectures/5-blas)\
+Lectures: [LLM or Torch for R](materials/lectures/6-nn) [BLAS Libraries](materials/lectures/6-blas)\
 Assignment?: [Starter Code](materials/assignment/6-nn) 
 
 *Week 7, April 29 & May 1*

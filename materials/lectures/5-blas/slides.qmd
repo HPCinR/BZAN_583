@@ -12,17 +12,45 @@ editor: source
 engine: knitr
 ---
 
+
+## Matrix Libraries ...
+
+## R-LAPACK-BLAS 
+
+* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
+  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
+
+* LAPACK: matrix decompositions and more  
+
+<!--
+$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
+
+* Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,
+
+## R-LAPACK-BLAS {.smaller}
+![](/pics/01-intro/pbdRlib.jpg)
+* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
+  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
+
+* LAPACK: dense and banded matrix decompositions and more  
+  * $\quad LU$ $\quad LL^T$ $\quad QR$ $\quad UDV^T$ $\quad VD^2V^T$ $\quad\|\cdot\|_p$  
+
+* Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries  
+
+* **FlexiBLAS**: A BLAS and LAPACK wrapper library with runtime exchangable backends  
+
+
 ## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="80%" background-position="center"}
 
 ## `parallel::mclapply()` {background-image="/pics/ParallelSoftware/ParallelSoftware9.png" background-size="80%" background-position="center"}
 
 ## BLAS Libraries {background-image="/pics/ParallelSoftware/ParallelSoftware10.png" background-size="80%" background-position="center"}
 
-## BLAS Libraries
+## OS Viewpoint on BLAS Libraries {.smaller}
 
-### Linux OS development cascade:
+#### Fedora Linux OS development cascade:
 
-Fedora $\rightarrow$ CentOS Stream $\rightarrow$ Red Hat Enterprise Linux
+Fedora $\rightarrow$ CentOS Stream $\rightarrow$ Red Hat Enterprise Linux (RHEL)
 
 $$\qquad$$
 
@@ -30,9 +58,17 @@ $$\qquad$$
 
 - R - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, ...)
 
-#### On delta, we have: 
+#### On Delta, we have [*spack*](https://spack.io/)-installed: 
 
 - R - OpenBLAS
+
+#### [*EasyBuild*](https://easybuild.io/) is currently more R-friendly than *spack* for the HPC BLAS ecosystem
+
+- EasyBuild [Common toolchains](https://docs.easybuild.io/common-toolchains/)
+
+::: aside
+These may be relevant for making OS choices when configuring cloud resources
+:::
 
 ## Set Number of Threads for Operation
 
@@ -45,35 +81,11 @@ Also get information on threads:
 
 ## Examples
 
-## Matrix Libraries ...
-
-## R-LAPACK-BLAS
-
-* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
-  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
-
-* LAPACK: matrix decompositions and more  
-
-<!--
-$$\quad LU \quad LL^T \quad QR \quad UDV^T \quad VD^2V^T \quad\|\cdot\|_p$$ -->
-
-* Implementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,
-
-## R-LAPACK-BLAS
-![](/pics/01-intro/pbdRlib.jpg)
-* BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library  
-  * vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)  
-
-* LAPACK: dense and banded matrix decompositions and more  
-  * $\quad LU$ $\quad LL^T$ $\quad QR$ $\quad UDV^T$ $\quad VD^2V^T$ $\quad\|\cdot\|_p$  
-
-* Implementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries  
-
-* **FlexiBLAS**: A BLAS and LAPACK wrapper library with runtime exchangable backends  
-
 ## FlexiBLAS
 
-```{r eval=FALSE}
+```{r}
+#| eval: FALSE
+#| echo: TRUE
 library(flexiblas)
 
 # check whether FlexiBLAS is available
@@ -96,8 +108,8 @@ flexiblas_get_num_threads()
 #> [1] 12
 ```
 
-.footnote[
+::: aside
 [https://github.com/Enchufa2/r-flexiblas](https://github.com/Enchufa2/r-flexiblas)  
 [https://cran.r-project.org/package=flexiblas](https://cran.r-project.org/package=flexiblas)
-]
+:::
 

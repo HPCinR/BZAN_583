@@ -67,14 +67,14 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.445    83.77      1.490     86.38\n\"aperm.default\"     0.135     7.83      0.135      7.83\n\"array\"             0.035     2.03      0.035      2.03\n\"colMeans\"          0.030     1.74      0.030      1.74\n\"is.finite\"         0.030     1.74      0.030      1.74\n\"matrix\"            0.020     1.16      0.020      1.16\n\"any\"               0.015     0.87      0.015      0.87\n\"svd\"               0.010     0.58      1.520     88.12\n\"sweep\"             0.005     0.29      0.175     10.14"
+    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.365    81.98      1.415     84.98\n\"aperm.default\"     0.145     8.71      0.145      8.71\n\"is.finite\"         0.040     2.40      0.040      2.40\n\"array\"             0.035     2.10      0.035      2.10\n\"colMeans\"          0.030     1.80      0.030      1.80\n\"matrix\"            0.020     1.20      0.020      1.20\n\"any\"               0.015     0.90      0.015      0.90\n\"sweep\"             0.010     0.60      0.190     11.41\n\"svd\"               0.005     0.30      1.445     86.79"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.465    85.17      1.500     87.21\n\"aperm.default\"     0.150     8.72      0.150      8.72\n\"is.finite\"         0.030     1.74      0.030      1.74\n\"array\"             0.025     1.45      0.025      1.45\n\"any\"               0.015     0.87      0.015      0.87\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.515    85.11       1.56     87.64\n\"aperm.default\"     0.150     8.43       0.15      8.43\n\"is.finite\"         0.030     1.69       0.03      1.69\n\"any\"               0.020     1.12       0.02      1.12\n\"array\"             0.020     1.12       0.02      1.12\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.415    84.48      1.460     87.16\n\"aperm.default\"     0.145     8.66      0.145      8.66\n\"is.finite\"         0.030     1.79      0.030      1.79\n\"matrix\"            0.025     1.49      0.025      1.49\n\"array\"             0.020     1.19      0.020      1.19"
+    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.395    84.80      1.430     86.93\n\"aperm.default\"     0.145     8.81      0.145      8.81\n\"array\"             0.030     1.82      0.030      1.82\n\"is.finite\"         0.030     1.82      0.030      1.82\n\"colMeans\"          0.015     0.91      0.015      0.91\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.340    83.49      1.390     86.60\n\"aperm.default\"     0.140     8.72      0.140      8.72\n\"array\"             0.025     1.56      0.025      1.56\n\"is.finite\"         0.025     1.56      0.025      1.56\n\"matrix\"            0.025     1.56      0.025      1.56\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.375    84.88      1.420     87.65\n\"aperm.default\"     0.135     8.33      0.135      8.33\n\"is.finite\"         0.030     1.85      0.030      1.85\n\"array\"             0.025     1.54      0.025      1.54\n\"matrix\"            0.020     1.23      0.020      1.23"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#lazy-evaluation",
@@ -88,7 +88,7 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark\n",
-    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.235    2.611     0.200    0.031          0         0\n2 g(x)          100   0.090    1.000     0.084    0.007          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.234      2.6     0.200    0.030          0         0\n2 g(x)          100   0.090      1.0     0.084    0.006          0         0"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#profiling-summary",
@@ -102,7 +102,7 @@
     "href": "materials/lectures/2-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.957   0.077   1.034 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.031 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.995   0.067   1.062 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.031   0.001   0.032 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#compute-once-if-not-changing",
@@ -130,7 +130,7 @@
     "href": "materials/lectures/2-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Preallocate lists and vectors Instead of Growing Them",
-    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.392   1.805   8.228 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.408   0.047   0.455 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.453   1.875   8.349 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.407   0.044   0.452 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#specialize-more-general-functions",
@@ -151,7 +151,7 @@
     "href": "materials/lectures/2-faster/slides.html#contiguous-access-to-arrays-and-lists",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Contiguous access to arrays and lists",
-    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.917   0.075   0.993 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.381   0.045   0.425 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.235   0.059   0.295 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.860   0.067   0.930 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.365   0.049   0.415 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.232   0.048   0.279 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#programming-languages-hierarchy",
@@ -172,7 +172,7 @@
     "href": "materials/lectures/2-faster/slides.html#rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "\nRfast and RFast2 Packages: A collection of Rcpp-Implemented Functions",
-    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.328   0.024   0.361 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.066   0.006   0.086 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
+    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.327   0.023   0.355 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.066   0.006   0.096 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
   },
   {
     "objectID": "materials/lectures/1b-setupdemo/slides.html#today",

@@ -10,6 +10,20 @@ filters:
 
 ## Distributed Memory Computing
 
+## Working with a remote cluster using R {.smaller}
+
+![](/pics/01-intro/Workflow.png)
+
+## Running Distributed on a Cluster {background-image="/pics/01-intro/WorkflowRunning.png" background-size="200px" .smaller}
+
+![](/pics/01-intro/BatchRonCluster.jpg)
+
+## Parallel R Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="75%"}
+
+## Distributed Memory Tools {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="75%"}
+
+## Message Passing Interface (MPI) {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="75%"}
+
 ## Running MPI on a Laptop {.smaller}
 
 macOS in a Terminal window:
@@ -182,19 +196,7 @@ Total R sessions: 8 Total cores: 48
 Notes: pid to core map changes frequently during mclapply
 ```
 
-## Working with a remote cluster using R {.smaller}
-
-![](/pics/01-intro/Workflow.png)
-
-## Running Distributed on a Cluster {background-image="/pics/01-intro/WorkflowRunning.png" background-size="200px" .smaller}
-
-![](/pics/01-intro/BatchRonCluster.jpg)
-
-## Distributed Memory Tools {background-image="/pics/ParallelSoftware/Slide7distributed.jpg" background-size="1200px"}
-
-## Message Passing Interface (MPI) {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="1200px"}
-
-## Single Program Multiple Data (SPMD) {.smaller background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
+## Single Program Multiple Data (SPMD) {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 -   N instances of the same code cooperate
     -   Each of the N instances has `rank`, {0, . . ., N-1}
@@ -207,7 +209,7 @@ Notes: pid to core map changes frequently during mclapply
     -   Multilevel parallelism is possible
 -   Typically no manager, it is all cooperation
 
-## pbdR Project {.smaller background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
+## pbdR Project {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 ![](/pics/01-intro/pbdRlib.jpg)
 
@@ -227,7 +229,7 @@ Notes: pid to core map changes frequently during mclapply
 Using HPC concepts and libraries \* Benefits the R user by knowing standard components of HPC
 :::
 
-##  {.smaller background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
+##  {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 ![](/pics/01-intro/pbdRlib.jpg)
 
@@ -252,7 +254,7 @@ Using HPC concepts and libraries \* Benefits the R user by knowing standard comp
     -   Because a client-server relationship is more appropriate
 :::
 
-## `pbdMPI`: High-level Collective Communications {.smaller background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
+## `pbdMPI`: High-level Collective Communications {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 Each of these operations is performed across a `communicator` of ranks. Simplest one is all ranks but rank arrays can be used for multilevel collectives.
 
@@ -270,7 +272,7 @@ Each of these operations is performed across a `communicator` of ranks. Simplest
 
 -   **`barrier()`** Waits on all ranks in a `comm` before proceeding
 
-## `pbdMPI`: High-level Collective Operations {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
+## `pbdMPI`: High-level Collective Operations {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 $\small \bf A = \sum_{i=1}^nX_i$ $\quad$ $\qquad$ $\qquad$ **`A = reduce(X)`** $\qquad$ $\qquad$ **`A = allreduce(X)`**
 
@@ -283,7 +285,7 @@ $\small \bf A = \left[ X_1 | X_2 | \cdots | X_n \right]$ $\qquad$ **`A = gather(
     -   that's why it beats Spark/MapReduce
 :::
 
-## `pbdMPI`: Functions to Facilitate SPMD Programming {.smaller background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
+## `pbdMPI`: Functions to Facilitate SPMD Programming {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 -   **`comm.chunk()`** splits a number into chunks in various ways and various formats. Tailored for SPMD programming, returning rank-specific results.
 
@@ -291,9 +293,9 @@ $\small \bf A = \left[ X_1 | X_2 | \cdots | X_n \right]$ $\qquad$ **`A = gather(
 
 -   **`comm.print()`** and **`comm.cat()`** print by default from rank 0 only, with options to print from any or all ranks.
 
-## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/Slide6.png" background-size="1100px"}
+## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="75%"}
 
-## Random Forest with MPI {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
+## Random Forest with MPI {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 `mpi/rf_mpi.R`
 ```{.r code-line-numbers="|"}
@@ -331,7 +333,8 @@ bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hell
 `allreduce()` is parallel
 :::
 
-## Package `pbdDMAT` {.smaller background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="top right"}
+<!-- Save for later
+## Package `pbdDMAT` {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
 
 -   ScaLAPACK: Distributed version of LAPACK (uses PBLAS/BLAS but not LAPACK)
 
@@ -345,7 +348,7 @@ bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hell
 
 ![](/pics/01-intro/pbdRlib.jpg) {size=300 position="left"}
 
-## Package `pbdML` {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="top right"}
+## Package `pbdML` {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
 
 -   A demonstration of `pbdDMAT` package capabilities
 
@@ -365,7 +368,7 @@ bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hell
 
 <br> Martinsson, P., & Tropp, J. (2020). Randomized numerical linear algebra: Foundations and algorithms. Acta Numerica, 29, 403-572. <https://doi.org/10.48550/arXiv.2002.01387>
 
-## Hands on Session $\quad$ rsvd: {.smaller background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="top right"}
+## Hands on Session $\quad$ rsvd: {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
 
 #### Randomized SVD via subspace embedding
 
@@ -380,7 +383,7 @@ $Q$ is an orthogonal basis for the columnspace of $Y$, which with high probabili
 3. Compute $U = Q\hat{U}$\
 4. Truncate factorization to $r$ columns
 
-## MNIST Data {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="top right"}
+## MNIST Data {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
 
 ![](/pics/mnist/Rplots.png){size="500" position="left"}
 
@@ -394,7 +397,7 @@ $Q$ is an orthogonal basis for the columnspace of $Y$, which with high probabili
 ``` {.r include="code/rsvd_snippet.donotrun"}
 ```
 
-## Package `kazaam` {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="top right"}
+## Package `kazaam` {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right" .smaller}
 
 ![](/pics/01-intro/pbdRlib.jpg) {size=300 position="left"}
 
@@ -409,3 +412,4 @@ $Q$ is an orthogonal basis for the columnspace of $Y$, which with high probabili
 .footnote\[ Naming is a "tongue-in-cheek" play on 'Shaquille' 'ONeal' ('Shaq') and the film 'Kazaam'\]
 
 ## Hands on Session `kazaam`
+-->

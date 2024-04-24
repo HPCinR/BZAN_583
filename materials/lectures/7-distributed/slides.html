@@ -401,6 +401,42 @@
 <section id="distributed-memory-computing" class="slide level2">
 <h2>Distributed Memory Computing</h2>
 </section>
+<section id="working-with-a-remote-cluster-using-r" class="slide level2 smaller">
+<h2>Working with a remote cluster using R</h2>
+
+<img data-src="../../../pics/01-intro/Workflow.png" class="r-stretch"></section>
+<section id="running-distributed-on-a-cluster" class="slide level2 smaller" data-background-image="../../../pics/01-intro/WorkflowRunning.png" data-background-size="200px">
+<h2>Running Distributed on a Cluster</h2>
+
+<img data-src="../../../pics/01-intro/BatchRonCluster.jpg" class="r-stretch"></section>
+<section id="parallel-r-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="75%">
+<h2>Parallel R Tools</h2>
+</section>
+<section id="distributed-memory-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="75%">
+<h2>Distributed Memory Tools</h2>
+</section>
+<section id="message-passing-interface-mpi" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="75%">
+<h2>Message Passing Interface (MPI)</h2>
+</section>
+<section id="single-program-multiple-data-spmd" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="10%" data-background-position="bottom right">
+<h2>Single Program Multiple Data (SPMD)</h2>
+<ul>
+<li>N instances of the same code cooperate
+<ul>
+<li>Each of the N instances has <code>rank</code>, {0, . . ., N-1}</li>
+<li>The <code>rank</code> determines any differences in work</li>
+<li>Instances run asynchronously</li>
+</ul></li>
+<li>SPMD parallelization is a generalization of the serial code
+<ul>
+<li>Many rank-aware operations are automated</li>
+<li>Collective operations are high level and easy to learn</li>
+<li>Explicit point-to-point communications are an advanced topic</li>
+<li>Multilevel parallelism is possible</li>
+</ul></li>
+<li>Typically no manager, it is all cooperation</li>
+</ul>
+</section>
 <section id="running-mpi-on-a-laptop" class="slide level2 smaller">
 <h2>Running MPI on a Laptop</h2>
 <p>macOS in a Terminal window:</p>
@@ -517,7 +553,7 @@ Hello World! My name is Rank7. We are 8 identical siblings. </code></pre>
 <section id="two-parallel-levels" class="slide level2 smaller">
 <h2>Two Parallel Levels</h2>
 <p><code>hello_balance.R</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="do">## This script describes two levels of parallelism:</span></span>
+<div class="sourceCode" id="cb6" data-code-line-numbers="|6|9|11-14|16-20|22-24|26-27|29-33|35|36-37|39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="do">## This script describes two levels of parallelism:</span></span>
 <span id="cb6-2"><a></a><span class="do">## Top level: Distributed MPI runs several copies of this entire script. Instances differ by their comm.rank() designation.</span></span>
 <span id="cb6-3"><a></a><span class="do">## Inner level: The unix fork (copy-on-write) shared memory parallel execution of the mc.function() managed by parallel::mclapply()</span></span>
 <span id="cb6-4"><a></a><span class="do">## Further levels are possible: multithreading in compiled code and communicator splitting at the distributed MPI level.</span></span>
@@ -628,40 +664,7 @@ Total R sessions: 8 Total cores: 48
 
 Notes: pid to core map changes frequently during mclapply</code></pre>
 </section>
-<section id="working-with-a-remote-cluster-using-r" class="slide level2 smaller">
-<h2>Working with a remote cluster using R</h2>
-
-<img data-src="../../../pics/01-intro/Workflow.png" class="r-stretch"></section>
-<section id="running-distributed-on-a-cluster" class="slide level2 smaller" data-background-image="../../../pics/01-intro/WorkflowRunning.png" data-background-size="200px">
-<h2>Running Distributed on a Cluster</h2>
-
-<img data-src="../../../pics/01-intro/BatchRonCluster.jpg" class="r-stretch"></section>
-<section id="distributed-memory-tools" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7distributed.jpg" data-background-size="1200px">
-<h2>Distributed Memory Tools</h2>
-</section>
-<section id="message-passing-interface-mpi" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="1200px">
-<h2>Message Passing Interface (MPI)</h2>
-</section>
-<section id="single-program-multiple-data-spmd" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
-<h2>Single Program Multiple Data (SPMD)</h2>
-<ul>
-<li>N instances of the same code cooperate
-<ul>
-<li>Each of the N instances has <code>rank</code>, {0, . . ., N-1}</li>
-<li>The <code>rank</code> determines any differences in work</li>
-<li>Instances run asynchronously</li>
-</ul></li>
-<li>SPMD parallelization is a generalization of the serial code
-<ul>
-<li>Many rank-aware operations are automated</li>
-<li>Collective operations are high level and easy to learn</li>
-<li>Explicit point-to-point communications are an advanced topic</li>
-<li>Multilevel parallelism is possible</li>
-</ul></li>
-<li>Typically no manager, it is all cooperation</li>
-</ul>
-</section>
-<section id="pbdr-project" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
+<section id="pbdr-project" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="10%" data-background-position="bottom right">
 <h2>pbdR Project</h2>
 
 <img data-src="../../../pics/01-intro/pbdRlib.jpg" class="r-stretch"><ul>
@@ -689,7 +692,7 @@ Notes: pid to core map changes frequently during mclapply</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="section" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
+<section id="section" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="10%" data-background-position="bottom right">
 <h2></h2>
 
 <img data-src="../../../pics/01-intro/pbdRlib.jpg" class="r-stretch"></section>
@@ -732,7 +735,7 @@ Notes: pid to core map changes frequently during mclapply</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="pbdmpi-high-level-collective-communications" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
+<section id="pbdmpi-high-level-collective-communications" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="10%" data-background-position="bottom right">
 <h2><code>pbdMPI</code>: High-level Collective Communications</h2>
 <p>Each of these operations is performed across a <code>communicator</code> of ranks. Simplest one is all ranks but rank arrays can be used for multilevel collectives.</p>
 <ul>
@@ -745,7 +748,7 @@ Notes: pid to core map changes frequently during mclapply</code></pre>
 <li><p><strong><code>barrier()</code></strong> Waits on all ranks in a <code>comm</code> before proceeding</p></li>
 </ul>
 </section>
-<section id="pbdmpi-high-level-collective-operations" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
+<section id="pbdmpi-high-level-collective-operations" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="10%" data-background-position="bottom right">
 <h2><code>pbdMPI</code>: High-level Collective Operations</h2>
 <p><span class="math inline">\(\small \bf A = \sum_{i=1}^nX_i\)</span> <span class="math inline">\(\quad\)</span> <span class="math inline">\(\qquad\)</span> <span class="math inline">\(\qquad\)</span> <strong><code>A = reduce(X)</code></strong> <span class="math inline">\(\qquad\)</span> <span class="math inline">\(\qquad\)</span> <strong><code>A = allreduce(X)</code></strong></p>
 <p><span class="math inline">\(\small \bf A = \left[ X_1 | X_2 | \cdots | X_n \right]\)</span> <span class="math inline">\(\qquad\)</span> <strong><code>A = gather(X)</code></strong> <span class="math inline">\(\qquad\)</span> <span class="math inline">\(\qquad\)</span> <strong><code>A = allgather(X)</code></strong></p>
@@ -769,7 +772,7 @@ Notes: pid to core map changes frequently during mclapply</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="pbdmpi-functions-to-facilitate-spmd-programming" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
+<section id="pbdmpi-functions-to-facilitate-spmd-programming" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="10%" data-background-position="bottom right">
 <h2><code>pbdMPI</code>: Functions to Facilitate SPMD Programming</h2>
 <ul>
 <li><p><strong><code>comm.chunk()</code></strong> splits a number into chunks in various ways and various formats. Tailored for SPMD programming, returning rank-specific results.</p></li>
@@ -777,10 +780,10 @@ Notes: pid to core map changes frequently during mclapply</code></pre>
 <li><p><strong><code>comm.print()</code></strong> and <strong><code>comm.cat()</code></strong> print by default from rank 0 only, with options to print from any or all ranks.</p></li>
 </ul>
 </section>
-<section id="distributed-programming-works-in-shared-memory" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide6.png" data-background-size="1100px">
+<section id="distributed-programming-works-in-shared-memory" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware8.png" data-background-size="75%">
 <h2>Distributed Programming Works in Shared Memory</h2>
 </section>
-<section id="random-forest-with-mpi" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
+<section id="random-forest-with-mpi" class="slide level2" data-background-image="../../../pics/ParallelSoftware/ParallelSoftware11.png" data-background-size="10%" data-background-position="bottom right">
 <h2>Random Forest with MPI</h2>
 <p><code>mpi/rf_mpi.R</code></p>
 <div class="sourceCode" id="cb8" data-code-line-numbers="|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(randomForest))</span>
@@ -858,77 +861,86 @@ Notes: pid to core map changes frequently during mclapply</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="package-pbddmat" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="top right">
-<h2>Package <code>pbdDMAT</code></h2>
-<ul>
-<li><p>ScaLAPACK: Distributed version of LAPACK (uses PBLAS/BLAS but not LAPACK)</p>
-<ul>
-<li><p>2d Block-Cyclic data layout - mostly automated in <code>pbdDMAT</code> package</p></li>
-<li><p>BLACS: Communication collectives for distributed matrix computation</p></li>
-<li><p>PBLAS: Distributed BLAS (uses standard BLAS within blocks)</p></li>
-</ul></li>
-<li><p>R code is identical for most matrix operations by overloading operators and <code>ddmatrix</code> class</p></li>
-</ul>
-<p><img data-src="../../../pics/01-intro/pbdRlib.jpg"> {size=300 position=“left”}</p>
-</section>
-<section id="package-pbdml" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="top right">
-<h2>Package <code>pbdML</code></h2>
-<ul>
-<li><p>A demonstration of <code>pbdDMAT</code> package capabilities</p></li>
-<li><p>Includes</p>
-<ul>
-<li>Randomized SVD</li>
-<li>Randomized principal components analysis</li>
-<li>Robust Principal Component Analysis?” from https://arxiv.org/pdf/0912.3599.pdf</li>
-</ul></li>
-</ul>
-</section>
-<section id="hands-on-session-quad-rsvd" class="slide level2">
-<h2>Hands on Session <span class="math inline">\(\quad\)</span> rsvd:</h2>
-<h4 id="singular-value-decomposition-via-randomized-sketching">Singular value decomposition via randomized sketching</h4>
-<p><br> Randomized sketching produces fast new alternatives to classical numerical linear algebra computations.</p>
-<p><br> Guarantees are given with probability statements instead of classical error analysis.</p>
-<p><br> Martinsson, P., &amp; Tropp, J. (2020). Randomized numerical linear algebra: Foundations and algorithms. Acta Numerica, 29, 403-572. <a href="https://doi.org/10.48550/arXiv.2002.01387" class="uri">https://doi.org/10.48550/arXiv.2002.01387</a></p>
-</section>
-<section id="hands-on-session-quad-rsvd-1" class="slide level2 smaller" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="top right">
-<h2>Hands on Session <span class="math inline">\(\quad\)</span> rsvd:</h2>
-<h4 id="randomized-svd-via-subspace-embedding">Randomized SVD via subspace embedding</h4>
-<p>Given an <span class="math inline">\(n\times p\)</span> matrix <span class="math inline">\(X\)</span> and <span class="math inline">\(k = r + 10\)</span>, where <span class="math inline">\(r\)</span> is the <em>effective rank</em> of <span class="math inline">\(X\)</span>:<br>
-1. Construct a <span class="math inline">\(p\times k\)</span> random matrix <span class="math inline">\(\Omega\)</span><br>
-2. Form <span class="math inline">\(Y = X \Omega\)</span><br>
-3. Decompose <span class="math inline">\(Y = QR\)</span></p>
-<p><span class="math inline">\(Q\)</span> is an orthogonal basis for the columnspace of <span class="math inline">\(Y\)</span>, which with high probability is the columnspace of <span class="math inline">\(X\)</span>. To get the SVD of <span class="math inline">\(X\)</span>:<br>
-1. Compute <span class="math inline">\(C= Q^TX\)</span><br>
-2. Decompose <span class="math inline">\(C = \hat{U}\Sigma V^T\)</span><br>
-3. Compute <span class="math inline">\(U = Q\hat{U}\)</span><br>
-4. Truncate factorization to <span class="math inline">\(r\)</span> columns</p>
-</section>
-<section id="mnist-data" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="top right">
-<h2>MNIST Data</h2>
+<!-- Save for later
+## Package `pbdDMAT` {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
 
-<img data-src="../../../pics/mnist/Rplots.png" size="500" data-position="left" class="r-stretch"></section>
-<section id="mnist_rsvd.r" class="slide level2">
-<h2><code>mnist_rsvd.R</code></h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="hands-on-session-rsvd" class="slide level2">
-<h2>Hands-on Session rsvd</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="package-kazaam" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="top right">
-<h2>Package <code>kazaam</code></h2>
-<p><img data-src="../../../pics/01-intro/pbdRlib.jpg"> {size=300 position=“left”}</p>
-<ul>
-<li><p>Distributed methods for tall matrices (and some for wide matrices) that exploit the short dimension for speed and long dimension for parallelism</p></li>
-<li><p>Tall matrices, <code>shaq</code> class, are chunked by blocks of rows</p></li>
-<li><p>Wide matrices, <code>tshaq</code> class, are chunked by blocks of columns</p></li>
-<li><p>Much like <code>pbdDMAT</code>, most matrix operations in R code are identical to serial through overloading operators and <code>shaq</code> <code>S4</code> class</p></li>
-</ul>
-<p>.footnote[ Naming is a “tongue-in-cheek” play on ‘Shaquille’ ‘ONeal’ (‘Shaq’) and the film ‘Kazaam’]</p>
-</section>
-<section id="hands-on-session-kazaam" class="slide level2">
-<h2>Hands on Session <code>kazaam</code></h2>
+-   ScaLAPACK: Distributed version of LAPACK (uses PBLAS/BLAS but not LAPACK)
+
+    -   2d Block-Cyclic data layout - mostly automated in `pbdDMAT` package
+
+    -   BLACS: Communication collectives for distributed matrix computation
+
+    -   PBLAS: Distributed BLAS (uses standard BLAS within blocks)
+
+-   R code is identical for most matrix operations by overloading operators and `ddmatrix` class
+
+![](/pics/01-intro/pbdRlib.jpg) {size=300 position="left"}
+
+## Package `pbdML` {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
+
+-   A demonstration of `pbdDMAT` package capabilities
+
+-   Includes
+
+    -   Randomized SVD
+    -   Randomized principal components analysis
+    -   Robust Principal Component Analysis?" from https://arxiv.org/pdf/0912.3599.pdf
+
+## Hands on Session $\quad$ rsvd:
+
+#### Singular value decomposition via randomized sketching
+
+<br> Randomized sketching produces fast new alternatives to classical numerical linear algebra computations.
+
+<br> Guarantees are given with probability statements instead of classical error analysis.
+
+<br> Martinsson, P., & Tropp, J. (2020). Randomized numerical linear algebra: Foundations and algorithms. Acta Numerica, 29, 403-572. <https://doi.org/10.48550/arXiv.2002.01387>
+
+## Hands on Session $\quad$ rsvd: {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
+
+#### Randomized SVD via subspace embedding
+
+Given an $n\times p$ matrix $X$ and $k = r + 10$, where $r$ is the *effective rank* of $X$:\
+1. Construct a $p\times k$ random matrix $\Omega$\
+2. Form $Y = X \Omega$\
+3. Decompose $Y = QR$
+
+$Q$ is an orthogonal basis for the columnspace of $Y$, which with high probability is the columnspace of $X$. To get the SVD of $X$:\
+1. Compute $C= Q^TX$\
+2. Decompose $C = \hat{U}\Sigma V^T$\
+3. Compute $U = Q\hat{U}$\
+4. Truncate factorization to $r$ columns
+
+## MNIST Data {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
+
+![](/pics/mnist/Rplots.png){size="500" position="left"}
+
+## `mnist_rsvd.R`
+
+``` {.r include="code/mnist_rsvd.R"}
+```
+
+## Hands-on Session rsvd
+
+``` {.r include="code/rsvd_snippet.donotrun"}
+```
+
+## Package `kazaam` {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right" .smaller}
+
+![](/pics/01-intro/pbdRlib.jpg) {size=300 position="left"}
+
+-   Distributed methods for tall matrices (and some for wide matrices) that exploit the short dimension for speed and long dimension for parallelism
+
+-   Tall matrices, `shaq` class, are chunked by blocks of rows
+
+-   Wide matrices, `tshaq` class, are chunked by blocks of columns
+
+-   Much like `pbdDMAT`, most matrix operations in R code are identical to serial through overloading operators and `shaq` `S4` class
+
+.footnote\[ Naming is a "tongue-in-cheek" play on 'Shaquille' 'ONeal' ('Shaq') and the film 'Kazaam'\]
+
+## Hands on Session `kazaam`
+-->
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

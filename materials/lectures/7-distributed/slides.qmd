@@ -24,6 +24,19 @@ filters:
 
 ## Message Passing Interface (MPI) {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="75%"}
 
+## Single Program Multiple Data (SPMD) {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
+
+-   N instances of the same code cooperate
+    -   Each of the N instances has `rank`, {0, . . ., N-1}
+    -   The `rank` determines any differences in work
+    -   Instances run asynchronously
+-   SPMD parallelization is a generalization of the serial code
+    -   Many rank-aware operations are automated
+    -   Collective operations are high level and easy to learn
+    -   Explicit point-to-point communications are an advanced topic
+    -   Multilevel parallelism is possible
+-   Typically no manager, it is all cooperation
+
 ## Running MPI on a Laptop {.smaller}
 
 macOS in a Terminal window:
@@ -119,7 +132,7 @@ Hello World! My name is Rank7. We are 8 identical siblings.
 ## Two Parallel Levels  {.smaller}
 
 `hello_balance.R`
-``` {.r}
+``` {.r code-line-numbers="|6|9|11-14|16-20|22-24|26-27|29-33|35|36-37|39"}
 {{< include /code/mpi/hello_balance.R >}}
 ```
 
@@ -195,19 +208,6 @@ Total R sessions: 8 Total cores: 48
 
 Notes: pid to core map changes frequently during mclapply
 ```
-
-## Single Program Multiple Data (SPMD) {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
-
--   N instances of the same code cooperate
-    -   Each of the N instances has `rank`, {0, . . ., N-1}
-    -   The `rank` determines any differences in work
-    -   Instances run asynchronously
--   SPMD parallelization is a generalization of the serial code
-    -   Many rank-aware operations are automated
-    -   Collective operations are high level and easy to learn
-    -   Explicit point-to-point communications are an advanced topic
-    -   Multilevel parallelism is possible
--   Typically no manager, it is all cooperation
 
 ## pbdR Project {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 

@@ -1,3 +1,6 @@
 [submodule "pics"]
 	path = pics
 	url = git@github.com:HPCinR/pics.git
+[submodule "code"]
+	path = code
+	url = git@github.com:HPCinR/BZAN_583_code.git

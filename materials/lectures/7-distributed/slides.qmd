@@ -24,16 +24,169 @@ Windows
 -   Download: https://www.microsoft.com/en-us/download/details.aspx?id=100593
 -   `pbdMPI` has a Windows binary on CRAN
 
-## Revisit `hello_balance.R`
+## MPI Hello World {.smaller}
 
-``` {.r include="code/hello_balance.R"}
+SPMD: $n$ identical codes running, each given a unique rank: $0$ to $n-1$
+
+`hello_world.R`
+```{.r code-line-numbers="|1|3-4|5-6|8"}
+{{< include /code/mpi/hello_world.R >}}
 ```
 
-## Working with a remote cluster using R
+## MPI Hello World {.smaller}
+
+Shell script to run 8 instances of `hello_world.R`
+
+`hello_world.sh`
+```{.r code-line-numbers="|6-8,17"}
+{{< include /code/mpi/hello_world.sh >}}
+```
+
+- Submit with: `sbatch hello_world.sh`
+
+## MPI Output `utk.o` {.smaller}
+
+```
+[gostrouc@dt-login04 mpi]$ cat utk.o
+/u/gostrouc/BZAN_583_code/mpi
+
+======================   ALLOCATED NODES   ======================
+	cn095: flags=0x11 slots=8 max_slots=0 slots_inuse=0 state=UP
+=================================================================
+Hello World! My name is Rank1. We are 8 identical siblings. 
+Hello World! My name is Rank0. We are 8 identical siblings. 
+Hello World! My name is Rank4. We are 8 identical siblings. 
+Hello World! My name is Rank5. We are 8 identical siblings. 
+Hello World! My name is Rank6. We are 8 identical siblings. 
+Hello World! My name is Rank2. We are 8 identical siblings. 
+Hello World! My name is Rank3. We are 8 identical siblings. 
+Hello World! My name is Rank7. We are 8 identical siblings. 
+```
+
+- Note the rank order is arbitrary  
+- In general, `cat()` does not even prevent overprinting!
+
+## MPI Hello World {.smaller}
+
+SPMD: some control over printing with `comm.cat()`
+
+`hello_world2.R`
+```{.r code-line-numbers="6"}
+{{< include /code/mpi/hello_world2.R >}}
+```
+
+## MPI Output `utk.o` {.smaller}
+
+```
+[gostrouc@dt-login04 mpi]$ cat utk.o
+/u/gostrouc/BZAN_583_code/mpi
+
+======================   ALLOCATED NODES   ======================
+	cn095: flags=0x11 slots=8 max_slots=0 slots_inuse=0 state=UP
+=================================================================
+COMM.RANK = 0
+Hello World! My name is Rank0. We are 8 identical siblings. 
+COMM.RANK = 1
+Hello World! My name is Rank1. We are 8 identical siblings. 
+COMM.RANK = 2
+Hello World! My name is Rank2. We are 8 identical siblings. 
+COMM.RANK = 3
+Hello World! My name is Rank3. We are 8 identical siblings. 
+COMM.RANK = 4
+Hello World! My name is Rank4. We are 8 identical siblings. 
+COMM.RANK = 5
+Hello World! My name is Rank5. We are 8 identical siblings. 
+COMM.RANK = 6
+Hello World! My name is Rank6. We are 8 identical siblings. 
+COMM.RANK = 7
+Hello World! My name is Rank7. We are 8 identical siblings. 
+```
+
+## Two Parallel Levels  {.smaller}
+
+`hello_balance.R`
+``` {.r}
+{{< include /code/mpi/hello_balance.R >}}
+```
+
+## Two Parallel Levels Output {.smaller}
+
+```
+[gostrouc@dt-login04 mpi]$ cat utk.o
+/u/gostrouc/BZAN_583_code/mpi
+
+======================   ALLOCATED NODES   ======================
+	cn096: flags=0x11 slots=4 max_slots=0 slots_inuse=0 state=UP
+	cn099: flags=0x10 slots=4 max_slots=0 slots_inuse=0 state=UP
+=================================================================
+R version 4.3.2 (2023-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Red Hat Enterprise Linux 8.8 (Ootpa)
+
+Matrix products: default
+BLAS/LAPACK: /sw/spack/deltas11-2023-03/apps/linux-rhel8-zen3/gcc-11.4.0/openblas-0.3.25-5yvxjnl/lib/libopenblas_zen-r0.3.25.so;  LAPACK version 3.11.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] pbdMPI_0.5-1
+
+loaded via a namespace (and not attached):
+[1] compiler_4.3.2 parallel_4.3.2 float_0.3-2   
+COMM.RANK = 0
+Hello World from rank 0 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939702 939706 939708 939712 939715 939719
+COMM.RANK = 1
+Hello World from rank 1 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939704 939709 939714 939718 939722 939723
+COMM.RANK = 2
+Hello World from rank 2 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939703 939707 939710 939713 939716 939720
+COMM.RANK = 3
+Hello World from rank 3 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939705 939711 939717 939721 939724 939725
+COMM.RANK = 4
+Hello World from rank 4 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152806 1152810 1152816 1152821 1152824 1152826
+COMM.RANK = 5
+Hello World from rank 5 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152804 1152808 1152812 1152814 1152818 1152822
+COMM.RANK = 6
+Hello World from rank 6 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152803 1152807 1152811 1152813 1152817 1152819
+COMM.RANK = 7
+Hello World from rank 7 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152805 1152809 1152815 1152820 1152823 1152825
+Total R sessions: 8 Total cores: 48 
+
+Notes: pid to core map changes frequently during mclapply
+```
+
+## Working with a remote cluster using R {.smaller}
 
 ![](/pics/01-intro/Workflow.png)
 
-## Running Distributed on a Cluster {background-image="/pics/01-intro/WorkflowRunning.png" background-size="200px"}
+## Running Distributed on a Cluster {background-image="/pics/01-intro/WorkflowRunning.png" background-size="200px" .smaller}
 
 ![](/pics/01-intro/BatchRonCluster.jpg)
 
@@ -140,27 +293,21 @@ $\small \bf A = \left[ X_1 | X_2 | \cdots | X_n \right]$ $\qquad$ **`A = gather(
 
 ## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/Slide6.png" background-size="1100px"}
 
-## Hands on Session 5: Hello MPI Ranks {/pics/ParallelSoftware/Slide7mpi.jpg background-size="200px" background-position="bottom right"}
+## Random Forest with MPI {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
 
-`code_5/hello_world.R` `{.r include = "code/hello_world.R"}`
-
-### **Rank** distinguishes the parallel copies of the same code
-
-## Hands on Session 5: Random Forest with MPI {background-image="/pics/ParallelSoftware/Slide7mpi.jpg" background-size="200px" background-position="bottom right"}
-
-`code_5/rf_mpi.R`
-
-``` {.r include="code/rf_mpi.R"}
+`mpi/rf_mpi.R`
+```{.r code-line-numbers="|"}
+{{< include /code/mpi/rf_mpi.R >}}
 ```
 
-## Hands on Session 5: `comm.chunk()`
+## `comm.chunk()`
 
-`mpi_shorts/chunk.r`
-
-``` {.r include="code/chunk.r"}
+`mpi/chunk.r`
+```{.r code-line-numbers="|"}
+{{< include /code/mpi/chunk.r >}}
 ```
 
-## Hands on Session 5: other short MPI codes {.smaller}
+## Other short MPI codes {.smaller}
 
 bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hello-p.r hello.r map-reduce.r mcsim.r ols.r qr-cop.r rank.r reduce-mat.r timer.r
 
@@ -169,8 +316,6 @@ bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hell
 -   Wile in the `mpi_shorts` directory, run the following
     -   `source ../code_4/modules_MACHINE.sh`
     -   `mpirun -np 4 Rscript your_script.r`
-
-.footnote\[ $^*$ Note that running long or large jobs on login nodes is strongly discouraged\]
 
 ## Shared Memory - MPI or fork? {.smaller background-image="/pics/01-intro/pbdRlib.jpg" background-size="200px" background-position="bottom right"}
 

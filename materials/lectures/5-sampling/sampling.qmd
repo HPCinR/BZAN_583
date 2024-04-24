@@ -262,27 +262,27 @@ Taken from: Parallel Statistical Computing with R: An Illustration on Two Archit
 
 ## `rf_serial.r`  
 ```{.r}
-{{< include _code/rf_serial.R >}}
+{{< include /code/sampling/rf_serial.R >}}
 ```
 
 ## `rf_serial.r`  
 ```{.r code-line-numbers="|5-9|11|12|14-15"}
-{{< include _code/rf_serial.R >}}
+{{< include /code/sampling/rf_serial.R >}}
 ```
 
 ## `rf_mc.r`
 ```{.r}
-{{< include _code/rf_mc.R >}} 
+{{< include /code/sampling/rf_mc.R >}} 
 ```
 
 ## `rf_mc.r`
 ```{.r code-line-numbers="|1|4|6-10|12|13|14|15|16|18-21"}
-{{< include _code/rf_mc.R >}} 
+{{< include /code/sampling/rf_mc.R >}} 
 ```
 
 ## `rf_mc.sh`
 ```{.bash code-line-numbers="|7"}
-{{< include _code/rf_mc.sh >}} 
+{{< include /code/sampling/rf_mc.sh >}} 
 ```
 
 ## Crossvalidation Example
@@ -299,22 +299,22 @@ $m$, the number of predictors sampled
 
 ## `rf_cv_serial.R`  
 ```{.r}
-{{< include _code/rf_cv_serial.R >}}
+{{< include /code/sampling/rf_cv_serial.R >}}
 ```
 
 ## `rf_cv_serial.R`  
 ```{.r code-line-numbers="|1-9|11-23|11-12|13|14|15|16-22|19|24-25|27-29|31-33|35-40|35|36-38"}
-{{< include _code/rf_cv_serial.R >}}
+{{< include /code/sampling/rf_cv_serial.R >}}
 ```
 
 ## `rf_cv_mc.R`
 ```{.r}
-{{< include _code/rf_cv_mc.R >}} 
+{{< include /code/sampling/rf_cv_mc.R >}} 
 ```
 
 ## `rf_cv_mc.R`
 ```{.r code-line-numbers="|25-26"}
-{{< include _code/rf_cv_mc.R >}} 
+{{< include /code/sampling/rf_cv_mc.R >}} 
 ```
 
 ## R Interfaces to Low-Level Native Tools {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="80%" background-position="center"}

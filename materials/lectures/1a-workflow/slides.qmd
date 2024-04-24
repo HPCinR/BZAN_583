@@ -167,6 +167,15 @@ Commands are files in directories listed in your PATH variable (try "echo \$PATH
 
 There are many resources on the web to learn Linux basics
 
+## Solutions for Potential Windows Issues {.smaller}
+
+- Files produced in text editors may have Windows line endings  
+   - Windows: `\r\n`, Unix: `\n`  
+   - Fix on Unix command line: `sed -i.bak 's/\r$//' file.txt`  
+     - Edits in-place and creates a backup file with `.bak` extension
+- RStudio on Windows may not recognize Unix line endings  
+   - Change in RStudio: Tools -> Global Options -> Code -> Line endings  
+
 ## Use of Login Nodes and Compute Nodes {background-image="/pics/01-intro/BatchRonClusterLaptop.jpg" background-size="60%" background-position="bottom right" .smaller} 
 
 **Login nodes:**  

@@ -8,14 +8,14 @@ editor: source
 
 ## GitHub Copilot {.smaller}
 
-RStudio now has a [Copilot option](https://docs.posit.co/ide/user/ide/guide/tools/copilot.html)
+RStudio now has a [GitHub Copilot](https://docs.posit.co/ide/user/ide/guide/tools/copilot.html) option
 
 Free to students and academics ($20/month otherwise - says Copilot, but I think it's $10)
 
 ::: {.incremental}
 - This slide is being written with Copilot on
 - It's a bit like a smart autocomplete
-- Above, it suggested a non-existent link for the Copilot option
+- Above, it suggested a non-existent link for the GitHub Copilot option (now fixed)
 - It's better than autocomplete in RStudio
 - But I find it unhelpful for HPC facing R code
 - It does a little better with shell scripts
@@ -40,13 +40,58 @@ Free to students and academics ($20/month otherwise - says Copilot, but I think 
 - Pytorch is a deep learning library for Python that is based on the Torch library
 - **torch** is a package for R that provides an interface to the Torch library
   - Takes about 15 minutes to install on Delta
-    - Still working out what modules are needed on Delta
+    - Installs in a standard interactive R session on a login node
   - Copilot: I have a [video](https://www.youtube.com/watch?v=3Q1JZQ1J0Zo) on how to install it
-  - Copilot: Copilot is wrong, but I do have a video on how to install it (Not)
+  - Copilot: Copilot is wrong, but I do have a video on how to install it (Not!)
+:::
+
+## Torch via torch in R Resources {.smaller}
+
   - A book: [Deep Learning and Scientific Computing with R torch](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
+
+::: {.incremental}
   - Accompanying [GitHub repo](https://github.com/skeydan/Deep-Learning-and-Scientific-Computing-with-R-torch), more recent from [mlverse](https://github.com/mlverse/torch)
   - A [blog](https://blogs.rstudio.com/ai/posts/2020-09-29-introducing-torch-for-r/), another [blog](https://willhipson.netlify.app/post/torch-for-r/torch_stars/)
   - Torch [Hugging Face Integrations](https://blogs.rstudio.com/ai/posts/2023-07-12-hugging-face-integrations/) and [mlverse](https://github.com/mlverse)
 - [Posit AI blogs](https://blogs.rstudio.com/ai/)
 :::
   
+## Torch via torch in R Overview {.smaller}
+
+- A tensor is a multi-dimensional array (vector, matrix, etc.)
+- Tensor types in torch are: float, double, int, long, byte, short, char, bool, complex, and about 60 others, created with `torch_<type>()`  
+   - Less memory overhead than R's double
+- R stores only a reference to the tensor in the R object
+- **torch** is *object-oriented*, as opposed to *functional* in R
+   - Fewer copy operations than in R generally
+   - Implemented with R7 classes (see [talk](https://posit.co/talks/an-introduction-to-r7/))
+- **torch** is *lazy* like R, so you may need to call `torch$run()` to execute
+- **torch** can put objects on CPU or GPU
+- **torch** provides functions primarily for neural networks, but also for optimization, and linear algebra
+
+## Torch via torch in R Examples {.smaller}
+
+Following the original [blog](https://blogs.rstudio.com/ai/posts/2020-09-29-introducing-torch-for-r/) by Sigrid Keydana, the example code is on GitHub in HPCinR/BZAN_583_code repository in the torch directory:
+
+- R script: `torch_example_gpu.R`
+- Bash script: `torch_example_gpu.sh`
+
+The code uses the [Kuzushiji-MNIST](http://codh.rois.ac.jp/kmnist/index.html.en) (Clanuwat et al. 2018) data (70,000 images 28x28 of 10 characters), considered an “MNIST drop-in”. Like other datasets explicitly created to replace MNIST, it has ten classes – characters, in this case, depicted as grayscale images of resolution 28x28.
+
+## Everyone is now added to the GPU allocation on Delta: *bckj-delta-gpu* {.smaller}
+
+- NVIDIA A40 GPUs
+- Queue times are longer than on the CPU nodes (15-30 minutes)
+
+- Installing **torch**: in a login node R session, may take two cycles
+- Installing **torchvision**: needs `module load jpeg` and possibly 
+   - `export LD_LIBRARY_PATH=/sw/spack/deltas11-2023-03/apps/linux-rhel8-zen/gcc-8.5.0/libjpeg-9e-rq7ceaj/lib:$LD_LIBRARY_PATH`
+   - to be noticed by the install
+   
+## Hugging Face Models {.smaller}
+
+- Install **hfhub**
+- Install **tok**: needs `module load rust`
+
+#### More on Hugging Face Next Week ...
+

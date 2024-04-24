@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HPC for Data Science in R - BZAN 583</title>
+<title>HPC for Data Science in R - BZAN 583 - BLAS Libraries</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">HPC for Data Science in R - BZAN 583</span>
     </a>
   </div>
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
+    <a class="nav-link" href="../../../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
 </ul>
@@ -118,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">HPC for Data Science in R - BZAN 583</h1>
+<h1 class="title">BLAS Libraries</h1>
 </div>
 
 
@@ -135,91 +135,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This course is intended to provide an ability to use modern HPC systems for data science with R, provide some understanding of computational and large data issues that arise in statistical and machine learning and their potential solutions, and give some practice of these skills on a modern HPC cluster system. See Syllabus link above for additional details.</p>
-<p>It is the first time this course has been offered so there will be some rough edges and some material provided “just in time.” Much of the material was recently presented in data science and HPC conference tutorials and is being adapted to this half-semester course. I welcome any suggestions and corrections to improve the material.</p>
-<p><strong>Please check back frequently for updates!</strong> NOTE: This is a GitHub Pages site, which uses caching so you might need to click the refresh button within your web browser to see changes.</p>
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout="[1,2]">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 1, March 18 &amp; 20</em></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Lectures: <a href="materials/lectures/1-welcome">Welcome and Setup</a> <a href="materials/lectures/1a-workflow">Workflow Introduction</a> <a href="materials/lectures/1b-setupdemo">Setup and Demo</a><br>
-Assignment: <a href="materials/assignment/1-workflow">Installs and Workflow</a> <!--
-workflow practice starts with faster examples and timing.
-e.g. compare lapply sum, coulumnSums(), and tidyverse sum of taxi data subset
-downloading packages practice, git and GitHub setup
---></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 2, March 25 &amp; 27</em></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Lectures: <a href="materials/lectures/2-faster">Coding for Faster R</a>, <a href="materials/lectures/2-hardware">Memory Hierarchy and Hardware</a><br>
-Assignment: <a href="materials/assignment/2-faster">Faster Code</a> <!-- double down on faster with memory hierarchy examples --></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 3, April 1 &amp; 3</em><br>
-Project Proposals Due by Friday, April 5.</p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Lectures: <a href="materials/lectures/3-software">HPC Software</a>, <a href="materials/lectures/3-fork">The Unix fork</a><br>
-Assignment: <a href="materials/assignment/3-project">Project Proposal</a> <!-- start library parallel FlexiBLAS & OpenBLAS --></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 4, April 8 &amp; 10</em></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Lectures: <a href="materials/lectures/4-data">File System and Data</a>, <a href="materials/lectures/4-parallel">Parallel</a><br>
-Assignment: <a href="materials/assignment/4-data">Project Data</a></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 5, April 15 &amp; 17</em></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Lectures: <a href="materials/lectures/5-sampling">Methods that Rely on Sampling</a><br>
-Assignment: <a href="materials/assignment/5-resampling">Resampling Estimators</a></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 6, April 22 &amp; 24</em></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Lectures: <a href="materials/lectures/6-nn">LLM or Torch for R</a> <a href="materials/lectures/6-blas">BLAS Libraries</a><br>
-Assignment?: <a href="materials/assignment/6-nn">Starter Code</a></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 7, April 29 &amp; May 1</em></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Lectures: <a href="materials/lectures/6-distributed">Distributed Computing</a><br>
-Assignment?: <a href="materials/assignment/6-mpi">pbdMPI in Project</a> <!-- simple distributed (mapreduce & spmd MPI) and projects --></p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<p><em>Week 8, May 6</em></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
-<p>Project: <a href="materials/lectures/8-presentations">Presentations</a></p>
-</div>
-</div>
-</div>
-<p><strong>Notes:</strong> <a href="./style.html">Programming Style</a></p>
+<p>Basic Linear Algebra Software (BLAS) Libraries</p>
+<p><a href="../../../materials/lectures/6-blas/slides.html">Full Screen</a></p>
+<iframe class="slide-deck" src="slides.html" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
 
 
 

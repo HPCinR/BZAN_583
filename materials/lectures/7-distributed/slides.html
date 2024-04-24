@@ -416,67 +416,223 @@
 <li><code>pbdMPI</code> has a Windows binary on CRAN</li>
 </ul>
 </section>
-<section id="revisit-hello_balance.r" class="slide level2">
-<h2>Revisit <code>hello_balance.R</code></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="do">## This script describes two levels of parallelism:</span></span>
-<span id="cb1-2"><a></a><span class="do">## Top level: Distributed MPI runs several copies of this entire script.</span></span>
-<span id="cb1-3"><a></a><span class="do">##            Instances differ by their comm.rank() designation.</span></span>
-<span id="cb1-4"><a></a><span class="do">## Inner level: The unix fork (copy-on-write) shared memory parallel execution</span></span>
-<span id="cb1-5"><a></a><span class="do">##            of the mc.function() managed by parallel::mclapply()</span></span>
-<span id="cb1-6"><a></a><span class="do">## Further levels are possible: multithreading in compiled code and communicator</span></span>
-<span id="cb1-7"><a></a><span class="do">## splitting at the distributed MPI level.</span></span>
-<span id="cb1-8"><a></a></span>
-<span id="cb1-9"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdMPI))</span>
-<span id="cb1-10"><a></a><span class="fu">comm.print</span>(<span class="fu">sessionInfo</span>())</span>
-<span id="cb1-11"><a></a></span>
-<span id="cb1-12"><a></a><span class="do">## get node name</span></span>
-<span id="cb1-13"><a></a>host <span class="ot">=</span> <span class="fu">system</span>(<span class="st">"hostname"</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-14"><a></a></span>
-<span id="cb1-15"><a></a>mc.function <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1-16"><a></a>    <span class="fu">Sys.sleep</span>(<span class="dv">1</span>) <span class="co"># replace with your function for mclapply cores here</span></span>
-<span id="cb1-17"><a></a>    <span class="fu">Sys.getpid</span>() <span class="co"># returns process id</span></span>
-<span id="cb1-18"><a></a>}</span>
-<span id="cb1-19"><a></a></span>
-<span id="cb1-20"><a></a><span class="do">## Compute how many cores per R session are on this node</span></span>
-<span id="cb1-21"><a></a>local_ranks_query <span class="ot">=</span> <span class="st">"echo $OMPI_COMM_WORLD_LOCAL_SIZE"</span></span>
-<span id="cb1-22"><a></a>ranks_on_my_node <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">system</span>(local_ranks_query, <span class="at">intern =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-23"><a></a>cores_on_my_node <span class="ot">=</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>()</span>
-<span id="cb1-24"><a></a>cores_per_R <span class="ot">=</span> <span class="fu">floor</span>(cores_on_my_node<span class="sc">/</span>ranks_on_my_node)</span>
-<span id="cb1-25"><a></a>cores_total <span class="ot">=</span> <span class="fu">allreduce</span>(cores_per_R)  <span class="co"># adds up over ranks</span></span>
-<span id="cb1-26"><a></a></span>
-<span id="cb1-27"><a></a><span class="do">## Run mclapply on allocated cores to demonstrate fork pids</span></span>
-<span id="cb1-28"><a></a>my_pids <span class="ot">=</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span>cores_per_R, mc.function, <span class="at">mc.cores =</span> cores_per_R)</span>
-<span id="cb1-29"><a></a>my_pids <span class="ot">=</span> <span class="fu">do.call</span>(paste, my_pids) <span class="co"># combines results from mclapply</span></span>
-<span id="cb1-30"><a></a><span class="do">##</span></span>
-<span id="cb1-31"><a></a><span class="do">## Same cores are shared with OpenBLAS (see flexiblas package)</span></span>
-<span id="cb1-32"><a></a><span class="do">##            or for other OpenMP enabled codes outside mclapply.</span></span>
-<span id="cb1-33"><a></a><span class="do">## If BLAS functions are called inside mclapply, they compete for the</span></span>
-<span id="cb1-34"><a></a><span class="do">##            same cores: avoid or manage appropriately!!!</span></span>
-<span id="cb1-35"><a></a></span>
-<span id="cb1-36"><a></a><span class="do">## Now report what happened and where</span></span>
-<span id="cb1-37"><a></a>msg <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"Hello World from rank "</span>, <span class="fu">comm.rank</span>(), <span class="st">" on host "</span>, host,</span>
-<span id="cb1-38"><a></a>             <span class="st">" with "</span>, cores_per_R, <span class="st">" cores allocated</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb1-39"><a></a>             <span class="st">"            ("</span>, ranks_on_my_node, <span class="st">" R sessions sharing "</span>,</span>
-<span id="cb1-40"><a></a>             cores_on_my_node, <span class="st">" cores on this host node).</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb1-41"><a></a>             <span class="st">"      pid: "</span>, my_pids, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb1-42"><a></a><span class="fu">comm.cat</span>(msg, <span class="at">quiet =</span> <span class="cn">TRUE</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-43"><a></a></span>
-<span id="cb1-44"><a></a></span>
-<span id="cb1-45"><a></a><span class="fu">comm.cat</span>(<span class="st">"Total R sessions:"</span>, <span class="fu">comm.size</span>(), <span class="st">"Total cores:"</span>, cores_total, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb1-46"><a></a>         <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-47"><a></a><span class="fu">comm.cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Notes: cores on node obtained by: detectCores {parallel}</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb1-48"><a></a>         <span class="st">"       ranks (R sessions) per node: OMPI_COMM_WORLD_LOCAL_SIZE</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb1-49"><a></a>         <span class="st">"       pid to core map changes frequently during mclapply</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb1-50"><a></a>         <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-51"><a></a></span>
-<span id="cb1-52"><a></a><span class="fu">finalize</span>()</span>
-<span id="cb1-53"><a></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="mpi-hello-world" class="slide level2 smaller">
+<h2>MPI Hello World</h2>
+<p>SPMD: <span class="math inline">\(n\)</span> identical codes running, each given a unique rank: <span class="math inline">\(0\)</span> to <span class="math inline">\(n-1\)</span></p>
+<p><code>hello_world.R</code></p>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-4|5-6|8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdMPI))</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>my_rank <span class="ot">=</span> <span class="fu">comm.rank</span>()</span>
+<span id="cb1-4"><a></a>nranks <span class="ot">=</span> <span class="fu">comm.size</span>()</span>
+<span id="cb1-5"><a></a>msg <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"Hello World! My name is Rank"</span>, my_rank, <span class="st">". We are "</span>, nranks, <span class="st">" identical siblings."</span>)</span>
+<span id="cb1-6"><a></a><span class="fu">cat</span>(msg, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a><span class="fu">finalize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="working-with-a-remote-cluster-using-r" class="slide level2">
+<section id="mpi-hello-world-1" class="slide level2 smaller">
+<h2>MPI Hello World</h2>
+<p>Shell script to run 8 instances of <code>hello_world.R</code></p>
+<p><code>hello_world.sh</code></p>
+<div class="sourceCode" id="cb2" data-code-line-numbers="|6-8,17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co">#!/bin/bash</span></span>
+<span id="cb2-2"><a></a><span class="co">#SBATCH --job-name utk</span></span>
+<span id="cb2-3"><a></a><span class="co">#SBATCH --account=bckj-delta-cpu</span></span>
+<span id="cb2-4"><a></a><span class="co">#SBATCH --partition=cpu</span></span>
+<span id="cb2-5"><a></a><span class="co">#SBATCH --mem=20g</span></span>
+<span id="cb2-6"><a></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb2-7"><a></a><span class="co">#SBATCH --cpus-per-task=8</span></span>
+<span id="cb2-8"><a></a><span class="co">#SBATCH --tasks-per-node=8</span></span>
+<span id="cb2-9"><a></a><span class="co">#SBATCH --time 00:10:00</span></span>
+<span id="cb2-10"><a></a><span class="co">#SBATCH -e ./utk.e</span></span>
+<span id="cb2-11"><a></a><span class="co">#SBATCH -o ./utk.o</span></span>
+<span id="cb2-12"><a></a></span>
+<span id="cb2-13"><a></a>pwd</span>
+<span id="cb2-14"><a></a>module load r</span>
+<span id="cb2-15"><a></a>module list</span>
+<span id="cb2-16"><a></a></span>
+<span id="cb2-17"><a></a>time mpirun <span class="sc">-</span>np <span class="dv">8</span> Rscript hello_world.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Submit with: <code>sbatch hello_world.sh</code></li>
+</ul>
+</section>
+<section id="mpi-output-utk.o" class="slide level2 smaller">
+<h2>MPI Output <code>utk.o</code></h2>
+<pre><code>[gostrouc@dt-login04 mpi]$ cat utk.o
+/u/gostrouc/BZAN_583_code/mpi
+
+======================   ALLOCATED NODES   ======================
+    cn095: flags=0x11 slots=8 max_slots=0 slots_inuse=0 state=UP
+=================================================================
+Hello World! My name is Rank1. We are 8 identical siblings. 
+Hello World! My name is Rank0. We are 8 identical siblings. 
+Hello World! My name is Rank4. We are 8 identical siblings. 
+Hello World! My name is Rank5. We are 8 identical siblings. 
+Hello World! My name is Rank6. We are 8 identical siblings. 
+Hello World! My name is Rank2. We are 8 identical siblings. 
+Hello World! My name is Rank3. We are 8 identical siblings. 
+Hello World! My name is Rank7. We are 8 identical siblings. </code></pre>
+<ul>
+<li>Note the rank order is arbitrary<br>
+</li>
+<li>In general, <code>cat()</code> does not even prevent overprinting!</li>
+</ul>
+</section>
+<section id="mpi-hello-world-2" class="slide level2 smaller">
+<h2>MPI Hello World</h2>
+<p>SPMD: some control over printing with <code>comm.cat()</code></p>
+<p><code>hello_world2.R</code></p>
+<div class="sourceCode" id="cb4" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdMPI))</span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a>my_rank <span class="ot">=</span> <span class="fu">comm.rank</span>()</span>
+<span id="cb4-4"><a></a>nranks <span class="ot">=</span> <span class="fu">comm.size</span>()</span>
+<span id="cb4-5"><a></a>msg <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"Hello World! My name is Rank"</span>, my_rank, <span class="st">". We are "</span>, nranks, <span class="st">" identical siblings."</span>)</span>
+<span id="cb4-6"><a></a><span class="fu">comm.cat</span>(msg, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a></a></span>
+<span id="cb4-8"><a></a><span class="fu">finalize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mpi-output-utk.o-1" class="slide level2 smaller">
+<h2>MPI Output <code>utk.o</code></h2>
+<pre><code>[gostrouc@dt-login04 mpi]$ cat utk.o
+/u/gostrouc/BZAN_583_code/mpi
+
+======================   ALLOCATED NODES   ======================
+    cn095: flags=0x11 slots=8 max_slots=0 slots_inuse=0 state=UP
+=================================================================
+COMM.RANK = 0
+Hello World! My name is Rank0. We are 8 identical siblings. 
+COMM.RANK = 1
+Hello World! My name is Rank1. We are 8 identical siblings. 
+COMM.RANK = 2
+Hello World! My name is Rank2. We are 8 identical siblings. 
+COMM.RANK = 3
+Hello World! My name is Rank3. We are 8 identical siblings. 
+COMM.RANK = 4
+Hello World! My name is Rank4. We are 8 identical siblings. 
+COMM.RANK = 5
+Hello World! My name is Rank5. We are 8 identical siblings. 
+COMM.RANK = 6
+Hello World! My name is Rank6. We are 8 identical siblings. 
+COMM.RANK = 7
+Hello World! My name is Rank7. We are 8 identical siblings. </code></pre>
+</section>
+<section id="two-parallel-levels" class="slide level2 smaller">
+<h2>Two Parallel Levels</h2>
+<p><code>hello_balance.R</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="do">## This script describes two levels of parallelism:</span></span>
+<span id="cb6-2"><a></a><span class="do">## Top level: Distributed MPI runs several copies of this entire script. Instances differ by their comm.rank() designation.</span></span>
+<span id="cb6-3"><a></a><span class="do">## Inner level: The unix fork (copy-on-write) shared memory parallel execution of the mc.function() managed by parallel::mclapply()</span></span>
+<span id="cb6-4"><a></a><span class="do">## Further levels are possible: multithreading in compiled code and communicator splitting at the distributed MPI level.</span></span>
+<span id="cb6-5"><a></a></span>
+<span id="cb6-6"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdMPI))</span>
+<span id="cb6-7"><a></a><span class="fu">comm.print</span>(<span class="fu">sessionInfo</span>())</span>
+<span id="cb6-8"><a></a></span>
+<span id="cb6-9"><a></a>host <span class="ot">=</span> <span class="fu">system</span>(<span class="st">"hostname"</span>, <span class="at">intern =</span> <span class="cn">TRUE</span>)  <span class="co"># get node name</span></span>
+<span id="cb6-10"><a></a></span>
+<span id="cb6-11"><a></a>mc.function <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
+<span id="cb6-12"><a></a>    <span class="fu">Sys.sleep</span>(<span class="fl">0.1</span>) <span class="co"># replace with your function for mclapply cores here</span></span>
+<span id="cb6-13"><a></a>    <span class="fu">Sys.getpid</span>() <span class="co"># returns process id</span></span>
+<span id="cb6-14"><a></a>}</span>
+<span id="cb6-15"><a></a></span>
+<span id="cb6-16"><a></a><span class="do">## ranks and cores queries</span></span>
+<span id="cb6-17"><a></a>ranks_on_my_node <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">"SLURM_NTASKS_PER_NODE"</span>)</span>
+<span id="cb6-18"><a></a>my_cores <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">"SLURM_CPUS_PER_TASK"</span>)</span>
+<span id="cb6-19"><a></a>cores_on_my_node <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">"SLURM_CPUS_ON_NODE"</span>)</span>
+<span id="cb6-20"><a></a>cores_total <span class="ot">=</span> <span class="fu">allreduce</span>(my_cores)  <span class="co"># adds up over ranks</span></span>
+<span id="cb6-21"><a></a></span>
+<span id="cb6-22"><a></a><span class="do">## Run mclapply on allocated cores to demonstrate fork pids</span></span>
+<span id="cb6-23"><a></a>my_pids <span class="ot">=</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="fu">seq_len</span>(my_cores), mc.function, <span class="at">mc.cores =</span> my_cores)</span>
+<span id="cb6-24"><a></a>my_pids <span class="ot">=</span> <span class="fu">do.call</span>(paste, my_pids) <span class="co"># combines results from mclapply</span></span>
+<span id="cb6-25"><a></a><span class="do">##</span></span>
+<span id="cb6-26"><a></a><span class="do">## Same cores are shared with OpenBLAS (see flexiblas package) or for other OpenMP enabled codes outside mclapply.</span></span>
+<span id="cb6-27"><a></a><span class="do">## If BLAS functions are called inside mclapply, they compete for the same cores: avoid or manage appropriately!!!</span></span>
+<span id="cb6-28"><a></a></span>
+<span id="cb6-29"><a></a><span class="do">## Now report what happened and where</span></span>
+<span id="cb6-30"><a></a>msg <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"Hello World from rank "</span>, <span class="fu">comm.rank</span>(), <span class="st">" on host "</span>, host, <span class="st">" with "</span>, my_cores, <span class="st">" cores allocated</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb6-31"><a></a>             <span class="st">"            ("</span>, ranks_on_my_node, <span class="st">" R sessions sharing "</span>, cores_on_my_node, <span class="st">" cores on this host node).</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb6-32"><a></a>             <span class="st">"      pid: "</span>, my_pids, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb6-33"><a></a><span class="fu">comm.cat</span>(msg, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-34"><a></a></span>
+<span id="cb6-35"><a></a><span class="fu">barrier</span>()  <span class="co"># wait for all ranks to reach this point</span></span>
+<span id="cb6-36"><a></a><span class="fu">comm.cat</span>(<span class="st">"Total R sessions:"</span>, <span class="fu">comm.size</span>(), <span class="st">"Total cores:"</span>, cores_total, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-37"><a></a><span class="fu">comm.cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Notes: pid to core map changes frequently during mclapply</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-38"><a></a></span>
+<span id="cb6-39"><a></a><span class="fu">finalize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="two-parallel-levels-output" class="slide level2 smaller">
+<h2>Two Parallel Levels Output</h2>
+<pre><code>[gostrouc@dt-login04 mpi]$ cat utk.o
+/u/gostrouc/BZAN_583_code/mpi
+
+======================   ALLOCATED NODES   ======================
+    cn096: flags=0x11 slots=4 max_slots=0 slots_inuse=0 state=UP
+    cn099: flags=0x10 slots=4 max_slots=0 slots_inuse=0 state=UP
+=================================================================
+R version 4.3.2 (2023-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Red Hat Enterprise Linux 8.8 (Ootpa)
+
+Matrix products: default
+BLAS/LAPACK: /sw/spack/deltas11-2023-03/apps/linux-rhel8-zen3/gcc-11.4.0/openblas-0.3.25-5yvxjnl/lib/libopenblas_zen-r0.3.25.so;  LAPACK version 3.11.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] pbdMPI_0.5-1
+
+loaded via a namespace (and not attached):
+[1] compiler_4.3.2 parallel_4.3.2 float_0.3-2   
+COMM.RANK = 0
+Hello World from rank 0 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939702 939706 939708 939712 939715 939719
+COMM.RANK = 1
+Hello World from rank 1 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939704 939709 939714 939718 939722 939723
+COMM.RANK = 2
+Hello World from rank 2 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939703 939707 939710 939713 939716 939720
+COMM.RANK = 3
+Hello World from rank 3 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated
+            (4 R sessions sharing 24 cores on this host node).
+      pid: 939705 939711 939717 939721 939724 939725
+COMM.RANK = 4
+Hello World from rank 4 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152806 1152810 1152816 1152821 1152824 1152826
+COMM.RANK = 5
+Hello World from rank 5 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152804 1152808 1152812 1152814 1152818 1152822
+COMM.RANK = 6
+Hello World from rank 6 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152803 1152807 1152811 1152813 1152817 1152819
+COMM.RANK = 7
+Hello World from rank 7 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated
+            (1 R sessions sharing 24 cores on this host node).
+      pid: 1152805 1152809 1152815 1152820 1152823 1152825
+Total R sessions: 8 Total cores: 48 
+
+Notes: pid to core map changes frequently during mclapply</code></pre>
+</section>
+<section id="working-with-a-remote-cluster-using-r" class="slide level2 smaller">
 <h2>Working with a remote cluster using R</h2>
 
 <img data-src="../../../pics/01-intro/Workflow.png" class="r-stretch"></section>
-<section id="running-distributed-on-a-cluster" class="slide level2" data-background-image="../../../pics/01-intro/WorkflowRunning.png" data-background-size="200px">
+<section id="running-distributed-on-a-cluster" class="slide level2 smaller" data-background-image="../../../pics/01-intro/WorkflowRunning.png" data-background-size="200px">
 <h2>Running Distributed on a Cluster</h2>
 
 <img data-src="../../../pics/01-intro/BatchRonCluster.jpg" class="r-stretch"></section>
@@ -624,56 +780,51 @@
 <section id="distributed-programming-works-in-shared-memory" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide6.png" data-background-size="1100px">
 <h2>Distributed Programming Works in Shared Memory</h2>
 </section>
-<section id="hands-on-session-5-hello-mpi-ranks-picsparallelsoftwareslide7mpi.jpg-background-size200px-background-positionbottom-right" class="slide level2">
-<h2>Hands on Session 5: Hello MPI Ranks {/pics/ParallelSoftware/Slide7mpi.jpg background-size=“200px” background-position=“bottom right”}</h2>
-<p><code>code_5/hello_world.R</code> <code>{.r include = "code/hello_world.R"}</code></p>
-<h3 id="rank-distinguishes-the-parallel-copies-of-the-same-code"><strong>Rank</strong> distinguishes the parallel copies of the same code</h3>
+<section id="random-forest-with-mpi" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
+<h2>Random Forest with MPI</h2>
+<p><code>mpi/rf_mpi.R</code></p>
+<div class="sourceCode" id="cb8" data-code-line-numbers="|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(randomForest))</span>
+<span id="cb8-2"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
+<span id="cb8-3"><a></a><span class="fu">library</span>(pbdMPI, <span class="at">quiet =</span> <span class="cn">TRUE</span>)                <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-4"><a></a><span class="fu">comm.set.seed</span>(<span class="at">seed =</span> <span class="dv">7654321</span>, <span class="at">diff =</span> <span class="cn">FALSE</span>)      <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(LetterRecognition)</span>
+<span id="cb8-7"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
+<span id="cb8-8"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
+<span id="cb8-9"><a></a>train <span class="ot">=</span> LetterRecognition[<span class="sc">-</span>i_test, ]</span>
+<span id="cb8-10"><a></a>test <span class="ot">=</span> LetterRecognition[i_test, ][<span class="fu">comm.chunk</span>(n_test, <span class="at">form =</span> <span class="st">"vector"</span>), ]    <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-11"><a></a></span>
+<span id="cb8-12"><a></a><span class="fu">comm.set.seed</span>(<span class="at">seed  =</span> <span class="dv">1234</span>, <span class="at">diff =</span> <span class="cn">TRUE</span>)          <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-13"><a></a>my.rf <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> <span class="fu">comm.chunk</span>(<span class="dv">500</span>), <span class="at">norm.votes =</span> <span class="cn">FALSE</span>) <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-14"><a></a>rf.all <span class="ot">=</span> <span class="fu">allgather</span>(my.rf)                  <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-15"><a></a>rf.all <span class="ot">=</span> <span class="fu">do.call</span>(combine, rf.all)          <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-16"><a></a>pred <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(rf.all, test))</span>
+<span id="cb8-17"><a></a></span>
+<span id="cb8-18"><a></a>correct <span class="ot">=</span> <span class="fu">allreduce</span>(<span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr))  <span class="co">#&lt;&lt;</span></span>
+<span id="cb8-19"><a></a><span class="fu">comm.cat</span>(<span class="st">"Proportion Correct:"</span>, correct<span class="sc">/</span>(n_test), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb8-20"><a></a></span>
+<span id="cb8-21"><a></a><span class="fu">finalize</span>()          <span class="co">#&lt;&lt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="hands-on-session-5-random-forest-with-mpi" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="bottom right">
-<h2>Hands on Session 5: Random Forest with MPI</h2>
-<p><code>code_5/rf_mpi.R</code></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(randomForest))</span>
-<span id="cb2-2"><a></a><span class="fu">data</span>(LetterRecognition, <span class="at">package =</span> <span class="st">"mlbench"</span>)</span>
-<span id="cb2-3"><a></a><span class="fu">library</span>(pbdMPI, <span class="at">quiet =</span> <span class="cn">TRUE</span>)                <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-4"><a></a><span class="fu">comm.set.seed</span>(<span class="at">seed =</span> <span class="dv">7654321</span>, <span class="at">diff =</span> <span class="cn">FALSE</span>)      <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(LetterRecognition)</span>
-<span id="cb2-7"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
-<span id="cb2-8"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
-<span id="cb2-9"><a></a>train <span class="ot">=</span> LetterRecognition[<span class="sc">-</span>i_test, ]</span>
-<span id="cb2-10"><a></a>test <span class="ot">=</span> LetterRecognition[i_test, ][<span class="fu">comm.chunk</span>(n_test, <span class="at">form =</span> <span class="st">"vector"</span>), ]    <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-11"><a></a></span>
-<span id="cb2-12"><a></a><span class="fu">comm.set.seed</span>(<span class="at">seed  =</span> <span class="dv">1234</span>, <span class="at">diff =</span> <span class="cn">TRUE</span>)          <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-13"><a></a>my.rf <span class="ot">=</span> <span class="fu">randomForest</span>(lettr <span class="sc">~</span> ., train, <span class="at">ntree =</span> <span class="fu">comm.chunk</span>(<span class="dv">500</span>), <span class="at">norm.votes =</span> <span class="cn">FALSE</span>) <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-14"><a></a>rf.all <span class="ot">=</span> <span class="fu">allgather</span>(my.rf)                  <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-15"><a></a>rf.all <span class="ot">=</span> <span class="fu">do.call</span>(combine, rf.all)          <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-16"><a></a>pred <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(rf.all, test))</span>
-<span id="cb2-17"><a></a></span>
-<span id="cb2-18"><a></a>correct <span class="ot">=</span> <span class="fu">allreduce</span>(<span class="fu">sum</span>(pred <span class="sc">==</span> test<span class="sc">$</span>lettr))  <span class="co">#&lt;&lt;</span></span>
-<span id="cb2-19"><a></a><span class="fu">comm.cat</span>(<span class="st">"Proportion Correct:"</span>, correct<span class="sc">/</span>(n_test), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb2-20"><a></a></span>
-<span id="cb2-21"><a></a><span class="fu">finalize</span>()          <span class="co">#&lt;&lt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="comm.chunk" class="slide level2">
+<h2><code>comm.chunk()</code></h2>
+<p><code>mpi/chunk.r</code></p>
+<div class="sourceCode" id="cb9" data-code-line-numbers="|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>( pbdMPI, <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>my.rank <span class="ot">=</span> <span class="fu">comm.rank</span>( )</span>
+<span id="cb9-4"><a></a></span>
+<span id="cb9-5"><a></a>k <span class="ot">=</span> <span class="fu">comm.chunk</span>( <span class="dv">10</span> )</span>
+<span id="cb9-6"><a></a><span class="fu">comm.cat</span>( my.rank, <span class="st">":"</span>, k, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-7"><a></a></span>
+<span id="cb9-8"><a></a>k <span class="ot">=</span> <span class="fu">comm.chunk</span>( <span class="dv">10</span> , <span class="at">form =</span> <span class="st">"vector"</span>)</span>
+<span id="cb9-9"><a></a><span class="fu">comm.cat</span>( my.rank, <span class="st">":"</span>, k, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-10"><a></a></span>
+<span id="cb9-11"><a></a>k <span class="ot">=</span> <span class="fu">comm.chunk</span>( <span class="dv">10</span> , <span class="at">form =</span> <span class="st">"vector"</span>, <span class="at">type =</span> <span class="st">"equal"</span>)</span>
+<span id="cb9-12"><a></a><span class="fu">comm.cat</span>( my.rank, <span class="st">":"</span>, k, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-13"><a></a></span>
+<span id="cb9-14"><a></a><span class="fu">finalize</span>( )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="hands-on-session-5-comm.chunk" class="slide level2">
-<h2>Hands on Session 5: <code>comm.chunk()</code></h2>
-<p><code>mpi_shorts/chunk.r</code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>( pbdMPI, <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb3-2"><a></a></span>
-<span id="cb3-3"><a></a>my.rank <span class="ot">=</span> <span class="fu">comm.rank</span>( )</span>
-<span id="cb3-4"><a></a></span>
-<span id="cb3-5"><a></a>k <span class="ot">=</span> <span class="fu">comm.chunk</span>( <span class="dv">10</span> )</span>
-<span id="cb3-6"><a></a><span class="fu">comm.cat</span>( my.rank, <span class="st">":"</span>, k, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-7"><a></a></span>
-<span id="cb3-8"><a></a>k <span class="ot">=</span> <span class="fu">comm.chunk</span>( <span class="dv">10</span> , <span class="at">form =</span> <span class="st">"vector"</span>)</span>
-<span id="cb3-9"><a></a><span class="fu">comm.cat</span>( my.rank, <span class="st">":"</span>, k, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-10"><a></a></span>
-<span id="cb3-11"><a></a>k <span class="ot">=</span> <span class="fu">comm.chunk</span>( <span class="dv">10</span> , <span class="at">form =</span> <span class="st">"vector"</span>, <span class="at">type =</span> <span class="st">"equal"</span>)</span>
-<span id="cb3-12"><a></a><span class="fu">comm.cat</span>( my.rank, <span class="st">":"</span>, k, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-13"><a></a></span>
-<span id="cb3-14"><a></a><span class="fu">finalize</span>( )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="hands-on-session-5-other-short-mpi-codes" class="slide level2 smaller">
-<h2>Hands on Session 5: other short MPI codes</h2>
+<section id="other-short-mpi-codes" class="slide level2 smaller">
+<h2>Other short MPI codes</h2>
 <p>bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hello-p.r hello.r map-reduce.r mcsim.r ols.r qr-cop.r rank.r reduce-mat.r timer.r</p>
 <ul>
 <li>These short codes only use <code>pbdMPI</code> and can run on a laptop in a terminal window if you installed OpenMPI</li>
@@ -684,7 +835,6 @@
 <li><code>mpirun -np 4 Rscript your_script.r</code></li>
 </ul></li>
 </ul>
-<p>.footnote[ <span class="math inline">\(^*\)</span> Note that running long or large jobs on login nodes is strongly discouraged]</p>
 </section>
 <section id="shared-memory---mpi-or-fork" class="slide level2 smaller" data-background-image="../../../pics/01-intro/pbdRlib.jpg" data-background-size="200px" data-background-position="bottom right">
 <h2>Shared Memory - MPI or fork?</h2>
@@ -760,85 +910,11 @@
 <img data-src="../../../pics/mnist/Rplots.png" size="500" data-position="left" class="r-stretch"></section>
 <section id="mnist_rsvd.r" class="slide level2">
 <h2><code>mnist_rsvd.R</code></h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">source</span>(<span class="st">"mnist_read_mpi.R"</span>) <span class="co"># reads blocks of rows</span></span>
-<span id="cb4-2"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdDMAT))</span>
-<span id="cb4-3"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdML))</span>
-<span id="cb4-4"><a></a><span class="fu">init.grid</span>()</span>
-<span id="cb4-5"><a></a></span>
-<span id="cb4-6"><a></a><span class="do">## construct block-cyclic ddmatrix</span></span>
-<span id="cb4-7"><a></a>bldim <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">allreduce</span>(<span class="fu">nrow</span>(my_train), <span class="at">op =</span> <span class="st">"max"</span>), <span class="fu">ncol</span>(my_train))</span>
-<span id="cb4-8"><a></a>gdim <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">allreduce</span>(<span class="fu">nrow</span>(my_train), <span class="at">op =</span> <span class="st">"sum"</span>), <span class="fu">ncol</span>(my_train))</span>
-<span id="cb4-9"><a></a>dmat_train <span class="ot">=</span> <span class="fu">new</span>(<span class="st">"ddmatrix"</span>, <span class="at">Data =</span> my_train, <span class="at">dim =</span> gdim, </span>
-<span id="cb4-10"><a></a>                 <span class="at">ldim =</span> <span class="fu">dim</span>(my_train), <span class="at">bldim =</span> bldim, <span class="at">ICTXT =</span> <span class="dv">2</span>)</span>
-<span id="cb4-11"><a></a>cyclic_train <span class="ot">=</span> <span class="fu">as.blockcyclic</span>(dmat_train)</span>
-<span id="cb4-12"><a></a></span>
-<span id="cb4-13"><a></a><span class="fu">comm.print</span>(<span class="fu">comm.size</span>())</span>
-<span id="cb4-14"><a></a>t1 <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">Sys.time</span>())</span>
-<span id="cb4-15"><a></a>rsvd_train <span class="ot">=</span> <span class="fu">rsvd</span>(cyclic_train, <span class="at">k =</span> <span class="dv">10</span>, <span class="at">q =</span> <span class="dv">3</span>, <span class="at">retu =</span> <span class="cn">FALSE</span>, <span class="at">retvt =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-16"><a></a>t2 <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">Sys.time</span>())</span>
-<span id="cb4-17"><a></a>t1 <span class="ot">=</span> <span class="fu">allreduce</span>(t1, <span class="at">op =</span> <span class="st">"min"</span>)</span>
-<span id="cb4-18"><a></a>t2 <span class="ot">=</span> <span class="fu">allreduce</span>(t2, <span class="at">op =</span> <span class="st">"max"</span>)</span>
-<span id="cb4-19"><a></a><span class="fu">comm.cat</span>(<span class="st">"Time:"</span>, t2 <span class="sc">-</span> t1, <span class="st">"seconds</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb4-20"><a></a><span class="fu">comm.cat</span>(<span class="st">"dim(V):"</span>, <span class="fu">dim</span>(rsvd_train<span class="sc">$</span>vt), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb4-21"><a></a></span>
-<span id="cb4-22"><a></a><span class="fu">comm.cat</span>(<span class="st">"rsvd top 10 singular values:"</span>, rsvd_train<span class="sc">$</span>d, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb4-23"><a></a></span>
-<span id="cb4-24"><a></a><span class="fu">finalize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="hands-on-session-rsvd" class="slide level2">
 <h2>Hands-on Session rsvd</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>rsvd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">k=</span><span class="dv">1</span>, <span class="at">q=</span><span class="dv">3</span>, <span class="at">retu=</span><span class="cn">TRUE</span>, <span class="at">retvt=</span><span class="cn">TRUE</span>) {</span>
-<span id="cb5-2"><a></a>  </span>
-<span id="cb5-3"><a></a>  n <span class="ot">&lt;-</span> <span class="fu">ncol</span>(x)</span>
-<span id="cb5-4"><a></a>  </span>
-<span id="cb5-5"><a></a>  <span class="cf">if</span> (<span class="fu">class</span>(x) <span class="sc">==</span> <span class="st">"matrix"</span>)</span>
-<span id="cb5-6"><a></a>    Omega <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(n<span class="sc">*</span><span class="dv">2</span>L<span class="sc">*</span>k), <span class="at">nrow=</span>n, <span class="at">ncol=</span><span class="dv">2</span>L<span class="sc">*</span>k)</span>
-<span id="cb5-7"><a></a>  <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">class</span>(x) <span class="sc">==</span> <span class="st">"ddmatrix"</span>)  <span class="co">#&lt;&lt;</span></span>
-<span id="cb5-8"><a></a>    Omega <span class="ot">&lt;-</span> <span class="fu">ddmatrix</span>(<span class="st">"runif"</span>, <span class="at">nrow=</span>n, <span class="at">ncol=</span><span class="dv">2</span>L<span class="sc">*</span>k, <span class="at">bldim=</span>x<span class="sc">@</span>bldim, <span class="at">ICTXT=</span>x<span class="sc">@</span>ICTXT) <span class="co">#&lt;&lt;</span></span>
-<span id="cb5-9"><a></a>  </span>
-<span id="cb5-10"><a></a>  Y <span class="ot">&lt;-</span> x <span class="sc">%*%</span> Omega</span>
-<span id="cb5-11"><a></a>  Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb5-12"><a></a>  </span>
-<span id="cb5-13"><a></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>q) {</span>
-<span id="cb5-14"><a></a>    Y <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(x, Q)</span>
-<span id="cb5-15"><a></a>    Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb5-16"><a></a>    Y <span class="ot">&lt;-</span> x <span class="sc">%*%</span> Q</span>
-<span id="cb5-17"><a></a>    Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(<span class="fu">qr</span>(Y))</span>
-<span id="cb5-18"><a></a>  }</span>
-<span id="cb5-19"><a></a>  </span>
-<span id="cb5-20"><a></a>  B <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(Q, x)</span>
-<span id="cb5-21"><a></a>  </span>
-<span id="cb5-22"><a></a>  <span class="cf">if</span> (<span class="sc">!</span>retu) nu <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb5-23"><a></a>  <span class="cf">else</span> nu <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">nrow</span>(B), <span class="fu">ncol</span>(B))</span>
-<span id="cb5-24"><a></a>  </span>
-<span id="cb5-25"><a></a>  <span class="cf">if</span> (<span class="sc">!</span>retvt) nv <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb5-26"><a></a>  <span class="cf">else</span> nv <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">nrow</span>(B), <span class="fu">ncol</span>(B))</span>
-<span id="cb5-27"><a></a>  </span>
-<span id="cb5-28"><a></a>  svd.B <span class="ot">&lt;-</span> <span class="fu">La.svd</span>(<span class="at">x=</span>B, <span class="at">nu=</span>nu, <span class="at">nv=</span>nv)</span>
-<span id="cb5-29"><a></a>  </span>
-<span id="cb5-30"><a></a>  d <span class="ot">&lt;-</span> svd.B<span class="sc">$</span>d</span>
-<span id="cb5-31"><a></a>  d <span class="ot">&lt;-</span> d[<span class="dv">1</span>L<span class="sc">:</span>k]</span>
-<span id="cb5-32"><a></a>  </span>
-<span id="cb5-33"><a></a>  <span class="co"># Produce u/vt as desired</span></span>
-<span id="cb5-34"><a></a>  <span class="cf">if</span> (retu) {</span>
-<span id="cb5-35"><a></a>    u <span class="ot">&lt;-</span> svd.B<span class="sc">$</span>u</span>
-<span id="cb5-36"><a></a>    u <span class="ot">&lt;-</span> Q <span class="sc">%*%</span> u</span>
-<span id="cb5-37"><a></a>    u <span class="ot">&lt;-</span> u[, <span class="dv">1</span>L<span class="sc">:</span>k, drop<span class="ot">=</span><span class="cn">FALSE</span>]</span>
-<span id="cb5-38"><a></a>  }</span>
-<span id="cb5-39"><a></a>  </span>
-<span id="cb5-40"><a></a>  <span class="cf">if</span> (retvt) vt <span class="ot">&lt;-</span> svd.B<span class="sc">$</span>vt[<span class="dv">1</span>L<span class="sc">:</span>k, , drop<span class="ot">=</span><span class="cn">FALSE</span>]</span>
-<span id="cb5-41"><a></a>  </span>
-<span id="cb5-42"><a></a>  <span class="co"># wrangle return</span></span>
-<span id="cb5-43"><a></a>  <span class="cf">if</span> (retu) {</span>
-<span id="cb5-44"><a></a>    <span class="cf">if</span> (retvt) svd <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">d=</span>d, <span class="at">u=</span>u, <span class="at">vt=</span>vt)</span>
-<span id="cb5-45"><a></a>    <span class="cf">else</span> svd <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">d=</span>d, <span class="at">u=</span>u)</span>
-<span id="cb5-46"><a></a>  } <span class="cf">else</span> {</span>
-<span id="cb5-47"><a></a>    <span class="cf">if</span> (retvt) svd <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">d=</span>d, <span class="at">vt=</span>vt)</span>
-<span id="cb5-48"><a></a>    <span class="cf">else</span> svd <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">d=</span>d)</span>
-<span id="cb5-49"><a></a>  }</span>
-<span id="cb5-50"><a></a>  </span>
-<span id="cb5-51"><a></a>  <span class="fu">return</span>( svd )</span>
-<span id="cb5-52"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="package-kazaam" class="slide level2" data-background-image="../../../pics/ParallelSoftware/Slide7mpi.jpg" data-background-size="200px" data-background-position="top right">
 <h2>Package <code>kazaam</code></h2>

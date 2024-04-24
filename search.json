@@ -67,14 +67,14 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.365    81.98      1.415     84.98\n\"aperm.default\"     0.145     8.71      0.145      8.71\n\"is.finite\"         0.040     2.40      0.040      2.40\n\"array\"             0.035     2.10      0.035      2.10\n\"colMeans\"          0.030     1.80      0.030      1.80\n\"matrix\"            0.020     1.20      0.020      1.20\n\"any\"               0.015     0.90      0.015      0.90\n\"sweep\"             0.010     0.60      0.190     11.41\n\"svd\"               0.005     0.30      1.445     86.79"
+    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.580    84.04      1.630     86.70\n\"aperm.default\"     0.145     7.71      0.145      7.71\n\"array\"             0.035     1.86      0.035      1.86\n\"is.finite\"         0.035     1.86      0.035      1.86\n\"colMeans\"          0.030     1.60      0.030      1.60\n\"matrix\"            0.025     1.33      0.025      1.33\n\"any\"               0.020     1.06      0.020      1.06\n\"svd\"               0.005     0.27      1.665     88.56\n\"sweep\"             0.005     0.27      0.185      9.84"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.395    84.80      1.430     86.93\n\"aperm.default\"     0.145     8.81      0.145      8.81\n\"array\"             0.030     1.82      0.030      1.82\n\"is.finite\"         0.030     1.82      0.030      1.82\n\"colMeans\"          0.015     0.91      0.015      0.91\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.340    83.49      1.390     86.60\n\"aperm.default\"     0.140     8.72      0.140      8.72\n\"array\"             0.025     1.56      0.025      1.56\n\"is.finite\"         0.025     1.56      0.025      1.56\n\"matrix\"            0.025     1.56      0.025      1.56\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.375    84.88      1.420     87.65\n\"aperm.default\"     0.135     8.33      0.135      8.33\n\"is.finite\"         0.030     1.85      0.030      1.85\n\"array\"             0.025     1.54      0.025      1.54\n\"matrix\"            0.020     1.23      0.020      1.23"
+    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.425    84.82      1.455     86.61\n\"aperm.default\"     0.155     9.23      0.155      9.23\n\"is.finite\"         0.025     1.49      0.025      1.49\n\"array\"             0.020     1.19      0.020      1.19\n\"colMeans\"          0.020     1.19      0.020      1.19\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.395    82.30       1.45     85.55\n\"aperm.default\"     0.170    10.03       0.17     10.03\n\"is.finite\"         0.030     1.77       0.03      1.77\n\"matrix\"            0.030     1.77       0.03      1.77\n\"any\"               0.020     1.18       0.02      1.18\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.405    83.63      1.455     86.61\n\"aperm.default\"     0.150     8.93      0.150      8.93\n\"is.finite\"         0.030     1.79      0.030      1.79\n\"matrix\"            0.025     1.49      0.025      1.49\n\"any\"               0.020     1.19      0.020      1.19"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#lazy-evaluation",
@@ -88,7 +88,7 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark\n",
-    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.234      2.6     0.200    0.030          0         0\n2 g(x)          100   0.090      1.0     0.084    0.006          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.234      2.6     0.202    0.030          0         0\n2 g(x)          100   0.090      1.0     0.084    0.008          0         0"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#profiling-summary",
@@ -102,7 +102,7 @@
     "href": "materials/lectures/2-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.995   0.067   1.062 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.031   0.001   0.032 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.975   0.090   1.069 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.031 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#compute-once-if-not-changing",
@@ -130,7 +130,7 @@
     "href": "materials/lectures/2-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Preallocate lists and vectors Instead of Growing Them",
-    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.453   1.875   8.349 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.407   0.044   0.452 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.396   1.899   8.368 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.407   0.046   0.453 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#specialize-more-general-functions",
@@ -151,7 +151,7 @@
     "href": "materials/lectures/2-faster/slides.html#contiguous-access-to-arrays-and-lists",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Contiguous access to arrays and lists",
-    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.860   0.067   0.930 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.365   0.049   0.415 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.232   0.048   0.279 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.920   0.069   0.991 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.382   0.042   0.424 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.242   0.067   0.309 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#programming-languages-hierarchy",
@@ -172,7 +172,7 @@
     "href": "materials/lectures/2-faster/slides.html#rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "\nRfast and RFast2 Packages: A collection of Rcpp-Implemented Functions",
-    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.327   0.023   0.355 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.066   0.006   0.096 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
+    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.325   0.027   0.355 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.081   0.007   0.220 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
   },
   {
     "objectID": "materials/lectures/1b-setupdemo/slides.html#today",
@@ -399,6 +399,76 @@
     "text": "Issues with Slow Data Reads on Delta\n\nCompute nodes are shared if not all cores requested\n\nCan compete for I/O channels with other jobs\n\nTends to be much less busy in AM\n\n\nLustre file system optimized for large binary reads\n\nThat’s /projects and /scratch file systems\nData sets with many files can have issues"
   },
   {
+    "objectID": "materials/lectures/6-blas/slides.html#matrix-libraries",
+    "href": "materials/lectures/6-blas/slides.html#matrix-libraries",
+    "title": "BLAS Libraries",
+    "section": "Matrix Libraries …",
+    "text": "Matrix Libraries …"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#r-lapack-blas",
+    "href": "materials/lectures/6-blas/slides.html#r-lapack-blas",
+    "title": "BLAS Libraries",
+    "section": "R-LAPACK-BLAS",
+    "text": "R-LAPACK-BLAS\n\nBLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n\nvector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\n\nLAPACK: matrix decompositions and more\n\n\nImplementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#r-lapack-blas-1",
+    "href": "materials/lectures/6-blas/slides.html#r-lapack-blas-1",
+    "title": "BLAS Libraries",
+    "section": "R-LAPACK-BLAS",
+    "text": "R-LAPACK-BLAS\n * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\n\nLAPACK: dense and banded matrix decompositions and more\n\n\n\\(\\quad LU\\) \\(\\quad LL^T\\) \\(\\quad QR\\) \\(\\quad UDV^T\\) \\(\\quad VD^2V^T\\) \\(\\quad\\|\\cdot\\|_p\\)\n\n\n\nImplementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries\nFlexiBLAS: A BLAS and LAPACK wrapper library with runtime exchangable backends"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#r-interfaces-to-low-level-native-tools",
+    "href": "materials/lectures/6-blas/slides.html#r-interfaces-to-low-level-native-tools",
+    "title": "BLAS Libraries",
+    "section": "R Interfaces to Low-Level Native Tools",
+    "text": "R Interfaces to Low-Level Native Tools"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#parallelmclapply",
+    "href": "materials/lectures/6-blas/slides.html#parallelmclapply",
+    "title": "BLAS Libraries",
+    "section": "parallel::mclapply()",
+    "text": "parallel::mclapply()"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#blas-libraries",
+    "href": "materials/lectures/6-blas/slides.html#blas-libraries",
+    "title": "BLAS Libraries",
+    "section": "BLAS Libraries",
+    "text": "BLAS Libraries"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#os-viewpoint-on-blas-libraries",
+    "href": "materials/lectures/6-blas/slides.html#os-viewpoint-on-blas-libraries",
+    "title": "BLAS Libraries",
+    "section": "OS Viewpoint on BLAS Libraries",
+    "text": "OS Viewpoint on BLAS Libraries\nFedora Linux OS development cascade:\nFedora \\(\\rightarrow\\) CentOS Stream \\(\\rightarrow\\) Red Hat Enterprise Linux (RHEL)\n\\[\\qquad\\]\nOptimal: BLAS control via FlexiBLAS\n\nR - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)\n\nOn Delta, we have spack-installed:\n\nR - OpenBLAS\n\n\nEasyBuild is currently more R-friendly than spack for the HPC BLAS ecosystem\n\nEasyBuild Common toolchains\n\n\n\n\nThese may be relevant for making OS choices when configuring cloud resources"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#set-number-of-threads-for-operation",
+    "href": "materials/lectures/6-blas/slides.html#set-number-of-threads-for-operation",
+    "title": "BLAS Libraries",
+    "section": "Set Number of Threads for Operation",
+    "text": "Set Number of Threads for Operation\n\nRhpcBLASctl::omp_set_num_threads()\n\nAlso get information on threads:\n\nRhpcBLASctl::omp_get_num_procs()\nRhpcBLASctl::omp_get_max_threads()"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#examples",
+    "href": "materials/lectures/6-blas/slides.html#examples",
+    "title": "BLAS Libraries",
+    "section": "Examples",
+    "text": "Examples"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/slides.html#flexiblas",
+    "href": "materials/lectures/6-blas/slides.html#flexiblas",
+    "title": "BLAS Libraries",
+    "section": "FlexiBLAS",
+    "text": "FlexiBLAS\n\nlibrary(flexiblas)\n\n# check whether FlexiBLAS is available\nflexiblas_avail()\n#&gt; [1] TRUE\n\n# get the current backend\nflexiblas_current_backend()\n#&gt; [1] \"OPENBLAS-OPENMP\"\n\n# list all available backends\nflexiblas_list()\n#&gt; [1] \"NETLIB\"           \"__FALLBACK__\"     \"BLIS-THREADS\"     \"OPENBLAS-OPENMP\"\n#&gt; [5] \"BLIS-SERIAL\"      \"ATLAS\"            \"OPENBLAS-SERIAL\"  \"OPENBLAS-THREADS\"\n#&gt; [9] \"BLIS-OPENMP\"\n\n# get/set the number of threads\nflexiblas_set_num_threads(12)\nflexiblas_get_num_threads()\n#&gt; [1] 12\n\n\n\n\n\n\n\n\n\nhttps://github.com/Enchufa2/r-flexiblashttps://cran.r-project.org/package=flexiblas"
+  },
+  {
     "objectID": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
     "href": "materials/lectures/1a-workflow/slides.html#workflow-for-remote-computing-in-r",
     "title": "Workflow for Remote Computing with R",
@@ -462,6 +532,13 @@
     "text": "Linux Commands\nIn a terminal, you talk to a shell program (bash is most common)\n\nCommands (executable files) can have options and arguments\n\n\nStandard input and standard output of a command is the terminal but can be redirected\n\n\n&lt;, &lt;&lt;, &gt;, &gt;&gt; redirect standard input and output\n\ncommand1 | command2 pipes standard output1 to standard input2\n\nCommands are files in directories listed in your PATH variable (try “echo $PATH”)\n\n$ means substitute variable value\n\nexport lists (or sets) variables and their values\n\nThere are many resources on the web to learn Linux basics"
   },
   {
+    "objectID": "materials/lectures/1a-workflow/slides.html#solutions-for-potential-windows-issues",
+    "href": "materials/lectures/1a-workflow/slides.html#solutions-for-potential-windows-issues",
+    "title": "Workflow for Remote Computing with R",
+    "section": "Solutions for Potential Windows Issues",
+    "text": "Solutions for Potential Windows Issues\n\nFiles produced in text editors may have Windows line endings\n\nWindows: \\r\\n, Unix: \\n\n\nFix on Unix command line: sed -i.bak 's/\\r$//' file.txt\n\nEdits in-place and creates a backup file with .bak extension\n\n\n\n\nRStudio on Windows may not recognize Unix line endings\n\nChange in RStudio: Tools -&gt; Global Options -&gt; Code -&gt; Line endings"
+  },
+  {
     "objectID": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
     "href": "materials/lectures/1a-workflow/slides.html#use-of-login-nodes-and-compute-nodes",
     "title": "Workflow for Remote Computing with R",
@@ -488,76 +565,6 @@
     "title": "Workflow for Remote Computing with R",
     "section": "Package Installation on Cluster",
     "text": "Package Installation on Cluster\nInstall packages in an interactive R session on a login node\nLogin to the cluster, then at the shell prompt:\n\nmodule load r\nR\n\nstarts an interactive R session. Now, for example, to install package dplyr:\ninstall.packages(\"dplyr\", repo = \"https://cloud.r-project.org/\")\nThe repo parameter can be skipped if it is set in options(). R may also ask to choose a repository location.\nYou may need to load other modules if a package has external to R dependencies.\n\nmodule avail\n\nwill list available software modules. If you don’t see the software, ask help@ncsa.illinois.edu to have it installed. Note that this is for external to R software (not R packages)."
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#matrix-libraries",
-    "href": "materials/lectures/5-blas/slides.html#matrix-libraries",
-    "title": "BLAS Libraries",
-    "section": "Matrix Libraries …",
-    "text": "Matrix Libraries …"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#r-lapack-blas",
-    "href": "materials/lectures/5-blas/slides.html#r-lapack-blas",
-    "title": "BLAS Libraries",
-    "section": "R-LAPACK-BLAS",
-    "text": "R-LAPACK-BLAS\n\nBLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n\nvector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\n\nLAPACK: matrix decompositions and more\n\n\nImplementations: OpenBLAS, Intel MKL, Apple vecLib, AMD BLIS, Nvidia nvBLAS,"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#r-lapack-blas-1",
-    "href": "materials/lectures/5-blas/slides.html#r-lapack-blas-1",
-    "title": "BLAS Libraries",
-    "section": "R-LAPACK-BLAS",
-    "text": "R-LAPACK-BLAS\n * BLAS: Basic Linear Algebra Subroutines - A matrix multiplication library\n* vector-vector (Level-1), matrix-vector (Level-2), matrix-matrix (Level-3)\n\n\nLAPACK: dense and banded matrix decompositions and more\n\n\n\\(\\quad LU\\) \\(\\quad LL^T\\) \\(\\quad QR\\) \\(\\quad UDV^T\\) \\(\\quad VD^2V^T\\) \\(\\quad\\|\\cdot\\|_p\\)\n\n\n\nImplementations: OpenBLAS, Intel MKL, Nvidia nvBLAS, Apple vecLib, AMD BLIS, Arm Performance Libraries\nFlexiBLAS: A BLAS and LAPACK wrapper library with runtime exchangable backends"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#r-interfaces-to-low-level-native-tools",
-    "href": "materials/lectures/5-blas/slides.html#r-interfaces-to-low-level-native-tools",
-    "title": "BLAS Libraries",
-    "section": "R Interfaces to Low-Level Native Tools",
-    "text": "R Interfaces to Low-Level Native Tools"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#parallelmclapply",
-    "href": "materials/lectures/5-blas/slides.html#parallelmclapply",
-    "title": "BLAS Libraries",
-    "section": "parallel::mclapply()",
-    "text": "parallel::mclapply()"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#blas-libraries",
-    "href": "materials/lectures/5-blas/slides.html#blas-libraries",
-    "title": "BLAS Libraries",
-    "section": "BLAS Libraries",
-    "text": "BLAS Libraries"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#os-viewpoint-on-blas-libraries",
-    "href": "materials/lectures/5-blas/slides.html#os-viewpoint-on-blas-libraries",
-    "title": "BLAS Libraries",
-    "section": "OS Viewpoint on BLAS Libraries",
-    "text": "OS Viewpoint on BLAS Libraries\nFedora Linux OS development cascade:\nFedora \\(\\rightarrow\\) CentOS Stream \\(\\rightarrow\\) Red Hat Enterprise Linux (RHEL)\n\\[\\qquad\\]\nOptimal: BLAS control via FlexiBLAS\n\nR - FlexiBLAS - (NETLIB, OpenBLAS, vecLib, …)\n\nOn Delta, we have spack-installed:\n\nR - OpenBLAS\n\n\nEasyBuild is currently more R-friendly than spack for the HPC BLAS ecosystem\n\nEasyBuild Common toolchains\n\n\n\n\nThese may be relevant for making OS choices when configuring cloud resources"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#set-number-of-threads-for-operation",
-    "href": "materials/lectures/5-blas/slides.html#set-number-of-threads-for-operation",
-    "title": "BLAS Libraries",
-    "section": "Set Number of Threads for Operation",
-    "text": "Set Number of Threads for Operation\n\nRhpcBLASctl::omp_set_num_threads()\n\nAlso get information on threads:\n\nRhpcBLASctl::omp_get_num_procs()\nRhpcBLASctl::omp_get_max_threads()"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#examples",
-    "href": "materials/lectures/5-blas/slides.html#examples",
-    "title": "BLAS Libraries",
-    "section": "Examples",
-    "text": "Examples"
-  },
-  {
-    "objectID": "materials/lectures/5-blas/slides.html#flexiblas",
-    "href": "materials/lectures/5-blas/slides.html#flexiblas",
-    "title": "BLAS Libraries",
-    "section": "FlexiBLAS",
-    "text": "FlexiBLAS\n\nlibrary(flexiblas)\n\n# check whether FlexiBLAS is available\nflexiblas_avail()\n#&gt; [1] TRUE\n\n# get the current backend\nflexiblas_current_backend()\n#&gt; [1] \"OPENBLAS-OPENMP\"\n\n# list all available backends\nflexiblas_list()\n#&gt; [1] \"NETLIB\"           \"__FALLBACK__\"     \"BLIS-THREADS\"     \"OPENBLAS-OPENMP\"\n#&gt; [5] \"BLIS-SERIAL\"      \"ATLAS\"            \"OPENBLAS-SERIAL\"  \"OPENBLAS-THREADS\"\n#&gt; [9] \"BLIS-OPENMP\"\n\n# get/set the number of threads\nflexiblas_set_num_threads(12)\nflexiblas_get_num_threads()\n#&gt; [1] 12\n\n\n\n\n\n\n\n\n\nhttps://github.com/Enchufa2/r-flexiblashttps://cran.r-project.org/package=flexiblas"
   },
   {
     "objectID": "materials/lectures/3-software/slides.html#two-three-basic-concepts-in-hardware",
@@ -679,11 +686,53 @@
     "text": "Running MPI on a Laptop\nmacOS in a Terminal window:\n\nbrew install openmpi\nIn an R session: install.packages(\"pbdMPI\")\nmpirun -np 4 Rscript your_spmd_code.R\n\nWindows\n\nWeb Page: https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi\nDownload: https://www.microsoft.com/en-us/download/details.aspx?id=100593\npbdMPI has a Windows binary on CRAN"
   },
   {
-    "objectID": "materials/lectures/7-distributed/slides.html#revisit-hello_balance.r",
-    "href": "materials/lectures/7-distributed/slides.html#revisit-hello_balance.r",
+    "objectID": "materials/lectures/7-distributed/slides.html#mpi-hello-world",
+    "href": "materials/lectures/7-distributed/slides.html#mpi-hello-world",
     "title": "Distributed Computing",
-    "section": "Revisit hello_balance.R",
-    "text": "Revisit hello_balance.R\n## This script describes two levels of parallelism:\n## Top level: Distributed MPI runs several copies of this entire script.\n##            Instances differ by their comm.rank() designation.\n## Inner level: The unix fork (copy-on-write) shared memory parallel execution\n##            of the mc.function() managed by parallel::mclapply()\n## Further levels are possible: multithreading in compiled code and communicator\n## splitting at the distributed MPI level.\n\nsuppressMessages(library(pbdMPI))\ncomm.print(sessionInfo())\n\n## get node name\nhost = system(\"hostname\", intern = TRUE)\n\nmc.function = function(x) {\n    Sys.sleep(1) # replace with your function for mclapply cores here\n    Sys.getpid() # returns process id\n}\n\n## Compute how many cores per R session are on this node\nlocal_ranks_query = \"echo $OMPI_COMM_WORLD_LOCAL_SIZE\"\nranks_on_my_node = as.numeric(system(local_ranks_query, intern = TRUE))\ncores_on_my_node = parallel::detectCores()\ncores_per_R = floor(cores_on_my_node/ranks_on_my_node)\ncores_total = allreduce(cores_per_R)  # adds up over ranks\n\n## Run mclapply on allocated cores to demonstrate fork pids\nmy_pids = parallel::mclapply(1:cores_per_R, mc.function, mc.cores = cores_per_R)\nmy_pids = do.call(paste, my_pids) # combines results from mclapply\n##\n## Same cores are shared with OpenBLAS (see flexiblas package)\n##            or for other OpenMP enabled codes outside mclapply.\n## If BLAS functions are called inside mclapply, they compete for the\n##            same cores: avoid or manage appropriately!!!\n\n## Now report what happened and where\nmsg = paste0(\"Hello World from rank \", comm.rank(), \" on host \", host,\n             \" with \", cores_per_R, \" cores allocated\\n\",\n             \"            (\", ranks_on_my_node, \" R sessions sharing \",\n             cores_on_my_node, \" cores on this host node).\\n\",\n             \"      pid: \", my_pids, \"\\n\")\ncomm.cat(msg, quiet = TRUE, all.rank = TRUE)\n\n\ncomm.cat(\"Total R sessions:\", comm.size(), \"Total cores:\", cores_total, \"\\n\",\n         quiet = TRUE)\ncomm.cat(\"\\nNotes: cores on node obtained by: detectCores {parallel}\\n\",\n         \"       ranks (R sessions) per node: OMPI_COMM_WORLD_LOCAL_SIZE\\n\",\n         \"       pid to core map changes frequently during mclapply\\n\",\n         quiet = TRUE)\n\nfinalize()"
+    "section": "MPI Hello World",
+    "text": "MPI Hello World\nSPMD: \\(n\\) identical codes running, each given a unique rank: \\(0\\) to \\(n-1\\)\nhello_world.R\nsuppressMessages(library(pbdMPI))\n\nmy_rank = comm.rank()\nnranks = comm.size()\nmsg = paste0(\"Hello World! My name is Rank\", my_rank, \". We are \", nranks, \" identical siblings.\")\ncat(msg, \"\\n\")\n\nfinalize()"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#mpi-hello-world-1",
+    "href": "materials/lectures/7-distributed/slides.html#mpi-hello-world-1",
+    "title": "Distributed Computing",
+    "section": "MPI Hello World",
+    "text": "MPI Hello World\nShell script to run 8 instances of hello_world.R\nhello_world.sh\n#!/bin/bash\n#SBATCH --job-name utk\n#SBATCH --account=bckj-delta-cpu\n#SBATCH --partition=cpu\n#SBATCH --mem=20g\n#SBATCH --nodes=1\n#SBATCH --cpus-per-task=8\n#SBATCH --tasks-per-node=8\n#SBATCH --time 00:10:00\n#SBATCH -e ./utk.e\n#SBATCH -o ./utk.o\n\npwd\nmodule load r\nmodule list\n\ntime mpirun -np 8 Rscript hello_world.R\n\nSubmit with: sbatch hello_world.sh"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#mpi-output-utk.o",
+    "href": "materials/lectures/7-distributed/slides.html#mpi-output-utk.o",
+    "title": "Distributed Computing",
+    "section": "MPI Output utk.o",
+    "text": "MPI Output utk.o\n[gostrouc@dt-login04 mpi]$ cat utk.o\n/u/gostrouc/BZAN_583_code/mpi\n\n======================   ALLOCATED NODES   ======================\n    cn095: flags=0x11 slots=8 max_slots=0 slots_inuse=0 state=UP\n=================================================================\nHello World! My name is Rank1. We are 8 identical siblings. \nHello World! My name is Rank0. We are 8 identical siblings. \nHello World! My name is Rank4. We are 8 identical siblings. \nHello World! My name is Rank5. We are 8 identical siblings. \nHello World! My name is Rank6. We are 8 identical siblings. \nHello World! My name is Rank2. We are 8 identical siblings. \nHello World! My name is Rank3. We are 8 identical siblings. \nHello World! My name is Rank7. We are 8 identical siblings. \n\nNote the rank order is arbitrary\n\nIn general, cat() does not even prevent overprinting!"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#mpi-hello-world-2",
+    "href": "materials/lectures/7-distributed/slides.html#mpi-hello-world-2",
+    "title": "Distributed Computing",
+    "section": "MPI Hello World",
+    "text": "MPI Hello World\nSPMD: some control over printing with comm.cat()\nhello_world2.R\nsuppressMessages(library(pbdMPI))\n\nmy_rank = comm.rank()\nnranks = comm.size()\nmsg = paste0(\"Hello World! My name is Rank\", my_rank, \". We are \", nranks, \" identical siblings.\")\ncomm.cat(msg, \"\\n\", all.rank = TRUE)\n\nfinalize()"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#mpi-output-utk.o-1",
+    "href": "materials/lectures/7-distributed/slides.html#mpi-output-utk.o-1",
+    "title": "Distributed Computing",
+    "section": "MPI Output utk.o",
+    "text": "MPI Output utk.o\n[gostrouc@dt-login04 mpi]$ cat utk.o\n/u/gostrouc/BZAN_583_code/mpi\n\n======================   ALLOCATED NODES   ======================\n    cn095: flags=0x11 slots=8 max_slots=0 slots_inuse=0 state=UP\n=================================================================\nCOMM.RANK = 0\nHello World! My name is Rank0. We are 8 identical siblings. \nCOMM.RANK = 1\nHello World! My name is Rank1. We are 8 identical siblings. \nCOMM.RANK = 2\nHello World! My name is Rank2. We are 8 identical siblings. \nCOMM.RANK = 3\nHello World! My name is Rank3. We are 8 identical siblings. \nCOMM.RANK = 4\nHello World! My name is Rank4. We are 8 identical siblings. \nCOMM.RANK = 5\nHello World! My name is Rank5. We are 8 identical siblings. \nCOMM.RANK = 6\nHello World! My name is Rank6. We are 8 identical siblings. \nCOMM.RANK = 7\nHello World! My name is Rank7. We are 8 identical siblings."
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#two-parallel-levels",
+    "href": "materials/lectures/7-distributed/slides.html#two-parallel-levels",
+    "title": "Distributed Computing",
+    "section": "Two Parallel Levels",
+    "text": "Two Parallel Levels\nhello_balance.R\n## This script describes two levels of parallelism:\n## Top level: Distributed MPI runs several copies of this entire script. Instances differ by their comm.rank() designation.\n## Inner level: The unix fork (copy-on-write) shared memory parallel execution of the mc.function() managed by parallel::mclapply()\n## Further levels are possible: multithreading in compiled code and communicator splitting at the distributed MPI level.\n\nsuppressMessages(library(pbdMPI))\ncomm.print(sessionInfo())\n\nhost = system(\"hostname\", intern = TRUE)  # get node name\n\nmc.function = function(x) {\n    Sys.sleep(0.1) # replace with your function for mclapply cores here\n    Sys.getpid() # returns process id\n}\n\n## ranks and cores queries\nranks_on_my_node = Sys.getenv(\"SLURM_NTASKS_PER_NODE\")\nmy_cores = Sys.getenv(\"SLURM_CPUS_PER_TASK\")\ncores_on_my_node = Sys.getenv(\"SLURM_CPUS_ON_NODE\")\ncores_total = allreduce(my_cores)  # adds up over ranks\n\n## Run mclapply on allocated cores to demonstrate fork pids\nmy_pids = parallel::mclapply(seq_len(my_cores), mc.function, mc.cores = my_cores)\nmy_pids = do.call(paste, my_pids) # combines results from mclapply\n##\n## Same cores are shared with OpenBLAS (see flexiblas package) or for other OpenMP enabled codes outside mclapply.\n## If BLAS functions are called inside mclapply, they compete for the same cores: avoid or manage appropriately!!!\n\n## Now report what happened and where\nmsg = paste0(\"Hello World from rank \", comm.rank(), \" on host \", host, \" with \", my_cores, \" cores allocated\\n\",\n             \"            (\", ranks_on_my_node, \" R sessions sharing \", cores_on_my_node, \" cores on this host node).\\n\",\n             \"      pid: \", my_pids, \"\\n\")\ncomm.cat(msg, all.rank = TRUE)\n\nbarrier()  # wait for all ranks to reach this point\ncomm.cat(\"Total R sessions:\", comm.size(), \"Total cores:\", cores_total, \"\\n\", quiet = TRUE)\ncomm.cat(\"\\nNotes: pid to core map changes frequently during mclapply\\n\", quiet = TRUE)\n\nfinalize()"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#two-parallel-levels-output",
+    "href": "materials/lectures/7-distributed/slides.html#two-parallel-levels-output",
+    "title": "Distributed Computing",
+    "section": "Two Parallel Levels Output",
+    "text": "Two Parallel Levels Output\n[gostrouc@dt-login04 mpi]$ cat utk.o\n/u/gostrouc/BZAN_583_code/mpi\n\n======================   ALLOCATED NODES   ======================\n    cn096: flags=0x11 slots=4 max_slots=0 slots_inuse=0 state=UP\n    cn099: flags=0x10 slots=4 max_slots=0 slots_inuse=0 state=UP\n=================================================================\nR version 4.3.2 (2023-10-31)\nPlatform: x86_64-pc-linux-gnu (64-bit)\nRunning under: Red Hat Enterprise Linux 8.8 (Ootpa)\n\nMatrix products: default\nBLAS/LAPACK: /sw/spack/deltas11-2023-03/apps/linux-rhel8-zen3/gcc-11.4.0/openblas-0.3.25-5yvxjnl/lib/libopenblas_zen-r0.3.25.so;  LAPACK version 3.11.0\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              \n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    \n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   \n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 \n [9] LC_ADDRESS=C               LC_TELEPHONE=C            \n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       \n\ntime zone: America/Chicago\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] pbdMPI_0.5-1\n\nloaded via a namespace (and not attached):\n[1] compiler_4.3.2 parallel_4.3.2 float_0.3-2   \nCOMM.RANK = 0\nHello World from rank 0 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939702 939706 939708 939712 939715 939719\nCOMM.RANK = 1\nHello World from rank 1 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939704 939709 939714 939718 939722 939723\nCOMM.RANK = 2\nHello World from rank 2 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939703 939707 939710 939713 939716 939720\nCOMM.RANK = 3\nHello World from rank 3 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939705 939711 939717 939721 939724 939725\nCOMM.RANK = 4\nHello World from rank 4 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152806 1152810 1152816 1152821 1152824 1152826\nCOMM.RANK = 5\nHello World from rank 5 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152804 1152808 1152812 1152814 1152818 1152822\nCOMM.RANK = 6\nHello World from rank 6 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152803 1152807 1152811 1152813 1152817 1152819\nCOMM.RANK = 7\nHello World from rank 7 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152805 1152809 1152815 1152820 1152823 1152825\nTotal R sessions: 8 Total cores: 48 \n\nNotes: pid to core map changes frequently during mclapply"
   },
   {
     "objectID": "materials/lectures/7-distributed/slides.html#working-with-a-remote-cluster-using-r",
@@ -763,32 +812,25 @@
     "text": "Distributed Programming Works in Shared Memory"
   },
   {
-    "objectID": "materials/lectures/7-distributed/slides.html#hands-on-session-5-hello-mpi-ranks-picsparallelsoftwareslide7mpi.jpg-background-size200px-background-positionbottom-right",
-    "href": "materials/lectures/7-distributed/slides.html#hands-on-session-5-hello-mpi-ranks-picsparallelsoftwareslide7mpi.jpg-background-size200px-background-positionbottom-right",
+    "objectID": "materials/lectures/7-distributed/slides.html#random-forest-with-mpi",
+    "href": "materials/lectures/7-distributed/slides.html#random-forest-with-mpi",
     "title": "Distributed Computing",
-    "section": "Hands on Session 5: Hello MPI Ranks {/pics/ParallelSoftware/Slide7mpi.jpg background-size=“200px” background-position=“bottom right”}",
-    "text": "Hands on Session 5: Hello MPI Ranks {/pics/ParallelSoftware/Slide7mpi.jpg background-size=“200px” background-position=“bottom right”}\ncode_5/hello_world.R {.r include = \"code/hello_world.R\"}\nRank distinguishes the parallel copies of the same code"
+    "section": "Random Forest with MPI",
+    "text": "Random Forest with MPI\nmpi/rf_mpi.R\nsuppressPackageStartupMessages(library(randomForest))\ndata(LetterRecognition, package = \"mlbench\")\nlibrary(pbdMPI, quiet = TRUE)                #&lt;&lt;\ncomm.set.seed(seed = 7654321, diff = FALSE)      #&lt;&lt;\n\nn = nrow(LetterRecognition)\nn_test = floor(0.2 * n)\ni_test = sample.int(n, n_test)\ntrain = LetterRecognition[-i_test, ]\ntest = LetterRecognition[i_test, ][comm.chunk(n_test, form = \"vector\"), ]    #&lt;&lt;\n\ncomm.set.seed(seed  = 1234, diff = TRUE)          #&lt;&lt;\nmy.rf = randomForest(lettr ~ ., train, ntree = comm.chunk(500), norm.votes = FALSE) #&lt;&lt;\nrf.all = allgather(my.rf)                  #&lt;&lt;\nrf.all = do.call(combine, rf.all)          #&lt;&lt;\npred = as.vector(predict(rf.all, test))\n\ncorrect = allreduce(sum(pred == test$lettr))  #&lt;&lt;\ncomm.cat(\"Proportion Correct:\", correct/(n_test), \"\\n\")\n\nfinalize()          #&lt;&lt;"
   },
   {
-    "objectID": "materials/lectures/7-distributed/slides.html#hands-on-session-5-random-forest-with-mpi",
-    "href": "materials/lectures/7-distributed/slides.html#hands-on-session-5-random-forest-with-mpi",
+    "objectID": "materials/lectures/7-distributed/slides.html#comm.chunk",
+    "href": "materials/lectures/7-distributed/slides.html#comm.chunk",
     "title": "Distributed Computing",
-    "section": "Hands on Session 5: Random Forest with MPI",
-    "text": "Hands on Session 5: Random Forest with MPI\ncode_5/rf_mpi.R\nsuppressPackageStartupMessages(library(randomForest))\ndata(LetterRecognition, package = \"mlbench\")\nlibrary(pbdMPI, quiet = TRUE)                #&lt;&lt;\ncomm.set.seed(seed = 7654321, diff = FALSE)      #&lt;&lt;\n\nn = nrow(LetterRecognition)\nn_test = floor(0.2 * n)\ni_test = sample.int(n, n_test)\ntrain = LetterRecognition[-i_test, ]\ntest = LetterRecognition[i_test, ][comm.chunk(n_test, form = \"vector\"), ]    #&lt;&lt;\n\ncomm.set.seed(seed  = 1234, diff = TRUE)          #&lt;&lt;\nmy.rf = randomForest(lettr ~ ., train, ntree = comm.chunk(500), norm.votes = FALSE) #&lt;&lt;\nrf.all = allgather(my.rf)                  #&lt;&lt;\nrf.all = do.call(combine, rf.all)          #&lt;&lt;\npred = as.vector(predict(rf.all, test))\n\ncorrect = allreduce(sum(pred == test$lettr))  #&lt;&lt;\ncomm.cat(\"Proportion Correct:\", correct/(n_test), \"\\n\")\n\nfinalize()          #&lt;&lt;"
+    "section": "comm.chunk()",
+    "text": "comm.chunk()\nmpi/chunk.r\nlibrary( pbdMPI, quiet = TRUE )\n\nmy.rank = comm.rank( )\n\nk = comm.chunk( 10 )\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\", type = \"equal\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nfinalize( )"
   },
   {
-    "objectID": "materials/lectures/7-distributed/slides.html#hands-on-session-5-comm.chunk",
-    "href": "materials/lectures/7-distributed/slides.html#hands-on-session-5-comm.chunk",
+    "objectID": "materials/lectures/7-distributed/slides.html#other-short-mpi-codes",
+    "href": "materials/lectures/7-distributed/slides.html#other-short-mpi-codes",
     "title": "Distributed Computing",
-    "section": "Hands on Session 5: comm.chunk()",
-    "text": "Hands on Session 5: comm.chunk()\nmpi_shorts/chunk.r\nlibrary( pbdMPI, quiet = TRUE )\n\nmy.rank = comm.rank( )\n\nk = comm.chunk( 10 )\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\", type = \"equal\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nfinalize( )"
-  },
-  {
-    "objectID": "materials/lectures/7-distributed/slides.html#hands-on-session-5-other-short-mpi-codes",
-    "href": "materials/lectures/7-distributed/slides.html#hands-on-session-5-other-short-mpi-codes",
-    "title": "Distributed Computing",
-    "section": "Hands on Session 5: other short MPI codes",
-    "text": "Hands on Session 5: other short MPI codes\nbcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hello-p.r hello.r map-reduce.r mcsim.r ols.r qr-cop.r rank.r reduce-mat.r timer.r\n\nThese short codes only use pbdMPI and can run on a laptop in a terminal window if you installed OpenMPI\nOn the clusters these can run on a login node with a small \\(^*\\) number of ranks\nWile in the mpi_shorts directory, run the following\n\nsource ../code_4/modules_MACHINE.sh\nmpirun -np 4 Rscript your_script.r\n\n\n.footnote[ \\(^*\\) Note that running long or large jobs on login nodes is strongly discouraged]"
+    "section": "Other short MPI codes",
+    "text": "Other short MPI codes\nbcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hello-p.r hello.r map-reduce.r mcsim.r ols.r qr-cop.r rank.r reduce-mat.r timer.r\n\nThese short codes only use pbdMPI and can run on a laptop in a terminal window if you installed OpenMPI\nOn the clusters these can run on a login node with a small \\(^*\\) number of ranks\nWile in the mpi_shorts directory, run the following\n\nsource ../code_4/modules_MACHINE.sh\nmpirun -np 4 Rscript your_script.r"
   },
   {
     "objectID": "materials/lectures/7-distributed/slides.html#shared-memory---mpi-or-fork",
@@ -837,14 +879,14 @@
     "href": "materials/lectures/7-distributed/slides.html#mnist_rsvd.r",
     "title": "Distributed Computing",
     "section": "mnist_rsvd.R",
-    "text": "mnist_rsvd.R\nsource(\"mnist_read_mpi.R\") # reads blocks of rows\nsuppressMessages(library(pbdDMAT))\nsuppressMessages(library(pbdML))\ninit.grid()\n\n## construct block-cyclic ddmatrix\nbldim = c(allreduce(nrow(my_train), op = \"max\"), ncol(my_train))\ngdim = c(allreduce(nrow(my_train), op = \"sum\"), ncol(my_train))\ndmat_train = new(\"ddmatrix\", Data = my_train, dim = gdim, \n                 ldim = dim(my_train), bldim = bldim, ICTXT = 2)\ncyclic_train = as.blockcyclic(dmat_train)\n\ncomm.print(comm.size())\nt1 = as.numeric(Sys.time())\nrsvd_train = rsvd(cyclic_train, k = 10, q = 3, retu = FALSE, retvt = TRUE)\nt2 = as.numeric(Sys.time())\nt1 = allreduce(t1, op = \"min\")\nt2 = allreduce(t2, op = \"max\")\ncomm.cat(\"Time:\", t2 - t1, \"seconds\\n\")\ncomm.cat(\"dim(V):\", dim(rsvd_train$vt), \"\\n\")\n\ncomm.cat(\"rsvd top 10 singular values:\", rsvd_train$d, \"\\n\")\n\nfinalize()"
+    "text": "mnist_rsvd.R"
   },
   {
     "objectID": "materials/lectures/7-distributed/slides.html#hands-on-session-rsvd",
     "href": "materials/lectures/7-distributed/slides.html#hands-on-session-rsvd",
     "title": "Distributed Computing",
     "section": "Hands-on Session rsvd",
-    "text": "Hands-on Session rsvd\nrsvd &lt;- function(x, k=1, q=3, retu=TRUE, retvt=TRUE) {\n  \n  n &lt;- ncol(x)\n  \n  if (class(x) == \"matrix\")\n    Omega &lt;- matrix(runif(n*2L*k), nrow=n, ncol=2L*k)\n  else if (class(x) == \"ddmatrix\")  #&lt;&lt;\n    Omega &lt;- ddmatrix(\"runif\", nrow=n, ncol=2L*k, bldim=x@bldim, ICTXT=x@ICTXT) #&lt;&lt;\n  \n  Y &lt;- x %*% Omega\n  Q &lt;- qr.Q(qr(Y))\n  \n  for (i in 1:q) {\n    Y &lt;- crossprod(x, Q)\n    Q &lt;- qr.Q(qr(Y))\n    Y &lt;- x %*% Q\n    Q &lt;- qr.Q(qr(Y))\n  }\n  \n  B &lt;- crossprod(Q, x)\n  \n  if (!retu) nu &lt;- 0\n  else nu &lt;- min(nrow(B), ncol(B))\n  \n  if (!retvt) nv &lt;- 0\n  else nv &lt;- min(nrow(B), ncol(B))\n  \n  svd.B &lt;- La.svd(x=B, nu=nu, nv=nv)\n  \n  d &lt;- svd.B$d\n  d &lt;- d[1L:k]\n  \n  # Produce u/vt as desired\n  if (retu) {\n    u &lt;- svd.B$u\n    u &lt;- Q %*% u\n    u &lt;- u[, 1L:k, drop=FALSE]\n  }\n  \n  if (retvt) vt &lt;- svd.B$vt[1L:k, , drop=FALSE]\n  \n  # wrangle return\n  if (retu) {\n    if (retvt) svd &lt;- list(d=d, u=u, vt=vt)\n    else svd &lt;- list(d=d, u=u)\n  } else {\n    if (retvt) svd &lt;- list(d=d, vt=vt)\n    else svd &lt;- list(d=d)\n  }\n  \n  return( svd )\n}"
+    "text": "Hands-on Session rsvd"
   },
   {
     "objectID": "materials/lectures/7-distributed/slides.html#package-kazaam",
@@ -865,14 +907,49 @@
     "href": "materials/lectures/6-nn/slides.html#github-copilot",
     "title": "LLMs and torch",
     "section": "GitHub Copilot",
-    "text": "GitHub Copilot\nRStudio now has a Copilot option\nFree to students and academics ($20/month otherwise - says Copilot, but I think it’s $10)\n\n\nThis slide is being written with Copilot on\nIt’s a bit like a smart autocomplete\nAbove, it suggested a non-existent link for the Copilot option\nIt’s better than autocomplete in RStudio\nBut I find it unhelpful for HPC facing R code\nIt does a little better with shell scripts\n\n\nA video and conference talk\n\n\nExperiments with GPT 3.5\nR is mostly laptop\n\nparallel suggestions are mostly laptop oriented\n\nPlanned demo with rf-serial into rf_mc\n\nfailed to get it to work"
+    "text": "GitHub Copilot\nRStudio now has a GitHub Copilot option\nFree to students and academics ($20/month otherwise - says Copilot, but I think it’s $10)\n\n\nThis slide is being written with Copilot on\nIt’s a bit like a smart autocomplete\nAbove, it suggested a non-existent link for the GitHub Copilot option (now fixed)\nIt’s better than autocomplete in RStudio\nBut I find it unhelpful for HPC facing R code\nIt does a little better with shell scripts\n\n\nA video and conference talk\n\n\nExperiments with GPT 3.5\nR is mostly laptop\n\nparallel suggestions are mostly laptop oriented\n\nPlanned demo with rf-serial into rf_mc\n\nfailed to get it to work"
   },
   {
     "objectID": "materials/lectures/6-nn/slides.html#torch-pytorch-and-torch",
     "href": "materials/lectures/6-nn/slides.html#torch-pytorch-and-torch",
     "title": "LLMs and torch",
     "section": "Torch, Pytorch, and torch",
-    "text": "Torch, Pytorch, and torch\n\nTorch is a C++ library that provides neural network and optimization routines that work with tensors (multi-dimensional arrays)\n\n\n\nPytorch is a deep learning library for Python that is based on the Torch library\ntorch is a package for R that provides an interface to the Torch library\n\nTakes about 15 minutes to install on Delta\n\nStill working out what modules are needed on Delta\n\nCopilot: I have a video on how to install it\nCopilot: Copilot is wrong, but I do have a video on how to install it (Not)\nA book: Deep Learning and Scientific Computing with R torch\nAccompanying GitHub repo, more recent from mlverse\nA blog, another blog\nTorch Hugging Face Integrations and mlverse\n\nPosit AI blogs"
+    "text": "Torch, Pytorch, and torch\n\nTorch is a C++ library that provides neural network and optimization routines that work with tensors (multi-dimensional arrays)\n\n\n\nPytorch is a deep learning library for Python that is based on the Torch library\ntorch is a package for R that provides an interface to the Torch library\n\nTakes about 15 minutes to install on Delta\n\nInstalls in a standard interactive R session on a login node\n\nCopilot: I have a video on how to install it\nCopilot: Copilot is wrong, but I do have a video on how to install it (Not!)"
+  },
+  {
+    "objectID": "materials/lectures/6-nn/slides.html#torch-via-torch-in-r-resources",
+    "href": "materials/lectures/6-nn/slides.html#torch-via-torch-in-r-resources",
+    "title": "LLMs and torch",
+    "section": "Torch via torch in R Resources",
+    "text": "Torch via torch in R Resources\n\nA book: Deep Learning and Scientific Computing with R torch\n\n\n\nAccompanying GitHub repo, more recent from mlverse\nA blog, another blog\nTorch Hugging Face Integrations and mlverse\nPosit AI blogs"
+  },
+  {
+    "objectID": "materials/lectures/6-nn/slides.html#torch-via-torch-in-r-overview",
+    "href": "materials/lectures/6-nn/slides.html#torch-via-torch-in-r-overview",
+    "title": "LLMs and torch",
+    "section": "Torch via torch in R Overview",
+    "text": "Torch via torch in R Overview\n\nA tensor is a multi-dimensional array (vector, matrix, etc.)\nTensor types in torch are: float, double, int, long, byte, short, char, bool, complex, and about 60 others, created with torch_&lt;type&gt;()\n\nLess memory overhead than R’s double\n\nR stores only a reference to the tensor in the R object\ntorch is object-oriented, as opposed to functional in R\n\nFewer copy operations than in R generally\nImplemented with R7 classes (see talk)\n\ntorch is lazy like R, so you may need to call torch$run() to execute\ntorch can put objects on CPU or GPU\ntorch provides functions primarily for neural networks, but also for optimization, and linear algebra"
+  },
+  {
+    "objectID": "materials/lectures/6-nn/slides.html#torch-via-torch-in-r-examples",
+    "href": "materials/lectures/6-nn/slides.html#torch-via-torch-in-r-examples",
+    "title": "LLMs and torch",
+    "section": "Torch via torch in R Examples",
+    "text": "Torch via torch in R Examples\nFollowing the original blog by Sigrid Keydana, the example code is on GitHub in HPCinR/BZAN_583_code repository in the torch directory:\n\nR script: torch_example_gpu.R\nBash script: torch_example_gpu.sh\n\nThe code uses the Kuzushiji-MNIST (Clanuwat et al. 2018) data (70,000 images 28x28 of 10 characters), considered an “MNIST drop-in”. Like other datasets explicitly created to replace MNIST, it has ten classes – characters, in this case, depicted as grayscale images of resolution 28x28."
+  },
+  {
+    "objectID": "materials/lectures/6-nn/slides.html#everyone-is-now-added-to-the-gpu-allocation-on-delta-bckj-delta-gpu",
+    "href": "materials/lectures/6-nn/slides.html#everyone-is-now-added-to-the-gpu-allocation-on-delta-bckj-delta-gpu",
+    "title": "LLMs and torch",
+    "section": "Everyone is now added to the GPU allocation on Delta: bckj-delta-gpu",
+    "text": "Everyone is now added to the GPU allocation on Delta: bckj-delta-gpu\n\nNVIDIA A40 GPUs\nQueue times are longer than on the CPU nodes (15-30 minutes)\nInstalling torch: in a login node R session, may take two cycles\nInstalling torchvision: needs module load jpeg and possibly\n\nexport LD_LIBRARY_PATH=/sw/spack/deltas11-2023-03/apps/linux-rhel8-zen/gcc-8.5.0/libjpeg-9e-rq7ceaj/lib:$LD_LIBRARY_PATH\nto be noticed by the install"
+  },
+  {
+    "objectID": "materials/lectures/6-nn/slides.html#hugging-face-models",
+    "href": "materials/lectures/6-nn/slides.html#hugging-face-models",
+    "title": "LLMs and torch",
+    "section": "Hugging Face Models",
+    "text": "Hugging Face Models\n\nInstall hfhub\nInstall tok: needs module load rust\n\nMore on Hugging Face Next Week …"
   },
   {
     "objectID": "materials/lectures/2-hardware/slides.html#memory-hierarchy",
@@ -1330,18 +1407,18 @@
     "text": "Parallel software to make your R code faster. How to parallelize in Unix flavors.\nFull Screen"
   },
   {
-    "objectID": "materials/lectures/5-blas/index.html",
-    "href": "materials/lectures/5-blas/index.html",
-    "title": "BLAS Libraries",
-    "section": "",
-    "text": "Basic Linear Algebra Software (BLAS) Libraries\nFull Screen"
-  },
-  {
     "objectID": "materials/lectures/1a-workflow/index.html",
     "href": "materials/lectures/1a-workflow/index.html",
     "title": "Workflow for Remote Computing with R",
     "section": "",
     "text": "Full Screen"
+  },
+  {
+    "objectID": "materials/lectures/6-blas/index.html",
+    "href": "materials/lectures/6-blas/index.html",
+    "title": "BLAS Libraries",
+    "section": "",
+    "text": "Basic Linear Algebra Software (BLAS) Libraries\nFull Screen"
   },
   {
     "objectID": "materials/lectures/4-data/index.html",

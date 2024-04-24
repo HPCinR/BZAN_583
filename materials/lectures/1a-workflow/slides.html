@@ -613,7 +613,25 @@
 <em>export</em> lists (or sets) variables and their values</li>
 </ul>
 <p>There are many resources on the web to learn Linux basics</p>
-</section><section id="use-of-login-nodes-and-compute-nodes" class="slide level2 smaller" data-background-image="../../../pics/01-intro/BatchRonClusterLaptop.jpg" data-background-size="60%" data-background-position="bottom right"><h2>Use of Login Nodes and Compute Nodes</h2>
+</section><section id="solutions-for-potential-windows-issues" class="slide level2 smaller"><h2>Solutions for Potential Windows Issues</h2>
+<ul>
+<li>Files produced in text editors may have Windows line endings
+<ul>
+<li>Windows: <code>\r\n</code>, Unix: <code>\n</code><br>
+</li>
+<li>Fix on Unix command line: <code>sed -i.bak 's/\r$//' file.txt</code>
+<ul>
+<li>Edits in-place and creates a backup file with <code>.bak</code> extension</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RStudio on Windows may not recognize Unix line endings
+<ul>
+<li>Change in RStudio: Tools -&gt; Global Options -&gt; Code -&gt; Line endings</li>
+</ul>
+</li>
+</ul></section><section id="use-of-login-nodes-and-compute-nodes" class="slide level2 smaller" data-background-image="../../../pics/01-intro/BatchRonClusterLaptop.jpg" data-background-size="60%" data-background-position="bottom right"><h2>Use of Login Nodes and Compute Nodes</h2>
 <p><strong>Login nodes:</strong></p>
 <ul>
 <li><p>Code downloads, GitHub or other<br></p></li>

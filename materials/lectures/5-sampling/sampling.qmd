@@ -260,30 +260,53 @@ $\qquad\qquad\qquad$ Default RNG $\qquad\qquad\qquad\qquad\qquad\qquad\qquad$ L'
 Taken from: Parallel Statistical Computing with R: An Illustration on Two Architectures [arXiv:1709.01195](https://arxiv.org/abs/1709.01195)
 :::
 
-## `rf_serial.r`  
+## Serial Random Forest {.smaller}
+
+`rf_serial.r` 
 ```{.r}
 {{< include /code/sampling/rf_serial.R >}}
 ```
 
-## `rf_serial.r`  
+## Serial Random Forest {.smaller}
+
+`rf_serial.r`  
 ```{.r code-line-numbers="|5-9|11|12|14-15"}
 {{< include /code/sampling/rf_serial.R >}}
 ```
 
-## `rf_mc.r`
+## Parallel Random Forest {.smaller}
+
+`rf_mc.r`
 ```{.r}
 {{< include /code/sampling/rf_mc.R >}} 
 ```
 
-## `rf_mc.r`
+## Parallel Random Forest {.smaller}
+
+`rf_mc.r`  
 ```{.r code-line-numbers="|1|4|6-10|12|13|14|15|16|18-21"}
 {{< include /code/sampling/rf_mc.R >}} 
 ```
 
-## `rf_mc.sh`
+## Parallel Random Forest: bash script {.smaller}
+
+`rf_mc.sh`
 ```{.bash code-line-numbers="|7"}
 {{< include /code/sampling/rf_mc.sh >}} 
 ```
+
+## Further bash Parallelization `&` {.smaller}
+
+`rf_mc2.sh` $\qquad$ `&` runs in the background and starts the next command without waiting
+```{.bash code-line-numbers="7,17-22"}
+{{< include /code/sampling/rf_mc2.sh >}} 
+```
+
+::: fragment
+- Reorder and fill up the requested cores with the first 5 commands
+- Wait for the longest running command to finish
+- Then run the last 16-core command
+:::
 
 ## Crossvalidation Example
 <br>

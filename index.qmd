@@ -54,7 +54,7 @@ Assignment?: [Starter Code](materials/assignment/6-nn)
 
 *Week 7, April 29 & May 1*
 
-Lectures: [Distributed Computing](materials/lectures/6-distributed)\
+Lectures: [Distributed Computing](materials/lectures/7-distributed)\
 Assignment?: [pbdMPI in Project](materials/assignment/6-mpi) 
 <!-- simple distributed (mapreduce & spmd MPI) and projects -->
 

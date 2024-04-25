@@ -320,22 +320,30 @@ $m$, the number of predictors sampled
 - $m = p/3$
 - $\ldots$
 
-## `rf_cv_serial.R`  
+## Serial Crossvalidation Example {.smaller}
+
+`rf_cv_serial.R`  
 ```{.r}
 {{< include /code/sampling/rf_cv_serial.R >}}
 ```
 
-## `rf_cv_serial.R`  
+## Serial Crossvalidation Example {.smaller}
+
+`rf_cv_serial.R`  
 ```{.r code-line-numbers="|1-9|11-23|11-12|13|14|15|16-22|19|24-25|27-29|31-33|35-40|35|36-38"}
 {{< include /code/sampling/rf_cv_serial.R >}}
 ```
 
-## `rf_cv_mc.R`
+## Parallel Crossvalidation Example {.smaller}
+
+`rf_cv_mc.R`
 ```{.r}
 {{< include /code/sampling/rf_cv_mc.R >}} 
 ```
 
-## `rf_cv_mc.R`
+## Parallel Crossvalidation Example {.smaller}
+
+`rf_cv_mc.R`
 ```{.r code-line-numbers="|25-26"}
 {{< include /code/sampling/rf_cv_mc.R >}} 
 ```
@@ -350,4 +358,3 @@ $m$, the number of predictors sampled
 * reverse of history - because we are used to a laptop 
 * Distributed - some things are recomputed rather than communicated
 :::
-

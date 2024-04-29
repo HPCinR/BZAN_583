@@ -170,6 +170,10 @@ $\qquad$
 $\qquad$  
 $\qquad$  
 $\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
 Process each chunk into smaller result by selecting , filtering, and mutating
 :::
 
@@ -227,18 +231,63 @@ Recombine to all for building a random forest model in parallel
 
 ::::
 
-## Gather Collective Operations {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right" .smaller}
+## MPI Gather Collective Operations {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right" .smaller}
 
-$$\small \bf A = \left[ \begin{array} \\ {X_1} \\ X_2 \\ \vdots \\ X_n \end{array} \right]$$  
+:::: {layout="[ 20, 80 ]"}
+
+::: {#first-column}
+$$\small \bf A = \left[ \begin{array} \\ {A_1} \\ A_2 \\ \vdots \\ A_n \end{array} \right]$$
+:::
+
+::: {#second-column}
+  
 $\qquad$ **`A = gather(X)`** $\qquad$ $\qquad$ **`A = allgather(X)`**
 
 ![](/pics/01-intro/RHistory3sub.png)
+
+Same number of steps, but increased parallelism in allgather
+
+:::
+
+::::
 
 ::: notes
 -   Powerful: communication and reduction is highly parallel
     -   that's why it beats Spark/MapReduce
 :::
 
+## Work with Data Bigger than Memory {background-image="/pics/distributed/Distributed5.png" background-position="bottom" background-size="100%" .smaller}
+
+:::: {layout="[ 20, 80 ]"}
+
+::: {#first-column}
+$\qquad$
+:::
+
+::: {#second-column}
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+Recombine to all for building a random forest model in parallel
+:::
+
+::::
+
+## Now the R Code
+
+`mpi/data_rf_mpi_mc.R`
+``` {.r code-line-numbers="|1-5|7-10|12-13|15-16|18-24|26-33|34-35|37-39|41-44|46-50|52-53|54-57|58-59|60-61|63|65-68"}
+{{< include /code/mpi/data_rf_mpi_mc.R >}}
+```
 
 ## Two Parallel Levels  {.smaller}
 
@@ -319,7 +368,7 @@ Total R sessions: 8 Total cores: 48
 
 Notes: pid to core map changes frequently during mclapply
 ```
-
+<!--
 ## pbdR Project {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 ![](/pics/01-intro/pbdRlib.jpg)
@@ -343,6 +392,7 @@ Using HPC concepts and libraries \* Benefits the R user by knowing standard comp
 ##  {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
 ![](/pics/01-intro/pbdRlib.jpg)
+-->
 
 ## Package `pbdMPI` {.smaller}
 
@@ -406,13 +456,6 @@ $\small \bf A = \left[ X_1 | X_2 | \cdots | X_n \right]$ $\qquad$ **`A = gather(
 
 ## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/ParallelSoftware7.png" background-size="75%"}
 
-## Distributed I/O is Fast
-
-```
-[gostrouc@dt-login02 ~]$ du -hs /projects/bckj
-163G	/projects/bckj
-```
-
 
 ## Random Forest with MPI {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 
@@ -428,6 +471,7 @@ $\small \bf A = \left[ X_1 | X_2 | \cdots | X_n \right]$ $\qquad$ **`A = gather(
 {{< include /code/mpi/chunk.r >}}
 ```
 
+<!--
 ## Other short MPI codes {.smaller}
 
 bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hello-p.r hello.r map-reduce.r mcsim.r ols.r qr-cop.r rank.r reduce-mat.r timer.r
@@ -451,7 +495,7 @@ bcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hell
 `do.call()` is serial\
 `allreduce()` is parallel
 :::
-
+-->
 <!-- Save for later
 ## Package `pbdDMAT` {.smaller background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="top right"}
 

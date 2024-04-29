@@ -668,7 +668,7 @@ $^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
 --><aside><div>
 <p><a href="https://link.springer.com/book/10.1007/978-0-387-84858-7">Algorithm 15.1 in Hastie, et al.&nbsp;(2009). The Elements of Statistical Learning,<br>
 Second Edition</a></p>
-</div></aside></section><section id="k-fold-crossvalidation" class="slide level2 smaller" data-background-image="../../../pics/fork/fork8.png" data-background-size="80%" data-background-position="bottom"><h2>K-fold Crossvalidation</h2>
+</div></aside></section><section id="k-fold-crossvalidation" class="slide level2 smaller" data-background-image="../../../pics/parallel/Parallel7.png" data-background-size="80%" data-background-position="bottom"><h2>K-fold Crossvalidation</h2>
 <div>
 <ul>
 <li class="fragment">Let <span class="math inline">\(y \approx f(x, \beta, \alpha)\)</span> be a model and <span class="math inline">\(\widehat{y} = f(x, \widehat{\beta}, \alpha)\)</span> be the model prediction of <span class="math inline">\(y\)</span>
@@ -690,38 +690,30 @@ Second Edition</a></p>
 <li class="fragment">Taking <span class="math inline">\(\alpha\)</span> with minimum average loss, gives best expected generalization</li>
 </ul>
 </div>
-</section><section id="pseudo-random-number-generators-rng" class="slide level2 smaller" data-background-image="../../../pics/fork/Fork6.png" data-background-size="90%" data-background-position="bottom"><h2>Pseudo Random Number Generators (RNG)</h2>
-<div class="quarto-layout-panel" data-layout="[1,1]">
+</section><section id="pseudo-random-number-generators-rng" class="slide level2 smaller" data-background-image="../../../pics/parallel/Parallel5.png" data-background-size="90%" data-background-position="center"><h2>Pseudo Random Number Generators (RNG)</h2>
+<div class="quarto-layout-panel" data-layout="[1,1.2]">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: flex-start;">
 <p><strong>Default RNG:</strong></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p><strong>L’Ecuyer-CMRG:</strong></p>
+<div class="quarto-layout-cell" style="flex-basis: 54.6%;justify-content: flex-start;">
+<p><strong>L’Ecuyer-CMRG:</strong> <span style="color:green;"><strong>Guaranteed</strong></span> independent streams</p>
 </div>
 </div>
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell" style="flex-basis: 45.5%;justify-content: flex-start;">
 <p><span style="color:green;"><strong>High probability</strong></span> of independent streams</p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p><span style="color:green;"><strong>Guaranteed</strong></span> independent streams</p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p><span class="math inline">\(\qquad\)</span></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p>L’Ecuyer-CMRG stream is about 2^191 long</p>
-</div>
-</div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p><span class="math inline">\(\qquad\)</span></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p>Substreams jump 2^127 (about 1.7e38) for up to 2^64 (about 1.8e19) independent streams</p>
+<div class="quarto-layout-cell" style="flex-basis: 54.6%;justify-content: flex-start;">
+<ul>
+<li>Full stream is about 2^191 long<br>
+</li>
+<li>Substreams jump 2^127 (about 1.7e38)
+<ul>
+<li>up to 2^64 (about 1.8e19) independent streams</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>

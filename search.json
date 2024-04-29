@@ -67,14 +67,14 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.385    82.69      1.435     85.67\n\"aperm.default\"     0.135     8.06      0.135      8.06\n\"array\"             0.040     2.39      0.040      2.39\n\"is.finite\"         0.040     2.39      0.040      2.39\n\"any\"               0.020     1.19      0.020      1.19\n\"colMeans\"          0.020     1.19      0.020      1.19\n\"matrix\"            0.020     1.19      0.020      1.19\n\"svd\"               0.010     0.60      1.475     88.06\n\"sweep\"             0.005     0.30      0.180     10.75"
+    "text": "Performance Profiling Tools: Rprof()\n\nSamples the call stack at interval (default 0.02 second)\n\nx = matrix(rnorm(1e5*250), nrow=1e5, ncol=250)\n\nRprof(interval = 0.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.525    83.56      1.580     86.58\n\"aperm.default\"     0.140     7.67      0.140      7.67\n\"array\"             0.035     1.92      0.035      1.92\n\"is.finite\"         0.035     1.92      0.035      1.92\n\"any\"               0.025     1.37      0.025      1.37\n\"matrix\"            0.025     1.37      0.025      1.37\n\"svd\"               0.015     0.82      1.625     89.04\n\"colMeans\"          0.015     0.82      0.015      0.82\n\"sweep\"             0.010     0.55      0.185     10.14"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rprof-1",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: Rprof()\n",
-    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.385    84.19      1.425     86.63\n\"aperm.default\"     0.150     9.12      0.150      9.12\n\"is.finite\"         0.030     1.82      0.030      1.82\n\"array\"             0.025     1.52      0.025      1.52\n\"any\"               0.020     1.22      0.020      1.22\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.390    84.24      1.435     86.97\n\"aperm.default\"     0.135     8.18      0.135      8.18\n\"matrix\"            0.025     1.52      0.025      1.52\n\"any\"               0.020     1.21      0.020      1.21\n\"array\"             0.020     1.21      0.020      1.21\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.415    85.24      1.455     87.65\n\"aperm.default\"     0.135     8.13      0.135      8.13\n\"array\"             0.025     1.51      0.025      1.51\n\"is.finite\"         0.025     1.51      0.025      1.51\n\"matrix\"            0.020     1.20      0.020      1.20"
+    "text": "Performance Profiling Tools: Rprof()\n\n\nRprof(interval=.005)\nx_pr = prcomp(x, retx = FALSE)\nRprof(NULL)\nsummaryRprof()$by.self[1:5, ]     \n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.475    83.57      1.510     85.55\n\"aperm.default\"     0.155     8.78      0.155      8.78\n\"colMeans\"          0.035     1.98      0.035      1.98\n\"is.finite\"         0.030     1.70      0.030      1.70\n\"array\"             0.025     1.42      0.025      1.42\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.440    83.97      1.480     86.30\n\"aperm.default\"     0.150     8.75      0.150      8.75\n\"is.finite\"         0.030     1.75      0.030      1.75\n\"colMeans\"          0.025     1.46      0.025      1.46\n\"array\"             0.020     1.17      0.020      1.17\n\n\n\n\n                self.time self.pct total.time total.pct\n\"La.svd\"            1.420    83.28      1.475     86.51\n\"aperm.default\"     0.155     9.09      0.155      9.09\n\"array\"             0.025     1.47      0.025      1.47\n\"is.finite\"         0.025     1.47      0.025      1.47\n\"matrix\"            0.025     1.47      0.025      1.47"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#lazy-evaluation",
@@ -88,7 +88,7 @@
     "href": "materials/lectures/2-faster/slides.html#performance-profiling-tools-rbenchmark",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Performance Profiling Tools: rbenchmark\n",
-    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.225    2.473     0.199    0.027          0         0\n2 g(x)          100   0.091    1.000     0.084    0.006          0         0"
+    "text": "Performance Profiling Tools: rbenchmark\n\na package that easily benchmarks different functions\n\nx = matrix(rnorm(1000*500), nrow=1000, ncol=500)\n\nf = function(x) t(x) %*% x\ng = function(x) crossprod(x)\n\nlibrary(rbenchmark)\nbenchmark(f(x), g(x))\n\n  test replications elapsed relative user.self sys.self user.child sys.child\n1 f(x)          100   0.242    2.602     0.203    0.032          0         0\n2 g(x)          100   0.093    1.000     0.083    0.009          0         0"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#profiling-summary",
@@ -102,7 +102,7 @@
     "href": "materials/lectures/2-faster/slides.html#vectorizing",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Vectorizing",
-    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  0.975   0.079   1.055 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.030   0.001   0.032 \n\nall.equal(y1, y2)\n\n[1] TRUE"
+    "text": "Vectorizing\n\nn = 1e6\nx = seq(0, 1, length.out=n)\nf = function(x) exp(x^3 + 2.5*x^2 + 12*x + 0.12)\ny1 = numeric(n)\n\nset.seed(12345)\nsystem.time({\n  for(i in seq_len(n))\n    y1[i] = f(x[i]) + rnorm(1)\n})\n\n   user  system elapsed \n  1.016   0.078   1.095 \n\nset.seed(12345)\nsystem.time({\n  y2 = f(x) + rnorm(n)\n})\n\n   user  system elapsed \n  0.032   0.001   0.033 \n\nall.equal(y1, y2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#compute-once-if-not-changing",
@@ -130,7 +130,7 @@
     "href": "materials/lectures/2-faster/slides.html#preallocate-lists-and-vectors-instead-of-growing-them",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Preallocate lists and vectors Instead of Growing Them",
-    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.477   2.047   8.581 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.424   0.064   0.489 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Preallocate lists and vectors Instead of Growing Them\n\nm = 1e3\nn = 1e5\nmat = matrix(runif(m*n), nrow = m)\nsystem.time({\nresult1 = NULL\nfor(i in seq_len(n)) {\n    newres = mean(mat[, i])\n    result1 = c(result1, newres)\n}})\n\n   user  system elapsed \n  6.542   1.968   8.536 \n\nsystem.time({\nresult2 = vector(\"double\", n)\nfor(i in seq_len(n)) {\n    result2[i] = mean(mat[, i])\n}})\n\n   user  system elapsed \n  0.411   0.048   0.460 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#specialize-more-general-functions",
@@ -151,7 +151,7 @@
     "href": "materials/lectures/2-faster/slides.html#contiguous-access-to-arrays-and-lists",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "Contiguous access to arrays and lists",
-    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.915   0.067   0.995 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.366   0.043   0.411 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.243   0.074   0.354 \n\nall.equal(result1, result2)\n\n[1] TRUE"
+    "text": "Contiguous access to arrays and lists\n\nsystem.time({\nresult1 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result1[i] = mean(mat[i, ])  # non-contiguous access by rows\n}})\n\n   user  system elapsed \n  0.889   0.066   0.957 \n\nsystem.time({tmat = t(mat)}) # transpose for columnar access\n\n   user  system elapsed \n  0.379   0.042   0.421 \n\nsystem.time({\nresult2 = vector(\"double\", m)\nfor(i in seq_len(m)) {\n    result2[i] = mean(tmat[, i]) # contiguous access via columns\n}})\n\n   user  system elapsed \n  0.233   0.057   0.291 \n\nall.equal(result1, result2)\n\n[1] TRUE"
   },
   {
     "objectID": "materials/lectures/2-faster/slides.html#programming-languages-hierarchy",
@@ -172,7 +172,7 @@
     "href": "materials/lectures/2-faster/slides.html#rfast-and-rfast2-packages-a-collection-of-rcpp-implemented-functions",
     "title": "Faster R for All Platforms, Including HPC Clusters",
     "section": "\nRfast and RFast2 Packages: A collection of Rcpp-Implemented Functions",
-    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.339   0.024   0.371 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.067   0.006   0.086 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
+    "text": "Rfast and RFast2 Packages: A collection of Rcpp-Implemented Functions\n\nsystem.time({cx2 = crossprod(sweep(x, 2, colMeans(x)))/(nrow(x) - 1)})\n\n   user  system elapsed \n  0.329   0.019   0.360 \n\nsystem.time({cx3 = Rfast::cova(x)})\n\n   user  system elapsed \n  0.070   0.007   0.158 \n\nall.equal(cx2, cx3)\n\n[1] TRUE\n\n\nTaking R to its limits: 70+ tips by Michail Tsagris and Manos Papadakis is a “not peer-reviewed” PeerJPreprints publication.\nLots of good advice Some good and some bad programming practice Some spelling and grammar issues Definitely worth reading!"
   },
   {
     "objectID": "materials/lectures/1b-setupdemo/slides.html#today",
@@ -763,6 +763,69 @@
     "text": "MPI Output utk.o\n[gostrouc@dt-login04 mpi]$ cat utk.o\n/u/gostrouc/BZAN_583_code/mpi\n\n======================   ALLOCATED NODES   ======================\n    cn095: flags=0x11 slots=8 max_slots=0 slots_inuse=0 state=UP\n=================================================================\nCOMM.RANK = 0\nHello World! My name is Rank0. We are 8 identical siblings. \nCOMM.RANK = 1\nHello World! My name is Rank1. We are 8 identical siblings. \nCOMM.RANK = 2\nHello World! My name is Rank2. We are 8 identical siblings. \nCOMM.RANK = 3\nHello World! My name is Rank3. We are 8 identical siblings. \nCOMM.RANK = 4\nHello World! My name is Rank4. We are 8 identical siblings. \nCOMM.RANK = 5\nHello World! My name is Rank5. We are 8 identical siblings. \nCOMM.RANK = 6\nHello World! My name is Rank6. We are 8 identical siblings. \nCOMM.RANK = 7\nHello World! My name is Rank7. We are 8 identical siblings."
   },
   {
+    "objectID": "materials/lectures/7-distributed/slides.html#distributed-io-with-mpi-and-arrow",
+    "href": "materials/lectures/7-distributed/slides.html#distributed-io-with-mpi-and-arrow",
+    "title": "Distributed Computing",
+    "section": "Distributed I/O with MPI and arrow",
+    "text": "Distributed I/O with MPI and arrow\n\nArrow is a binary columnar data format\nFiles are partitioned into directory blocks\n\nIndependent reads and writes are possible\n\nSelected columns\nFiltered rows\n\n\nArrow uses metadata for fast independent access"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory",
+    "href": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory",
+    "title": "Distributed Computing",
+    "section": "Work with Data Bigger than Memory",
+    "text": "Work with Data Bigger than Memory"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-1",
+    "href": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-1",
+    "title": "Distributed Computing",
+    "section": "Work with Data Bigger than Memory",
+    "text": "Work with Data Bigger than Memory\n\n\n\n\\(\\qquad\\)\n\n\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\nRead chunks with different MPI ranks"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-2",
+    "href": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-2",
+    "title": "Distributed Computing",
+    "section": "Work with Data Bigger than Memory",
+    "text": "Work with Data Bigger than Memory\n\n\n\n\\(\\qquad\\)\n\n\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\nProcess each chunk into smaller result by selecting , filtering, and mutating"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-3",
+    "href": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-3",
+    "title": "Distributed Computing",
+    "section": "Work with Data Bigger than Memory",
+    "text": "Work with Data Bigger than Memory\n\n\n\n\\(\\qquad\\)\n\n\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\nRecombine to all for building a random forest model in parallel"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-4",
+    "href": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-4",
+    "title": "Distributed Computing",
+    "section": "Work with Data Bigger than Memory",
+    "text": "Work with Data Bigger than Memory\n\n\n\n\\(\\qquad\\)\n\n\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\nRecombine to all for building a random forest model in parallel"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#mpi-gather-collective-operations",
+    "href": "materials/lectures/7-distributed/slides.html#mpi-gather-collective-operations",
+    "title": "Distributed Computing",
+    "section": "MPI Gather Collective Operations",
+    "text": "MPI Gather Collective Operations\n\n\n\n\\[\\small \\bf A = \\left[ \\begin{array} \\\\ {A_1} \\\\ A_2 \\\\ \\vdots \\\\ A_n \\end{array} \\right]\\]\n\n\n\\(\\qquad\\) A = gather(X) \\(\\qquad\\) \\(\\qquad\\) A = allgather(X)\n\nSame number of steps, but increased parallelism in allgather\n\n\n\n\n\nPowerful: communication and reduction is highly parallel\n\nthat’s why it beats Spark/MapReduce"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-5",
+    "href": "materials/lectures/7-distributed/slides.html#work-with-data-bigger-than-memory-5",
+    "title": "Distributed Computing",
+    "section": "Work with Data Bigger than Memory",
+    "text": "Work with Data Bigger than Memory\n\n\n\n\\(\\qquad\\)\n\n\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\n\\(\\qquad\\)\nRecombine to all for building a random forest model in parallel"
+  },
+  {
+    "objectID": "materials/lectures/7-distributed/slides.html#now-the-r-code",
+    "href": "materials/lectures/7-distributed/slides.html#now-the-r-code",
+    "title": "Distributed Computing",
+    "section": "Now the R Code",
+    "text": "Now the R Code\nmpi/data_rf_mpi_mc.R\nsuppressMessages(library(pbdMPI))\n\nsuppressMessages(library(arrow))\nsuppressMessages(library(dplyr))\nsuppressMessages(...)\n\nds &lt;- open_dataset(\"/projects/bckj/&lt;your-parquet-data&gt;\")\nget_hive_var = function(ds, var) \n  sub(\"/.*$\", \"\", sub(paste0(\"^.*\", var, \"=\"), \"\", ds$files))\npartitions = get_hive_var(ds, \"&lt;your-partition-var&gt;\")  \n\nmy_partitions = partitions[comm.chunk(length(partitions), form = \"vector\")]\ncomm.cat(\"rank\", comm.rank(), \"partitions\", my_partitions, \"\\n\", all.rank = TRUE)\n\n# Read only the data for the partitions in my_partitions\nmy_data &lt;- ds %&gt;% filter(flightDate %in% my_partitions) %&gt;% collect()\n\n# Filter, select, mutate, and reduce the data (do separately for debug)\nmy_data &lt;- my_data %&gt;%\n  filter(&lt;your-filters&gt;) %&gt;% \n  select(&lt;your-var-selections&gt;)) %&gt;%\n  drop_na() %&gt;% collect()\n\ncomm.cat(comm.rank(), \"dim\", dim(my_data), \"\\n\", all.rank = TRUE)\n\n## allgather() for data.frames (not in pbdMPI ... yet!)\nallgather.data.frame = function(x) {\n  cnames = names(x)\n  x = lapply(x, function(x) do.call(c, allgather(x)))\n  x = as.data.frame(x)\n  names(x) = cnames\n  x\n}\ndata = allgather.data.frame(my_data)\nrm(my_data) # free up memory\n\n## Check on the result\ncomm.cat(comm.rank(), \"dim\", dim(data), \"\\n\", all.rank = TRUE)\ncomm.print(memuse::Sys.procmem()$size, all.rank = TRUE)\n\n## Parallel random forest part\nsuppressMessages(library(randomForest))\nsuppressMessages(library(parallel))\ncomm.set.seed(seed = 7654321, diff = FALSE)      #&lt;&lt;\n\nn = nrow(data)\nn_test = floor(0.2 * n)\ni_test = sample.int(n, n_test)\ntrain = data[-i_test, ][1:1000, ]    # limit to 1k obs for debugging\nmy_test = data[i_test, ][comm.chunk(n_test, form = \"vector\"), ]    #&lt;&lt;\n\nntree = 64 # start small for debug\nmy_ntree = comm.chunk(ntree, form = \"vector\", rng = TRUE, seed = 12345)        #&lt;&lt;\nrfc = function(i, mnt, mxn = 6) {\n  comm.set.stream(i)                  #&lt;&lt;\n  randomForest(&lt;your-target&gt; ~ ., train, ntree = mnt[i], maxnodes = mxn, norm.votes = FALSE) #&lt;&lt;\n}\nmy_rf = mclapply(seq_along(my_ntree), rfc, mnt = my_ntree) #&lt;&lt;\nmy_rf = do.call(combine, my_rf)            #&lt;&lt;\nrf_all = allgather(my_rf)                  #&lt;&lt;\nrf_all = do.call(combine, rf_all)          #&lt;&lt;\n\nmy_pred = as.vector(predict(rf_all, my_test))\n\n# correct = allreduce(sum(my_pred == my_test$&lt;your-true-category&gt;))  # classification\nsse = allreduce(sum((my_pred - my_test$&lt;your-target&gt;)^2)) # regression\n# comm.cat(\"Proportion Correct:\", correct/(n_test), \"\\n\")\ncomm.cat(\"RMSE:\", sqrt(rmse/n_test), \"\\n\")\n\nfinalize()"
+  },
+  {
     "objectID": "materials/lectures/7-distributed/slides.html#two-parallel-levels",
     "href": "materials/lectures/7-distributed/slides.html#two-parallel-levels",
     "title": "Distributed Computing",
@@ -775,13 +838,6 @@
     "title": "Distributed Computing",
     "section": "Two Parallel Levels Output",
     "text": "Two Parallel Levels Output\n[gostrouc@dt-login04 mpi]$ cat utk.o\n/u/gostrouc/BZAN_583_code/mpi\n\n======================   ALLOCATED NODES   ======================\n    cn096: flags=0x11 slots=4 max_slots=0 slots_inuse=0 state=UP\n    cn099: flags=0x10 slots=4 max_slots=0 slots_inuse=0 state=UP\n=================================================================\nR version 4.3.2 (2023-10-31)\nPlatform: x86_64-pc-linux-gnu (64-bit)\nRunning under: Red Hat Enterprise Linux 8.8 (Ootpa)\n\nMatrix products: default\nBLAS/LAPACK: /sw/spack/deltas11-2023-03/apps/linux-rhel8-zen3/gcc-11.4.0/openblas-0.3.25-5yvxjnl/lib/libopenblas_zen-r0.3.25.so;  LAPACK version 3.11.0\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              \n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    \n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   \n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 \n [9] LC_ADDRESS=C               LC_TELEPHONE=C            \n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       \n\ntime zone: America/Chicago\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] pbdMPI_0.5-1\n\nloaded via a namespace (and not attached):\n[1] compiler_4.3.2 parallel_4.3.2 float_0.3-2   \nCOMM.RANK = 0\nHello World from rank 0 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939702 939706 939708 939712 939715 939719\nCOMM.RANK = 1\nHello World from rank 1 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939704 939709 939714 939718 939722 939723\nCOMM.RANK = 2\nHello World from rank 2 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939703 939707 939710 939713 939716 939720\nCOMM.RANK = 3\nHello World from rank 3 on host cn096.delta.ncsa.illinois.edu with 6 cores allocated\n            (4 R sessions sharing 24 cores on this host node).\n      pid: 939705 939711 939717 939721 939724 939725\nCOMM.RANK = 4\nHello World from rank 4 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152806 1152810 1152816 1152821 1152824 1152826\nCOMM.RANK = 5\nHello World from rank 5 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152804 1152808 1152812 1152814 1152818 1152822\nCOMM.RANK = 6\nHello World from rank 6 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152803 1152807 1152811 1152813 1152817 1152819\nCOMM.RANK = 7\nHello World from rank 7 on host cn099.delta.ncsa.illinois.edu with 6 cores allocated\n            (1 R sessions sharing 24 cores on this host node).\n      pid: 1152805 1152809 1152815 1152820 1152823 1152825\nTotal R sessions: 8 Total cores: 48 \n\nNotes: pid to core map changes frequently during mclapply"
-  },
-  {
-    "objectID": "materials/lectures/7-distributed/slides.html#pbdr-project",
-    "href": "materials/lectures/7-distributed/slides.html#pbdr-project",
-    "title": "Distributed Computing",
-    "section": "pbdR Project",
-    "text": "pbdR Project\n\n\nBridge HPC with high-productivity of R: Expressive for data and modern statistics\nKeep syntax identical to R, when possible\nSoftware reuse philosophy:\n\nDon’t reinvent the wheel when possible\nIntroduce HPC standards with R flavor\nUse scalable HPC libraries with R convenience\n\nSimplify and use R intelligence where possible\n\n\nUsing HPC concepts and libraries * Benefits the R user by knowing standard components of HPC"
   },
   {
     "objectID": "materials/lectures/7-distributed/slides.html#package-pbdmpi",
@@ -831,20 +887,6 @@
     "title": "Distributed Computing",
     "section": "comm.chunk()",
     "text": "comm.chunk()\nmpi/chunk.r\nlibrary( pbdMPI, quiet = TRUE )\n\nmy.rank = comm.rank( )\n\nk = comm.chunk( 10 )\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nk = comm.chunk( 10 , form = \"vector\", type = \"equal\")\ncomm.cat( my.rank, \":\", k, \"\\n\", all.rank = TRUE, quiet = TRUE)\n\nfinalize( )"
-  },
-  {
-    "objectID": "materials/lectures/7-distributed/slides.html#other-short-mpi-codes",
-    "href": "materials/lectures/7-distributed/slides.html#other-short-mpi-codes",
-    "title": "Distributed Computing",
-    "section": "Other short MPI codes",
-    "text": "Other short MPI codes\nbcast.r chunk.r comm_split.R cov.r gather-named.r gather.r gather-unequal.r hello-p.r hello.r map-reduce.r mcsim.r ols.r qr-cop.r rank.r reduce-mat.r timer.r\n\nThese short codes only use pbdMPI and can run on a laptop in a terminal window if you installed OpenMPI\nOn the clusters these can run on a login node with a small \\(^*\\) number of ranks\nWile in the mpi_shorts directory, run the following\n\nsource ../code_4/modules_MACHINE.sh\nmpirun -np 4 Rscript your_script.r"
-  },
-  {
-    "objectID": "materials/lectures/7-distributed/slides.html#shared-memory---mpi-or-fork",
-    "href": "materials/lectures/7-distributed/slides.html#shared-memory---mpi-or-fork",
-    "title": "Distributed Computing",
-    "section": "Shared Memory - MPI or fork?",
-    "text": "Shared Memory - MPI or fork?\n\n\n\n\nfork via mclapply() + do.call()\n\n\nMPI replicated data + allreduce()\n\n\nMPI chunked data + allreduce()\n\n\n\n\ndo.call() is serial\nallreduce() is parallel"
   },
   {
     "objectID": "materials/lectures/6-nn/slides.html#github-copilot",
@@ -1096,7 +1138,7 @@
     "href": "materials/lectures/5-sampling/sampling.html#pseudo-random-number-generators-rng",
     "title": "ML/Stat Methods Relying on Sampling: case for parallel computing",
     "section": "Pseudo Random Number Generators (RNG)",
-    "text": "Pseudo Random Number Generators (RNG)\n\n\n\nDefault RNG:\n\n\nL’Ecuyer-CMRG:\n\n\n\n\nHigh probability of independent streams\n\n\nGuaranteed independent streams\n\n\n\n\n\\(\\qquad\\)\n\n\nL’Ecuyer-CMRG stream is about 2^191 long\n\n\n\n\n\\(\\qquad\\)\n\n\nSubstreams jump 2^127 (about 1.7e38) for up to 2^64 (about 1.8e19) independent streams\n\n\n\n\n\n\\(\\qquad\\qquad\\qquad\\) Default RNG \\(\\qquad\\qquad\\qquad\\qquad\\qquad\\qquad\\qquad\\) L’Ecuyer-CMRG"
+    "text": "Pseudo Random Number Generators (RNG)\n\n\n\nDefault RNG:\n\n\nL’Ecuyer-CMRG: Guaranteed independent streams\n\n\n\n\nHigh probability of independent streams\n\n\n\nFull stream is about 2^191 long\n\nSubstreams jump 2^127 (about 1.7e38)\n\nup to 2^64 (about 1.8e19) independent streams\n\n\n\n\n\n\n\n\n\\(\\qquad\\qquad\\qquad\\) Default RNG \\(\\qquad\\qquad\\qquad\\qquad\\qquad\\qquad\\qquad\\) L’Ecuyer-CMRG"
   },
   {
     "objectID": "materials/lectures/5-sampling/sampling.html#example-random-forest-code",

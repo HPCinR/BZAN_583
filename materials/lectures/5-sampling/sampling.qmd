@@ -214,7 +214,7 @@ $^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
 ]
 -->
 
-## K-fold Crossvalidation {background-image="/pics/fork/fork8.png" background-size="80%" background-position="bottom" .smaller}
+## K-fold Crossvalidation {background-image="/pics/parallel/Parallel7.png" background-size="80%" background-position="bottom" .smaller}
 
 ::: {.incremental}
 - Let $y \approx f(x, \beta, \alpha)$ be a model and $\widehat{y} = f(x, \widehat{\beta}, \alpha)$ be the model prediction of $y$
@@ -227,24 +227,18 @@ $^*$ Algorithm 10.1 in Hastie, Tibshirani, and Friedman (2009)
 - Taking $\alpha$ with minimum average loss, gives best expected generalization
 :::
 
-## Pseudo Random Number Generators (RNG) {background-image="/pics/fork/Fork6.png" background-size="90%" background-position="bottom" .smaller}
+## Pseudo Random Number Generators (RNG) {background-image="/pics/parallel/Parallel5.png" background-size="90%" background-position="center" .smaller}
 
-::: {layout="[1,1]"}
+::: {layout="[1,1.2]"}
 **Default RNG:**
 
-**L’Ecuyer-CMRG:**
+**L’Ecuyer-CMRG:** [**Guaranteed**]{style="color:green;"} independent streams  
 
 [**High probability**]{style="color:green;"} of independent streams
 
-[**Guaranteed**]{style="color:green;"} independent streams
-
-$\qquad$
-
-L’Ecuyer-CMRG stream is about 2^191 long
-
-$\qquad$
-
-Substreams jump 2^127 (about 1.7e38) for up to 2^64 (about 1.8e19) independent streams
+- Full stream is about 2^191 long  
+- Substreams jump 2^127 (about 1.7e38)  
+  - up to 2^64 (about 1.8e19) independent streams  
 
 :::
 

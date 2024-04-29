@@ -45,7 +45,7 @@ A deeper discussion of `fork` memory (if you have interest) on [YouTube](https:/
 :::
 
 
-## OS manages core affinity  {background-image="/pics/fork/Fork9.png" background-size="90%" background-position="center"}
+## OS manages core affinity  {background-image="/pics/fork/Fork2.png" background-size="90%" background-position="center"}
 
 ::: aside
  $\qquad$ OS tasks compete $\qquad$ Core switching occurs frequently   

@@ -12,7 +12,7 @@ editor: source
 engine: knitr
 ---
 
-## Embarrassingly (Pleasingly) Parallel {background-image="/pics/fork/Slide2.png" background-size="100%" background-position="center" .smaller}  
+## Embarrassingly (Pleasingly) Parallel {background-image="/pics/parallel/Parallel1.png" background-size="100%" background-position="center" .smaller}  
 
 $$\qquad$$  
 - $$t_p = \frac{t}{n} = t_n$$
@@ -24,7 +24,7 @@ $t_p$ - Parallel time
 
 #### Best case scenario: no overhead, no communication  
 
-## Serial Section (Amdahl's Law) {background-image="/pics/fork/Slide3.png" background-size="100%" background-position="center" .smaller}  
+## Serial Section (Amdahl's Law) {background-image="/pics/parallel/Parallel2.png" background-size="100%" background-position="center" .smaller}  
 
 $$\qquad$$
 $$\qquad$$  
@@ -39,7 +39,7 @@ $t_s$ - Serial section time
 
 #### Strong Scaling: fixed work, increasing resources  
 
-## Serial Section (Gustafson's Law) {background-image="/pics/fork/Slide3.png" background-size="100%" background-position="center" .smaller}  
+## Serial Section (Gustafson's Law) {background-image="/pics/parallel/Parallel2.png" background-size="100%" background-position="center" .smaller}  
 
 $$\qquad$$  
 $$\qquad$$
@@ -58,7 +58,7 @@ $t_s$ - Serial section time
 Weak: misnomer: the speedup is actually great
 :::
 
-## Parallel Overhead {background-image="/pics/fork/Slide4.png" background-size="100%" background-position="center" .smaller}
+## Parallel Overhead {background-image="/pics/parallel/Parallel3.png" background-size="100%" background-position="center" .smaller}
 
 $$\qquad$$  
 $$\qquad$$  
@@ -70,7 +70,7 @@ $t_p$ - Parallel time
 $t_s$ - Serial section time  
 $t_o(n)$ - Parallel overhead time  
 
-## Replication of Serial Section (Distirbuted) {background-image="/pics/fork/Slide5.png" background-size="100%" background-position="center" .smaller}
+## Replication of Serial Section (Distirbuted) {background-image="/pics/parallel/Parallel4.png" background-size="100%" background-position="center" .smaller}
 
 $$\qquad$$  
 $$\qquad$$  $$\qquad$$  $$\qquad$$  

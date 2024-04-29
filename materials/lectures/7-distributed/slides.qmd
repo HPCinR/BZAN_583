@@ -14,7 +14,7 @@ filters:
 
 ![](/pics/01-intro/Workflow.png)
 
-## Running Distributed on a Cluster {background-image="/pics/01-intro/WorkflowRunning.png" background-size="200px" .smaller}
+## Running Distributed on a Cluster {background-image="/pics/01-intro/WorkflowRunning.png" background-size="10%" .smaller}
 
 ![](/pics/01-intro/BatchRonCluster.jpg)
 
@@ -128,6 +128,117 @@ Hello World! My name is Rank6. We are 8 identical siblings.
 COMM.RANK = 7
 Hello World! My name is Rank7. We are 8 identical siblings. 
 ```
+
+## Distributed I/O with MPI and arrow {.smaller}
+
+- Arrow is a binary columnar data format
+- Files are partitioned into directory blocks  
+- Independent reads and writes are possible
+   - Selected columns
+   - Filtered rows  
+- Arrow uses metadata for fast independent access
+
+## Work with Data Bigger than Memory {background-image="/pics/distributed/Distributed1.png" background-position="center" background-size="100%" .smaller}
+
+## Work with Data Bigger than Memory {background-image="/pics/distributed/Distributed2.png" background-position="center" background-size="100%" .smaller}
+
+:::: {layout="[ 20, 80 ]"}
+
+::: {#first-column}
+$\qquad$
+:::
+
+::: {#second-column}
+$\qquad$  
+$\qquad$  
+$\qquad$  
+Read chunks with different MPI ranks
+:::
+
+::::
+
+## Work with Data Bigger than Memory {background-image="/pics/distributed/Distributed3.png" background-position="bottom" background-size="100%" .smaller}
+
+:::: {layout="[ 20, 80 ]"}
+
+::: {#first-column}
+$\qquad$
+:::
+
+::: {#second-column}
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+Process each chunk into smaller result by selecting , filtering, and mutating
+:::
+
+::::
+
+## Work with Data Bigger than Memory {background-image="/pics/distributed/Distributed4.png" background-position="bottom" background-size="100%" .smaller}
+
+:::: {layout="[ 20, 80 ]"}
+
+::: {#first-column}
+$\qquad$
+:::
+
+::: {#second-column}
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+Recombine to all for building a random forest model in parallel
+:::
+
+::::
+
+## Work with Data Bigger than Memory {background-image="/pics/distributed/Distributed5.png" background-position="bottom" background-size="100%" .smaller}
+
+:::: {layout="[ 20, 80 ]"}
+
+::: {#first-column}
+$\qquad$
+:::
+
+::: {#second-column}
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+$\qquad$  
+Recombine to all for building a random forest model in parallel
+:::
+
+::::
+
+## Gather Collective Operations {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right" .smaller}
+
+$$\small \bf A = \left[ \begin{array} \\ {X_1} \\ X_2 \\ \vdots \\ X_n \end{array} \right]$$  
+$\qquad$ **`A = gather(X)`** $\qquad$ $\qquad$ **`A = allgather(X)`**
+
+![](/pics/01-intro/RHistory3sub.png)
+
+::: notes
+-   Powerful: communication and reduction is highly parallel
+    -   that's why it beats Spark/MapReduce
+:::
+
 
 ## Two Parallel Levels  {.smaller}
 
@@ -293,7 +404,15 @@ $\small \bf A = \left[ X_1 | X_2 | \cdots | X_n \right]$ $\qquad$ **`A = gather(
 
 -   **`comm.print()`** and **`comm.cat()`** print by default from rank 0 only, with options to print from any or all ranks.
 
-## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/ParallelSoftware8.png" background-size="75%"}
+## Distributed Programming Works in Shared Memory {background-image="/pics/ParallelSoftware/ParallelSoftware7.png" background-size="75%"}
+
+## Distributed I/O is Fast
+
+```
+[gostrouc@dt-login02 ~]$ du -hs /projects/bckj
+163G	/projects/bckj
+```
+
 
 ## Random Forest with MPI {background-image="/pics/ParallelSoftware/ParallelSoftware11.png" background-size="10%" background-position="bottom right"}
 

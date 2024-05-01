@@ -1,0 +1,124 @@
+---
+title: "Last Lecture"
+format: 
+  revealjs:
+    chalkboard: true
+    code-link: true
+    code-line-numbers: false
+editor: source
+filters: 
+   - include-code-files
+---
+
+## Random Forests for Large Data
+
+## Random Forest {background-image="/pics/boot/randomforest.png" background-size="55%" background-position="bottom right".smaller}
+
+1. [For b = 1 to B:]{style="color:green;"}     
+   i. [Draw a bootstrap sample ${\mathbf Z^∗}$ from the training data]{style="color:green;"}    
+   ii. [Grow a random-forest tree $T_b$ on $\mathbf Z^*$ until $n_{min}$ nodes achieved:]{style="color:green;"}   
+        a. [Select $m < p$ variables at random]{style="color:green;"}   
+        b. [Pick the best variable/split-point among the $m$]{style="color:green;"}   
+        c. [Split the node into two daughter nodes]{style="color:green;"}   
+2. [Output the ensemble of trees $\{T_b\}^B_1$]{style="color:green;"}   
+
+
+
+::: aside
+[Algorithm 15.1 in Hastie, et al. (2009).  
+The Elements of Statistical Learning, Second Edition](https://link.springer.com/book/10.1007/978-0-387-84858-7)
+::: 
+
+## Random Forest for Large Data {background-image="/pics/boot/randomforest.png" background-size="55%" background-position="bottom right".smaller}
+
+1. [For b = 1 to B:]{style="color:green;"}     
+   i. [Draw a bootstrap sample ${\mathbf Z^∗}$ from the training data]{style="color:green;"}    
+   ii. [Grow a random-forest tree $T_b$ on $\mathbf Z^*$]{style="color:green;"} [**until $n_{min}$ nodes achieved**:]{style="color:blue;"}   
+        a. [Select $m < p$ variables at random]{style="color:green;"}   
+        b. [Pick the best variable/split-point among the $m$]{style="color:green;"}   
+        c. [Split the node into two daughter nodes]{style="color:green;"}   
+2. [Output the ensemble of trees $\{T_b\}^B_1$]{style="color:green;"}   
+
+::: aside
+[Algorithm 15.1 in Hastie, et al. (2009).  
+The Elements of Statistical Learning,
+Second Edition](https://link.springer.com/book/10.1007/978-0-387-84858-7)
+::: 
+
+## Random Forest Regression {.smaller}
+
+::: {.incremental}
+- Hastie: Grow a random-forest tree $T_b$ on $\mathbf Z^*$ [until $n_{min}$ nodes achieved:]{style="color:green;"}  
+- `randomForest:` For each tree, grow to a maximum depth or [until a node has fewer than `nodesize` observations]{style="color:green;"}  
+- What happens for individual trees when `nrow(data)` is very large, say 1M?  
+   - When `nodesize = 5` (default in randomForest regression)? (`maxnodes` not set)  
+   - Up to 200,000 nodes per tree!!  
+- Start with setting `nodesize` to 1% of rows. That's `nodesize = 10,000` for 1M rows  
+   - It's like asking for maximum precision of about 1% of range of response variable
+:::
+
+```{r}
+#| eval: false
+#| echo: true
+#| line-numbers: false
+rf = randomForest::randomForest(response ~ ., data, ntree, nodesize, maxnodes, mtry)
+```
+
+
+
+::: aside
+nodesize: 	Minimum size of terminal nodes. Setting this number larger causes smaller trees to be grown (and thus take less time). Note that the default values are different for classification (1) and regression (5).  
+
+maxnodes:  Maximum number of terminal nodes trees in the forest can have. If not given, trees are grown to the maximum possible (subject to limits by nodesize). If set larger than maximum possible, a warning is issued.
+::: 
+
+
+## Now the Updated R Code
+
+`mpi/data_rf_mpi_mc.R`
+``` {.r code-line-numbers="|1-5|6-8|10-13|15-16|18-19|21-27|29-36|38-39|41-43|45-48|50-51|53-58|58-59|60-64|65-67|68-69|71|74-75,77|78-80"}
+{{< include /code/mpi/data_rf_mpi_mc.R >}}
+```
+
+
+## Teams
+
+Covid lung image data   
+Spotify music data   
+Flight data   
+Climate data  
+Taxi/Uber/Lyft data  
+Car sales data  
+
+## Team Presentation Schedule
+
+[4:10 PM:]{style="color:green;"} Covid lung image data   
+[4:20 PM:]{style="color:green;"} Spotify music data   
+[4:30 PM:]{style="color:green;"} Flight data   
+[4:40 PM:]{style="color:green;"} Climate data  
+[4:50 PM:]{style="color:green;"} Taxi/Uber/Lyft data  
+[5:00 PM:]{style="color:green;"} Car sales data  
+
+::: aside
+- 5 minute presentation + 5 minutes of Q&A  
+- Upload presentation (pdf, pptx, or html) to Canvas by 1:00 PM on Monday, May 6.
+:::
+
+
+
+## Presentation Overview {.smaller}
+
+Presentations should address:  
+
+- Quick overview of the original data, including   
+   - Topic, source, format, size, etc.   
+- The prediction/estimation problem   
+- Your data processing and reductions  
+- Methods used for prediction/estimation   
+- Run times and handling of reducing them  (multicore, MPI, multithreading, faster functions)
+- Results and conclusions
+
+::: aside
+- 5 minute presentation + 5 minutes of Q&A  
+- Upload presentation (pdf, pptx, or html) to Canvas by 1:00 PM on Monday, May 6.
+:::

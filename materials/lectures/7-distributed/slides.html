@@ -716,76 +716,88 @@ Recombine to all for building a random forest model in parallel</p>
 <section id="now-the-r-code" class="slide level2">
 <h2>Now the R Code</h2>
 <p><code>mpi/data_rf_mpi_mc.R</code></p>
-<div class="sourceCode" id="cb6" data-code-line-numbers="|1-5|7-10|12-13|15-16|18-24|26-33|34-35|37-39|41-44|46-50|52-53|54-57|58-59|60-61|63|65-68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdMPI))</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(arrow))</span>
-<span id="cb6-4"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(dplyr))</span>
-<span id="cb6-5"><a></a><span class="fu">suppressMessages</span>(...)</span>
-<span id="cb6-6"><a></a></span>
-<span id="cb6-7"><a></a>ds <span class="ot">&lt;-</span> <span class="fu">open_dataset</span>(<span class="st">"/projects/bckj/&lt;your-parquet-data&gt;"</span>)</span>
-<span id="cb6-8"><a></a>get_hive_var <span class="ot">=</span> <span class="cf">function</span>(ds, var) </span>
-<span id="cb6-9"><a></a>  <span class="fu">sub</span>(<span class="st">"/.*$"</span>, <span class="st">""</span>, <span class="fu">sub</span>(<span class="fu">paste0</span>(<span class="st">"^.*"</span>, var, <span class="st">"="</span>), <span class="st">""</span>, ds<span class="sc">$</span>files))</span>
-<span id="cb6-10"><a></a>partitions <span class="ot">=</span> <span class="fu">get_hive_var</span>(ds, <span class="st">"&lt;your-partition-var&gt;"</span>)  </span>
-<span id="cb6-11"><a></a></span>
-<span id="cb6-12"><a></a>my_partitions <span class="ot">=</span> partitions[<span class="fu">comm.chunk</span>(<span class="fu">length</span>(partitions), <span class="at">form =</span> <span class="st">"vector"</span>)]</span>
-<span id="cb6-13"><a></a><span class="fu">comm.cat</span>(<span class="st">"rank"</span>, <span class="fu">comm.rank</span>(), <span class="st">"partitions"</span>, my_partitions, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode" id="cb6" data-code-line-numbers="|1-5|7-10|12-13|15-16|18-24|26-33|34-35|37-39|41-44|46-50|52-53|54-57|58-59|60-61|63|65-68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="do">## All of the following need to be replaced with your data:</span></span>
+<span id="cb6-2"><a></a><span class="do">## your_parquet_data, your_target, your_filters, your_var_selections,</span></span>
+<span id="cb6-3"><a></a><span class="do">## your_true_category, your_partition_var</span></span>
+<span id="cb6-4"><a></a><span class="do">##</span></span>
+<span id="cb6-5"><a></a></span>
+<span id="cb6-6"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(pbdMPI))</span>
+<span id="cb6-7"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(arrow))</span>
+<span id="cb6-8"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a>ds <span class="ot">&lt;-</span> <span class="fu">open_dataset</span>(<span class="st">"/projects/bckj/your_parquet_data"</span>)</span>
+<span id="cb6-11"><a></a>get_hive_var <span class="ot">=</span> <span class="cf">function</span>(ds, var) </span>
+<span id="cb6-12"><a></a>  <span class="fu">sub</span>(<span class="st">"/.*$"</span>, <span class="st">""</span>, <span class="fu">sub</span>(<span class="fu">paste0</span>(<span class="st">"^.*"</span>, var, <span class="st">"="</span>), <span class="st">""</span>, ds<span class="sc">$</span>files))</span>
+<span id="cb6-13"><a></a>partitions <span class="ot">=</span> <span class="fu">get_hive_var</span>(ds, <span class="st">"your_partition_var"</span>)  </span>
 <span id="cb6-14"><a></a></span>
-<span id="cb6-15"><a></a><span class="co"># Read only the data for the partitions in my_partitions</span></span>
-<span id="cb6-16"><a></a>my_data <span class="ot">&lt;-</span> ds <span class="sc">%&gt;%</span> <span class="fu">filter</span>(flightDate <span class="sc">%in%</span> my_partitions) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb6-15"><a></a>my_partitions <span class="ot">=</span> partitions[<span class="fu">comm.chunk</span>(<span class="fu">length</span>(partitions), <span class="at">form =</span> <span class="st">"vector"</span>)]</span>
+<span id="cb6-16"><a></a><span class="fu">comm.cat</span>(<span class="st">"rank"</span>, <span class="fu">comm.rank</span>(), <span class="st">"partitions"</span>, my_partitions, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-17"><a></a></span>
-<span id="cb6-18"><a></a><span class="co"># Filter, select, mutate, and reduce the data (do separately for debug)</span></span>
-<span id="cb6-19"><a></a>my_data <span class="ot">&lt;-</span> my_data <span class="sc">%&gt;%</span></span>
-<span id="cb6-20"><a></a>  <span class="fu">filter</span>(<span class="sc">&lt;</span>your<span class="sc">-</span>filters<span class="sc">&gt;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-21"><a></a>  <span class="fu">select</span>(<span class="sc">&lt;</span>your<span class="sc">-</span>var<span class="sc">-</span>selections<span class="sc">&gt;</span>)<span class="er">)</span> <span class="sc">%&gt;%</span></span>
-<span id="cb6-22"><a></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
-<span id="cb6-23"><a></a></span>
-<span id="cb6-24"><a></a><span class="fu">comm.cat</span>(<span class="fu">comm.rank</span>(), <span class="st">"dim"</span>, <span class="fu">dim</span>(my_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-25"><a></a></span>
-<span id="cb6-26"><a></a><span class="do">## allgather() for data.frames (not in pbdMPI ... yet!)</span></span>
-<span id="cb6-27"><a></a>allgather.data.frame <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
-<span id="cb6-28"><a></a>  cnames <span class="ot">=</span> <span class="fu">names</span>(x)</span>
-<span id="cb6-29"><a></a>  x <span class="ot">=</span> <span class="fu">lapply</span>(x, <span class="cf">function</span>(x) <span class="fu">do.call</span>(c, <span class="fu">allgather</span>(x)))</span>
-<span id="cb6-30"><a></a>  x <span class="ot">=</span> <span class="fu">as.data.frame</span>(x)</span>
-<span id="cb6-31"><a></a>  <span class="fu">names</span>(x) <span class="ot">=</span> cnames</span>
-<span id="cb6-32"><a></a>  x</span>
-<span id="cb6-33"><a></a>}</span>
-<span id="cb6-34"><a></a>data <span class="ot">=</span> <span class="fu">allgather.data.frame</span>(my_data)</span>
-<span id="cb6-35"><a></a><span class="fu">rm</span>(my_data) <span class="co"># free up memory</span></span>
-<span id="cb6-36"><a></a></span>
-<span id="cb6-37"><a></a><span class="do">## Check on the result</span></span>
-<span id="cb6-38"><a></a><span class="fu">comm.cat</span>(<span class="fu">comm.rank</span>(), <span class="st">"dim"</span>, <span class="fu">dim</span>(data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-39"><a></a><span class="fu">comm.print</span>(memuse<span class="sc">::</span><span class="fu">Sys.procmem</span>()<span class="sc">$</span>size, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-18"><a></a><span class="co"># Read only the data for the partitions in my_partitions</span></span>
+<span id="cb6-19"><a></a>my_data <span class="ot">&lt;-</span> ds <span class="sc">%&gt;%</span> <span class="fu">filter</span>(flightDate <span class="sc">%in%</span> my_partitions) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb6-20"><a></a></span>
+<span id="cb6-21"><a></a><span class="co"># Filter, select, mutate, and reduce the data (do separately for debug)</span></span>
+<span id="cb6-22"><a></a>my_data <span class="ot">&lt;-</span> my_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-23"><a></a>  <span class="fu">filter</span>(your_filters) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-24"><a></a>  <span class="fu">select</span>(your_var_selections) <span class="sc">%&gt;%</span></span>
+<span id="cb6-25"><a></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb6-26"><a></a></span>
+<span id="cb6-27"><a></a><span class="fu">comm.cat</span>(<span class="fu">comm.rank</span>(), <span class="st">"dim"</span>, <span class="fu">dim</span>(my_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-28"><a></a></span>
+<span id="cb6-29"><a></a><span class="do">## allgather() for data.frames (not in pbdMPI ... yet!)</span></span>
+<span id="cb6-30"><a></a>allgather.data.frame <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
+<span id="cb6-31"><a></a>  cnames <span class="ot">=</span> <span class="fu">names</span>(x)</span>
+<span id="cb6-32"><a></a>  x <span class="ot">=</span> <span class="fu">lapply</span>(x, <span class="cf">function</span>(x) <span class="fu">do.call</span>(c, <span class="fu">allgather</span>(x)))</span>
+<span id="cb6-33"><a></a>  x <span class="ot">=</span> <span class="fu">as.data.frame</span>(x)</span>
+<span id="cb6-34"><a></a>  <span class="fu">names</span>(x) <span class="ot">=</span> cnames</span>
+<span id="cb6-35"><a></a>  x</span>
+<span id="cb6-36"><a></a>}</span>
+<span id="cb6-37"><a></a></span>
+<span id="cb6-38"><a></a>data <span class="ot">=</span> <span class="fu">allgather.data.frame</span>(my_data)</span>
+<span id="cb6-39"><a></a><span class="fu">rm</span>(my_data) <span class="co"># free up memory</span></span>
 <span id="cb6-40"><a></a></span>
-<span id="cb6-41"><a></a><span class="do">## Parallel random forest part</span></span>
-<span id="cb6-42"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(randomForest))</span>
-<span id="cb6-43"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(parallel))</span>
-<span id="cb6-44"><a></a><span class="fu">comm.set.seed</span>(<span class="at">seed =</span> <span class="dv">7654321</span>, <span class="at">diff =</span> <span class="cn">FALSE</span>)      <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-45"><a></a></span>
-<span id="cb6-46"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb6-47"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
-<span id="cb6-48"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
-<span id="cb6-49"><a></a>train <span class="ot">=</span> data[<span class="sc">-</span>i_test, ][<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, ]    <span class="co"># limit to 1k obs for debugging</span></span>
-<span id="cb6-50"><a></a>my_test <span class="ot">=</span> data[i_test, ][<span class="fu">comm.chunk</span>(n_test, <span class="at">form =</span> <span class="st">"vector"</span>), ]    <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-51"><a></a></span>
-<span id="cb6-52"><a></a>ntree <span class="ot">=</span> <span class="dv">64</span> <span class="co"># start small for debug</span></span>
-<span id="cb6-53"><a></a>my_ntree <span class="ot">=</span> <span class="fu">comm.chunk</span>(ntree, <span class="at">form =</span> <span class="st">"vector"</span>, <span class="at">rng =</span> <span class="cn">TRUE</span>, <span class="at">seed =</span> <span class="dv">12345</span>)        <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-54"><a></a>rfc <span class="ot">=</span> <span class="cf">function</span>(i, mnt, <span class="at">mxn =</span> <span class="dv">6</span>) {</span>
-<span id="cb6-55"><a></a>  <span class="fu">comm.set.stream</span>(i)                  <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-56"><a></a>  <span class="fu">randomForest</span>(<span class="sc">&lt;</span>your<span class="sc">-</span>target<span class="sc">&gt;</span> <span class="er">~</span> ., train, <span class="at">ntree =</span> mnt[i], <span class="at">maxnodes =</span> mxn, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>) <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-57"><a></a>}</span>
-<span id="cb6-58"><a></a>my_rf <span class="ot">=</span> <span class="fu">mclapply</span>(<span class="fu">seq_along</span>(my_ntree), rfc, <span class="at">mnt =</span> my_ntree) <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-59"><a></a>my_rf <span class="ot">=</span> <span class="fu">do.call</span>(combine, my_rf)            <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-60"><a></a>rf_all <span class="ot">=</span> <span class="fu">allgather</span>(my_rf)                  <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-61"><a></a>rf_all <span class="ot">=</span> <span class="fu">do.call</span>(combine, rf_all)          <span class="co">#&lt;&lt;</span></span>
-<span id="cb6-62"><a></a></span>
-<span id="cb6-63"><a></a>my_pred <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(rf_all, my_test))</span>
-<span id="cb6-64"><a></a></span>
-<span id="cb6-65"><a></a><span class="co"># correct = allreduce(sum(my_pred == my_test$&lt;your-true-category&gt;))  # classification</span></span>
-<span id="cb6-66"><a></a>sse <span class="ot">=</span> <span class="fu">allreduce</span>(<span class="fu">sum</span>((my_pred <span class="sc">-</span> my_test<span class="sc">$</span><span class="er">&lt;</span>your<span class="sc">-</span>target<span class="sc">&gt;</span>)<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># regression</span></span>
-<span id="cb6-67"><a></a><span class="co"># comm.cat("Proportion Correct:", correct/(n_test), "\n")</span></span>
-<span id="cb6-68"><a></a><span class="fu">comm.cat</span>(<span class="st">"RMSE:"</span>, <span class="fu">sqrt</span>(rmse<span class="sc">/</span>n_test), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb6-69"><a></a></span>
-<span id="cb6-70"><a></a><span class="fu">finalize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-41"><a></a><span class="do">## Check on the result</span></span>
+<span id="cb6-42"><a></a><span class="fu">comm.cat</span>(<span class="fu">comm.rank</span>(), <span class="st">"dim"</span>, <span class="fu">dim</span>(data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-43"><a></a><span class="fu">comm.print</span>(memuse<span class="sc">::</span><span class="fu">Sys.procmem</span>()<span class="sc">$</span>size, <span class="at">all.rank =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-44"><a></a></span>
+<span id="cb6-45"><a></a><span class="do">## Parallel random forest part</span></span>
+<span id="cb6-46"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(randomForest))</span>
+<span id="cb6-47"><a></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(parallel))</span>
+<span id="cb6-48"><a></a><span class="fu">comm.set.seed</span>(<span class="at">seed =</span> <span class="dv">7654321</span>, <span class="at">diff =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb6-49"><a></a></span>
+<span id="cb6-50"><a></a>i_samp <span class="ot">=</span> <span class="fu">sample.int</span>(<span class="fu">nrow</span>(data), <span class="fl">1e5</span>)</span>
+<span id="cb6-51"><a></a>data <span class="ot">=</span> data[i_samp, ]    <span class="co"># limit to 100k obs for debugging</span></span>
+<span id="cb6-52"><a></a></span>
+<span id="cb6-53"><a></a>n <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb6-54"><a></a>n_test <span class="ot">=</span> <span class="fu">floor</span>(<span class="fl">0.2</span> <span class="sc">*</span> n)</span>
+<span id="cb6-55"><a></a>i_test <span class="ot">=</span> <span class="fu">sample.int</span>(n, n_test)</span>
+<span id="cb6-56"><a></a>train <span class="ot">=</span> data[<span class="sc">-</span>i_test, ]</span>
+<span id="cb6-57"><a></a>my_test <span class="ot">=</span> data[i_test, ][<span class="fu">comm.chunk</span>(n_test, <span class="at">form =</span> <span class="st">"vector"</span>), ] </span>
+<span id="cb6-58"><a></a><span class="fu">rm</span>(data)  <span class="co"># no longer needed, free up memory</span></span>
+<span id="cb6-59"><a></a></span>
+<span id="cb6-60"><a></a><span class="do">## start with nodesize at 1% of the data and small ntree</span></span>
+<span id="cb6-61"><a></a>ntree <span class="ot">=</span> <span class="dv">64</span></span>
+<span id="cb6-62"><a></a>my_ntree <span class="ot">=</span> <span class="fu">comm.chunk</span>(ntree, <span class="at">form =</span> <span class="st">"number"</span>, <span class="at">rng =</span> <span class="cn">TRUE</span>, <span class="at">seed =</span> <span class="dv">12345</span>)</span>
+<span id="cb6-63"><a></a>rF <span class="ot">=</span> <span class="cf">function</span>(nt, tr) </span>
+<span id="cb6-64"><a></a>  <span class="fu">randomForest</span>(your_target <span class="sc">~</span> ., <span class="at">data =</span> tr, <span class="at">ntree =</span> nt, <span class="at">nodesize =</span> <span class="fl">1e3</span>, <span class="at">norm.votes =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb6-65"><a></a>nc <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)[<span class="dv">2</span>]) </span>
+<span id="cb6-66"><a></a>rf <span class="ot">=</span> <span class="fu">mclapply</span>(<span class="fu">seq_len</span>(my_ntree), rF, <span class="at">tr =</span> train, <span class="at">mc.cores =</span> nc)</span>
+<span id="cb6-67"><a></a>rf <span class="ot">=</span> <span class="fu">do.call</span>(combine, rf)  <span class="co"># reusing rf name to release memory after operation</span></span>
+<span id="cb6-68"><a></a>rf <span class="ot">=</span> <span class="fu">allgather</span>(rf) </span>
+<span id="cb6-69"><a></a>rf <span class="ot">=</span> <span class="fu">do.call</span>(combine, rf)</span>
+<span id="cb6-70"><a></a></span>
+<span id="cb6-71"><a></a>my_pred <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">predict</span>(rf_all, my_test))</span>
+<span id="cb6-72"><a></a></span>
+<span id="cb6-73"><a></a><span class="co"># correct = allreduce(sum(my_pred == my_test$your_true_category))  # classification</span></span>
+<span id="cb6-74"><a></a>sse <span class="ot">=</span> <span class="fu">allreduce</span>(<span class="fu">sum</span>((my_pred <span class="sc">-</span> my_test<span class="sc">$</span>your_target)<span class="sc">^</span><span class="dv">2</span>)) <span class="co"># regression</span></span>
+<span id="cb6-75"><a></a>rmse <span class="ot">=</span> <span class="fu">sqrt</span>(sse<span class="sc">/</span>n_test)</span>
+<span id="cb6-76"><a></a><span class="co"># comm.cat("Proportion Correct:", correct/(n_test), "\n")</span></span>
+<span id="cb6-77"><a></a><span class="fu">comm.cat</span>(<span class="st">"RMSE:"</span>, rmse, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb6-78"><a></a>mean <span class="ot">=</span> <span class="fu">allreduce</span>(<span class="fu">sum</span>(my_test<span class="sc">$</span>your_target)) <span class="sc">/</span> n_test</span>
+<span id="cb6-79"><a></a><span class="fu">comm.cat</span>(<span class="st">"Mean:"</span>, mean, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb6-80"><a></a><span class="fu">comm.cat</span>(<span class="st">"Coefficient of Variation:"</span>, <span class="dv">100</span><span class="sc">*</span>rmse<span class="sc">/</span>mean, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb6-81"><a></a></span>
+<span id="cb6-82"><a></a><span class="fu">finalize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="two-parallel-levels" class="slide level2 smaller">
 <h2>Two Parallel Levels</h2>

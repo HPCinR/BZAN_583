@@ -10,9 +10,7 @@ filters:
    - include-code-files
 ---
 
-## Random Forests for Large Data
-
-## Random Forest {background-image="/pics/boot/randomforest.png" background-size="55%" background-position="bottom right".smaller}
+## Random Forests for Large Data {background-image="/pics/boot/randomforest.png" background-size="55%" background-position="bottom right".smaller}
 
 1. [For b = 1 to B:]{style="color:green;"}     
    i. [Draw a bootstrap sample ${\mathbf Z^∗}$ from the training data]{style="color:green;"}    

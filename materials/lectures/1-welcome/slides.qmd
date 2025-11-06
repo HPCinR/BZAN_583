@@ -39,7 +39,7 @@ editor: source
 -  Your laptop: [Unix, Mac, Windows]{style="color:blue;"}  
 - R experience:  [used in a class, used in two classes, x years, wrote an R package, live and breathe R]{style="color:blue;"}  
 - Use RStudio?  [usually, all the time, reluctantly, prefer Jupyter, prefer Visual Studio]{style="color:blue;"}
-- Other programming languages: [Python, C, C++, Go, ...]{style="color:blue;"}  
+- Other programming languages: [Python, C, C++, Go, Julia, ...]{style="color:blue;"}  
 - Use git?  [what's that?, heard of it, tried it once, use it often, I live on it]{style="color:blue;"}
 - R parallel package?  [what's that?, heard of it, tried it once, didn't help me, got great results, keeps all the cores busy on my laptop]{style="color:blue;"}
 

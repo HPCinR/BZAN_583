@@ -1,5 +1,8 @@
 ---
 title: "Syllabus"
+format:
+  html:
+    toc: false
 editor: source
 ---
 
@@ -25,7 +28,7 @@ $\qquad$
 **Room:** HBB 132
 
 **Office Hours:** Tuesdays 11-12, Wednesdays 9:00 - 9:30, and Thursdays 11-12, on Zoom:\
-Join from PC, Mac, Linux, iOS or Android: [https://tennessee.zoom.us/j/85721294477](https://tennessee.zoom.us/j/85721294477).
+Join from PC, Mac, Linux, iOS or Android: [https://tennessee.zoom.us/j/##########](https://tennessee.zoom.us/j/##########).
 
 :::
 
